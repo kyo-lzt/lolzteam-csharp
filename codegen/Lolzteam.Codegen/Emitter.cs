@@ -73,7 +73,8 @@ internal static partial class Emitter
 	private static string EmitResponseRecord(string group, MethodDefinition method)
 	{
 		var typeName = Naming.BuildTypeName(group, method.MethodName) + "Response";
-		return $"\tpublic sealed record {typeName}(JsonElement Data);";
+		var csharpType = Transforms.ToCSharpType(method.ResponseType);
+		return $"\tpublic sealed record {typeName}({csharpType} Data);";
 	}
 
 	internal static string EmitCSharpTypesFile(List<ParsedGroup> groups, string subPackage)
@@ -122,6 +123,28 @@ internal static partial class Emitter
 	private static string MakeNullable(string type) =>
 		type.EndsWith('?') ? type : type + "?";
 
+	/// <summary>Map path param type to a native C# type, falling back to string for complex types.</summary>
+	private static string PathParamToCSharpType(string intermediateType)
+	{
+		var csharp = Transforms.ToCSharpType(intermediateType).TrimEnd('?');
+		// Path params are string-interpolated into URLs — JsonElement makes no sense here
+		return csharp == "JsonElement" ? "string" : csharp;
+	}
+
+	/// <summary>Emit a return statement that constructs the response record from __result.</summary>
+	private static void EmitReturnStatement(StringBuilder sb, string responseTypeName, string dataCSharpType, string indent)
+	{
+		if (dataCSharpType == "JsonElement")
+		{
+			sb.Append(indent).Append("return new ").Append(responseTypeName).Append("(__result);\n");
+		}
+		else
+		{
+			sb.Append(indent).Append("return new ").Append(responseTypeName)
+				.Append("(JsonSerializer.Deserialize<").Append(dataCSharpType).Append(">(__result)!);\n");
+		}
+	}
+
 	// ─── Client File ──────────────────────────────────────────────────
 
 	private static string BuildPathExpression(string path, List<ParsedParameter> pathParams)
@@ -164,10 +187,10 @@ internal static partial class Emitter
 		// Build argument list
 		var args = new List<string>();
 
-		// Path params (always required, strip nullable)
+		// Path params (always required, native types)
 		foreach (var param in method.Params.PathParams)
 		{
-			var csharpType = Transforms.ToCSharpType(param.Type).TrimEnd('?');
+			var csharpType = PathParamToCSharpType(param.Type);
 			args.Add(csharpType + " " + Naming.SnakeToPascal(Naming.SanitizeName(param.Name)));
 		}
 
@@ -211,12 +234,13 @@ internal static partial class Emitter
 		var isMultipart = method.BodyEncoding == "multipart";
 
 		var responseTypeName = className + "Types." + typeName + "Response";
+		var responseCSharpType = Transforms.ToCSharpType(method.ResponseType);
 		sb.Append("\tpublic async Task<").Append(responseTypeName).Append("> ").Append(method.MethodName)
 			.Append("Async(").Append(argStr).Append(")\n\t{\n");
 
 		if (isMultipart && hasByteArrayFields)
 		{
-			EmitMultipartByteArrayMethod(sb, method, pathExpr, hasQueryType, isSearch, responseTypeName);
+			EmitMultipartByteArrayMethod(sb, method, pathExpr, hasQueryType, isSearch, responseTypeName, responseCSharpType);
 		}
 		else
 		{
@@ -254,7 +278,7 @@ internal static partial class Emitter
 			}
 
 			sb.Append("\t\t}, cancellationToken).ConfigureAwait(false);\n");
-			sb.Append("\t\treturn new ").Append(responseTypeName).Append("(__result);\n");
+			EmitReturnStatement(sb, responseTypeName, responseCSharpType, "\t\t");
 		}
 
 		sb.Append("\t}");
@@ -263,7 +287,7 @@ internal static partial class Emitter
 
 	private static void EmitMultipartByteArrayMethod(
 		StringBuilder sb, MethodDefinition method, string pathExpr,
-		bool hasQueryType, bool isSearch, string responseTypeName)
+		bool hasQueryType, bool isSearch, string responseTypeName, string responseCSharpType)
 	{
 		var serializableProps = method.BodyProperties.FindAll(p => p.Type != "Blob");
 		var byteArrayFieldNames = method.BodyProperties.FindAll(p => p.Type == "Blob")
@@ -328,7 +352,7 @@ internal static partial class Emitter
 				sb.Append(indent).Append("\tIsSearch = true,\n");
 			}
 			sb.Append(indent).Append("}, cancellationToken).ConfigureAwait(false);\n");
-			sb.Append(indent).Append("return new ").Append(responseTypeName).Append("(__result);\n");
+			EmitReturnStatement(sb, responseTypeName, responseCSharpType, indent);
 		}
 
 		if (method.BodyRequired)
@@ -354,7 +378,7 @@ internal static partial class Emitter
 				sb.Append("\t\t\t\tIsSearch = true,\n");
 			}
 			sb.Append("\t\t\t}, cancellationToken).ConfigureAwait(false);\n");
-			sb.Append("\t\t\treturn new ").Append(responseTypeName).Append("(__result);\n");
+			EmitReturnStatement(sb, responseTypeName, responseCSharpType, "\t\t\t");
 			sb.Append("\t\t}\n");
 		}
 	}

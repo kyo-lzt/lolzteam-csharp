@@ -738,7 +738,7 @@ public sealed class UsersApi
 		return new UsersApiTypes.UsersFindResponse(__result);
 	}
 
-	public async Task<UsersApiTypes.UsersGetResponse> GetAsync(JsonElement UserId, UsersApiTypes.UsersGetParams? @params = null, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersGetResponse> GetAsync(string UserId, UsersApiTypes.UsersGetParams? @params = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -749,7 +749,7 @@ public sealed class UsersApi
 		return new UsersApiTypes.UsersGetResponse(__result);
 	}
 
-	public async Task<UsersApiTypes.UsersEditResponse> EditAsync(JsonElement UserId, UsersApiTypes.UsersEditBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersEditResponse> EditAsync(string UserId, UsersApiTypes.UsersEditBody? body = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -761,7 +761,7 @@ public sealed class UsersApi
 		return new UsersApiTypes.UsersEditResponse(__result);
 	}
 
-	public async Task<UsersApiTypes.UsersClaimsResponse> ClaimsAsync(JsonElement UserId, UsersApiTypes.UsersClaimsParams? @params = null, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersClaimsResponse> ClaimsAsync(string UserId, UsersApiTypes.UsersClaimsParams? @params = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -772,7 +772,7 @@ public sealed class UsersApi
 		return new UsersApiTypes.UsersClaimsResponse(__result);
 	}
 
-	public async Task<UsersApiTypes.UsersAvatarUploadResponse> AvatarUploadAsync(JsonElement UserId, UsersApiTypes.UsersAvatarUploadBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersAvatarUploadResponse> AvatarUploadAsync(string UserId, UsersApiTypes.UsersAvatarUploadBody? body = null, CancellationToken cancellationToken = default)
 	{
 		if (body is not null)
 		{
@@ -804,7 +804,7 @@ public sealed class UsersApi
 		}
 	}
 
-	public async Task<UsersApiTypes.UsersAvatarDeleteResponse> AvatarDeleteAsync(JsonElement UserId, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersAvatarDeleteResponse> AvatarDeleteAsync(string UserId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -814,7 +814,7 @@ public sealed class UsersApi
 		return new UsersApiTypes.UsersAvatarDeleteResponse(__result);
 	}
 
-	public async Task<UsersApiTypes.UsersAvatarCropResponse> AvatarCropAsync(JsonElement UserId, UsersApiTypes.UsersAvatarCropBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersAvatarCropResponse> AvatarCropAsync(string UserId, UsersApiTypes.UsersAvatarCropBody? body = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -826,7 +826,7 @@ public sealed class UsersApi
 		return new UsersApiTypes.UsersAvatarCropResponse(__result);
 	}
 
-	public async Task<UsersApiTypes.UsersBackgroundUploadResponse> BackgroundUploadAsync(JsonElement UserId, UsersApiTypes.UsersBackgroundUploadBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersBackgroundUploadResponse> BackgroundUploadAsync(string UserId, UsersApiTypes.UsersBackgroundUploadBody? body = null, CancellationToken cancellationToken = default)
 	{
 		if (body is not null)
 		{
@@ -858,7 +858,7 @@ public sealed class UsersApi
 		}
 	}
 
-	public async Task<UsersApiTypes.UsersBackgroundDeleteResponse> BackgroundDeleteAsync(JsonElement UserId, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersBackgroundDeleteResponse> BackgroundDeleteAsync(string UserId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -868,7 +868,7 @@ public sealed class UsersApi
 		return new UsersApiTypes.UsersBackgroundDeleteResponse(__result);
 	}
 
-	public async Task<UsersApiTypes.UsersBackgroundCropResponse> BackgroundCropAsync(JsonElement UserId, UsersApiTypes.UsersBackgroundCropBody body, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersBackgroundCropResponse> BackgroundCropAsync(string UserId, UsersApiTypes.UsersBackgroundCropBody body, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -880,7 +880,7 @@ public sealed class UsersApi
 		return new UsersApiTypes.UsersBackgroundCropResponse(__result);
 	}
 
-	public async Task<UsersApiTypes.UsersFollowersResponse> FollowersAsync(JsonElement UserId, UsersApiTypes.UsersFollowersParams? @params = null, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersFollowersResponse> FollowersAsync(string UserId, UsersApiTypes.UsersFollowersParams? @params = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -891,7 +891,7 @@ public sealed class UsersApi
 		return new UsersApiTypes.UsersFollowersResponse(__result);
 	}
 
-	public async Task<UsersApiTypes.UsersFollowResponse> FollowAsync(JsonElement UserId, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersFollowResponse> FollowAsync(string UserId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -901,7 +901,7 @@ public sealed class UsersApi
 		return new UsersApiTypes.UsersFollowResponse(__result);
 	}
 
-	public async Task<UsersApiTypes.UsersUnfollowResponse> UnfollowAsync(JsonElement UserId, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersUnfollowResponse> UnfollowAsync(string UserId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -911,7 +911,7 @@ public sealed class UsersApi
 		return new UsersApiTypes.UsersUnfollowResponse(__result);
 	}
 
-	public async Task<UsersApiTypes.UsersFollowingsResponse> FollowingsAsync(JsonElement UserId, UsersApiTypes.UsersFollowingsParams? @params = null, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersFollowingsResponse> FollowingsAsync(string UserId, UsersApiTypes.UsersFollowingsParams? @params = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -922,7 +922,7 @@ public sealed class UsersApi
 		return new UsersApiTypes.UsersFollowingsResponse(__result);
 	}
 
-	public async Task<UsersApiTypes.UsersLikesResponse> LikesAsync(JsonElement UserId, UsersApiTypes.UsersLikesParams? @params = null, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersLikesResponse> LikesAsync(string UserId, UsersApiTypes.UsersLikesParams? @params = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -944,7 +944,7 @@ public sealed class UsersApi
 		return new UsersApiTypes.UsersIgnoredResponse(__result);
 	}
 
-	public async Task<UsersApiTypes.UsersIgnoreResponse> IgnoreAsync(JsonElement UserId, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersIgnoreResponse> IgnoreAsync(string UserId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -954,7 +954,7 @@ public sealed class UsersApi
 		return new UsersApiTypes.UsersIgnoreResponse(__result);
 	}
 
-	public async Task<UsersApiTypes.UsersIgnoreEditResponse> IgnoreEditAsync(JsonElement UserId, UsersApiTypes.UsersIgnoreEditParams? @params = null, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersIgnoreEditResponse> IgnoreEditAsync(string UserId, UsersApiTypes.UsersIgnoreEditParams? @params = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -965,7 +965,7 @@ public sealed class UsersApi
 		return new UsersApiTypes.UsersIgnoreEditResponse(__result);
 	}
 
-	public async Task<UsersApiTypes.UsersUnignoreResponse> UnignoreAsync(JsonElement UserId, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersUnignoreResponse> UnignoreAsync(string UserId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -975,7 +975,7 @@ public sealed class UsersApi
 		return new UsersApiTypes.UsersUnignoreResponse(__result);
 	}
 
-	public async Task<UsersApiTypes.UsersContentsResponse> ContentsAsync(JsonElement UserId, UsersApiTypes.UsersContentsParams? @params = null, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersContentsResponse> ContentsAsync(string UserId, UsersApiTypes.UsersContentsParams? @params = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -986,7 +986,7 @@ public sealed class UsersApi
 		return new UsersApiTypes.UsersContentsResponse(__result);
 	}
 
-	public async Task<UsersApiTypes.UsersTrophiesResponse> TrophiesAsync(JsonElement UserId, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersTrophiesResponse> TrophiesAsync(string UserId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -1036,7 +1036,7 @@ public sealed class ProfilePostsApi
 		_http = http;
 	}
 
-	public async Task<ProfilePostsApiTypes.ProfilePostsListResponse> ListAsync(JsonElement UserId, ProfilePostsApiTypes.ProfilePostsListParams? @params = null, CancellationToken cancellationToken = default)
+	public async Task<ProfilePostsApiTypes.ProfilePostsListResponse> ListAsync(string UserId, ProfilePostsApiTypes.ProfilePostsListParams? @params = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -1673,7 +1673,7 @@ public sealed class SearchApi
 		return new SearchApiTypes.SearchTaggedResponse(__result);
 	}
 
-	public async Task<SearchApiTypes.SearchResultsResponse> ResultsAsync(JsonElement SearchId, SearchApiTypes.SearchResultsParams? @params = null, CancellationToken cancellationToken = default)
+	public async Task<SearchApiTypes.SearchResultsResponse> ResultsAsync(string SearchId, SearchApiTypes.SearchResultsParams? @params = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
