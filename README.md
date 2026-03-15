@@ -78,12 +78,24 @@ Failed requests are retried automatically for transient errors. The delay uses e
 | Status | Retried | Behavior |
 |--------|---------|----------|
 | 429 | Yes | Uses `Retry-After` header if present |
-| 502, 503 | Yes | Exponential backoff with jitter |
+| 502, 503, 504 | Yes | Exponential backoff with jitter |
+| Network errors | Yes | Timeout and connection errors |
 | 401, 403 | No | Thrown immediately |
 | 404 | No | Thrown immediately |
-| Other | No | Thrown immediately |
 
 Delay formula: `min(baseDelay * 2^attempt + random(0, baseDelay), maxDelay)`
+
+```csharp
+// Disable retry
+var client = new ForumClient(new ClientConfig { Token = "...", Retry = null });
+
+// OnRetry callback
+var client = new ForumClient(new ClientConfig
+{
+    Token = "...",
+    Retry = new RetryConfig { OnRetry = info => Console.WriteLine($"Retry #{info.Attempt}") },
+});
+```
 
 ## Proxy
 
@@ -153,6 +165,15 @@ The built-in rate limiter uses a token bucket algorithm. Thread-safe with `Semap
 |--------|---------------|
 | Forum  | 300 req/min   |
 | Market | 120 req/min   |
+| Market (search) | 20 req/min |
+
+```csharp
+var client = new MarketClient(new ClientConfig
+{
+    Token = "...",
+    SearchRateLimit = new RateLimitConfig { RequestsPerMinute = 30 },
+});
+```
 
 ## Code Generation
 

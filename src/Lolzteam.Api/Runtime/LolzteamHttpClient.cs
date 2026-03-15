@@ -62,7 +62,17 @@ public sealed class LolzteamHttpClient : IDisposable
 			await _searchRateLimiter.AcquireAsync(cancellationToken).ConfigureAwait(false);
 		}
 
-		return await RetryHandler.WithRetryAsync(_config.Retry, () => ExecuteAsync(options, cancellationToken))
+		if (_config.Retry is not { } retryConfig)
+		{
+			return await ExecuteAsync(options, cancellationToken).ConfigureAwait(false);
+		}
+
+		return await RetryHandler.WithRetryAsync(
+				retryConfig,
+				() => ExecuteAsync(options, cancellationToken),
+				_config.OnRetry,
+				options.Method,
+				options.Path)
 			.ConfigureAwait(false);
 	}
 
