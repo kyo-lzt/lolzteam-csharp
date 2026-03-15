@@ -82,15 +82,23 @@ internal static partial class Naming
 		return CapitalizeFirst(camel);
 	}
 
-	/// <summary>Strip trailing [] from parameter names.</summary>
+	/// <summary>Strip trailing [] and replace non-alphanumeric/underscore chars from parameter names.</summary>
 	internal static string SanitizeName(string name)
 	{
 		if (name.EndsWith("[]"))
 		{
-			return name[..^2];
+			name = name[..^2];
+		}
+		// Replace characters invalid in C# identifiers (e.g. ':', '.') with '_'
+		if (InvalidIdentifierChars().IsMatch(name))
+		{
+			name = InvalidIdentifierChars().Replace(name, "_");
 		}
 		return name;
 	}
+
+	[GeneratedRegex(@"[^a-zA-Z0-9_]")]
+	private static partial Regex InvalidIdentifierChars();
 
 	/// <summary>Convert a parameter name to a safe C# identifier. Uses @ prefix for keywords.</summary>
 	internal static string SafeCSharpName(string name)

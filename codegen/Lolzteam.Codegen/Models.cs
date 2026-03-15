@@ -13,7 +13,7 @@ internal sealed record ApiConfig(
 internal sealed record ParseResult(
 	List<ParsedGroup> Groups,
 	string BaseUrl,
-	Dictionary<string, System.Text.Json.Nodes.JsonObject> ComponentSchemas
+	SortedDictionary<string, System.Text.Json.Nodes.JsonObject> ComponentSchemas
 );
 
 internal sealed record ParsedGroup(string GroupName, List<MethodDefinition> Methods);
@@ -48,5 +48,6 @@ internal sealed record MethodDefinition(
 	bool BodyIsArray,
 	string? BodyArrayItemType,
 	string BodyEncoding,
-	ResponseSchemaInfo? ResponseSchema = null
+	ResponseSchemaInfo? ResponseSchema = null,
+	System.Text.Json.Nodes.JsonObject? RawResponseSchema = null
 );

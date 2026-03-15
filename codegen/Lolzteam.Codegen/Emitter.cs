@@ -12,6 +12,7 @@ internal static partial class Emitter
 	private static string EmitComponentSchemaRecord(
 		string name, JsonObject schema, JsonNode rawSpec, HashSet<string> componentSchemaNames)
 	{
+		var nestedRecords = new List<string>();
 		var sb = new StringBuilder();
 		sb.Append("public sealed record ").Append(name).Append("(\n");
 
@@ -40,14 +41,16 @@ internal static partial class Emitter
 			if (propSchema is null) continue;
 
 			var required = requiredSet.Contains(propName);
-			var csharpType = ResolveComponentPropertyType(propSchema, rawSpec, componentSchemaNames);
+			var csharpType = ResolveComponentPropertyType(
+				propSchema, rawSpec, componentSchemaNames, name, propName, nestedRecords);
 			entries.Add((propName, csharpType, required));
 		}
 
+		var seenNames = new HashSet<string>();
 		for (var i = 0; i < entries.Count; i++)
 		{
 			var (jsonName, csharpType, required) = entries[i];
-			var propName = Naming.SafeCSharpName(jsonName);
+			var propName = DeduplicateName(Naming.SafeCSharpName(jsonName), seenNames);
 			var typeStr = required ? csharpType : MakeNullable(csharpType);
 
 			sb.Append("\t[property: JsonPropertyName(\"").Append(jsonName).Append("\")] ");
@@ -60,12 +63,20 @@ internal static partial class Emitter
 		}
 
 		sb.Append(");\n");
+
+		// Append nested records after the parent record
+		foreach (var nested in nestedRecords)
+		{
+			sb.Append('\n').Append(nested);
+		}
+
 		return sb.ToString();
 	}
 
 	/// <summary>Resolve a property type within a component schema.</summary>
 	private static string ResolveComponentPropertyType(
-		JsonNode schema, JsonNode rawSpec, HashSet<string> componentSchemaNames)
+		JsonNode schema, JsonNode rawSpec, HashSet<string> componentSchemaNames,
+		string? parentTypeName = null, string? propName = null, List<string>? nestedRecords = null)
 	{
 		// $ref to another component schema
 		if (schema is JsonObject refObj)
@@ -84,7 +95,8 @@ internal static partial class Emitter
 				var resolved = Transforms.ResolveRef(refStr, rawSpec);
 				if (resolved is not null)
 				{
-					return ResolveComponentPropertyType(resolved, rawSpec, componentSchemaNames);
+					return ResolveComponentPropertyType(
+						resolved, rawSpec, componentSchemaNames, parentTypeName, propName, nestedRecords);
 				}
 			}
 		}
@@ -107,7 +119,8 @@ internal static partial class Emitter
 			var items = sObj["items"];
 			if (items is not null)
 			{
-				var itemType = ResolveComponentPropertyType(items, rawSpec, componentSchemaNames);
+				var itemType = ResolveComponentPropertyType(
+					items, rawSpec, componentSchemaNames, parentTypeName, propName, nestedRecords);
 				return $"List<{itemType}>";
 			}
 			return "List<JsonElement>";
@@ -115,6 +128,52 @@ internal static partial class Emitter
 
 		if (type == "object" || sObj["properties"] is not null)
 		{
+			var props = sObj["properties"];
+			if (props is JsonObject propsObj && propsObj.Count > 0
+				&& parentTypeName is not null && propName is not null && nestedRecords is not null)
+			{
+				// Generate a nested record for inline objects with properties
+				var nestedName = parentTypeName + Naming.SnakeToPascal(Naming.SanitizeName(propName));
+				var nestedSb = new StringBuilder();
+				nestedSb.Append("public sealed record ").Append(nestedName).Append("(\n");
+
+				var requiredSet = new HashSet<string>();
+				var reqArr = sObj["required"];
+				if (reqArr is JsonArray rArr)
+				{
+					foreach (var r in rArr)
+					{
+						requiredSet.Add(r!.GetValue<string>());
+					}
+				}
+
+				var entries = new List<(string jsonName, string csharpType, bool required)>();
+				foreach (var kvp in propsObj)
+				{
+					var pName = kvp.Key;
+					var pSchema = kvp.Value;
+					if (pSchema is null) continue;
+					var req = requiredSet.Contains(pName);
+					var cType = ResolveComponentPropertyType(
+						pSchema, rawSpec, componentSchemaNames, nestedName, pName, nestedRecords);
+					entries.Add((pName, cType, req));
+				}
+
+				var nestedSeen = new HashSet<string>();
+				for (var i = 0; i < entries.Count; i++)
+				{
+					var (jn, ct, rq) = entries[i];
+					var pn = DeduplicateName(Naming.SafeCSharpName(jn), nestedSeen);
+					var ts = rq ? ct : MakeNullable(ct);
+					nestedSb.Append("\t[property: JsonPropertyName(\"").Append(jn).Append("\")] ");
+					nestedSb.Append(ts).Append(' ').Append(pn);
+					nestedSb.Append(i < entries.Count - 1 ? ",\n" : "\n");
+				}
+
+				nestedSb.Append(");\n");
+				nestedRecords.Add(nestedSb.ToString());
+				return nestedName;
+			}
 			return "JsonElement";
 		}
 
@@ -171,7 +230,6 @@ internal static partial class Emitter
 		if (method.BodyProperties.Count == 0) return null;
 
 		var typeName = Naming.BuildTypeName(group, method.MethodName) + "Body";
-		var hasByteArrayFields = method.BodyProperties.Exists(p => p.Type == "Blob");
 
 		var sb = new StringBuilder();
 		sb.Append("\tpublic sealed record ").Append(typeName).Append('\n');
@@ -182,7 +240,7 @@ internal static partial class Emitter
 			var csharpType = prop.Type == "Blob" ? "byte[]" : Transforms.ToCSharpType(prop.Type);
 			var propName = Naming.SafeCSharpName(prop.Name);
 
-			if (!hasByteArrayFields && Naming.NeedsJsonPropertyName(prop.Name))
+			if (Naming.NeedsJsonPropertyName(prop.Name))
 			{
 				sb.Append("\t\t[JsonPropertyName(\"").Append(prop.Name).Append("\")]\n");
 			}
@@ -201,43 +259,77 @@ internal static partial class Emitter
 		return sb.ToString();
 	}
 
-	private static string EmitResponseRecord(string group, MethodDefinition method)
+	private static string EmitResponseRecord(
+		string group, MethodDefinition method, JsonNode rawSpec, HashSet<string> componentSchemaNames)
 	{
 		var typeName = Naming.BuildTypeName(group, method.MethodName) + "Response";
 
-		// If we have typed response schema, emit a record with proper fields
-		if (method.ResponseSchema is { } schema && schema.Properties.Count > 0)
+		// If we have a raw response schema with properties, resolve types with nested record generation
+		if (method.RawResponseSchema is { } rawSchema
+			&& rawSchema["properties"] is JsonObject propsObj && propsObj.Count > 0)
 		{
+			var nestedRecords = new List<string>();
 			var sb = new StringBuilder();
 			sb.Append("\tpublic sealed record ").Append(typeName).Append("(\n");
 
-			for (var i = 0; i < schema.Properties.Count; i++)
+			var requiredSet = new HashSet<string>();
+			var requiredArr = rawSchema["required"];
+			if (requiredArr is JsonArray reqArr)
 			{
-				var prop = schema.Properties[i];
-				var propName = Naming.SafeCSharpName(prop.Name);
-				var typeStr = prop.Required ? prop.CSharpType : MakeNullable(prop.CSharpType);
+				foreach (var r in reqArr)
+				{
+					requiredSet.Add(r!.GetValue<string>());
+				}
+			}
 
-				sb.Append("\t\t[property: JsonPropertyName(\"").Append(prop.Name).Append("\")] ");
+			var entries = new List<(string jsonName, string csharpType, bool required)>();
+			foreach (var kvp in propsObj)
+			{
+				var propName = kvp.Key;
+				var propSchema = kvp.Value;
+				if (propSchema is null) continue;
+
+				var required = requiredSet.Contains(propName);
+				var csharpType = ResolveComponentPropertyType(
+					propSchema, rawSpec, componentSchemaNames, typeName, propName, nestedRecords);
+				entries.Add((propName, csharpType, required));
+			}
+
+			var seenNames = new HashSet<string>();
+			for (var i = 0; i < entries.Count; i++)
+			{
+				var (jsonName, csharpType, required) = entries[i];
+				var propName = DeduplicateName(Naming.SafeCSharpName(jsonName), seenNames);
+				var typeStr = required ? csharpType : MakeNullable(csharpType);
+
+				sb.Append("\t\t[property: JsonPropertyName(\"").Append(jsonName).Append("\")] ");
 				sb.Append(typeStr).Append(' ').Append(propName);
 
-				if (i < schema.Properties.Count - 1)
+				if (i < entries.Count - 1)
 					sb.Append(",\n");
 				else
 					sb.Append('\n');
 			}
 
 			sb.Append("\t);");
+
+			// Append nested records after the response record
+			foreach (var nested in nestedRecords)
+			{
+				sb.Append("\n\n\t").Append(nested.TrimEnd());
+			}
+
 			return sb.ToString();
 		}
 
 		// Fallback: opaque JsonElement
-		var csharpType = Transforms.ToCSharpType(method.ResponseType);
-		return $"\tpublic sealed record {typeName}({csharpType} Data);";
+		var fallbackType = Transforms.ToCSharpType(method.ResponseType);
+		return $"\tpublic sealed record {typeName}({fallbackType} Data);";
 	}
 
 	internal static string EmitCSharpTypesFile(
 		List<ParsedGroup> groups, string subPackage,
-		Dictionary<string, JsonObject> componentSchemas, JsonNode rawSpec)
+		SortedDictionary<string, JsonObject> componentSchemas, JsonNode rawSpec)
 	{
 		var sb = new StringBuilder();
 		var ns = "Lolzteam.Api.Generated." + Naming.CapitalizeFirst(subPackage);
@@ -272,7 +364,7 @@ internal static partial class Emitter
 				var bodyType = EmitBodyRecord(group.GroupName, method);
 				if (bodyType is not null) groupTypes.Add(bodyType);
 
-				groupTypes.Add(EmitResponseRecord(group.GroupName, method));
+				groupTypes.Add(EmitResponseRecord(group.GroupName, method, rawSpec, componentSchemaNames));
 			}
 
 			if (groupTypes.Count > 0)
@@ -289,6 +381,15 @@ internal static partial class Emitter
 		}
 
 		return sb.ToString();
+	}
+
+	/// <summary>Ensure a property name is unique within its record by appending a numeric suffix.</summary>
+	private static string DeduplicateName(string name, HashSet<string> seen)
+	{
+		if (seen.Add(name)) return name;
+		var suffix = 2;
+		while (!seen.Add(name + suffix)) suffix++;
+		return name + suffix;
 	}
 
 	/// <summary>Make a C# type nullable if it isn't already (avoids int?? etc).</summary>

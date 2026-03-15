@@ -5,6 +5,117 @@ using Lolzteam.Api.Runtime;
 
 namespace Lolzteam.Api.Generated.Market;
 
+public sealed class AutoPaymentsApi
+{
+	private readonly LolzteamHttpClient _http;
+
+	public AutoPaymentsApi(LolzteamHttpClient http)
+	{
+		_http = http;
+	}
+
+	public async Task<AutoPaymentsApiTypes.AutoPaymentsListResponse> ListAsync(CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = "/auto-payments",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<AutoPaymentsApiTypes.AutoPaymentsListResponse>(__result)!;
+	}
+
+	public async Task<AutoPaymentsApiTypes.AutoPaymentsCreateResponse> CreateAsync(AutoPaymentsApiTypes.AutoPaymentsCreateBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/auto-payment",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<AutoPaymentsApiTypes.AutoPaymentsCreateResponse>(__result)!;
+	}
+
+	public async Task<AutoPaymentsApiTypes.AutoPaymentsDeleteResponse> DeleteAsync(AutoPaymentsApiTypes.AutoPaymentsDeleteBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "DELETE",
+			Path = "/auto-payment",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<AutoPaymentsApiTypes.AutoPaymentsDeleteResponse>(__result)!;
+	}
+}
+
+public sealed class BatchApi
+{
+	private readonly LolzteamHttpClient _http;
+
+	public BatchApi(LolzteamHttpClient http)
+	{
+		_http = http;
+	}
+
+	public async Task<BatchApiTypes.BatchBatchResponse> BatchAsync(List<JsonElement> body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/batch",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<BatchApiTypes.BatchBatchResponse>(__result)!;
+	}
+}
+
+public sealed class CartApi
+{
+	private readonly LolzteamHttpClient _http;
+
+	public CartApi(LolzteamHttpClient http)
+	{
+		_http = http;
+	}
+
+	public async Task<CartApiTypes.CartGetResponse> GetAsync(CartApiTypes.CartGetParams? @params = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = "/cart",
+			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<CartApiTypes.CartGetResponse>(__result)!;
+	}
+
+	public async Task<CartApiTypes.CartAddResponse> AddAsync(CartApiTypes.CartAddBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/cart",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<CartApiTypes.CartAddResponse>(__result)!;
+	}
+
+	public async Task<CartApiTypes.CartDeleteResponse> DeleteAsync(CartApiTypes.CartDeleteBody? body = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "DELETE",
+			Path = "/cart",
+			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<CartApiTypes.CartDeleteResponse>(__result)!;
+	}
+}
+
 public sealed class CategoryApi
 {
 	private readonly LolzteamHttpClient _http;
@@ -349,6 +460,96 @@ public sealed class CategoryApi
 	}
 }
 
+public sealed class CustomDiscountsApi
+{
+	private readonly LolzteamHttpClient _http;
+
+	public CustomDiscountsApi(LolzteamHttpClient http)
+	{
+		_http = http;
+	}
+
+	public async Task<CustomDiscountsApiTypes.CustomDiscountsGetResponse> GetAsync(CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = "/custom-discounts",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<CustomDiscountsApiTypes.CustomDiscountsGetResponse>(__result)!;
+	}
+
+	public async Task<CustomDiscountsApiTypes.CustomDiscountsCreateResponse> CreateAsync(CustomDiscountsApiTypes.CustomDiscountsCreateBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/custom-discounts",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<CustomDiscountsApiTypes.CustomDiscountsCreateResponse>(__result)!;
+	}
+
+	public async Task<CustomDiscountsApiTypes.CustomDiscountsEditResponse> EditAsync(CustomDiscountsApiTypes.CustomDiscountsEditBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "PUT",
+			Path = "/custom-discounts",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<CustomDiscountsApiTypes.CustomDiscountsEditResponse>(__result)!;
+	}
+
+	public async Task<CustomDiscountsApiTypes.CustomDiscountsDeleteResponse> DeleteAsync(CustomDiscountsApiTypes.CustomDiscountsDeleteBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "DELETE",
+			Path = "/custom-discounts",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<CustomDiscountsApiTypes.CustomDiscountsDeleteResponse>(__result)!;
+	}
+}
+
+public sealed class ImapApi
+{
+	private readonly LolzteamHttpClient _http;
+
+	public ImapApi(LolzteamHttpClient http)
+	{
+		_http = http;
+	}
+
+	public async Task<ImapApiTypes.ImapCreateResponse> CreateAsync(ImapApiTypes.ImapCreateBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/imap",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ImapApiTypes.ImapCreateResponse>(__result)!;
+	}
+
+	public async Task<ImapApiTypes.ImapDeleteResponse> DeleteAsync(ImapApiTypes.ImapDeleteBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "DELETE",
+			Path = "/imap",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ImapApiTypes.ImapDeleteResponse>(__result)!;
+	}
+}
+
 public sealed class ListApi
 {
 	private readonly LolzteamHttpClient _http;
@@ -434,7 +635,7 @@ public sealed class ManagingApi
 		_http = http;
 	}
 
-	public async Task<ManagingApiTypes.ManagingGetResponse> GetAsync(int ItemId, ManagingApiTypes.ManagingGetParams? @params = null, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingGetResponse> GetAsync(long ItemId, ManagingApiTypes.ManagingGetParams? @params = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -445,25 +646,25 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingGetResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingDeleteResponse> DeleteAsync(int ItemId, ManagingApiTypes.ManagingDeleteBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingDeleteResponse> DeleteAsync(long ItemId, ManagingApiTypes.ManagingDeleteBody body, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
 			Method = "DELETE",
 			Path = $"/{ItemId}",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingDeleteResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingCreateClaimResponse> CreateClaimAsync(ManagingApiTypes.ManagingCreateClaimBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingCreateClaimResponse> CreateClaimAsync(ManagingApiTypes.ManagingCreateClaimBody body, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
 			Method = "POST",
 			Path = "/claims",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingCreateClaimResponse>(__result)!;
@@ -481,7 +682,7 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingBulkGetResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingSteamInventoryValueResponse> SteamInventoryValueAsync(int ItemId, ManagingApiTypes.ManagingSteamInventoryValueParams? @params = null, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingSteamInventoryValueResponse> SteamInventoryValueAsync(long ItemId, ManagingApiTypes.ManagingSteamInventoryValueParams? @params = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -503,7 +704,7 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingSteamValueResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingSteamPreviewResponse> SteamPreviewAsync(int ItemId, ManagingApiTypes.ManagingSteamPreviewParams? @params = null, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingSteamPreviewResponse> SteamPreviewAsync(long ItemId, ManagingApiTypes.ManagingSteamPreviewParams? @params = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -514,7 +715,7 @@ public sealed class ManagingApi
 		return new ManagingApiTypes.ManagingSteamPreviewResponse(__result);
 	}
 
-	public async Task<ManagingApiTypes.ManagingEditResponse> EditAsync(int ItemId, ManagingApiTypes.ManagingEditBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingEditResponse> EditAsync(long ItemId, ManagingApiTypes.ManagingEditBody? body = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -526,7 +727,7 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingEditResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingAIPriceResponse> AIPriceAsync(int ItemId, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingAIPriceResponse> AIPriceAsync(long ItemId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -536,7 +737,7 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingAIPriceResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingAutoBuyPriceResponse> AutoBuyPriceAsync(int ItemId, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingAutoBuyPriceResponse> AutoBuyPriceAsync(long ItemId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -546,7 +747,7 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingAutoBuyPriceResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingNoteResponse> NoteAsync(int ItemId, ManagingApiTypes.ManagingNoteBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingNoteResponse> NoteAsync(long ItemId, ManagingApiTypes.ManagingNoteBody? body = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -558,7 +759,7 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingNoteResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingSteamUpdateValueResponse> SteamUpdateValueAsync(int ItemId, ManagingApiTypes.ManagingSteamUpdateValueBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingSteamUpdateValueResponse> SteamUpdateValueAsync(long ItemId, ManagingApiTypes.ManagingSteamUpdateValueBody? body = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -570,7 +771,7 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingSteamUpdateValueResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingBumpResponse> BumpAsync(int ItemId, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingBumpResponse> BumpAsync(long ItemId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -580,19 +781,19 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingBumpResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingAutoBumpResponse> AutoBumpAsync(int ItemId, ManagingApiTypes.ManagingAutoBumpBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingAutoBumpResponse> AutoBumpAsync(long ItemId, ManagingApiTypes.ManagingAutoBumpBody body, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
 			Method = "POST",
 			Path = $"/{ItemId}/auto-bump",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingAutoBumpResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingAutoBumpDisableResponse> AutoBumpDisableAsync(int ItemId, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingAutoBumpDisableResponse> AutoBumpDisableAsync(long ItemId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -602,7 +803,7 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingAutoBumpDisableResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingOpenResponse> OpenAsync(int ItemId, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingOpenResponse> OpenAsync(long ItemId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -612,7 +813,7 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingOpenResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingCloseResponse> CloseAsync(int ItemId, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingCloseResponse> CloseAsync(long ItemId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -622,7 +823,7 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingCloseResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingImageResponse> ImageAsync(int ItemId, ManagingApiTypes.ManagingImageParams? @params = null, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingImageResponse> ImageAsync(long ItemId, ManagingApiTypes.ManagingImageParams? @params = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -633,7 +834,7 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingImageResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingEmailCodeResponse> EmailCodeAsync(int ItemId, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingEmailCodeResponse> EmailCodeAsync(long ItemId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -654,7 +855,7 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingGetLetters2Response>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingSteamGetMafileResponse> SteamGetMafileAsync(int ItemId, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingSteamGetMafileResponse> SteamGetMafileAsync(long ItemId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -664,7 +865,7 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingSteamGetMafileResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingSteamAddMafileResponse> SteamAddMafileAsync(int ItemId, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingSteamAddMafileResponse> SteamAddMafileAsync(long ItemId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -674,7 +875,7 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingSteamAddMafileResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingSteamRemoveMafileResponse> SteamRemoveMafileAsync(int ItemId, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingSteamRemoveMafileResponse> SteamRemoveMafileAsync(long ItemId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -684,7 +885,7 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingSteamRemoveMafileResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingSteamMafileCodeResponse> SteamMafileCodeAsync(int ItemId, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingSteamMafileCodeResponse> SteamMafileCodeAsync(long ItemId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -694,7 +895,7 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingSteamMafileCodeResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingSteamSDAResponse> SteamSDAAsync(int ItemId, ManagingApiTypes.ManagingSteamSDABody? body = null, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingSteamSDAResponse> SteamSDAAsync(long ItemId, ManagingApiTypes.ManagingSteamSDABody? body = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -706,7 +907,7 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingSteamSDAResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingTelegramCodeResponse> TelegramCodeAsync(int ItemId, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingTelegramCodeResponse> TelegramCodeAsync(long ItemId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -716,7 +917,7 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingTelegramCodeResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingTelegramResetAuthResponse> TelegramResetAuthAsync(int ItemId, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingTelegramResetAuthResponse> TelegramResetAuthAsync(long ItemId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -726,7 +927,7 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingTelegramResetAuthResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingRefuseGuaranteeResponse> RefuseGuaranteeAsync(int ItemId, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingRefuseGuaranteeResponse> RefuseGuaranteeAsync(long ItemId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -736,19 +937,19 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingRefuseGuaranteeResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingDeclineVideoRecordingResponse> DeclineVideoRecordingAsync(int ItemId, ManagingApiTypes.ManagingDeclineVideoRecordingBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingDeclineVideoRecordingResponse> DeclineVideoRecordingAsync(long ItemId, ManagingApiTypes.ManagingDeclineVideoRecordingBody body, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
 			Method = "POST",
 			Path = $"/{ItemId}/decline-video-recording",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingDeclineVideoRecordingResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingCheckGuaranteeResponse> CheckGuaranteeAsync(int ItemId, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingCheckGuaranteeResponse> CheckGuaranteeAsync(long ItemId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -758,7 +959,7 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingCheckGuaranteeResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingChangePasswordResponse> ChangePasswordAsync(int ItemId, ManagingApiTypes.ManagingChangePasswordBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingChangePasswordResponse> ChangePasswordAsync(long ItemId, ManagingApiTypes.ManagingChangePasswordBody? body = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -770,7 +971,7 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingChangePasswordResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingTempEmailPasswordResponse> TempEmailPasswordAsync(int ItemId, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingTempEmailPasswordResponse> TempEmailPasswordAsync(long ItemId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -780,55 +981,55 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingTempEmailPasswordResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingTagResponse> TagAsync(int ItemId, ManagingApiTypes.ManagingTagBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingTagResponse> TagAsync(long ItemId, ManagingApiTypes.ManagingTagBody body, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
 			Method = "POST",
 			Path = $"/{ItemId}/tag",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingTagResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingUntagResponse> UntagAsync(int ItemId, ManagingApiTypes.ManagingUntagBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingUntagResponse> UntagAsync(long ItemId, ManagingApiTypes.ManagingUntagBody body, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
 			Method = "DELETE",
 			Path = $"/{ItemId}/tag",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingUntagResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingPublicTagResponse> PublicTagAsync(int ItemId, ManagingApiTypes.ManagingPublicTagBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingPublicTagResponse> PublicTagAsync(long ItemId, ManagingApiTypes.ManagingPublicTagBody body, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
 			Method = "POST",
 			Path = $"/{ItemId}/public-tag",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingPublicTagResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingPublicUntagResponse> PublicUntagAsync(int ItemId, ManagingApiTypes.ManagingPublicUntagBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingPublicUntagResponse> PublicUntagAsync(long ItemId, ManagingApiTypes.ManagingPublicUntagBody body, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
 			Method = "DELETE",
 			Path = $"/{ItemId}/public-tag",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingPublicUntagResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingFavoriteResponse> FavoriteAsync(int ItemId, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingFavoriteResponse> FavoriteAsync(long ItemId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -838,7 +1039,7 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingFavoriteResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingUnfavoriteResponse> UnfavoriteAsync(int ItemId, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingUnfavoriteResponse> UnfavoriteAsync(long ItemId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -848,7 +1049,7 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingUnfavoriteResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingStickResponse> StickAsync(int ItemId, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingStickResponse> StickAsync(long ItemId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -858,7 +1059,7 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingStickResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingUnstickResponse> UnstickAsync(int ItemId, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingUnstickResponse> UnstickAsync(long ItemId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -868,16 +1069,160 @@ public sealed class ManagingApi
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingUnstickResponse>(__result)!;
 	}
 
-	public async Task<ManagingApiTypes.ManagingTransferResponse> TransferAsync(int ItemId, ManagingApiTypes.ManagingTransferBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<ManagingApiTypes.ManagingTransferResponse> TransferAsync(long ItemId, ManagingApiTypes.ManagingTransferBody body, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
 			Method = "POST",
 			Path = $"/{ItemId}/change-owner",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
 		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingTransferResponse>(__result)!;
+	}
+}
+
+public sealed class PaymentsApi
+{
+	private readonly LolzteamHttpClient _http;
+
+	public PaymentsApi(LolzteamHttpClient http)
+	{
+		_http = http;
+	}
+
+	public async Task<PaymentsApiTypes.PaymentsInvoiceGetResponse> InvoiceGetAsync(PaymentsApiTypes.PaymentsInvoiceGetParams? @params = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = "/invoice",
+			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsInvoiceGetResponse>(__result)!;
+	}
+
+	public async Task<PaymentsApiTypes.PaymentsInvoiceCreateResponse> InvoiceCreateAsync(PaymentsApiTypes.PaymentsInvoiceCreateBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/invoice",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsInvoiceCreateResponse>(__result)!;
+	}
+
+	public async Task<PaymentsApiTypes.PaymentsInvoiceListResponse> InvoiceListAsync(PaymentsApiTypes.PaymentsInvoiceListParams? @params = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = "/invoice/list",
+			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsInvoiceListResponse>(__result)!;
+	}
+
+	public async Task<PaymentsApiTypes.PaymentsCurrencyResponse> CurrencyAsync(CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = "/currency",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsCurrencyResponse>(__result)!;
+	}
+
+	public async Task<PaymentsApiTypes.PaymentsBalanceListResponse> BalanceListAsync(CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = "/balance/exchange",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsBalanceListResponse>(__result)!;
+	}
+
+	public async Task<PaymentsApiTypes.PaymentsBalanceExchangeResponse> BalanceExchangeAsync(PaymentsApiTypes.PaymentsBalanceExchangeBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/balance/exchange",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsBalanceExchangeResponse>(__result)!;
+	}
+
+	public async Task<PaymentsApiTypes.PaymentsTransferResponse> TransferAsync(PaymentsApiTypes.PaymentsTransferBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/balance/transfer",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsTransferResponse>(__result)!;
+	}
+
+	public async Task<PaymentsApiTypes.PaymentsFeeResponse> FeeAsync(PaymentsApiTypes.PaymentsFeeParams? @params = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = "/balance/transfer/fee",
+			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsFeeResponse>(__result)!;
+	}
+
+	public async Task<PaymentsApiTypes.PaymentsCancelResponse> CancelAsync(PaymentsApiTypes.PaymentsCancelBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/balance/transfer/cancel",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsCancelResponse>(__result)!;
+	}
+
+	public async Task<PaymentsApiTypes.PaymentsHistoryResponse> HistoryAsync(PaymentsApiTypes.PaymentsHistoryParams? @params = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = "/user/payments",
+			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsHistoryResponse>(__result)!;
+	}
+
+	public async Task<PaymentsApiTypes.PaymentsPayoutServicesResponse> PayoutServicesAsync(CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = "/balance/payout/services",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsPayoutServicesResponse>(__result)!;
+	}
+
+	public async Task<PaymentsApiTypes.PaymentsPayoutResponse> PayoutAsync(PaymentsApiTypes.PaymentsPayoutBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/balance/payout",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsPayoutResponse>(__result)!;
 	}
 }
 
@@ -925,419 +1270,6 @@ public sealed class ProfileApi
 	}
 }
 
-public sealed class CartApi
-{
-	private readonly LolzteamHttpClient _http;
-
-	public CartApi(LolzteamHttpClient http)
-	{
-		_http = http;
-	}
-
-	public async Task<CartApiTypes.CartGetResponse> GetAsync(CartApiTypes.CartGetParams? @params = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = "/cart",
-			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CartApiTypes.CartGetResponse>(__result)!;
-	}
-
-	public async Task<CartApiTypes.CartAddResponse> AddAsync(CartApiTypes.CartAddBody body, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/cart",
-			Body = JsonSerializer.SerializeToElement(body),
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CartApiTypes.CartAddResponse>(__result)!;
-	}
-
-	public async Task<CartApiTypes.CartDeleteResponse> DeleteAsync(CartApiTypes.CartDeleteBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "DELETE",
-			Path = "/cart",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CartApiTypes.CartDeleteResponse>(__result)!;
-	}
-}
-
-public sealed class PurchasingApi
-{
-	private readonly LolzteamHttpClient _http;
-
-	public PurchasingApi(LolzteamHttpClient http)
-	{
-		_http = http;
-	}
-
-	public async Task<PurchasingApiTypes.PurchasingFastBuyResponse> FastBuyAsync(int ItemId, PurchasingApiTypes.PurchasingFastBuyBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = $"/{ItemId}/fast-buy",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PurchasingApiTypes.PurchasingFastBuyResponse>(__result)!;
-	}
-
-	public async Task<PurchasingApiTypes.PurchasingCheckResponse> CheckAsync(int ItemId, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = $"/{ItemId}/check-account",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PurchasingApiTypes.PurchasingCheckResponse>(__result)!;
-	}
-
-	public async Task<PurchasingApiTypes.PurchasingConfirmResponse> ConfirmAsync(int ItemId, PurchasingApiTypes.PurchasingConfirmBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = $"/{ItemId}/confirm-buy",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PurchasingApiTypes.PurchasingConfirmResponse>(__result)!;
-	}
-
-	public async Task<PurchasingApiTypes.PurchasingDiscountRequestResponse> DiscountRequestAsync(int ItemId, PurchasingApiTypes.PurchasingDiscountRequestBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = $"/{ItemId}/discount",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PurchasingApiTypes.PurchasingDiscountRequestResponse>(__result)!;
-	}
-
-	public async Task<PurchasingApiTypes.PurchasingDiscountCancelResponse> DiscountCancelAsync(int ItemId, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "DELETE",
-			Path = $"/{ItemId}/discount",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PurchasingApiTypes.PurchasingDiscountCancelResponse>(__result)!;
-	}
-}
-
-public sealed class CustomDiscountsApi
-{
-	private readonly LolzteamHttpClient _http;
-
-	public CustomDiscountsApi(LolzteamHttpClient http)
-	{
-		_http = http;
-	}
-
-	public async Task<CustomDiscountsApiTypes.CustomDiscountsGetResponse> GetAsync(CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = "/custom-discounts",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CustomDiscountsApiTypes.CustomDiscountsGetResponse>(__result)!;
-	}
-
-	public async Task<CustomDiscountsApiTypes.CustomDiscountsCreateResponse> CreateAsync(CustomDiscountsApiTypes.CustomDiscountsCreateBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/custom-discounts",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CustomDiscountsApiTypes.CustomDiscountsCreateResponse>(__result)!;
-	}
-
-	public async Task<CustomDiscountsApiTypes.CustomDiscountsEditResponse> EditAsync(CustomDiscountsApiTypes.CustomDiscountsEditBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "PUT",
-			Path = "/custom-discounts",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CustomDiscountsApiTypes.CustomDiscountsEditResponse>(__result)!;
-	}
-
-	public async Task<CustomDiscountsApiTypes.CustomDiscountsDeleteResponse> DeleteAsync(CustomDiscountsApiTypes.CustomDiscountsDeleteBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "DELETE",
-			Path = "/custom-discounts",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CustomDiscountsApiTypes.CustomDiscountsDeleteResponse>(__result)!;
-	}
-}
-
-public sealed class PublishingApi
-{
-	private readonly LolzteamHttpClient _http;
-
-	public PublishingApi(LolzteamHttpClient http)
-	{
-		_http = http;
-	}
-
-	public async Task<PublishingApiTypes.PublishingFastSellResponse> FastSellAsync(PublishingApiTypes.PublishingFastSellBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/item/fast-sell",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PublishingApiTypes.PublishingFastSellResponse>(__result)!;
-	}
-
-	public async Task<PublishingApiTypes.PublishingAddResponse> AddAsync(PublishingApiTypes.PublishingAddBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/item/add",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PublishingApiTypes.PublishingAddResponse>(__result)!;
-	}
-
-	public async Task<PublishingApiTypes.PublishingCheckResponse> CheckAsync(int ItemId, PublishingApiTypes.PublishingCheckBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = $"/{ItemId}/goods/check",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PublishingApiTypes.PublishingCheckResponse>(__result)!;
-	}
-
-	public async Task<PublishingApiTypes.PublishingExternalResponse> ExternalAsync(int ItemId, PublishingApiTypes.PublishingExternalBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = $"/{ItemId}/external-account",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PublishingApiTypes.PublishingExternalResponse>(__result)!;
-	}
-}
-
-public sealed class PaymentsApi
-{
-	private readonly LolzteamHttpClient _http;
-
-	public PaymentsApi(LolzteamHttpClient http)
-	{
-		_http = http;
-	}
-
-	public async Task<PaymentsApiTypes.PaymentsInvoiceGetResponse> InvoiceGetAsync(PaymentsApiTypes.PaymentsInvoiceGetParams? @params = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = "/invoice",
-			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsInvoiceGetResponse>(__result)!;
-	}
-
-	public async Task<PaymentsApiTypes.PaymentsInvoiceCreateResponse> InvoiceCreateAsync(PaymentsApiTypes.PaymentsInvoiceCreateBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/invoice",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsInvoiceCreateResponse>(__result)!;
-	}
-
-	public async Task<PaymentsApiTypes.PaymentsInvoiceListResponse> InvoiceListAsync(PaymentsApiTypes.PaymentsInvoiceListParams? @params = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = "/invoice/list",
-			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsInvoiceListResponse>(__result)!;
-	}
-
-	public async Task<PaymentsApiTypes.PaymentsCurrencyResponse> CurrencyAsync(CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = "/currency",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsCurrencyResponse>(__result)!;
-	}
-
-	public async Task<PaymentsApiTypes.PaymentsBalanceListResponse> BalanceListAsync(CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = "/balance/exchange",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsBalanceListResponse>(__result)!;
-	}
-
-	public async Task<PaymentsApiTypes.PaymentsBalanceExchangeResponse> BalanceExchangeAsync(PaymentsApiTypes.PaymentsBalanceExchangeBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/balance/exchange",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsBalanceExchangeResponse>(__result)!;
-	}
-
-	public async Task<PaymentsApiTypes.PaymentsTransferResponse> TransferAsync(PaymentsApiTypes.PaymentsTransferBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/balance/transfer",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsTransferResponse>(__result)!;
-	}
-
-	public async Task<PaymentsApiTypes.PaymentsFeeResponse> FeeAsync(PaymentsApiTypes.PaymentsFeeParams? @params = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = "/balance/transfer/fee",
-			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsFeeResponse>(__result)!;
-	}
-
-	public async Task<PaymentsApiTypes.PaymentsCancelResponse> CancelAsync(PaymentsApiTypes.PaymentsCancelBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/balance/transfer/cancel",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsCancelResponse>(__result)!;
-	}
-
-	public async Task<PaymentsApiTypes.PaymentsHistoryResponse> HistoryAsync(PaymentsApiTypes.PaymentsHistoryParams? @params = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = "/user/payments",
-			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsHistoryResponse>(__result)!;
-	}
-
-	public async Task<PaymentsApiTypes.PaymentsPayoutServicesResponse> PayoutServicesAsync(CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = "/balance/payout/services",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsPayoutServicesResponse>(__result)!;
-	}
-
-	public async Task<PaymentsApiTypes.PaymentsPayoutResponse> PayoutAsync(PaymentsApiTypes.PaymentsPayoutBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/balance/payout",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsPayoutResponse>(__result)!;
-	}
-}
-
-public sealed class AutoPaymentsApi
-{
-	private readonly LolzteamHttpClient _http;
-
-	public AutoPaymentsApi(LolzteamHttpClient http)
-	{
-		_http = http;
-	}
-
-	public async Task<AutoPaymentsApiTypes.AutoPaymentsListResponse> ListAsync(CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = "/auto-payments",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<AutoPaymentsApiTypes.AutoPaymentsListResponse>(__result)!;
-	}
-
-	public async Task<AutoPaymentsApiTypes.AutoPaymentsCreateResponse> CreateAsync(AutoPaymentsApiTypes.AutoPaymentsCreateBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/auto-payment",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<AutoPaymentsApiTypes.AutoPaymentsCreateResponse>(__result)!;
-	}
-
-	public async Task<AutoPaymentsApiTypes.AutoPaymentsDeleteResponse> DeleteAsync(AutoPaymentsApiTypes.AutoPaymentsDeleteBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "DELETE",
-			Path = "/auto-payment",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<AutoPaymentsApiTypes.AutoPaymentsDeleteResponse>(__result)!;
-	}
-}
-
 public sealed class ProxyApi
 {
 	private readonly LolzteamHttpClient _http;
@@ -1382,77 +1314,145 @@ public sealed class ProxyApi
 	}
 }
 
-public sealed class ImapApi
+public sealed class PublishingApi
 {
 	private readonly LolzteamHttpClient _http;
 
-	public ImapApi(LolzteamHttpClient http)
+	public PublishingApi(LolzteamHttpClient http)
 	{
 		_http = http;
 	}
 
-	public async Task<ImapApiTypes.ImapCreateResponse> CreateAsync(ImapApiTypes.ImapCreateBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<PublishingApiTypes.PublishingFastSellResponse> FastSellAsync(PublishingApiTypes.PublishingFastSellBody body, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
 			Method = "POST",
-			Path = "/imap",
+			Path = "/item/fast-sell",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PublishingApiTypes.PublishingFastSellResponse>(__result)!;
+	}
+
+	public async Task<PublishingApiTypes.PublishingAddResponse> AddAsync(PublishingApiTypes.PublishingAddBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/item/add",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PublishingApiTypes.PublishingAddResponse>(__result)!;
+	}
+
+	public async Task<PublishingApiTypes.PublishingCheckResponse> CheckAsync(long ItemId, PublishingApiTypes.PublishingCheckBody? body = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = $"/{ItemId}/goods/check",
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ImapApiTypes.ImapCreateResponse>(__result)!;
+		return JsonSerializer.Deserialize<PublishingApiTypes.PublishingCheckResponse>(__result)!;
 	}
 
-	public async Task<ImapApiTypes.ImapDeleteResponse> DeleteAsync(ImapApiTypes.ImapDeleteBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<PublishingApiTypes.PublishingExternalResponse> ExternalAsync(long ItemId, PublishingApiTypes.PublishingExternalBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = $"/{ItemId}/external-account",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PublishingApiTypes.PublishingExternalResponse>(__result)!;
+	}
+}
+
+public sealed class PurchasingApi
+{
+	private readonly LolzteamHttpClient _http;
+
+	public PurchasingApi(LolzteamHttpClient http)
+	{
+		_http = http;
+	}
+
+	public async Task<PurchasingApiTypes.PurchasingFastBuyResponse> FastBuyAsync(long ItemId, PurchasingApiTypes.PurchasingFastBuyBody? body = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = $"/{ItemId}/fast-buy",
+			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PurchasingApiTypes.PurchasingFastBuyResponse>(__result)!;
+	}
+
+	public async Task<PurchasingApiTypes.PurchasingCheckResponse> CheckAsync(long ItemId, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = $"/{ItemId}/check-account",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PurchasingApiTypes.PurchasingCheckResponse>(__result)!;
+	}
+
+	public async Task<PurchasingApiTypes.PurchasingConfirmResponse> ConfirmAsync(long ItemId, PurchasingApiTypes.PurchasingConfirmBody? body = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = $"/{ItemId}/confirm-buy",
+			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PurchasingApiTypes.PurchasingConfirmResponse>(__result)!;
+	}
+
+	public async Task<PurchasingApiTypes.PurchasingDiscountRequestResponse> DiscountRequestAsync(long ItemId, PurchasingApiTypes.PurchasingDiscountRequestBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = $"/{ItemId}/discount",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PurchasingApiTypes.PurchasingDiscountRequestResponse>(__result)!;
+	}
+
+	public async Task<PurchasingApiTypes.PurchasingDiscountCancelResponse> DiscountCancelAsync(long ItemId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
 			Method = "DELETE",
-			Path = "/imap",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
+			Path = $"/{ItemId}/discount",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ImapApiTypes.ImapDeleteResponse>(__result)!;
-	}
-}
-
-public sealed class BatchApi
-{
-	private readonly LolzteamHttpClient _http;
-
-	public BatchApi(LolzteamHttpClient http)
-	{
-		_http = http;
-	}
-
-	public async Task<BatchApiTypes.BatchBatchResponse> BatchAsync(List<JsonElement> body, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/batch",
-			Body = JsonSerializer.SerializeToElement(body),
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<BatchApiTypes.BatchBatchResponse>(__result)!;
+		return JsonSerializer.Deserialize<PurchasingApiTypes.PurchasingDiscountCancelResponse>(__result)!;
 	}
 }
 
 public sealed class MarketClient : IDisposable
 {
+	public AutoPaymentsApi AutoPayments { get; }
+	public BatchApi Batch { get; }
+	public CartApi Cart { get; }
 	public CategoryApi Category { get; }
+	public CustomDiscountsApi CustomDiscounts { get; }
+	public ImapApi Imap { get; }
 	public ListApi List { get; }
 	public ManagingApi Managing { get; }
-	public ProfileApi Profile { get; }
-	public CartApi Cart { get; }
-	public PurchasingApi Purchasing { get; }
-	public CustomDiscountsApi CustomDiscounts { get; }
-	public PublishingApi Publishing { get; }
 	public PaymentsApi Payments { get; }
-	public AutoPaymentsApi AutoPayments { get; }
+	public ProfileApi Profile { get; }
 	public ProxyApi Proxy { get; }
-	public ImapApi Imap { get; }
-	public BatchApi Batch { get; }
+	public PublishingApi Publishing { get; }
+	public PurchasingApi Purchasing { get; }
 
 	private readonly LolzteamHttpClient _http;
 
@@ -1466,19 +1466,19 @@ public sealed class MarketClient : IDisposable
 		};
 		_http = new LolzteamHttpClient(resolvedConfig);
 
+		AutoPayments = new AutoPaymentsApi(_http);
+		Batch = new BatchApi(_http);
+		Cart = new CartApi(_http);
 		Category = new CategoryApi(_http);
+		CustomDiscounts = new CustomDiscountsApi(_http);
+		Imap = new ImapApi(_http);
 		List = new ListApi(_http);
 		Managing = new ManagingApi(_http);
-		Profile = new ProfileApi(_http);
-		Cart = new CartApi(_http);
-		Purchasing = new PurchasingApi(_http);
-		CustomDiscounts = new CustomDiscountsApi(_http);
-		Publishing = new PublishingApi(_http);
 		Payments = new PaymentsApi(_http);
-		AutoPayments = new AutoPaymentsApi(_http);
+		Profile = new ProfileApi(_http);
 		Proxy = new ProxyApi(_http);
-		Imap = new ImapApi(_http);
-		Batch = new BatchApi(_http);
+		Publishing = new PublishingApi(_http);
+		Purchasing = new PurchasingApi(_http);
 	}
 
 	public void Dispose()

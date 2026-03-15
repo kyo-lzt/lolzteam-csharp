@@ -21,7 +21,7 @@ internal static class Parser
 			return new ParseResult([], "https://localhost", componentSchemas);
 		}
 
-		var groupMap = new Dictionary<string, List<MethodDefinition>>();
+		var groupMap = new SortedDictionary<string, List<MethodDefinition>>();
 
 		foreach (var pathEntry in pathsObj)
 		{
@@ -82,9 +82,9 @@ internal static class Parser
 		return new ParseResult(groups, baseUrl, componentSchemas);
 	}
 
-	private static Dictionary<string, JsonObject> ExtractComponentSchemas(JsonNode rawSpec)
+	private static SortedDictionary<string, JsonObject> ExtractComponentSchemas(JsonNode rawSpec)
 	{
-		var result = new Dictionary<string, JsonObject>();
+		var result = new SortedDictionary<string, JsonObject>();
 		if (rawSpec is not JsonObject root) return result;
 		var components = root["components"];
 		if (components is not JsonObject compObj) return result;
@@ -95,6 +95,12 @@ internal static class Parser
 		{
 			if (kvp.Value is JsonObject schemaObj)
 			{
+				// Skip non-object schemas (no properties and not type: "object")
+				var hasProperties = schemaObj["properties"] is JsonObject propsObj && propsObj.Count > 0;
+				var typeNode = schemaObj["type"];
+				var isObject = typeNode is JsonValue tv && tv.TryGetValue<string>(out var t) && t == "object";
+				if (!hasProperties && !isObject) continue;
+
 				// Deep clone so we can resolve $refs within component schemas later
 				var cloned = JsonNode.Parse(schemaObj.ToJsonString());
 				if (cloned is JsonObject clonedObj)

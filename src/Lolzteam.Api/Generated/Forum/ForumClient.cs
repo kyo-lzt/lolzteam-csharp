@@ -5,28 +5,6 @@ using Lolzteam.Api.Runtime;
 
 namespace Lolzteam.Api.Generated.Forum;
 
-public sealed class OAuthApi
-{
-	private readonly LolzteamHttpClient _http;
-
-	public OAuthApi(LolzteamHttpClient http)
-	{
-		_http = http;
-	}
-
-	public async Task<OAuthApiTypes.OAuthTokenResponse> TokenAsync(OAuthApiTypes.OAuthTokenBody body, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/oauth/token",
-			Body = JsonSerializer.SerializeToElement(body),
-			BodyEncoding = BodyEncoding.Multipart,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<OAuthApiTypes.OAuthTokenResponse>(__result)!;
-	}
-}
-
 public sealed class AssetsApi
 {
 	private readonly LolzteamHttpClient _http;
@@ -45,6 +23,28 @@ public sealed class AssetsApi
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
 		return JsonSerializer.Deserialize<AssetsApiTypes.AssetsCssResponse>(__result)!;
+	}
+}
+
+public sealed class BatchApi
+{
+	private readonly LolzteamHttpClient _http;
+
+	public BatchApi(LolzteamHttpClient http)
+	{
+		_http = http;
+	}
+
+	public async Task<BatchApiTypes.BatchExecuteResponse> ExecuteAsync(List<JsonElement>? body = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/batch",
+			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<BatchApiTypes.BatchExecuteResponse>(__result)!;
 	}
 }
 
@@ -68,7 +68,7 @@ public sealed class CategoriesApi
 		return JsonSerializer.Deserialize<CategoriesApiTypes.CategoriesListResponse>(__result)!;
 	}
 
-	public async Task<CategoriesApiTypes.CategoriesGetResponse> GetAsync(int CategoryId, CancellationToken cancellationToken = default)
+	public async Task<CategoriesApiTypes.CategoriesGetResponse> GetAsync(long CategoryId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -76,6 +76,448 @@ public sealed class CategoriesApi
 			Path = $"/categories/{CategoryId}",
 		}, cancellationToken).ConfigureAwait(false);
 		return JsonSerializer.Deserialize<CategoriesApiTypes.CategoriesGetResponse>(__result)!;
+	}
+}
+
+public sealed class ChatboxApi
+{
+	private readonly LolzteamHttpClient _http;
+
+	public ChatboxApi(LolzteamHttpClient http)
+	{
+		_http = http;
+	}
+
+	public async Task<ChatboxApiTypes.ChatboxIndexResponse> IndexAsync(ChatboxApiTypes.ChatboxIndexParams? @params = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = "/chatbox",
+			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxIndexResponse>(__result)!;
+	}
+
+	public async Task<ChatboxApiTypes.ChatboxGetMessagesResponse> GetMessagesAsync(ChatboxApiTypes.ChatboxGetMessagesParams? @params = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = "/chatbox/messages",
+			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxGetMessagesResponse>(__result)!;
+	}
+
+	public async Task<ChatboxApiTypes.ChatboxPostMessageResponse> PostMessageAsync(ChatboxApiTypes.ChatboxPostMessageBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/chatbox/messages",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxPostMessageResponse>(__result)!;
+	}
+
+	public async Task<ChatboxApiTypes.ChatboxEditMessageResponse> EditMessageAsync(ChatboxApiTypes.ChatboxEditMessageBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "PUT",
+			Path = "/chatbox/messages",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxEditMessageResponse>(__result)!;
+	}
+
+	public async Task<ChatboxApiTypes.ChatboxDeleteMessageResponse> DeleteMessageAsync(ChatboxApiTypes.ChatboxDeleteMessageBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "DELETE",
+			Path = "/chatbox/messages",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxDeleteMessageResponse>(__result)!;
+	}
+
+	public async Task<ChatboxApiTypes.ChatboxOnlineResponse> OnlineAsync(ChatboxApiTypes.ChatboxOnlineParams? @params = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = "/chatbox/messages/online",
+			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxOnlineResponse>(__result)!;
+	}
+
+	public async Task<ChatboxApiTypes.ChatboxReportReasonsResponse> ReportReasonsAsync(ChatboxApiTypes.ChatboxReportReasonsParams? @params = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = "/chatbox/messages/report",
+			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxReportReasonsResponse>(__result)!;
+	}
+
+	public async Task<ChatboxApiTypes.ChatboxReportResponse> ReportAsync(ChatboxApiTypes.ChatboxReportBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/chatbox/messages/report",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxReportResponse>(__result)!;
+	}
+
+	public async Task<ChatboxApiTypes.ChatboxGetLeaderboardResponse> GetLeaderboardAsync(ChatboxApiTypes.ChatboxGetLeaderboardParams? @params = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = "/chatbox/messages/leaderboard",
+			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxGetLeaderboardResponse>(__result)!;
+	}
+
+	public async Task<ChatboxApiTypes.ChatboxGetIgnoreResponse> GetIgnoreAsync(CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = "/chatbox/ignore",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxGetIgnoreResponse>(__result)!;
+	}
+
+	public async Task<ChatboxApiTypes.ChatboxPostIgnoreResponse> PostIgnoreAsync(ChatboxApiTypes.ChatboxPostIgnoreBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/chatbox/ignore",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxPostIgnoreResponse>(__result)!;
+	}
+
+	public async Task<ChatboxApiTypes.ChatboxDeleteIgnoreResponse> DeleteIgnoreAsync(ChatboxApiTypes.ChatboxDeleteIgnoreBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "DELETE",
+			Path = "/chatbox/ignore",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxDeleteIgnoreResponse>(__result)!;
+	}
+}
+
+public sealed class ConversationsApi
+{
+	private readonly LolzteamHttpClient _http;
+
+	public ConversationsApi(LolzteamHttpClient http)
+	{
+		_http = http;
+	}
+
+	public async Task<ConversationsApiTypes.ConversationsListResponse> ListAsync(ConversationsApiTypes.ConversationsListParams? @params = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = "/conversations",
+			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsListResponse>(__result)!;
+	}
+
+	public async Task<ConversationsApiTypes.ConversationsCreateResponse> CreateAsync(ConversationsApiTypes.ConversationsCreateBody? body = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/conversations",
+			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsCreateResponse>(__result)!;
+	}
+
+	public async Task<ConversationsApiTypes.ConversationsUpdateResponse> UpdateAsync(ConversationsApiTypes.ConversationsUpdateBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "PUT",
+			Path = "/conversations",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsUpdateResponse>(__result)!;
+	}
+
+	public async Task<ConversationsApiTypes.ConversationsDeleteResponse> DeleteAsync(ConversationsApiTypes.ConversationsDeleteBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "DELETE",
+			Path = "/conversations",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsDeleteResponse>(__result)!;
+	}
+
+	public async Task<ConversationsApiTypes.ConversationsStartResponse> StartAsync(ConversationsApiTypes.ConversationsStartBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/conversations/start",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsStartResponse>(__result)!;
+	}
+
+	public async Task<ConversationsApiTypes.ConversationsSaveResponse> SaveAsync(ConversationsApiTypes.ConversationsSaveBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/conversations/save",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsSaveResponse>(__result)!;
+	}
+
+	public async Task<ConversationsApiTypes.ConversationsGetResponse> GetAsync(long ConversationId, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = $"/conversations/{ConversationId}",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsGetResponse>(__result)!;
+	}
+
+	public async Task<ConversationsApiTypes.ConversationsMessagesListResponse> MessagesListAsync(long ConversationId, ConversationsApiTypes.ConversationsMessagesListParams? @params = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = $"/conversations/{ConversationId}/messages",
+			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesListResponse>(__result)!;
+	}
+
+	public async Task<ConversationsApiTypes.ConversationsMessagesCreateResponse> MessagesCreateAsync(long ConversationId, ConversationsApiTypes.ConversationsMessagesCreateBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = $"/conversations/{ConversationId}/messages",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesCreateResponse>(__result)!;
+	}
+
+	public async Task<ConversationsApiTypes.ConversationsSearchResponse> SearchAsync(ConversationsApiTypes.ConversationsSearchBody? body = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/conversations/search",
+			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsSearchResponse>(__result)!;
+	}
+
+	public async Task<ConversationsApiTypes.ConversationsMessagesGetResponse> MessagesGetAsync(long MessageId, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = $"/conversations/messages/{MessageId}",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesGetResponse>(__result)!;
+	}
+
+	public async Task<ConversationsApiTypes.ConversationsMessagesEditResponse> MessagesEditAsync(long ConversationId, long MessageId, ConversationsApiTypes.ConversationsMessagesEditBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "PUT",
+			Path = $"/conversations/{ConversationId}/messages/{MessageId}",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesEditResponse>(__result)!;
+	}
+
+	public async Task<ConversationsApiTypes.ConversationsMessagesDeleteResponse> MessagesDeleteAsync(long ConversationId, long MessageId, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "DELETE",
+			Path = $"/conversations/{ConversationId}/messages/{MessageId}",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesDeleteResponse>(__result)!;
+	}
+
+	public async Task<ConversationsApiTypes.ConversationsInviteResponse> InviteAsync(long ConversationId, ConversationsApiTypes.ConversationsInviteBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = $"/conversations/{ConversationId}/invite",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsInviteResponse>(__result)!;
+	}
+
+	public async Task<ConversationsApiTypes.ConversationsKickResponse> KickAsync(long ConversationId, ConversationsApiTypes.ConversationsKickBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = $"/conversations/{ConversationId}/kick",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsKickResponse>(__result)!;
+	}
+
+	public async Task<ConversationsApiTypes.ConversationsReadResponse> ReadAsync(long ConversationId, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = $"/conversations/{ConversationId}/read",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsReadResponse>(__result)!;
+	}
+
+	public async Task<ConversationsApiTypes.ConversationsReadAllResponse> ReadAllAsync(CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/conversations/read-all",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsReadAllResponse>(__result)!;
+	}
+
+	public async Task<ConversationsApiTypes.ConversationsMessagesStickResponse> MessagesStickAsync(long ConversationId, long MessageId, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = $"/conversations/{ConversationId}/messages/{MessageId}/stick",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesStickResponse>(__result)!;
+	}
+
+	public async Task<ConversationsApiTypes.ConversationsMessagesUnstickResponse> MessagesUnstickAsync(long ConversationId, long MessageId, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "DELETE",
+			Path = $"/conversations/{ConversationId}/messages/{MessageId}/stick",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesUnstickResponse>(__result)!;
+	}
+
+	public async Task<ConversationsApiTypes.ConversationsStarResponse> StarAsync(long ConversationId, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = $"/conversations/{ConversationId}/star",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsStarResponse>(__result)!;
+	}
+
+	public async Task<ConversationsApiTypes.ConversationsUnstarResponse> UnstarAsync(long ConversationId, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "DELETE",
+			Path = $"/conversations/{ConversationId}/star",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsUnstarResponse>(__result)!;
+	}
+
+	public async Task<ConversationsApiTypes.ConversationsAlertsEnableResponse> AlertsEnableAsync(long ConversationId, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = $"/conversations/{ConversationId}/alerts",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsAlertsEnableResponse>(__result)!;
+	}
+
+	public async Task<ConversationsApiTypes.ConversationsAlertsDisableResponse> AlertsDisableAsync(long ConversationId, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "DELETE",
+			Path = $"/conversations/{ConversationId}/alerts",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsAlertsDisableResponse>(__result)!;
+	}
+}
+
+public sealed class FormsApi
+{
+	private readonly LolzteamHttpClient _http;
+
+	public FormsApi(LolzteamHttpClient http)
+	{
+		_http = http;
+	}
+
+	public async Task<FormsApiTypes.FormsListResponse> ListAsync(FormsApiTypes.FormsListParams? @params = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = "/forms",
+			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<FormsApiTypes.FormsListResponse>(__result)!;
+	}
+
+	public async Task<FormsApiTypes.FormsCreateResponse> CreateAsync(FormsApiTypes.FormsCreateBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/forms/save",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<FormsApiTypes.FormsCreateResponse>(__result)!;
 	}
 }
 
@@ -109,7 +551,7 @@ public sealed class ForumsApi
 		return JsonSerializer.Deserialize<ForumsApiTypes.ForumsGroupedResponse>(__result)!;
 	}
 
-	public async Task<ForumsApiTypes.ForumsGetResponse> GetAsync(int ForumId, CancellationToken cancellationToken = default)
+	public async Task<ForumsApiTypes.ForumsGetResponse> GetAsync(long ForumId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -119,7 +561,7 @@ public sealed class ForumsApi
 		return JsonSerializer.Deserialize<ForumsApiTypes.ForumsGetResponse>(__result)!;
 	}
 
-	public async Task<ForumsApiTypes.ForumsFollowersResponse> FollowersAsync(int ForumId, CancellationToken cancellationToken = default)
+	public async Task<ForumsApiTypes.ForumsFollowersResponse> FollowersAsync(long ForumId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -129,7 +571,7 @@ public sealed class ForumsApi
 		return JsonSerializer.Deserialize<ForumsApiTypes.ForumsFollowersResponse>(__result)!;
 	}
 
-	public async Task<ForumsApiTypes.ForumsFollowResponse> FollowAsync(int ForumId, ForumsApiTypes.ForumsFollowBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<ForumsApiTypes.ForumsFollowResponse> FollowAsync(long ForumId, ForumsApiTypes.ForumsFollowBody? body = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -141,7 +583,7 @@ public sealed class ForumsApi
 		return JsonSerializer.Deserialize<ForumsApiTypes.ForumsFollowResponse>(__result)!;
 	}
 
-	public async Task<ForumsApiTypes.ForumsUnfollowResponse> UnfollowAsync(int ForumId, CancellationToken cancellationToken = default)
+	public async Task<ForumsApiTypes.ForumsUnfollowResponse> UnfollowAsync(long ForumId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -204,7 +646,7 @@ public sealed class LinksApi
 		return JsonSerializer.Deserialize<LinksApiTypes.LinksListResponse>(__result)!;
 	}
 
-	public async Task<LinksApiTypes.LinksGetResponse> GetAsync(int LinkId, CancellationToken cancellationToken = default)
+	public async Task<LinksApiTypes.LinksGetResponse> GetAsync(long LinkId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -212,37 +654,6 @@ public sealed class LinksApi
 			Path = $"/link-forums/{LinkId}",
 		}, cancellationToken).ConfigureAwait(false);
 		return JsonSerializer.Deserialize<LinksApiTypes.LinksGetResponse>(__result)!;
-	}
-}
-
-public sealed class PagesApi
-{
-	private readonly LolzteamHttpClient _http;
-
-	public PagesApi(LolzteamHttpClient http)
-	{
-		_http = http;
-	}
-
-	public async Task<PagesApiTypes.PagesListResponse> ListAsync(PagesApiTypes.PagesListParams? @params = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = "/pages",
-			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PagesApiTypes.PagesListResponse>(__result)!;
-	}
-
-	public async Task<PagesApiTypes.PagesGetResponse> GetAsync(int PageId, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = $"/pages/{PageId}",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PagesApiTypes.PagesGetResponse>(__result)!;
 	}
 }
 
@@ -267,6 +678,634 @@ public sealed class NavigationApi
 	}
 }
 
+public sealed class NotificationsApi
+{
+	private readonly LolzteamHttpClient _http;
+
+	public NotificationsApi(LolzteamHttpClient http)
+	{
+		_http = http;
+	}
+
+	public async Task<NotificationsApiTypes.NotificationsListResponse> ListAsync(NotificationsApiTypes.NotificationsListParams? @params = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = "/notifications",
+			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<NotificationsApiTypes.NotificationsListResponse>(__result)!;
+	}
+
+	public async Task<NotificationsApiTypes.NotificationsGetResponse> GetAsync(long NotificationId, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = $"/notifications/{NotificationId}/content",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<NotificationsApiTypes.NotificationsGetResponse>(__result)!;
+	}
+
+	public async Task<NotificationsApiTypes.NotificationsReadResponse> ReadAsync(NotificationsApiTypes.NotificationsReadBody? body = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/notifications/read",
+			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<NotificationsApiTypes.NotificationsReadResponse>(__result)!;
+	}
+}
+
+public sealed class OAuthApi
+{
+	private readonly LolzteamHttpClient _http;
+
+	public OAuthApi(LolzteamHttpClient http)
+	{
+		_http = http;
+	}
+
+	public async Task<OAuthApiTypes.OAuthTokenResponse> TokenAsync(OAuthApiTypes.OAuthTokenBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/oauth/token",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Multipart,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<OAuthApiTypes.OAuthTokenResponse>(__result)!;
+	}
+}
+
+public sealed class PagesApi
+{
+	private readonly LolzteamHttpClient _http;
+
+	public PagesApi(LolzteamHttpClient http)
+	{
+		_http = http;
+	}
+
+	public async Task<PagesApiTypes.PagesListResponse> ListAsync(PagesApiTypes.PagesListParams? @params = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = "/pages",
+			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PagesApiTypes.PagesListResponse>(__result)!;
+	}
+
+	public async Task<PagesApiTypes.PagesGetResponse> GetAsync(long PageId, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = $"/pages/{PageId}",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PagesApiTypes.PagesGetResponse>(__result)!;
+	}
+}
+
+public sealed class PostsApi
+{
+	private readonly LolzteamHttpClient _http;
+
+	public PostsApi(LolzteamHttpClient http)
+	{
+		_http = http;
+	}
+
+	public async Task<PostsApiTypes.PostsListResponse> ListAsync(PostsApiTypes.PostsListParams? @params = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = "/posts",
+			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsListResponse>(__result)!;
+	}
+
+	public async Task<PostsApiTypes.PostsCreateResponse> CreateAsync(PostsApiTypes.PostsCreateBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/posts",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsCreateResponse>(__result)!;
+	}
+
+	public async Task<PostsApiTypes.PostsGetResponse> GetAsync(long PostId, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = $"/posts/{PostId}",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsGetResponse>(__result)!;
+	}
+
+	public async Task<PostsApiTypes.PostsEditResponse> EditAsync(long PostId, PostsApiTypes.PostsEditBody? body = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "PUT",
+			Path = $"/posts/{PostId}",
+			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsEditResponse>(__result)!;
+	}
+
+	public async Task<PostsApiTypes.PostsDeleteResponse> DeleteAsync(long PostId, PostsApiTypes.PostsDeleteBody? body = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "DELETE",
+			Path = $"/posts/{PostId}",
+			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsDeleteResponse>(__result)!;
+	}
+
+	public async Task<PostsApiTypes.PostsLikesResponse> LikesAsync(long PostId, PostsApiTypes.PostsLikesParams? @params = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = $"/posts/{PostId}/likes",
+			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsLikesResponse>(__result)!;
+	}
+
+	public async Task<PostsApiTypes.PostsLikeResponse> LikeAsync(long PostId, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = $"/posts/{PostId}/likes",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsLikeResponse>(__result)!;
+	}
+
+	public async Task<PostsApiTypes.PostsUnlikeResponse> UnlikeAsync(long PostId, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "DELETE",
+			Path = $"/posts/{PostId}/likes",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsUnlikeResponse>(__result)!;
+	}
+
+	public async Task<PostsApiTypes.PostsReportReasonsResponse> ReportReasonsAsync(long PostId, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = $"/posts/{PostId}/report",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsReportReasonsResponse>(__result)!;
+	}
+
+	public async Task<PostsApiTypes.PostsReportResponse> ReportAsync(long PostId, PostsApiTypes.PostsReportBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = $"/posts/{PostId}/report",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsReportResponse>(__result)!;
+	}
+
+	public async Task<PostsApiTypes.PostsCommentsGetResponse> CommentsGetAsync(PostsApiTypes.PostsCommentsGetParams? @params = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = "/posts/comments",
+			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsCommentsGetResponse>(__result)!;
+	}
+
+	public async Task<PostsApiTypes.PostsCommentsCreateResponse> CommentsCreateAsync(PostsApiTypes.PostsCommentsCreateBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/posts/comments",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsCommentsCreateResponse>(__result)!;
+	}
+
+	public async Task<PostsApiTypes.PostsCommentsEditResponse> CommentsEditAsync(PostsApiTypes.PostsCommentsEditBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "PUT",
+			Path = "/posts/comments",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsCommentsEditResponse>(__result)!;
+	}
+
+	public async Task<PostsApiTypes.PostsCommentsDeleteResponse> CommentsDeleteAsync(PostsApiTypes.PostsCommentsDeleteBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "DELETE",
+			Path = "/posts/comments",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsCommentsDeleteResponse>(__result)!;
+	}
+
+	public async Task<PostsApiTypes.PostsCommentsReportResponse> CommentsReportAsync(PostsApiTypes.PostsCommentsReportBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/posts/comments/report",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsCommentsReportResponse>(__result)!;
+	}
+}
+
+public sealed class ProfilePostsApi
+{
+	private readonly LolzteamHttpClient _http;
+
+	public ProfilePostsApi(LolzteamHttpClient http)
+	{
+		_http = http;
+	}
+
+	public async Task<ProfilePostsApiTypes.ProfilePostsListResponse> ListAsync(string UserId, ProfilePostsApiTypes.ProfilePostsListParams? @params = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = $"/users/{UserId}/profile-posts",
+			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsListResponse>(__result)!;
+	}
+
+	public async Task<ProfilePostsApiTypes.ProfilePostsGetResponse> GetAsync(long ProfilePostId, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = $"/profile-posts/{ProfilePostId}",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsGetResponse>(__result)!;
+	}
+
+	public async Task<ProfilePostsApiTypes.ProfilePostsEditResponse> EditAsync(long ProfilePostId, ProfilePostsApiTypes.ProfilePostsEditBody? body = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "PUT",
+			Path = $"/profile-posts/{ProfilePostId}",
+			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsEditResponse>(__result)!;
+	}
+
+	public async Task<ProfilePostsApiTypes.ProfilePostsDeleteResponse> DeleteAsync(long ProfilePostId, ProfilePostsApiTypes.ProfilePostsDeleteParams? @params = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "DELETE",
+			Path = $"/profile-posts/{ProfilePostId}",
+			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsDeleteResponse>(__result)!;
+	}
+
+	public async Task<ProfilePostsApiTypes.ProfilePostsReportReasonsResponse> ReportReasonsAsync(long ProfilePostId, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = $"/profile-posts/{ProfilePostId}/report",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsReportReasonsResponse>(__result)!;
+	}
+
+	public async Task<ProfilePostsApiTypes.ProfilePostsReportResponse> ReportAsync(long ProfilePostId, ProfilePostsApiTypes.ProfilePostsReportBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = $"/profile-posts/{ProfilePostId}/report",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsReportResponse>(__result)!;
+	}
+
+	public async Task<ProfilePostsApiTypes.ProfilePostsCreateResponse> CreateAsync(ProfilePostsApiTypes.ProfilePostsCreateBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/profile-posts",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCreateResponse>(__result)!;
+	}
+
+	public async Task<ProfilePostsApiTypes.ProfilePostsStickResponse> StickAsync(long ProfilePostId, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = $"/profile-posts/{ProfilePostId}/stick",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsStickResponse>(__result)!;
+	}
+
+	public async Task<ProfilePostsApiTypes.ProfilePostsUnstickResponse> UnstickAsync(long ProfilePostId, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "DELETE",
+			Path = $"/profile-posts/{ProfilePostId}/stick",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsUnstickResponse>(__result)!;
+	}
+
+	public async Task<ProfilePostsApiTypes.ProfilePostsLikesResponse> LikesAsync(long ProfilePostId, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = $"/profile-posts/{ProfilePostId}/likes",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsLikesResponse>(__result)!;
+	}
+
+	public async Task<ProfilePostsApiTypes.ProfilePostsLikeResponse> LikeAsync(long ProfilePostId, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = $"/profile-posts/{ProfilePostId}/likes",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsLikeResponse>(__result)!;
+	}
+
+	public async Task<ProfilePostsApiTypes.ProfilePostsUnlikeResponse> UnlikeAsync(long ProfilePostId, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "DELETE",
+			Path = $"/profile-posts/{ProfilePostId}/likes",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsUnlikeResponse>(__result)!;
+	}
+
+	public async Task<ProfilePostsApiTypes.ProfilePostsCommentsListResponse> CommentsListAsync(ProfilePostsApiTypes.ProfilePostsCommentsListParams? @params = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = "/profile-posts/comments",
+			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCommentsListResponse>(__result)!;
+	}
+
+	public async Task<ProfilePostsApiTypes.ProfilePostsCommentsCreateResponse> CommentsCreateAsync(ProfilePostsApiTypes.ProfilePostsCommentsCreateBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/profile-posts/comments",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCommentsCreateResponse>(__result)!;
+	}
+
+	public async Task<ProfilePostsApiTypes.ProfilePostsCommentsEditResponse> CommentsEditAsync(ProfilePostsApiTypes.ProfilePostsCommentsEditBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "PUT",
+			Path = "/profile-posts/comments",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCommentsEditResponse>(__result)!;
+	}
+
+	public async Task<ProfilePostsApiTypes.ProfilePostsCommentsDeleteResponse> CommentsDeleteAsync(ProfilePostsApiTypes.ProfilePostsCommentsDeleteBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "DELETE",
+			Path = "/profile-posts/comments",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCommentsDeleteResponse>(__result)!;
+	}
+
+	public async Task<ProfilePostsApiTypes.ProfilePostsCommentsGetResponse> CommentsGetAsync(long ProfilePostId, long CommentId, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = $"/profile-posts/{ProfilePostId}/comments/{CommentId}",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCommentsGetResponse>(__result)!;
+	}
+
+	public async Task<ProfilePostsApiTypes.ProfilePostsCommentsReportResponse> CommentsReportAsync(long CommentId, ProfilePostsApiTypes.ProfilePostsCommentsReportBody body, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = $"/profile-posts/comments/{CommentId}/report",
+			Body = JsonSerializer.SerializeToElement(body),
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCommentsReportResponse>(__result)!;
+	}
+}
+
+public sealed class SearchApi
+{
+	private readonly LolzteamHttpClient _http;
+
+	public SearchApi(LolzteamHttpClient http)
+	{
+		_http = http;
+	}
+
+	public async Task<SearchApiTypes.SearchAllResponse> AllAsync(SearchApiTypes.SearchAllBody? body = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/search",
+			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<SearchApiTypes.SearchAllResponse>(__result)!;
+	}
+
+	public async Task<SearchApiTypes.SearchThreadsResponse> ThreadsAsync(SearchApiTypes.SearchThreadsBody? body = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/search/threads",
+			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<SearchApiTypes.SearchThreadsResponse>(__result)!;
+	}
+
+	public async Task<SearchApiTypes.SearchPostsResponse> PostsAsync(SearchApiTypes.SearchPostsBody? body = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/search/posts",
+			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<SearchApiTypes.SearchPostsResponse>(__result)!;
+	}
+
+	public async Task<SearchApiTypes.SearchUsersResponse> UsersAsync(SearchApiTypes.SearchUsersBody? body = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/search/users",
+			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<SearchApiTypes.SearchUsersResponse>(__result)!;
+	}
+
+	public async Task<SearchApiTypes.SearchProfilePostsResponse> ProfilePostsAsync(SearchApiTypes.SearchProfilePostsBody? body = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/search/profile-posts",
+			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<SearchApiTypes.SearchProfilePostsResponse>(__result)!;
+	}
+
+	public async Task<SearchApiTypes.SearchTaggedResponse> TaggedAsync(SearchApiTypes.SearchTaggedBody? body = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "POST",
+			Path = "/search/tagged",
+			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			BodyEncoding = BodyEncoding.Json,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<SearchApiTypes.SearchTaggedResponse>(__result)!;
+	}
+
+	public async Task<SearchApiTypes.SearchResultsResponse> ResultsAsync(string SearchId, SearchApiTypes.SearchResultsParams? @params = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = $"/search/{SearchId}/results",
+			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<SearchApiTypes.SearchResultsResponse>(__result)!;
+	}
+}
+
+public sealed class TagsApi
+{
+	private readonly LolzteamHttpClient _http;
+
+	public TagsApi(LolzteamHttpClient http)
+	{
+		_http = http;
+	}
+
+	public async Task<TagsApiTypes.TagsPopularResponse> PopularAsync(CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = "/tags",
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<TagsApiTypes.TagsPopularResponse>(__result)!;
+	}
+
+	public async Task<TagsApiTypes.TagsListResponse> ListAsync(TagsApiTypes.TagsListParams? @params = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = "/tags/list",
+			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<TagsApiTypes.TagsListResponse>(__result)!;
+	}
+
+	public async Task<TagsApiTypes.TagsGetResponse> GetAsync(long TagId, TagsApiTypes.TagsGetParams? @params = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = $"/tags/{TagId}",
+			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<TagsApiTypes.TagsGetResponse>(__result)!;
+	}
+
+	public async Task<TagsApiTypes.TagsFindResponse> FindAsync(TagsApiTypes.TagsFindParams? @params = null, CancellationToken cancellationToken = default)
+	{
+		var __result = await _http.RequestAsync(new RequestOptions
+		{
+			Method = "GET",
+			Path = "/tags/find",
+			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<TagsApiTypes.TagsFindResponse>(__result)!;
+	}
+}
+
 public sealed class ThreadsApi
 {
 	private readonly LolzteamHttpClient _http;
@@ -287,13 +1326,13 @@ public sealed class ThreadsApi
 		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsListResponse>(__result)!;
 	}
 
-	public async Task<ThreadsApiTypes.ThreadsCreateResponse> CreateAsync(ThreadsApiTypes.ThreadsCreateBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<ThreadsApiTypes.ThreadsCreateResponse> CreateAsync(ThreadsApiTypes.ThreadsCreateBody body, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
 			Method = "POST",
 			Path = "/threads",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
 		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsCreateResponse>(__result)!;
@@ -311,19 +1350,19 @@ public sealed class ThreadsApi
 		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsCreateContestResponse>(__result)!;
 	}
 
-	public async Task<ThreadsApiTypes.ThreadsClaimResponse> ClaimAsync(ThreadsApiTypes.ThreadsClaimBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<ThreadsApiTypes.ThreadsClaimResponse> ClaimAsync(ThreadsApiTypes.ThreadsClaimBody body, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
 			Method = "POST",
 			Path = "/claims",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
 		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsClaimResponse>(__result)!;
 	}
 
-	public async Task<ThreadsApiTypes.ThreadsGetResponse> GetAsync(int ThreadId, ThreadsApiTypes.ThreadsGetParams? @params = null, CancellationToken cancellationToken = default)
+	public async Task<ThreadsApiTypes.ThreadsGetResponse> GetAsync(long ThreadId, ThreadsApiTypes.ThreadsGetParams? @params = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -334,7 +1373,7 @@ public sealed class ThreadsApi
 		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsGetResponse>(__result)!;
 	}
 
-	public async Task<ThreadsApiTypes.ThreadsEditResponse> EditAsync(int ThreadId, ThreadsApiTypes.ThreadsEditBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<ThreadsApiTypes.ThreadsEditResponse> EditAsync(long ThreadId, ThreadsApiTypes.ThreadsEditBody? body = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -346,7 +1385,7 @@ public sealed class ThreadsApi
 		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsEditResponse>(__result)!;
 	}
 
-	public async Task<ThreadsApiTypes.ThreadsDeleteResponse> DeleteAsync(int ThreadId, ThreadsApiTypes.ThreadsDeleteBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<ThreadsApiTypes.ThreadsDeleteResponse> DeleteAsync(long ThreadId, ThreadsApiTypes.ThreadsDeleteBody? body = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -358,19 +1397,19 @@ public sealed class ThreadsApi
 		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsDeleteResponse>(__result)!;
 	}
 
-	public async Task<ThreadsApiTypes.ThreadsMoveResponse> MoveAsync(int ThreadId, ThreadsApiTypes.ThreadsMoveBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<ThreadsApiTypes.ThreadsMoveResponse> MoveAsync(long ThreadId, ThreadsApiTypes.ThreadsMoveBody body, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
 			Method = "POST",
 			Path = $"/threads/{ThreadId}/move",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
+			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
 		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsMoveResponse>(__result)!;
 	}
 
-	public async Task<ThreadsApiTypes.ThreadsBumpResponse> BumpAsync(int ThreadId, CancellationToken cancellationToken = default)
+	public async Task<ThreadsApiTypes.ThreadsBumpResponse> BumpAsync(long ThreadId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -380,7 +1419,7 @@ public sealed class ThreadsApi
 		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsBumpResponse>(__result)!;
 	}
 
-	public async Task<ThreadsApiTypes.ThreadsHideResponse> HideAsync(int ThreadId, CancellationToken cancellationToken = default)
+	public async Task<ThreadsApiTypes.ThreadsHideResponse> HideAsync(long ThreadId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -390,7 +1429,7 @@ public sealed class ThreadsApi
 		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsHideResponse>(__result)!;
 	}
 
-	public async Task<ThreadsApiTypes.ThreadsStarResponse> StarAsync(int ThreadId, CancellationToken cancellationToken = default)
+	public async Task<ThreadsApiTypes.ThreadsStarResponse> StarAsync(long ThreadId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -400,7 +1439,7 @@ public sealed class ThreadsApi
 		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsStarResponse>(__result)!;
 	}
 
-	public async Task<ThreadsApiTypes.ThreadsUnstarResponse> UnstarAsync(int ThreadId, CancellationToken cancellationToken = default)
+	public async Task<ThreadsApiTypes.ThreadsUnstarResponse> UnstarAsync(long ThreadId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -410,7 +1449,7 @@ public sealed class ThreadsApi
 		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsUnstarResponse>(__result)!;
 	}
 
-	public async Task<ThreadsApiTypes.ThreadsFollowersResponse> FollowersAsync(int ThreadId, CancellationToken cancellationToken = default)
+	public async Task<ThreadsApiTypes.ThreadsFollowersResponse> FollowersAsync(long ThreadId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -420,7 +1459,7 @@ public sealed class ThreadsApi
 		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsFollowersResponse>(__result)!;
 	}
 
-	public async Task<ThreadsApiTypes.ThreadsFollowResponse> FollowAsync(int ThreadId, ThreadsApiTypes.ThreadsFollowBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<ThreadsApiTypes.ThreadsFollowResponse> FollowAsync(long ThreadId, ThreadsApiTypes.ThreadsFollowBody? body = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -432,7 +1471,7 @@ public sealed class ThreadsApi
 		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsFollowResponse>(__result)!;
 	}
 
-	public async Task<ThreadsApiTypes.ThreadsUnfollowResponse> UnfollowAsync(int ThreadId, CancellationToken cancellationToken = default)
+	public async Task<ThreadsApiTypes.ThreadsUnfollowResponse> UnfollowAsync(long ThreadId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -453,7 +1492,7 @@ public sealed class ThreadsApi
 		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsFollowedResponse>(__result)!;
 	}
 
-	public async Task<ThreadsApiTypes.ThreadsNavigationResponse> NavigationAsync(int ThreadId, CancellationToken cancellationToken = default)
+	public async Task<ThreadsApiTypes.ThreadsNavigationResponse> NavigationAsync(long ThreadId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -463,7 +1502,7 @@ public sealed class ThreadsApi
 		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsNavigationResponse>(__result)!;
 	}
 
-	public async Task<ThreadsApiTypes.ThreadsPollGetResponse> PollGetAsync(int ThreadId, CancellationToken cancellationToken = default)
+	public async Task<ThreadsApiTypes.ThreadsPollGetResponse> PollGetAsync(long ThreadId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -473,7 +1512,7 @@ public sealed class ThreadsApi
 		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsPollGetResponse>(__result)!;
 	}
 
-	public async Task<ThreadsApiTypes.ThreadsPollVoteResponse> PollVoteAsync(int ThreadId, ThreadsApiTypes.ThreadsPollVoteBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<ThreadsApiTypes.ThreadsPollVoteResponse> PollVoteAsync(long ThreadId, ThreadsApiTypes.ThreadsPollVoteBody? body = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -507,7 +1546,7 @@ public sealed class ThreadsApi
 		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsRecentResponse>(__result)!;
 	}
 
-	public async Task<ThreadsApiTypes.ThreadsFinishResponse> FinishAsync(int ThreadId, CancellationToken cancellationToken = default)
+	public async Task<ThreadsApiTypes.ThreadsFinishResponse> FinishAsync(long ThreadId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -515,185 +1554,6 @@ public sealed class ThreadsApi
 			Path = $"/contests/{ThreadId}/finish",
 		}, cancellationToken).ConfigureAwait(false);
 		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsFinishResponse>(__result)!;
-	}
-}
-
-public sealed class PostsApi
-{
-	private readonly LolzteamHttpClient _http;
-
-	public PostsApi(LolzteamHttpClient http)
-	{
-		_http = http;
-	}
-
-	public async Task<PostsApiTypes.PostsListResponse> ListAsync(PostsApiTypes.PostsListParams? @params = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = "/posts",
-			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsListResponse>(__result)!;
-	}
-
-	public async Task<PostsApiTypes.PostsCreateResponse> CreateAsync(PostsApiTypes.PostsCreateBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/posts",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsCreateResponse>(__result)!;
-	}
-
-	public async Task<PostsApiTypes.PostsGetResponse> GetAsync(int PostId, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = $"/posts/{PostId}",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsGetResponse>(__result)!;
-	}
-
-	public async Task<PostsApiTypes.PostsEditResponse> EditAsync(int PostId, PostsApiTypes.PostsEditBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "PUT",
-			Path = $"/posts/{PostId}",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsEditResponse>(__result)!;
-	}
-
-	public async Task<PostsApiTypes.PostsDeleteResponse> DeleteAsync(int PostId, PostsApiTypes.PostsDeleteBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "DELETE",
-			Path = $"/posts/{PostId}",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsDeleteResponse>(__result)!;
-	}
-
-	public async Task<PostsApiTypes.PostsLikesResponse> LikesAsync(int PostId, PostsApiTypes.PostsLikesParams? @params = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = $"/posts/{PostId}/likes",
-			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsLikesResponse>(__result)!;
-	}
-
-	public async Task<PostsApiTypes.PostsLikeResponse> LikeAsync(int PostId, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = $"/posts/{PostId}/likes",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsLikeResponse>(__result)!;
-	}
-
-	public async Task<PostsApiTypes.PostsUnlikeResponse> UnlikeAsync(int PostId, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "DELETE",
-			Path = $"/posts/{PostId}/likes",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsUnlikeResponse>(__result)!;
-	}
-
-	public async Task<PostsApiTypes.PostsReportReasonsResponse> ReportReasonsAsync(int PostId, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = $"/posts/{PostId}/report",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsReportReasonsResponse>(__result)!;
-	}
-
-	public async Task<PostsApiTypes.PostsReportResponse> ReportAsync(int PostId, PostsApiTypes.PostsReportBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = $"/posts/{PostId}/report",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsReportResponse>(__result)!;
-	}
-
-	public async Task<PostsApiTypes.PostsCommentsGetResponse> CommentsGetAsync(PostsApiTypes.PostsCommentsGetParams? @params = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = "/posts/comments",
-			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsCommentsGetResponse>(__result)!;
-	}
-
-	public async Task<PostsApiTypes.PostsCommentsCreateResponse> CommentsCreateAsync(PostsApiTypes.PostsCommentsCreateBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/posts/comments",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsCommentsCreateResponse>(__result)!;
-	}
-
-	public async Task<PostsApiTypes.PostsCommentsEditResponse> CommentsEditAsync(PostsApiTypes.PostsCommentsEditBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "PUT",
-			Path = "/posts/comments",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsCommentsEditResponse>(__result)!;
-	}
-
-	public async Task<PostsApiTypes.PostsCommentsDeleteResponse> CommentsDeleteAsync(PostsApiTypes.PostsCommentsDeleteBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "DELETE",
-			Path = "/posts/comments",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsCommentsDeleteResponse>(__result)!;
-	}
-
-	public async Task<PostsApiTypes.PostsCommentsReportResponse> CommentsReportAsync(PostsApiTypes.PostsCommentsReportBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/posts/comments/report",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsCommentsReportResponse>(__result)!;
 	}
 }
 
@@ -772,36 +1632,23 @@ public sealed class UsersApi
 		return JsonSerializer.Deserialize<UsersApiTypes.UsersClaimsResponse>(__result)!;
 	}
 
-	public async Task<UsersApiTypes.UsersAvatarUploadResponse> AvatarUploadAsync(string UserId, UsersApiTypes.UsersAvatarUploadBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersAvatarUploadResponse> AvatarUploadAsync(string UserId, UsersApiTypes.UsersAvatarUploadBody body, CancellationToken cancellationToken = default)
 	{
-		if (body is not null)
+		var jsonObj = new System.Text.Json.Nodes.JsonObject();
+		if (body.X is not null) jsonObj["x"] = System.Text.Json.Nodes.JsonValue.Create(body.X);
+		if (body.Y is not null) jsonObj["y"] = System.Text.Json.Nodes.JsonValue.Create(body.Y);
+		if (body.Crop is not null) jsonObj["crop"] = System.Text.Json.Nodes.JsonValue.Create(body.Crop);
+		var byteFields = new Dictionary<string, byte[]>();
+		byteFields["avatar"] = body.Avatar;
+		var __result = await _http.RequestAsync(new RequestOptions
 		{
-			var jsonObj = new System.Text.Json.Nodes.JsonObject();
-			if (body.X is not null) jsonObj["x"] = System.Text.Json.Nodes.JsonValue.Create(body.X);
-			if (body.Y is not null) jsonObj["y"] = System.Text.Json.Nodes.JsonValue.Create(body.Y);
-			if (body.Crop is not null) jsonObj["crop"] = System.Text.Json.Nodes.JsonValue.Create(body.Crop);
-			var byteFields = new Dictionary<string, byte[]>();
-			byteFields["avatar"] = body.Avatar;
-			var __result = await _http.RequestAsync(new RequestOptions
-			{
-				Method = "POST",
-				Path = $"/users/{UserId}/avatar",
-				Body = JsonSerializer.SerializeToElement(jsonObj),
-				BodyEncoding = BodyEncoding.Multipart,
-				ByteArrayFields = byteFields,
-			}, cancellationToken).ConfigureAwait(false);
-			return JsonSerializer.Deserialize<UsersApiTypes.UsersAvatarUploadResponse>(__result)!;
-		}
-		else
-		{
-			var __result = await _http.RequestAsync(new RequestOptions
-			{
-				Method = "POST",
-				Path = $"/users/{UserId}/avatar",
-				BodyEncoding = BodyEncoding.Multipart,
-			}, cancellationToken).ConfigureAwait(false);
-			return JsonSerializer.Deserialize<UsersApiTypes.UsersAvatarUploadResponse>(__result)!;
-		}
+			Method = "POST",
+			Path = $"/users/{UserId}/avatar",
+			Body = JsonSerializer.SerializeToElement(jsonObj),
+			BodyEncoding = BodyEncoding.Multipart,
+			ByteArrayFields = byteFields,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersAvatarUploadResponse>(__result)!;
 	}
 
 	public async Task<UsersApiTypes.UsersAvatarDeleteResponse> AvatarDeleteAsync(string UserId, CancellationToken cancellationToken = default)
@@ -826,36 +1673,23 @@ public sealed class UsersApi
 		return JsonSerializer.Deserialize<UsersApiTypes.UsersAvatarCropResponse>(__result)!;
 	}
 
-	public async Task<UsersApiTypes.UsersBackgroundUploadResponse> BackgroundUploadAsync(string UserId, UsersApiTypes.UsersBackgroundUploadBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersBackgroundUploadResponse> BackgroundUploadAsync(string UserId, UsersApiTypes.UsersBackgroundUploadBody body, CancellationToken cancellationToken = default)
 	{
-		if (body is not null)
+		var jsonObj = new System.Text.Json.Nodes.JsonObject();
+		if (body.X is not null) jsonObj["x"] = System.Text.Json.Nodes.JsonValue.Create(body.X);
+		if (body.Y is not null) jsonObj["y"] = System.Text.Json.Nodes.JsonValue.Create(body.Y);
+		if (body.Crop is not null) jsonObj["crop"] = System.Text.Json.Nodes.JsonValue.Create(body.Crop);
+		var byteFields = new Dictionary<string, byte[]>();
+		byteFields["background"] = body.Background;
+		var __result = await _http.RequestAsync(new RequestOptions
 		{
-			var jsonObj = new System.Text.Json.Nodes.JsonObject();
-			if (body.X is not null) jsonObj["x"] = System.Text.Json.Nodes.JsonValue.Create(body.X);
-			if (body.Y is not null) jsonObj["y"] = System.Text.Json.Nodes.JsonValue.Create(body.Y);
-			if (body.Crop is not null) jsonObj["crop"] = System.Text.Json.Nodes.JsonValue.Create(body.Crop);
-			var byteFields = new Dictionary<string, byte[]>();
-			byteFields["background"] = body.Background;
-			var __result = await _http.RequestAsync(new RequestOptions
-			{
-				Method = "POST",
-				Path = $"/users/{UserId}/background",
-				Body = JsonSerializer.SerializeToElement(jsonObj),
-				BodyEncoding = BodyEncoding.Multipart,
-				ByteArrayFields = byteFields,
-			}, cancellationToken).ConfigureAwait(false);
-			return JsonSerializer.Deserialize<UsersApiTypes.UsersBackgroundUploadResponse>(__result)!;
-		}
-		else
-		{
-			var __result = await _http.RequestAsync(new RequestOptions
-			{
-				Method = "POST",
-				Path = $"/users/{UserId}/background",
-				BodyEncoding = BodyEncoding.Multipart,
-			}, cancellationToken).ConfigureAwait(false);
-			return JsonSerializer.Deserialize<UsersApiTypes.UsersBackgroundUploadResponse>(__result)!;
-		}
+			Method = "POST",
+			Path = $"/users/{UserId}/background",
+			Body = JsonSerializer.SerializeToElement(jsonObj),
+			BodyEncoding = BodyEncoding.Multipart,
+			ByteArrayFields = byteFields,
+		}, cancellationToken).ConfigureAwait(false);
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersBackgroundUploadResponse>(__result)!;
 	}
 
 	public async Task<UsersApiTypes.UsersBackgroundDeleteResponse> BackgroundDeleteAsync(string UserId, CancellationToken cancellationToken = default)
@@ -1027,886 +1861,26 @@ public sealed class UsersApi
 	}
 }
 
-public sealed class ProfilePostsApi
-{
-	private readonly LolzteamHttpClient _http;
-
-	public ProfilePostsApi(LolzteamHttpClient http)
-	{
-		_http = http;
-	}
-
-	public async Task<ProfilePostsApiTypes.ProfilePostsListResponse> ListAsync(string UserId, ProfilePostsApiTypes.ProfilePostsListParams? @params = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = $"/users/{UserId}/profile-posts",
-			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsListResponse>(__result)!;
-	}
-
-	public async Task<ProfilePostsApiTypes.ProfilePostsGetResponse> GetAsync(int ProfilePostId, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = $"/profile-posts/{ProfilePostId}",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsGetResponse>(__result)!;
-	}
-
-	public async Task<ProfilePostsApiTypes.ProfilePostsEditResponse> EditAsync(int ProfilePostId, ProfilePostsApiTypes.ProfilePostsEditBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "PUT",
-			Path = $"/profile-posts/{ProfilePostId}",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsEditResponse>(__result)!;
-	}
-
-	public async Task<ProfilePostsApiTypes.ProfilePostsDeleteResponse> DeleteAsync(int ProfilePostId, ProfilePostsApiTypes.ProfilePostsDeleteParams? @params = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "DELETE",
-			Path = $"/profile-posts/{ProfilePostId}",
-			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsDeleteResponse>(__result)!;
-	}
-
-	public async Task<ProfilePostsApiTypes.ProfilePostsReportReasonsResponse> ReportReasonsAsync(int ProfilePostId, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = $"/profile-posts/{ProfilePostId}/report",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsReportReasonsResponse>(__result)!;
-	}
-
-	public async Task<ProfilePostsApiTypes.ProfilePostsReportResponse> ReportAsync(int ProfilePostId, ProfilePostsApiTypes.ProfilePostsReportBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = $"/profile-posts/{ProfilePostId}/report",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsReportResponse>(__result)!;
-	}
-
-	public async Task<ProfilePostsApiTypes.ProfilePostsCreateResponse> CreateAsync(ProfilePostsApiTypes.ProfilePostsCreateBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/profile-posts",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCreateResponse>(__result)!;
-	}
-
-	public async Task<ProfilePostsApiTypes.ProfilePostsStickResponse> StickAsync(int ProfilePostId, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = $"/profile-posts/{ProfilePostId}/stick",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsStickResponse>(__result)!;
-	}
-
-	public async Task<ProfilePostsApiTypes.ProfilePostsUnstickResponse> UnstickAsync(int ProfilePostId, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "DELETE",
-			Path = $"/profile-posts/{ProfilePostId}/stick",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsUnstickResponse>(__result)!;
-	}
-
-	public async Task<ProfilePostsApiTypes.ProfilePostsLikesResponse> LikesAsync(int ProfilePostId, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = $"/profile-posts/{ProfilePostId}/likes",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsLikesResponse>(__result)!;
-	}
-
-	public async Task<ProfilePostsApiTypes.ProfilePostsLikeResponse> LikeAsync(int ProfilePostId, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = $"/profile-posts/{ProfilePostId}/likes",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsLikeResponse>(__result)!;
-	}
-
-	public async Task<ProfilePostsApiTypes.ProfilePostsUnlikeResponse> UnlikeAsync(int ProfilePostId, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "DELETE",
-			Path = $"/profile-posts/{ProfilePostId}/likes",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsUnlikeResponse>(__result)!;
-	}
-
-	public async Task<ProfilePostsApiTypes.ProfilePostsCommentsListResponse> CommentsListAsync(ProfilePostsApiTypes.ProfilePostsCommentsListParams? @params = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = "/profile-posts/comments",
-			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCommentsListResponse>(__result)!;
-	}
-
-	public async Task<ProfilePostsApiTypes.ProfilePostsCommentsCreateResponse> CommentsCreateAsync(ProfilePostsApiTypes.ProfilePostsCommentsCreateBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/profile-posts/comments",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCommentsCreateResponse>(__result)!;
-	}
-
-	public async Task<ProfilePostsApiTypes.ProfilePostsCommentsEditResponse> CommentsEditAsync(ProfilePostsApiTypes.ProfilePostsCommentsEditBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "PUT",
-			Path = "/profile-posts/comments",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCommentsEditResponse>(__result)!;
-	}
-
-	public async Task<ProfilePostsApiTypes.ProfilePostsCommentsDeleteResponse> CommentsDeleteAsync(ProfilePostsApiTypes.ProfilePostsCommentsDeleteBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "DELETE",
-			Path = "/profile-posts/comments",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCommentsDeleteResponse>(__result)!;
-	}
-
-	public async Task<ProfilePostsApiTypes.ProfilePostsCommentsGetResponse> CommentsGetAsync(int ProfilePostId, int CommentId, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = $"/profile-posts/{ProfilePostId}/comments/{CommentId}",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCommentsGetResponse>(__result)!;
-	}
-
-	public async Task<ProfilePostsApiTypes.ProfilePostsCommentsReportResponse> CommentsReportAsync(int CommentId, ProfilePostsApiTypes.ProfilePostsCommentsReportBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = $"/profile-posts/comments/{CommentId}/report",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCommentsReportResponse>(__result)!;
-	}
-}
-
-public sealed class ConversationsApi
-{
-	private readonly LolzteamHttpClient _http;
-
-	public ConversationsApi(LolzteamHttpClient http)
-	{
-		_http = http;
-	}
-
-	public async Task<ConversationsApiTypes.ConversationsListResponse> ListAsync(ConversationsApiTypes.ConversationsListParams? @params = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = "/conversations",
-			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsListResponse>(__result)!;
-	}
-
-	public async Task<ConversationsApiTypes.ConversationsCreateResponse> CreateAsync(ConversationsApiTypes.ConversationsCreateBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/conversations",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsCreateResponse>(__result)!;
-	}
-
-	public async Task<ConversationsApiTypes.ConversationsUpdateResponse> UpdateAsync(ConversationsApiTypes.ConversationsUpdateBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "PUT",
-			Path = "/conversations",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsUpdateResponse>(__result)!;
-	}
-
-	public async Task<ConversationsApiTypes.ConversationsDeleteResponse> DeleteAsync(ConversationsApiTypes.ConversationsDeleteBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "DELETE",
-			Path = "/conversations",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsDeleteResponse>(__result)!;
-	}
-
-	public async Task<ConversationsApiTypes.ConversationsStartResponse> StartAsync(ConversationsApiTypes.ConversationsStartBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/conversations/start",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsStartResponse>(__result)!;
-	}
-
-	public async Task<ConversationsApiTypes.ConversationsSaveResponse> SaveAsync(ConversationsApiTypes.ConversationsSaveBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/conversations/save",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsSaveResponse>(__result)!;
-	}
-
-	public async Task<ConversationsApiTypes.ConversationsGetResponse> GetAsync(int ConversationId, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = $"/conversations/{ConversationId}",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsGetResponse>(__result)!;
-	}
-
-	public async Task<ConversationsApiTypes.ConversationsMessagesListResponse> MessagesListAsync(int ConversationId, ConversationsApiTypes.ConversationsMessagesListParams? @params = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = $"/conversations/{ConversationId}/messages",
-			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesListResponse>(__result)!;
-	}
-
-	public async Task<ConversationsApiTypes.ConversationsMessagesCreateResponse> MessagesCreateAsync(int ConversationId, ConversationsApiTypes.ConversationsMessagesCreateBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = $"/conversations/{ConversationId}/messages",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesCreateResponse>(__result)!;
-	}
-
-	public async Task<ConversationsApiTypes.ConversationsSearchResponse> SearchAsync(ConversationsApiTypes.ConversationsSearchBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/conversations/search",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsSearchResponse>(__result)!;
-	}
-
-	public async Task<ConversationsApiTypes.ConversationsMessagesGetResponse> MessagesGetAsync(int MessageId, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = $"/conversations/messages/{MessageId}",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesGetResponse>(__result)!;
-	}
-
-	public async Task<ConversationsApiTypes.ConversationsMessagesEditResponse> MessagesEditAsync(int ConversationId, int MessageId, ConversationsApiTypes.ConversationsMessagesEditBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "PUT",
-			Path = $"/conversations/{ConversationId}/messages/{MessageId}",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesEditResponse>(__result)!;
-	}
-
-	public async Task<ConversationsApiTypes.ConversationsMessagesDeleteResponse> MessagesDeleteAsync(int ConversationId, int MessageId, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "DELETE",
-			Path = $"/conversations/{ConversationId}/messages/{MessageId}",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesDeleteResponse>(__result)!;
-	}
-
-	public async Task<ConversationsApiTypes.ConversationsInviteResponse> InviteAsync(int ConversationId, ConversationsApiTypes.ConversationsInviteBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = $"/conversations/{ConversationId}/invite",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsInviteResponse>(__result)!;
-	}
-
-	public async Task<ConversationsApiTypes.ConversationsKickResponse> KickAsync(int ConversationId, ConversationsApiTypes.ConversationsKickBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = $"/conversations/{ConversationId}/kick",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsKickResponse>(__result)!;
-	}
-
-	public async Task<ConversationsApiTypes.ConversationsReadResponse> ReadAsync(int ConversationId, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = $"/conversations/{ConversationId}/read",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsReadResponse>(__result)!;
-	}
-
-	public async Task<ConversationsApiTypes.ConversationsReadAllResponse> ReadAllAsync(CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/conversations/read-all",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsReadAllResponse>(__result)!;
-	}
-
-	public async Task<ConversationsApiTypes.ConversationsMessagesStickResponse> MessagesStickAsync(int ConversationId, int MessageId, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = $"/conversations/{ConversationId}/messages/{MessageId}/stick",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesStickResponse>(__result)!;
-	}
-
-	public async Task<ConversationsApiTypes.ConversationsMessagesUnstickResponse> MessagesUnstickAsync(int ConversationId, int MessageId, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "DELETE",
-			Path = $"/conversations/{ConversationId}/messages/{MessageId}/stick",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesUnstickResponse>(__result)!;
-	}
-
-	public async Task<ConversationsApiTypes.ConversationsStarResponse> StarAsync(int ConversationId, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = $"/conversations/{ConversationId}/star",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsStarResponse>(__result)!;
-	}
-
-	public async Task<ConversationsApiTypes.ConversationsUnstarResponse> UnstarAsync(int ConversationId, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "DELETE",
-			Path = $"/conversations/{ConversationId}/star",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsUnstarResponse>(__result)!;
-	}
-
-	public async Task<ConversationsApiTypes.ConversationsAlertsEnableResponse> AlertsEnableAsync(int ConversationId, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = $"/conversations/{ConversationId}/alerts",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsAlertsEnableResponse>(__result)!;
-	}
-
-	public async Task<ConversationsApiTypes.ConversationsAlertsDisableResponse> AlertsDisableAsync(int ConversationId, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "DELETE",
-			Path = $"/conversations/{ConversationId}/alerts",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsAlertsDisableResponse>(__result)!;
-	}
-}
-
-public sealed class NotificationsApi
-{
-	private readonly LolzteamHttpClient _http;
-
-	public NotificationsApi(LolzteamHttpClient http)
-	{
-		_http = http;
-	}
-
-	public async Task<NotificationsApiTypes.NotificationsListResponse> ListAsync(NotificationsApiTypes.NotificationsListParams? @params = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = "/notifications",
-			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<NotificationsApiTypes.NotificationsListResponse>(__result)!;
-	}
-
-	public async Task<NotificationsApiTypes.NotificationsGetResponse> GetAsync(int NotificationId, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = $"/notifications/{NotificationId}/content",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<NotificationsApiTypes.NotificationsGetResponse>(__result)!;
-	}
-
-	public async Task<NotificationsApiTypes.NotificationsReadResponse> ReadAsync(NotificationsApiTypes.NotificationsReadBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/notifications/read",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<NotificationsApiTypes.NotificationsReadResponse>(__result)!;
-	}
-}
-
-public sealed class TagsApi
-{
-	private readonly LolzteamHttpClient _http;
-
-	public TagsApi(LolzteamHttpClient http)
-	{
-		_http = http;
-	}
-
-	public async Task<TagsApiTypes.TagsPopularResponse> PopularAsync(CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = "/tags",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<TagsApiTypes.TagsPopularResponse>(__result)!;
-	}
-
-	public async Task<TagsApiTypes.TagsListResponse> ListAsync(TagsApiTypes.TagsListParams? @params = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = "/tags/list",
-			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<TagsApiTypes.TagsListResponse>(__result)!;
-	}
-
-	public async Task<TagsApiTypes.TagsGetResponse> GetAsync(int TagId, TagsApiTypes.TagsGetParams? @params = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = $"/tags/{TagId}",
-			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<TagsApiTypes.TagsGetResponse>(__result)!;
-	}
-
-	public async Task<TagsApiTypes.TagsFindResponse> FindAsync(TagsApiTypes.TagsFindParams? @params = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = "/tags/find",
-			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<TagsApiTypes.TagsFindResponse>(__result)!;
-	}
-}
-
-public sealed class SearchApi
-{
-	private readonly LolzteamHttpClient _http;
-
-	public SearchApi(LolzteamHttpClient http)
-	{
-		_http = http;
-	}
-
-	public async Task<SearchApiTypes.SearchAllResponse> AllAsync(SearchApiTypes.SearchAllBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/search",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<SearchApiTypes.SearchAllResponse>(__result)!;
-	}
-
-	public async Task<SearchApiTypes.SearchThreadsResponse> ThreadsAsync(SearchApiTypes.SearchThreadsBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/search/threads",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<SearchApiTypes.SearchThreadsResponse>(__result)!;
-	}
-
-	public async Task<SearchApiTypes.SearchPostsResponse> PostsAsync(SearchApiTypes.SearchPostsBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/search/posts",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<SearchApiTypes.SearchPostsResponse>(__result)!;
-	}
-
-	public async Task<SearchApiTypes.SearchUsersResponse> UsersAsync(SearchApiTypes.SearchUsersBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/search/users",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<SearchApiTypes.SearchUsersResponse>(__result)!;
-	}
-
-	public async Task<SearchApiTypes.SearchProfilePostsResponse> ProfilePostsAsync(SearchApiTypes.SearchProfilePostsBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/search/profile-posts",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<SearchApiTypes.SearchProfilePostsResponse>(__result)!;
-	}
-
-	public async Task<SearchApiTypes.SearchTaggedResponse> TaggedAsync(SearchApiTypes.SearchTaggedBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/search/tagged",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<SearchApiTypes.SearchTaggedResponse>(__result)!;
-	}
-
-	public async Task<SearchApiTypes.SearchResultsResponse> ResultsAsync(string SearchId, SearchApiTypes.SearchResultsParams? @params = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = $"/search/{SearchId}/results",
-			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<SearchApiTypes.SearchResultsResponse>(__result)!;
-	}
-}
-
-public sealed class BatchApi
-{
-	private readonly LolzteamHttpClient _http;
-
-	public BatchApi(LolzteamHttpClient http)
-	{
-		_http = http;
-	}
-
-	public async Task<BatchApiTypes.BatchExecuteResponse> ExecuteAsync(List<JsonElement>? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/batch",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<BatchApiTypes.BatchExecuteResponse>(__result)!;
-	}
-}
-
-public sealed class ChatboxApi
-{
-	private readonly LolzteamHttpClient _http;
-
-	public ChatboxApi(LolzteamHttpClient http)
-	{
-		_http = http;
-	}
-
-	public async Task<ChatboxApiTypes.ChatboxIndexResponse> IndexAsync(ChatboxApiTypes.ChatboxIndexParams? @params = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = "/chatbox",
-			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxIndexResponse>(__result)!;
-	}
-
-	public async Task<ChatboxApiTypes.ChatboxGetMessagesResponse> GetMessagesAsync(ChatboxApiTypes.ChatboxGetMessagesParams? @params = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = "/chatbox/messages",
-			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxGetMessagesResponse>(__result)!;
-	}
-
-	public async Task<ChatboxApiTypes.ChatboxPostMessageResponse> PostMessageAsync(ChatboxApiTypes.ChatboxPostMessageBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/chatbox/messages",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxPostMessageResponse>(__result)!;
-	}
-
-	public async Task<ChatboxApiTypes.ChatboxEditMessageResponse> EditMessageAsync(ChatboxApiTypes.ChatboxEditMessageBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "PUT",
-			Path = "/chatbox/messages",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxEditMessageResponse>(__result)!;
-	}
-
-	public async Task<ChatboxApiTypes.ChatboxDeleteMessageResponse> DeleteMessageAsync(ChatboxApiTypes.ChatboxDeleteMessageBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "DELETE",
-			Path = "/chatbox/messages",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxDeleteMessageResponse>(__result)!;
-	}
-
-	public async Task<ChatboxApiTypes.ChatboxOnlineResponse> OnlineAsync(ChatboxApiTypes.ChatboxOnlineParams? @params = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = "/chatbox/messages/online",
-			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxOnlineResponse>(__result)!;
-	}
-
-	public async Task<ChatboxApiTypes.ChatboxReportReasonsResponse> ReportReasonsAsync(ChatboxApiTypes.ChatboxReportReasonsParams? @params = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = "/chatbox/messages/report",
-			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxReportReasonsResponse>(__result)!;
-	}
-
-	public async Task<ChatboxApiTypes.ChatboxReportResponse> ReportAsync(ChatboxApiTypes.ChatboxReportBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/chatbox/messages/report",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxReportResponse>(__result)!;
-	}
-
-	public async Task<ChatboxApiTypes.ChatboxGetLeaderboardResponse> GetLeaderboardAsync(ChatboxApiTypes.ChatboxGetLeaderboardParams? @params = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = "/chatbox/messages/leaderboard",
-			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxGetLeaderboardResponse>(__result)!;
-	}
-
-	public async Task<ChatboxApiTypes.ChatboxGetIgnoreResponse> GetIgnoreAsync(CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = "/chatbox/ignore",
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxGetIgnoreResponse>(__result)!;
-	}
-
-	public async Task<ChatboxApiTypes.ChatboxPostIgnoreResponse> PostIgnoreAsync(ChatboxApiTypes.ChatboxPostIgnoreBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/chatbox/ignore",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxPostIgnoreResponse>(__result)!;
-	}
-
-	public async Task<ChatboxApiTypes.ChatboxDeleteIgnoreResponse> DeleteIgnoreAsync(ChatboxApiTypes.ChatboxDeleteIgnoreBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "DELETE",
-			Path = "/chatbox/ignore",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxDeleteIgnoreResponse>(__result)!;
-	}
-}
-
-public sealed class FormsApi
-{
-	private readonly LolzteamHttpClient _http;
-
-	public FormsApi(LolzteamHttpClient http)
-	{
-		_http = http;
-	}
-
-	public async Task<FormsApiTypes.FormsListResponse> ListAsync(FormsApiTypes.FormsListParams? @params = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "GET",
-			Path = "/forms",
-			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<FormsApiTypes.FormsListResponse>(__result)!;
-	}
-
-	public async Task<FormsApiTypes.FormsCreateResponse> CreateAsync(FormsApiTypes.FormsCreateBody? body = null, CancellationToken cancellationToken = default)
-	{
-		var __result = await _http.RequestAsync(new RequestOptions
-		{
-			Method = "POST",
-			Path = "/forms/save",
-			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
-			BodyEncoding = BodyEncoding.Json,
-		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<FormsApiTypes.FormsCreateResponse>(__result)!;
-	}
-}
-
 public sealed class ForumClient : IDisposable
 {
-	public OAuthApi OAuth { get; }
 	public AssetsApi Assets { get; }
+	public BatchApi Batch { get; }
 	public CategoriesApi Categories { get; }
+	public ChatboxApi Chatbox { get; }
+	public ConversationsApi Conversations { get; }
+	public FormsApi Forms { get; }
 	public ForumsApi Forums { get; }
 	public LinksApi Links { get; }
-	public PagesApi Pages { get; }
 	public NavigationApi Navigation { get; }
-	public ThreadsApi Threads { get; }
-	public PostsApi Posts { get; }
-	public UsersApi Users { get; }
-	public ProfilePostsApi ProfilePosts { get; }
-	public ConversationsApi Conversations { get; }
 	public NotificationsApi Notifications { get; }
-	public TagsApi Tags { get; }
+	public OAuthApi OAuth { get; }
+	public PagesApi Pages { get; }
+	public PostsApi Posts { get; }
+	public ProfilePostsApi ProfilePosts { get; }
 	public SearchApi Search { get; }
-	public BatchApi Batch { get; }
-	public ChatboxApi Chatbox { get; }
-	public FormsApi Forms { get; }
+	public TagsApi Tags { get; }
+	public ThreadsApi Threads { get; }
+	public UsersApi Users { get; }
 
 	private readonly LolzteamHttpClient _http;
 
@@ -1919,24 +1893,24 @@ public sealed class ForumClient : IDisposable
 		};
 		_http = new LolzteamHttpClient(resolvedConfig);
 
-		OAuth = new OAuthApi(_http);
 		Assets = new AssetsApi(_http);
+		Batch = new BatchApi(_http);
 		Categories = new CategoriesApi(_http);
+		Chatbox = new ChatboxApi(_http);
+		Conversations = new ConversationsApi(_http);
+		Forms = new FormsApi(_http);
 		Forums = new ForumsApi(_http);
 		Links = new LinksApi(_http);
-		Pages = new PagesApi(_http);
 		Navigation = new NavigationApi(_http);
-		Threads = new ThreadsApi(_http);
-		Posts = new PostsApi(_http);
-		Users = new UsersApi(_http);
-		ProfilePosts = new ProfilePostsApi(_http);
-		Conversations = new ConversationsApi(_http);
 		Notifications = new NotificationsApi(_http);
-		Tags = new TagsApi(_http);
+		OAuth = new OAuthApi(_http);
+		Pages = new PagesApi(_http);
+		Posts = new PostsApi(_http);
+		ProfilePosts = new ProfilePostsApi(_http);
 		Search = new SearchApi(_http);
-		Batch = new BatchApi(_http);
-		Chatbox = new ChatboxApi(_http);
-		Forms = new FormsApi(_http);
+		Tags = new TagsApi(_http);
+		Threads = new ThreadsApi(_http);
+		Users = new UsersApi(_http);
 	}
 
 	public void Dispose()

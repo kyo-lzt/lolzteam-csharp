@@ -263,7 +263,7 @@ internal static partial class Transforms
 		{
 			"string" => "string",
 			"number" => "double?",
-			"integer" => "int?",
+			"integer" => "long?",
 			"boolean" => "bool?",
 			"unknown" => "JsonElement",
 			"Blob" => "byte[]",
@@ -388,23 +388,91 @@ internal static partial class Transforms
 		var oneOf = schemaObj["oneOf"];
 		if (oneOf is JsonArray oneOfArr)
 		{
-			var allProps = new Dictionary<string, JsonNode>();
+			var allProps = new Dictionary<string, List<JsonNode>>();
+			var variantRequiredSets = new List<HashSet<string>>();
 			foreach (var variant in oneOfArr)
 			{
 				if (variant is not JsonObject variantObj) continue;
+				var variantRequired = new HashSet<string>();
+				var reqArr = variantObj["required"];
+				if (reqArr is JsonArray vrArr)
+				{
+					foreach (var r in vrArr)
+					{
+						variantRequired.Add(r!.GetValue<string>());
+					}
+				}
+				variantRequiredSets.Add(variantRequired);
+
 				var variantProps = variantObj["properties"];
 				if (variantProps is not JsonObject vpObj) continue;
 				foreach (var kvp in vpObj)
 				{
-					allProps[kvp.Key] = kvp.Value!;
+					if (!allProps.TryGetValue(kvp.Key, out var schemas))
+					{
+						schemas = [];
+						allProps[kvp.Key] = schemas;
+					}
+					schemas.Add(kvp.Value!);
 				}
 			}
 			foreach (var kvp in allProps)
 			{
+				// Intersection: required only if present in ALL variants
+				var isRequired = variantRequiredSets.Count > 0
+					&& variantRequiredSets.TrueForAll(rs => rs.Contains(kvp.Key));
+
+				// Merge schemas: if all have enums, merge enum values
+				JsonNode mergedSchema;
+				if (kvp.Value.Count == 1)
+				{
+					mergedSchema = kvp.Value[0];
+				}
+				else
+				{
+					var allEnums = new List<JsonNode>();
+					var allAreEnums = true;
+					foreach (var ps in kvp.Value)
+					{
+						if (ps is JsonObject psObj && psObj["enum"] is JsonArray enumArr)
+						{
+							foreach (var v in enumArr)
+							{
+								if (v is not null) allEnums.Add(v.DeepClone());
+							}
+						}
+						else
+						{
+							allAreEnums = false;
+							break;
+						}
+					}
+					if (allAreEnums && allEnums.Count > 0)
+					{
+						// Deduplicate enum values
+						var seen = new HashSet<string>();
+						var uniqueEnums = new JsonArray();
+						foreach (var v in allEnums)
+						{
+							var key = v.ToJsonString();
+							if (seen.Add(key))
+							{
+								uniqueEnums.Add(v);
+							}
+						}
+						mergedSchema = new JsonObject { ["enum"] = uniqueEnums };
+					}
+					else
+					{
+						// Different types — use last schema (best effort)
+						mergedSchema = kvp.Value[^1];
+					}
+				}
+
 				bodyProperties.Add(new BodyProperty(
 					kvp.Key,
-					SchemaToTypeString(kvp.Value, spec),
-					false
+					SchemaToTypeString(mergedSchema, spec),
+					isRequired
 				));
 			}
 		}
@@ -517,6 +585,61 @@ internal static partial class Transforms
 		}
 
 		return result.Count > 0 ? new ResponseSchemaInfo(result) : null;
+	}
+
+	/// <summary>
+	/// Extract response schema info plus the raw resolved schema object for nested record generation.
+	/// </summary>
+	private static (ResponseSchemaInfo? Schema, JsonObject? RawSchema) ExtractResponseSchemaWithRaw(
+		JsonNode? rawOperation, JsonNode rawSpec, HashSet<string> componentSchemaNames)
+	{
+		if (rawOperation is not JsonObject rawOpObj) return (null, null);
+
+		var responses = rawOpObj["responses"];
+		if (responses is not JsonObject respObj) return (null, null);
+		var rawSuccess = respObj["200"] ?? respObj["201"];
+		if (rawSuccess is null) return (null, null);
+		var success = DerefShallow(rawSuccess, rawSpec);
+		if (success is not JsonObject successObj) return (null, null);
+		var content = successObj["content"];
+		if (content is not JsonObject contentObj) return (null, null);
+		var jsonContent = contentObj["application/json"];
+		if (jsonContent is not JsonObject jsonObj) return (null, null);
+		var rawSchema = jsonObj["schema"];
+		if (rawSchema is null) return (null, null);
+		var schema = DerefShallow(rawSchema, rawSpec);
+		if (schema is not JsonObject schemaObj) return (null, null);
+
+		var properties = schemaObj["properties"];
+		if (properties is not JsonObject propsObj || propsObj.Count == 0) return (null, null);
+
+		var requiredSet = new HashSet<string>();
+		var requiredArr = schemaObj["required"];
+		if (requiredArr is JsonArray reqArr)
+		{
+			foreach (var r in reqArr)
+			{
+				requiredSet.Add(r!.GetValue<string>());
+			}
+		}
+
+		var result = new List<ResponseProperty>();
+		foreach (var kvp in propsObj)
+		{
+			var propName = kvp.Key;
+			var propSchema = kvp.Value;
+			if (propSchema is null) continue;
+
+			var required = requiredSet.Contains(propName);
+			var (csharpType, componentRef) = ResolvePropertyType(propSchema, rawSpec, componentSchemaNames);
+			result.Add(new ResponseProperty(propName, csharpType, required, componentRef));
+		}
+
+		if (result.Count == 0) return (null, null);
+
+		// Deep-clone the schema so the emitter can iterate raw properties for nested record generation
+		var cloned = schemaObj.DeepClone();
+		return (new ResponseSchemaInfo(result), cloned as JsonObject);
 	}
 
 	/// <summary>
@@ -633,7 +756,7 @@ internal static partial class Transforms
 		var parameters = ExtractParameters(operation, emptySpec);
 		var body = ExtractBody(operation, emptySpec);
 		var responseType = ExtractResponseType(operation, emptySpec);
-		var responseSchema = ExtractResponseSchema(rawOperation, rawSpec, componentSchemaNames);
+		var (responseSchema, rawResponseSchema) = ExtractResponseSchemaWithRaw(rawOperation, rawSpec, componentSchemaNames);
 
 		var isGet = httpMethod.Equals("GET", StringComparison.OrdinalIgnoreCase);
 
@@ -663,7 +786,16 @@ internal static partial class Transforms
 		{
 			var rb = DerefShallow(rawRequestBody, emptySpec);
 			var reqNode = (rb as JsonObject)?["required"];
-			bodyRequired = reqNode is JsonValue rv && rv.TryGetValue<bool>(out var rBool) && rBool;
+			var explicitRequired = reqNode is JsonValue rv && rv.TryGetValue<bool>(out var rBool) && rBool;
+			if (explicitRequired)
+			{
+				bodyRequired = true;
+			}
+			else
+			{
+				// If requestBody.required not set, check if schema has required properties
+				bodyRequired = body.Properties.Exists(p => p.Required);
+			}
 		}
 		else
 		{
@@ -683,7 +815,8 @@ internal static partial class Transforms
 			!isGet && body.BodyIsArray,
 			isGet ? null : body.BodyArrayItemType,
 			isGet ? "form" : body.BodyEncoding,
-			responseSchema
+			responseSchema,
+			rawResponseSchema
 		);
 	}
 }
