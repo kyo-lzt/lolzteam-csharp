@@ -6,6 +6,214 @@ namespace Lolzteam.Codegen;
 
 internal static partial class Emitter
 {
+	// ─── Default Value Formatting ─────────────────────────────────────
+
+	/// <summary>Format a default value for display in XML doc comments.</summary>
+	private static string FormatDefaultValue(string value)
+	{
+		// Escape XML special characters
+		return value
+			.Replace("&", "&amp;")
+			.Replace("<", "&lt;")
+			.Replace(">", "&gt;")
+			.Replace("\"", "&quot;");
+	}
+
+	/// <summary>
+	/// Format a default value as a C# literal for a property initializer.
+	/// Returns null if the default cannot be represented as a compile-time constant.
+	/// </summary>
+	private static string? FormatDefaultLiteral(string defaultValue, string csharpType)
+	{
+		return FormatDefaultLiteral(defaultValue, csharpType, null);
+	}
+
+	private static string? FormatDefaultLiteral(
+		string defaultValue, string csharpType, List<EnumDefinition>? enumDefs,
+		string? propName = null)
+	{
+		// Strip nullable suffix for matching
+		var baseType = csharpType.TrimEnd('?');
+
+		switch (baseType)
+		{
+			case "string":
+				return "\"" + defaultValue.Replace("\\", "\\\\").Replace("\"", "\\\"") + "\"";
+			case "long":
+				return long.TryParse(defaultValue, out _) ? defaultValue : null;
+			case "double":
+				return double.TryParse(defaultValue, System.Globalization.NumberStyles.Float,
+					System.Globalization.CultureInfo.InvariantCulture, out var d)
+					? d.ToString(System.Globalization.CultureInfo.InvariantCulture)
+					: null;
+			case "bool":
+				return defaultValue switch
+				{
+					"true" or "1" => "true",
+					"false" or "0" => "false",
+					_ => null,
+				};
+			default:
+				if (baseType.StartsWith("Lolzteam.Api.Runtime.StringOrLong"))
+				{
+					return long.TryParse(defaultValue, out var lv)
+						? "(Lolzteam.Api.Runtime.StringOrLong)" + lv
+						: "(Lolzteam.Api.Runtime.StringOrLong)\"" + defaultValue.Replace("\\", "\\\\").Replace("\"", "\\\"") + "\"";
+				}
+
+				// Enum types: find matching member
+				if (enumDefs is not null)
+				{
+					var enumDef = enumDefs.Find(e => e.TypeName == baseType);
+					if (enumDef is not null)
+					{
+						return FindEnumDefaultLiteral(enumDef, defaultValue, propName);
+					}
+				}
+				return null;
+		}
+	}
+
+	/// <summary>Find the enum member name that corresponds to a default value.</summary>
+	private static string? FindEnumDefaultLiteral(
+		EnumDefinition enumDef, string defaultValue, string? propName = null)
+	{
+		string? memberName = null;
+		if (enumDef.IsIntEnum)
+		{
+			if (long.TryParse(defaultValue, out var longVal))
+			{
+				foreach (var v in enumDef.Values)
+				{
+					if (v is EnumVariant.IntVariant iv && iv.Value == longVal)
+					{
+						memberName = IntEnumMemberName(iv.Value);
+						break;
+					}
+				}
+			}
+		}
+		else
+		{
+			foreach (var v in enumDef.Values)
+			{
+				if (v is EnumVariant.StringVariant sv && sv.Value == defaultValue)
+				{
+					memberName = StringEnumMemberName(sv.Value);
+					break;
+				}
+			}
+		}
+
+		if (memberName is null) return null;
+
+		// If property name matches enum type name, C# will resolve the name to the property
+		// rather than the type. Skip the default in this case (XML doc comment still shows it).
+		if (propName is not null && propName == enumDef.TypeName)
+		{
+			return null;
+		}
+		return enumDef.TypeName + "." + memberName;
+	}
+
+	// ─── Enum Definitions ─────────────────────────────────────────────
+
+	/// <summary>Emit a single enum type definition.</summary>
+	private static string EmitEnumDefinition(EnumDefinition def)
+	{
+		var sb = new StringBuilder();
+		var seenMembers = new HashSet<string>();
+
+		if (def.IsIntEnum)
+		{
+			sb.Append("public enum ").Append(def.TypeName).Append(" : long\n{\n");
+			foreach (var variant in def.Values)
+			{
+				if (variant is EnumVariant.IntVariant iv)
+				{
+					var memberName = DeduplicateName(IntEnumMemberName(iv.Value), seenMembers);
+					sb.Append('\t').Append(memberName).Append(" = ").Append(iv.Value).Append(",\n");
+				}
+			}
+		}
+		else
+		{
+			sb.Append("[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<")
+				.Append(def.TypeName).Append(">))]\n");
+			sb.Append("public enum ").Append(def.TypeName).Append("\n{\n");
+			foreach (var variant in def.Values)
+			{
+				if (variant is EnumVariant.StringVariant sv)
+				{
+					var memberName = DeduplicateName(StringEnumMemberName(sv.Value), seenMembers);
+					sb.Append("\t[Lolzteam.Api.Runtime.EnumValue(\"")
+						.Append(sv.Value.Replace("\\", "\\\\").Replace("\"", "\\\""))
+						.Append("\")] ")
+						.Append(memberName).Append(",\n");
+				}
+			}
+		}
+
+		sb.Append("}\n");
+		return sb.ToString();
+	}
+
+	/// <summary>Generate a C# member name for an integer enum value.</summary>
+	private static string IntEnumMemberName(long value)
+	{
+		if (value < 0)
+		{
+			return "Neg" + (-value).ToString();
+		}
+		return "V" + value;
+	}
+
+	/// <summary>Generate a C# member name for a string enum value.</summary>
+	private static string StringEnumMemberName(string value)
+	{
+		if (string.IsNullOrEmpty(value))
+		{
+			return "None";
+		}
+
+		// Convert to PascalCase: split on non-alphanumeric chars
+		var sb = new StringBuilder();
+		var capitalizeNext = true;
+		foreach (var ch in value)
+		{
+			if (!char.IsLetterOrDigit(ch))
+			{
+				capitalizeNext = true;
+				continue;
+			}
+			if (capitalizeNext)
+			{
+				sb.Append(char.ToUpperInvariant(ch));
+				capitalizeNext = false;
+			}
+			else
+			{
+				sb.Append(ch);
+			}
+		}
+
+		var result = sb.ToString();
+
+		// If starts with digit, prefix with V
+		if (result.Length > 0 && char.IsDigit(result[0]))
+		{
+			result = "V" + result;
+		}
+
+		// If empty after processing, use hash
+		if (result.Length == 0)
+		{
+			result = "Value" + Math.Abs(value.GetHashCode()).ToString();
+		}
+
+		return result;
+	}
+
 	// ─── Component Schema Records ─────────────────────────────────────
 
 	/// <summary>Generate a sealed record for a component schema.</summary>
@@ -105,8 +313,22 @@ internal static partial class Emitter
 
 		var typeEl = sObj["type"];
 
-		// Multi-type array
-		if (typeEl is JsonArray) return "JsonElement";
+		// Multi-type array: type: ['string', 'integer'] → StringOrLong
+		if (typeEl is JsonArray multiTypeArr)
+		{
+			var nonNullTypes = new List<string>();
+			foreach (var t in multiTypeArr)
+			{
+				var ts = t!.GetValue<string>();
+				if (ts != "null") nonNullTypes.Add(ts);
+			}
+			var sortedTypes = nonNullTypes.OrderBy(s => s).ToList();
+			if (sortedTypes.Count == 2 && sortedTypes[0] == "integer" && sortedTypes[1] == "string")
+			{
+				return "Lolzteam.Api.Runtime.StringOrLong";
+			}
+			return "JsonElement";
+		}
 
 		string? type = null;
 		if (typeEl is JsonValue typeVal && typeVal.TryGetValue<string>(out var tv))
@@ -197,7 +419,9 @@ internal static partial class Emitter
 
 	// ─── Types File ───────────────────────────────────────────────────
 
-	private static string? EmitQueryParamsRecord(string group, MethodDefinition method)
+	private static string? EmitQueryParamsRecord(
+		string group, MethodDefinition method, Dictionary<string, string> paramToEnumType,
+		List<EnumDefinition>? enumDefs = null)
 	{
 		if (method.Params.QueryParams.Count == 0) return null;
 
@@ -208,46 +432,26 @@ internal static partial class Emitter
 
 		foreach (var param in method.Params.QueryParams)
 		{
-			var csharpType = Transforms.ToCSharpType(param.Type);
+			var enumKey = group + ":" + param.Name;
+			var csharpType = paramToEnumType.TryGetValue(enumKey, out var enumTypeName)
+				? enumTypeName
+				: Transforms.ToCSharpType(param.Type);
 			var propName = Naming.SafeCSharpName(param.Name);
+			if (param.DefaultValue is not null)
+			{
+				sb.Append("\t\t/// <summary>Default: ").Append(FormatDefaultValue(param.DefaultValue)).Append("</summary>\n");
+			}
 			if (Naming.NeedsJsonPropertyName(param.Name))
 			{
 				sb.Append("\t\t[JsonPropertyName(\"").Append(param.Name).Append("\")]\n");
 			}
-			sb.Append("\t\tpublic ").Append(MakeNullable(csharpType)).Append(' ').Append(propName).Append(" { get; init; }\n");
-		}
-
-		sb.Append("\t}");
-		return sb.ToString();
-	}
-
-	private static string? EmitBodyRecord(string group, MethodDefinition method)
-	{
-		if (!method.HasBody) return null;
-
-		// Array body — no record needed, method accepts List<T> directly
-		if (method.BodyIsArray) return null;
-		if (method.BodyProperties.Count == 0) return null;
-
-		var typeName = Naming.BuildTypeName(group, method.MethodName) + "Body";
-
-		var sb = new StringBuilder();
-		sb.Append("\tpublic sealed record ").Append(typeName).Append('\n');
-		sb.Append("\t{\n");
-
-		foreach (var prop in method.BodyProperties)
-		{
-			var csharpType = prop.Type == "Blob" ? "byte[]" : Transforms.ToCSharpType(prop.Type);
-			var propName = Naming.SafeCSharpName(prop.Name);
-
-			if (Naming.NeedsJsonPropertyName(prop.Name))
+			var defaultLiteral = param.DefaultValue is not null
+				? FormatDefaultLiteral(param.DefaultValue, csharpType, enumDefs, propName)
+				: null;
+			if (defaultLiteral is not null)
 			{
-				sb.Append("\t\t[JsonPropertyName(\"").Append(prop.Name).Append("\")]\n");
-			}
-
-			if (prop.Required)
-			{
-				sb.Append("\t\tpublic required ").Append(csharpType).Append(' ').Append(propName).Append(" { get; init; }\n");
+				sb.Append("\t\tpublic ").Append(MakeNullable(csharpType)).Append(' ').Append(propName)
+					.Append(" { get; init; } = ").Append(defaultLiteral).Append(";\n");
 			}
 			else
 			{
@@ -259,10 +463,195 @@ internal static partial class Emitter
 		return sb.ToString();
 	}
 
+	private static string? EmitBodyRecord(
+		string group, MethodDefinition method, Dictionary<string, string> paramToEnumType,
+		List<EnumDefinition>? enumDefs = null)
+	{
+		if (!method.HasBody) return null;
+
+		// Array body — no record needed, method accepts List<T> directly
+		if (method.BodyIsArray) return null;
+
+		// Discriminated oneOf → abstract base + sealed variant records
+		if (method.BodyOneOfVariants is { Count: > 0 } variants)
+		{
+			return EmitSealedBodyRecords(group, method, variants, paramToEnumType, enumDefs);
+		}
+
+		if (method.BodyProperties.Count == 0) return null;
+
+		var typeName = Naming.BuildTypeName(group, method.MethodName) + "Body";
+
+		var sb = new StringBuilder();
+		sb.Append("\tpublic sealed record ").Append(typeName).Append('\n');
+		sb.Append("\t{\n");
+
+		foreach (var prop in method.BodyProperties)
+		{
+			var enumKey = group + ":" + prop.Name;
+			var csharpType = prop.Type == "Blob"
+				? "byte[]"
+				: paramToEnumType.TryGetValue(enumKey, out var enumTypeName)
+					? enumTypeName
+					: Transforms.ToCSharpType(prop.Type);
+			var propName = Naming.SafeCSharpName(prop.Name);
+
+			if (prop.DefaultValue is not null)
+			{
+				sb.Append("\t\t/// <summary>Default: ").Append(FormatDefaultValue(prop.DefaultValue)).Append("</summary>\n");
+			}
+			if (Naming.NeedsJsonPropertyName(prop.Name))
+			{
+				sb.Append("\t\t[JsonPropertyName(\"").Append(prop.Name).Append("\")]\n");
+			}
+
+			var defaultLiteral = prop.DefaultValue is not null
+				? FormatDefaultLiteral(prop.DefaultValue, csharpType, enumDefs, propName)
+				: null;
+
+			if (prop.Required)
+			{
+				if (defaultLiteral is not null)
+				{
+					// Has default → not truly "required" from user perspective, emit with initializer
+					sb.Append("\t\tpublic ").Append(csharpType).Append(' ').Append(propName)
+						.Append(" { get; init; } = ").Append(defaultLiteral).Append(";\n");
+				}
+				else
+				{
+					sb.Append("\t\tpublic required ").Append(csharpType).Append(' ').Append(propName).Append(" { get; init; }\n");
+				}
+			}
+			else
+			{
+				if (defaultLiteral is not null)
+				{
+					sb.Append("\t\tpublic ").Append(MakeNullable(csharpType)).Append(' ').Append(propName)
+						.Append(" { get; init; } = ").Append(defaultLiteral).Append(";\n");
+				}
+				else
+				{
+					sb.Append("\t\tpublic ").Append(MakeNullable(csharpType)).Append(' ').Append(propName).Append(" { get; init; }\n");
+				}
+			}
+		}
+
+		sb.Append("\t}");
+		return sb.ToString();
+	}
+
+	private static string EmitSealedBodyRecords(
+		string group, MethodDefinition method, List<OneOfVariant> variants,
+		Dictionary<string, string> paramToEnumType, List<EnumDefinition>? enumDefs = null)
+	{
+		var baseName = Naming.BuildTypeName(group, method.MethodName) + "Body";
+		var sb = new StringBuilder();
+
+		// JsonDerivedType attributes on abstract base
+		foreach (var variant in variants)
+		{
+			var variantName = VariantClassName(baseName, variant.Title);
+			sb.Append("\t[JsonDerivedType(typeof(").Append(variantName).Append("), \"")
+				.Append(variant.DiscriminatorValue).Append("\")]\n");
+		}
+		sb.Append("\tpublic abstract record ").Append(baseName).Append(";\n");
+
+		// Variant records
+		foreach (var variant in variants)
+		{
+			var variantName = VariantClassName(baseName, variant.Title);
+			sb.Append('\n');
+			sb.Append("\tpublic sealed record ").Append(variantName).Append(" : ").Append(baseName).Append('\n');
+			sb.Append("\t{\n");
+
+			// Discriminator field as a constant
+			var discPropName = Naming.SafeCSharpName(variant.DiscriminatorField);
+			sb.Append("\t\t[JsonPropertyName(\"").Append(variant.DiscriminatorField).Append("\")]\n");
+
+			// Determine if discriminator is int or string
+			if (long.TryParse(variant.DiscriminatorValue, out var intDisc))
+			{
+				sb.Append("\t\tpublic long ").Append(discPropName).Append(" => ").Append(intDisc).Append(";\n");
+			}
+			else
+			{
+				sb.Append("\t\tpublic string ").Append(discPropName).Append(" => \"")
+					.Append(variant.DiscriminatorValue).Append("\";\n");
+			}
+
+			foreach (var prop in variant.Properties)
+			{
+				var enumKey = group + ":" + prop.Name;
+				var csharpType = prop.Type == "Blob"
+					? "byte[]"
+					: paramToEnumType.TryGetValue(enumKey, out var enumTypeName)
+						? enumTypeName
+						: Transforms.ToCSharpType(prop.Type);
+				var propName = Naming.SafeCSharpName(prop.Name);
+
+				if (prop.DefaultValue is not null)
+				{
+					sb.Append("\t\t/// <summary>Default: ").Append(FormatDefaultValue(prop.DefaultValue)).Append("</summary>\n");
+				}
+				if (Naming.NeedsJsonPropertyName(prop.Name))
+				{
+					sb.Append("\t\t[JsonPropertyName(\"").Append(prop.Name).Append("\")]\n");
+				}
+
+				var variantDefaultLiteral = prop.DefaultValue is not null
+					? FormatDefaultLiteral(prop.DefaultValue, csharpType, enumDefs, propName)
+					: null;
+
+				if (prop.Required)
+				{
+					if (variantDefaultLiteral is not null)
+					{
+						sb.Append("\t\tpublic ").Append(csharpType).Append(' ').Append(propName)
+							.Append(" { get; init; } = ").Append(variantDefaultLiteral).Append(";\n");
+					}
+					else
+					{
+						sb.Append("\t\tpublic required ").Append(csharpType).Append(' ').Append(propName).Append(" { get; init; }\n");
+					}
+				}
+				else
+				{
+					if (variantDefaultLiteral is not null)
+					{
+						sb.Append("\t\tpublic ").Append(MakeNullable(csharpType)).Append(' ').Append(propName)
+							.Append(" { get; init; } = ").Append(variantDefaultLiteral).Append(";\n");
+					}
+					else
+					{
+						sb.Append("\t\tpublic ").Append(MakeNullable(csharpType)).Append(' ').Append(propName).Append(" { get; init; }\n");
+					}
+				}
+			}
+
+			sb.Append("\t}");
+		}
+
+		return sb.ToString();
+	}
+
+	/// <summary>Convert a variant title like "Client Credentials" to a class name suffix.</summary>
+	private static string VariantClassName(string baseName, string title)
+	{
+		var parts = title.Split([' ', '_', '-'], StringSplitOptions.RemoveEmptyEntries);
+		var pascal = string.Join("", parts.Select(p => char.ToUpperInvariant(p[0]) + p[1..]));
+		return baseName + pascal;
+	}
+
 	private static string EmitResponseRecord(
 		string group, MethodDefinition method, JsonNode rawSpec, HashSet<string> componentSchemaNames)
 	{
 		var typeName = Naming.BuildTypeName(group, method.MethodName) + "Response";
+
+		// text/html endpoints return raw string
+		if (method.ReturnsHtml)
+		{
+			return $"\tpublic sealed record {typeName}(string Data);";
+		}
 
 		// If we have a raw response schema with properties, resolve types with nested record generation
 		if (method.RawResponseSchema is { } rawSchema
@@ -329,7 +718,8 @@ internal static partial class Emitter
 
 	internal static string EmitCSharpTypesFile(
 		List<ParsedGroup> groups, string subPackage,
-		SortedDictionary<string, JsonObject> componentSchemas, JsonNode rawSpec)
+		SortedDictionary<string, JsonObject> componentSchemas, JsonNode rawSpec,
+		List<EnumDefinition> enumDefs, Dictionary<string, string> paramToEnumType)
 	{
 		var sb = new StringBuilder();
 		var ns = "Lolzteam.Api.Generated." + Naming.CapitalizeFirst(subPackage);
@@ -340,7 +730,18 @@ internal static partial class Emitter
 		sb.Append("using System.Text.Json;\n\n");
 		sb.Append("namespace ").Append(ns).Append(";\n\n");
 
-		// Emit component schema records first
+		// Emit enum definitions
+		if (enumDefs.Count > 0)
+		{
+			sb.Append("// ─── Enums ────────────────────────────────────────────────────\n\n");
+			foreach (var def in enumDefs)
+			{
+				sb.Append(EmitEnumDefinition(def));
+				sb.Append('\n');
+			}
+		}
+
+		// Emit component schema records
 		if (componentSchemas.Count > 0)
 		{
 			sb.Append("// ─── Component Schemas ────────────────────────────────────────\n\n");
@@ -358,10 +759,10 @@ internal static partial class Emitter
 
 			foreach (var method in group.Methods)
 			{
-				var queryType = EmitQueryParamsRecord(group.GroupName, method);
+				var queryType = EmitQueryParamsRecord(group.GroupName, method, paramToEnumType, enumDefs);
 				if (queryType is not null) groupTypes.Add(queryType);
 
-				var bodyType = EmitBodyRecord(group.GroupName, method);
+				var bodyType = EmitBodyRecord(group.GroupName, method, paramToEnumType, enumDefs);
 				if (bodyType is not null) groupTypes.Add(bodyType);
 
 				groupTypes.Add(EmitResponseRecord(group.GroupName, method, rawSpec, componentSchemaNames));
@@ -519,6 +920,27 @@ internal static partial class Emitter
 		var responseTypeName = className + "Types." + typeName + "Response";
 		sb.Append("\tpublic async Task<").Append(responseTypeName).Append("> ").Append(method.MethodName)
 			.Append("Async(").Append(argStr).Append(")\n\t{\n");
+
+		// text/html endpoints use RequestRawAsync
+		if (method.ReturnsHtml)
+		{
+			sb.Append("\t\tvar __result = await _http.RequestRawAsync(new RequestOptions\n");
+			sb.Append("\t\t{\n");
+			sb.Append("\t\t\tMethod = \"").Append(method.HttpMethod).Append("\",\n");
+			sb.Append("\t\t\tPath = ").Append(pathExpr).Append(",\n");
+			if (hasQueryType)
+			{
+				sb.Append("\t\t\tQuery = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,\n");
+			}
+			if (isSearch)
+			{
+				sb.Append("\t\t\tIsSearch = true,\n");
+			}
+			sb.Append("\t\t}, cancellationToken).ConfigureAwait(false);\n");
+			sb.Append("\t\treturn new ").Append(responseTypeName).Append("(__result);\n");
+			sb.Append("\t}");
+			return sb.ToString();
+		}
 
 		if (isMultipart && hasByteArrayFields)
 		{

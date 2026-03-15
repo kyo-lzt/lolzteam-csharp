@@ -44,8 +44,13 @@ foreach (var config in apis)
 		Console.WriteLine($"  Deleted old {Path.GetFileName(file)}");
 	}
 
+	// Collect enums
+	var (enumDefs, paramToEnumType) = EnumCollector.Collect(result.Groups);
+	Console.WriteLine($"  Enums: {enumDefs.Count} types");
+
 	// Write Types
-	var typesContent = Emitter.EmitCSharpTypesFile(result.Groups, config.SubPackage, result.ComponentSchemas, rawSpec);
+	var typesContent = Emitter.EmitCSharpTypesFile(
+		result.Groups, config.SubPackage, result.ComponentSchemas, rawSpec, enumDefs, paramToEnumType);
 	File.WriteAllText(Path.Combine(config.OutputDir, "Types.cs"), typesContent);
 	Console.WriteLine("  Types.cs");
 

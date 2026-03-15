@@ -5,6 +5,902 @@ using System.Text.Json;
 
 namespace Lolzteam.Api.Generated.Market;
 
+// ─── Enums ────────────────────────────────────────────────────
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<AgeVerified>))]
+public enum AgeVerified
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+public enum AppId : long
+{
+	V730 = 730,
+	V578080 = 578080,
+	V753 = 753,
+	V570 = 570,
+	V440 = 440,
+	V252490 = 252490,
+	V304930 = 304930,
+	V232090 = 232090,
+	V322330 = 322330,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Autorenewal>))]
+public enum Autorenewal
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Bedrock>))]
+public enum Bedrock
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Billing>))]
+public enum Billing
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<BirthdayAfterPeriod>))]
+public enum BirthdayAfterPeriod
+{
+	[Lolzteam.Api.Runtime.EnumValue("day")] Day,
+	[Lolzteam.Api.Runtime.EnumValue("month")] Month,
+	[Lolzteam.Api.Runtime.EnumValue("year")] Year,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<BirthdayPeriod>))]
+public enum BirthdayPeriod
+{
+	[Lolzteam.Api.Runtime.EnumValue("day")] Day,
+	[Lolzteam.Api.Runtime.EnumValue("month")] Month,
+	[Lolzteam.Api.Runtime.EnumValue("year")] Year,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Bp>))]
+public enum Bp
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<BrawlPass>))]
+public enum BrawlPass
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+public enum Cancel : long
+{
+	V1 = 1,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<CanChangeDetails>))]
+public enum CanChangeDetails
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+public enum CategoryEg : long
+{
+	Neg1 = -1,
+	V0 = 0,
+	V1 = 1,
+}
+
+public enum CategoryEg2 : long
+{
+	Neg1 = -1,
+	V0 = 0,
+	V1 = 1,
+	V2 = 2,
+}
+
+public enum CategoryEg3 : long
+{
+	V0 = 0,
+	V1 = 1,
+}
+
+public enum CategoryId : long
+{
+	V1 = 1,
+	V3 = 3,
+	V4 = 4,
+	V5 = 5,
+	V6 = 6,
+	V7 = 7,
+	V8 = 8,
+	V9 = 9,
+	V10 = 10,
+	V11 = 11,
+	V12 = 12,
+	V13 = 13,
+	V14 = 14,
+	V15 = 15,
+	V16 = 16,
+	V17 = 17,
+	V18 = 18,
+	V19 = 19,
+	V20 = 20,
+	V22 = 22,
+	V24 = 24,
+	V28 = 28,
+	V30 = 30,
+	V31 = 31,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<CategorySubscription>))]
+public enum CategorySubscription
+{
+	[Lolzteam.Api.Runtime.EnumValue("EA Play")] EAPlay,
+	[Lolzteam.Api.Runtime.EnumValue("EA Play Pro")] EAPlayPro,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<CategorySubscription2>))]
+public enum CategorySubscription2
+{
+	[Lolzteam.Api.Runtime.EnumValue("discord_nitro")] DiscordNitro,
+	[Lolzteam.Api.Runtime.EnumValue("discord_nitro_basic")] DiscordNitroBasic,
+	[Lolzteam.Api.Runtime.EnumValue("discord_nitro_trial")] DiscordNitroTrial,
+	[Lolzteam.Api.Runtime.EnumValue("telegram_premium")] TelegramPremium,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<CategorySubscription3>))]
+public enum CategorySubscription3
+{
+	[Lolzteam.Api.Runtime.EnumValue("basic")] Basic,
+	[Lolzteam.Api.Runtime.EnumValue("premium")] Premium,
+	[Lolzteam.Api.Runtime.EnumValue("premiumAnywhere")] PremiumAnywhere,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<CategorySubscription4>))]
+public enum CategorySubscription4
+{
+	[Lolzteam.Api.Runtime.EnumValue("RobloxPremium1000")] RobloxPremium1000,
+	[Lolzteam.Api.Runtime.EnumValue("RobloxPremium100012Months")] RobloxPremium100012Months,
+	[Lolzteam.Api.Runtime.EnumValue("RobloxPremium1000OneMonth")] RobloxPremium1000OneMonth,
+	[Lolzteam.Api.Runtime.EnumValue("RobloxPremium2200")] RobloxPremium2200,
+	[Lolzteam.Api.Runtime.EnumValue("RobloxPremium2200OneMonth")] RobloxPremium2200OneMonth,
+	[Lolzteam.Api.Runtime.EnumValue("RobloxPremium450")] RobloxPremium450,
+	[Lolzteam.Api.Runtime.EnumValue("RobloxPremium450OneMonth")] RobloxPremium450OneMonth,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<CategorySubscription5>))]
+public enum CategorySubscription5
+{
+	[Lolzteam.Api.Runtime.EnumValue("PC Game Pass")] PCGamePass,
+	[Lolzteam.Api.Runtime.EnumValue("Xbox Game Pass Ultimate")] XboxGamePassUltimate,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<ChangeableFn>))]
+public enum ChangeableFn
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<ChangeEmail>))]
+public enum ChangeEmail
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<ChangeNickname>))]
+public enum ChangeNickname
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<ClaimState>))]
+public enum ClaimState
+{
+	[Lolzteam.Api.Runtime.EnumValue("active")] Active,
+	[Lolzteam.Api.Runtime.EnumValue("solved")] Solved,
+	[Lolzteam.Api.Runtime.EnumValue("rejected")] Rejected,
+	[Lolzteam.Api.Runtime.EnumValue("settled")] Settled,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Clan>))]
+public enum Clan
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Clans>))]
+public enum Clans
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<ClashPass>))]
+public enum ClashPass
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<CookieLogin>))]
+public enum CookieLogin
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Cookies>))]
+public enum Cookies
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+public enum Cs2MapRank : long
+{
+	V1 = 1,
+	V2 = 2,
+	V3 = 3,
+	V4 = 4,
+	V5 = 5,
+	V6 = 6,
+	V7 = 7,
+	V8 = 8,
+	V9 = 9,
+	V10 = 10,
+	V11 = 11,
+	V12 = 12,
+	V13 = 13,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Currency>))]
+public enum Currency
+{
+	[Lolzteam.Api.Runtime.EnumValue("rub")] Rub,
+	[Lolzteam.Api.Runtime.EnumValue("uah")] Uah,
+	[Lolzteam.Api.Runtime.EnumValue("kzt")] Kzt,
+	[Lolzteam.Api.Runtime.EnumValue("byn")] Byn,
+	[Lolzteam.Api.Runtime.EnumValue("usd")] Usd,
+	[Lolzteam.Api.Runtime.EnumValue("eur")] Eur,
+	[Lolzteam.Api.Runtime.EnumValue("gbp")] Gbp,
+	[Lolzteam.Api.Runtime.EnumValue("cny")] Cny,
+	[Lolzteam.Api.Runtime.EnumValue("try")] Try,
+	[Lolzteam.Api.Runtime.EnumValue("jpy")] Jpy,
+	[Lolzteam.Api.Runtime.EnumValue("brl")] Brl,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<D2LastMatchDatePeriod>))]
+public enum D2LastMatchDatePeriod
+{
+	[Lolzteam.Api.Runtime.EnumValue("day")] Day,
+	[Lolzteam.Api.Runtime.EnumValue("month")] Month,
+	[Lolzteam.Api.Runtime.EnumValue("year")] Year,
+}
+
+public enum Day : long
+{
+	V0 = 0,
+	V1 = 1,
+	V2 = 2,
+	V3 = 3,
+	V4 = 4,
+	V5 = 5,
+	V6 = 6,
+	V7 = 7,
+	V8 = 8,
+	V9 = 9,
+	V10 = 10,
+	V11 = 11,
+	V12 = 12,
+	V13 = 13,
+	V14 = 14,
+	V15 = 15,
+	V16 = 16,
+	V17 = 17,
+	V18 = 18,
+	V19 = 19,
+	V20 = 20,
+	V21 = 21,
+	V22 = 22,
+	V23 = 23,
+	V24 = 24,
+	V25 = 25,
+	V26 = 26,
+	V27 = 27,
+	V28 = 28,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Dungeons>))]
+public enum Dungeons
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<E2fa>))]
+public enum E2fa
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Ea>))]
+public enum Ea
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<EditBtag>))]
+public enum EditBtag
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Email>))]
+public enum Email
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<EmailType>))]
+public enum EmailType
+{
+	[Lolzteam.Api.Runtime.EnumValue("native")] Native,
+	[Lolzteam.Api.Runtime.EnumValue("autoreg")] Autoreg,
+}
+
+public enum ExtendedGuarantee : long
+{
+	Neg1 = -1,
+	V0 = 0,
+	V1 = 1,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Format>))]
+public enum Format
+{
+	[Lolzteam.Api.Runtime.EnumValue("short")] Short,
+	[Lolzteam.Api.Runtime.EnumValue("custom")] Custom,
+	[Lolzteam.Api.Runtime.EnumValue("mfa_file_steam_id")] MfaFileSteamId,
+	[Lolzteam.Api.Runtime.EnumValue("mfa_file_login")] MfaFileLogin,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<GameDonations>))]
+public enum GameDonations
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Gifts>))]
+public enum Gifts
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<HasActivatedKeys>))]
+public enum HasActivatedKeys
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<HasBan>))]
+public enum HasBan
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<HasFaceit>))]
+public enum HasFaceit
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<HoldLengthOption>))]
+public enum HoldLengthOption
+{
+	[Lolzteam.Api.Runtime.EnumValue("hour")] Hour,
+	[Lolzteam.Api.Runtime.EnumValue("day")] Day,
+	[Lolzteam.Api.Runtime.EnumValue("week")] Week,
+	[Lolzteam.Api.Runtime.EnumValue("month")] Month,
+	[Lolzteam.Api.Runtime.EnumValue("year")] Year,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<HypixelBan>))]
+public enum HypixelBan
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<HypixelBanParsed>))]
+public enum HypixelBanParsed
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<HypixelSkyblockApiEnabled>))]
+public enum HypixelSkyblockApiEnabled
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Java>))]
+public enum Java
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<LastLoginHypixelPeriod>))]
+public enum LastLoginHypixelPeriod
+{
+	[Lolzteam.Api.Runtime.EnumValue("day")] Day,
+	[Lolzteam.Api.Runtime.EnumValue("month")] Month,
+	[Lolzteam.Api.Runtime.EnumValue("year")] Year,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<LastTransDatePeriod>))]
+public enum LastTransDatePeriod
+{
+	[Lolzteam.Api.Runtime.EnumValue("day")] Day,
+	[Lolzteam.Api.Runtime.EnumValue("month")] Month,
+	[Lolzteam.Api.Runtime.EnumValue("year")] Year,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<LastTransDatePeriodLater>))]
+public enum LastTransDatePeriodLater
+{
+	[Lolzteam.Api.Runtime.EnumValue("day")] Day,
+	[Lolzteam.Api.Runtime.EnumValue("month")] Month,
+	[Lolzteam.Api.Runtime.EnumValue("year")] Year,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Legends>))]
+public enum Legends
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Limit>))]
+public enum Limit
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<LoginWithoutCookies>))]
+public enum LoginWithoutCookies
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Mafile>))]
+public enum Mafile
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<ManagingItemOrigin>))]
+public enum ManagingItemOrigin
+{
+	[Lolzteam.Api.Runtime.EnumValue("brute")] Brute,
+	[Lolzteam.Api.Runtime.EnumValue("phishing")] Phishing,
+	[Lolzteam.Api.Runtime.EnumValue("stealer")] Stealer,
+	[Lolzteam.Api.Runtime.EnumValue("personal")] Personal,
+	[Lolzteam.Api.Runtime.EnumValue("resale")] Resale,
+	[Lolzteam.Api.Runtime.EnumValue("autoreg")] Autoreg,
+	[Lolzteam.Api.Runtime.EnumValue("dummy")] Dummy,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<ManagingType>))]
+public enum ManagingType
+{
+	[Lolzteam.Api.Runtime.EnumValue("profiles")] Profiles,
+	[Lolzteam.Api.Runtime.EnumValue("games")] Games,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<ManagingType2>))]
+public enum ManagingType2
+{
+	[Lolzteam.Api.Runtime.EnumValue("skins")] Skins,
+	[Lolzteam.Api.Runtime.EnumValue("pickaxes")] Pickaxes,
+	[Lolzteam.Api.Runtime.EnumValue("dances")] Dances,
+	[Lolzteam.Api.Runtime.EnumValue("gliders")] Gliders,
+	[Lolzteam.Api.Runtime.EnumValue("weapons")] Weapons,
+	[Lolzteam.Api.Runtime.EnumValue("agents")] Agents,
+	[Lolzteam.Api.Runtime.EnumValue("buddies")] Buddies,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<MmBan>))]
+public enum MmBan
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Nitro>))]
+public enum Nitro
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<NitroPeriod>))]
+public enum NitroPeriod
+{
+	[Lolzteam.Api.Runtime.EnumValue("day")] Day,
+	[Lolzteam.Api.Runtime.EnumValue("month")] Month,
+	[Lolzteam.Api.Runtime.EnumValue("year")] Year,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<NoBans>))]
+public enum NoBans
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<NotEmailProvider>))]
+public enum NotEmailProvider
+{
+	[Lolzteam.Api.Runtime.EnumValue("other")] Other,
+	[Lolzteam.Api.Runtime.EnumValue("rambler")] Rambler,
+	[Lolzteam.Api.Runtime.EnumValue("outlook")] Outlook,
+	[Lolzteam.Api.Runtime.EnumValue("firstmail")] Firstmail,
+	[Lolzteam.Api.Runtime.EnumValue("notletters")] Notletters,
+	[Lolzteam.Api.Runtime.EnumValue("mail_ru")] MailRu,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<OrderBy>))]
+public enum OrderBy
+{
+	[Lolzteam.Api.Runtime.EnumValue("price_to_up")] PriceToUp,
+	[Lolzteam.Api.Runtime.EnumValue("price_to_down")] PriceToDown,
+	[Lolzteam.Api.Runtime.EnumValue("pdate_to_down")] PdateToDown,
+	[Lolzteam.Api.Runtime.EnumValue("pdate_to_up")] PdateToUp,
+	[Lolzteam.Api.Runtime.EnumValue("pdate_to_down_upload")] PdateToDownUpload,
+	[Lolzteam.Api.Runtime.EnumValue("pdate_to_up_upload")] PdateToUpUpload,
+	[Lolzteam.Api.Runtime.EnumValue("edate_to_up")] EdateToUp,
+	[Lolzteam.Api.Runtime.EnumValue("edate_to_down")] EdateToDown,
+	[Lolzteam.Api.Runtime.EnumValue("ddate_to_up")] DdateToUp,
+	[Lolzteam.Api.Runtime.EnumValue("ddate_to_down")] DdateToDown,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<ParentControl>))]
+public enum ParentControl
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Password>))]
+public enum Password
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<PaymentsType>))]
+public enum PaymentsType
+{
+	[Lolzteam.Api.Runtime.EnumValue("paid_item")] PaidItem,
+	[Lolzteam.Api.Runtime.EnumValue("sold_item")] SoldItem,
+	[Lolzteam.Api.Runtime.EnumValue("withdrawal_balance")] WithdrawalBalance,
+	[Lolzteam.Api.Runtime.EnumValue("refilled_balance")] RefilledBalance,
+	[Lolzteam.Api.Runtime.EnumValue("internal_purchase")] InternalPurchase,
+	[Lolzteam.Api.Runtime.EnumValue("money_transfer")] MoneyTransfer,
+	[Lolzteam.Api.Runtime.EnumValue("receiving_money")] ReceivingMoney,
+	[Lolzteam.Api.Runtime.EnumValue("claim_hold")] ClaimHold,
+	[Lolzteam.Api.Runtime.EnumValue("insurance_deposit")] InsuranceDeposit,
+	[Lolzteam.Api.Runtime.EnumValue("paid_mail")] PaidMail,
+	[Lolzteam.Api.Runtime.EnumValue("contest")] Contest,
+	[Lolzteam.Api.Runtime.EnumValue("invoice")] Invoice,
+	[Lolzteam.Api.Runtime.EnumValue("balance_exchange")] BalanceExchange,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Premium>))]
+public enum Premium
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<PremiumExpirationPeriod>))]
+public enum PremiumExpirationPeriod
+{
+	[Lolzteam.Api.Runtime.EnumValue("day")] Day,
+	[Lolzteam.Api.Runtime.EnumValue("month")] Month,
+	[Lolzteam.Api.Runtime.EnumValue("year")] Year,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<ProfileType>))]
+public enum ProfileType
+{
+	[Lolzteam.Api.Runtime.EnumValue("market")] Market,
+	[Lolzteam.Api.Runtime.EnumValue("nomarket")] Nomarket,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<PsnConnected>))]
+public enum PsnConnected
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<PsnLinkable>))]
+public enum PsnLinkable
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<PublishingItemOrigin>))]
+public enum PublishingItemOrigin
+{
+	[Lolzteam.Api.Runtime.EnumValue("brute")] Brute,
+	[Lolzteam.Api.Runtime.EnumValue("phishing")] Phishing,
+	[Lolzteam.Api.Runtime.EnumValue("stealer")] Stealer,
+	[Lolzteam.Api.Runtime.EnumValue("personal")] Personal,
+	[Lolzteam.Api.Runtime.EnumValue("resale")] Resale,
+	[Lolzteam.Api.Runtime.EnumValue("autoreg")] Autoreg,
+	[Lolzteam.Api.Runtime.EnumValue("dummy")] Dummy,
+	[Lolzteam.Api.Runtime.EnumValue("self_registration")] SelfRegistration,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<PublishingType>))]
+public enum PublishingType
+{
+	[Lolzteam.Api.Runtime.EnumValue("socialclub")] Socialclub,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Pve>))]
+public enum Pve
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<R6Ban>))]
+public enum R6Ban
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<RealId>))]
+public enum RealId
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Region>))]
+public enum Region
+{
+	[Lolzteam.Api.Runtime.EnumValue("af")] Af,
+	[Lolzteam.Api.Runtime.EnumValue("as")] As,
+	[Lolzteam.Api.Runtime.EnumValue("cis")] Cis,
+	[Lolzteam.Api.Runtime.EnumValue("eu")] Eu,
+	[Lolzteam.Api.Runtime.EnumValue("me")] Me,
+	[Lolzteam.Api.Runtime.EnumValue("oc")] Oc,
+	[Lolzteam.Api.Runtime.EnumValue("us")] Us,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<RegPeriod>))]
+public enum RegPeriod
+{
+	[Lolzteam.Api.Runtime.EnumValue("day")] Day,
+	[Lolzteam.Api.Runtime.EnumValue("month")] Month,
+	[Lolzteam.Api.Runtime.EnumValue("year")] Year,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<RoyalePass>))]
+public enum RoyalePass
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Rt>))]
+public enum Rt
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Show>))]
+public enum Show
+{
+	[Lolzteam.Api.Runtime.EnumValue("active")] Active,
+	[Lolzteam.Api.Runtime.EnumValue("paid")] Paid,
+	[Lolzteam.Api.Runtime.EnumValue("deleted")] Deleted,
+	[Lolzteam.Api.Runtime.EnumValue("awaiting")] Awaiting,
+	[Lolzteam.Api.Runtime.EnumValue("closed")] Closed,
+	[Lolzteam.Api.Runtime.EnumValue("discount_request")] DiscountRequest,
+	[Lolzteam.Api.Runtime.EnumValue("stickied")] Stickied,
+	[Lolzteam.Api.Runtime.EnumValue("pre_active")] PreActive,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Side>))]
+public enum Side
+{
+	[Lolzteam.Api.Runtime.EnumValue("Bear")] Bear,
+	[Lolzteam.Api.Runtime.EnumValue("Savage")] Savage,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Spam>))]
+public enum Spam
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Status>))]
+public enum Status
+{
+	[Lolzteam.Api.Runtime.EnumValue("paid")] Paid,
+	[Lolzteam.Api.Runtime.EnumValue("not_paid")] NotPaid,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<SteamConnected>))]
+public enum SteamConnected
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<SubscriptionPeriod>))]
+public enum SubscriptionPeriod
+{
+	[Lolzteam.Api.Runtime.EnumValue("day")] Day,
+	[Lolzteam.Api.Runtime.EnumValue("month")] Month,
+	[Lolzteam.Api.Runtime.EnumValue("year")] Year,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Tel>))]
+public enum Tel
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<TempEmail>))]
+public enum TempEmail
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<TradeBan>))]
+public enum TradeBan
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<TradeLimit>))]
+public enum TradeLimit
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Transactions>))]
+public enum Transactions
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Verified>))]
+public enum Verified
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Voice>))]
+public enum Voice
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<XboxConnected>))]
+public enum XboxConnected
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<XboxLinkable>))]
+public enum XboxLinkable
+{
+	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
+	[Lolzteam.Api.Runtime.EnumValue("no")] No,
+	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
+}
+
 // ─── Component Schemas ────────────────────────────────────────
 
 public sealed record BalanceModel(
@@ -645,11 +1541,11 @@ public static class AutoPaymentsApiTypes
 		[JsonPropertyName("username_receiver")]
 		public required string UsernameReceiver { get; init; }
 		[JsonPropertyName("day")]
-		public required JsonElement Day { get; init; }
+		public required Day Day { get; init; }
 		[JsonPropertyName("amount")]
 		public required double? Amount { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("description")]
 		public string? Description { get; init; }
 	}
@@ -700,7 +1596,7 @@ public static class CartApiTypes
 	public sealed record CartGetParams
 	{
 		[JsonPropertyName("category_id")]
-		public JsonElement? CategoryId { get; init; }
+		public CategoryId? CategoryId { get; init; }
 		[JsonPropertyName("page")]
 		public long? Page { get; init; }
 		[JsonPropertyName("pmin")]
@@ -710,7 +1606,7 @@ public static class CartApiTypes
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("tag_id[]")]
 		public List<long?>? TagId { get; init; }
 		[JsonPropertyName("not_tag_id[]")]
@@ -734,13 +1630,13 @@ public static class CartApiTypes
 		[JsonPropertyName("sb_by_me")]
 		public bool? SbByMe { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("email_login_data")]
 		public bool? EmailLoginData { get; init; }
 		[JsonPropertyName("email_provider[]")]
 		public JsonElement? EmailProvider { get; init; }
 		[JsonPropertyName("not_email_provider[]")]
-		public string? NotEmailProvider { get; init; }
+		public NotEmailProvider? NotEmailProvider { get; init; }
 		[JsonPropertyName("parse_same_item_ids")]
 		public bool? ParseSameItemIds { get; init; }
 	}
@@ -795,7 +1691,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("tag_id[]")]
 		public List<long?>? TagId { get; init; }
 		[JsonPropertyName("not_tag_id[]")]
@@ -819,13 +1715,13 @@ public static class CategoryApiTypes
 		[JsonPropertyName("sb_by_me")]
 		public bool? SbByMe { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("email_login_data")]
 		public bool? EmailLoginData { get; init; }
 		[JsonPropertyName("email_provider[]")]
 		public JsonElement? EmailProvider { get; init; }
 		[JsonPropertyName("not_email_provider[]")]
-		public string? NotEmailProvider { get; init; }
+		public NotEmailProvider? NotEmailProvider { get; init; }
 		[JsonPropertyName("parse_same_item_ids")]
 		public bool? ParseSameItemIds { get; init; }
 	}
@@ -853,7 +1749,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("tag_id[]")]
 		public List<long?>? TagId { get; init; }
 		[JsonPropertyName("not_tag_id[]")]
@@ -877,7 +1773,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("sb_by_me")]
 		public bool? SbByMe { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("email_login_data")]
 		public bool? EmailLoginData { get; init; }
 		[JsonPropertyName("email_type[]")]
@@ -885,7 +1781,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("email_provider[]")]
 		public JsonElement? EmailProvider { get; init; }
 		[JsonPropertyName("not_email_provider[]")]
-		public string? NotEmailProvider { get; init; }
+		public NotEmailProvider? NotEmailProvider { get; init; }
 		[JsonPropertyName("parse_same_item_ids")]
 		public bool? ParseSameItemIds { get; init; }
 		[JsonPropertyName("item_domain")]
@@ -897,27 +1793,28 @@ public static class CategoryApiTypes
 		[JsonPropertyName("hours_played_max")]
 		public JsonElement? HoursPlayedMax { get; init; }
 		[JsonPropertyName("eg")]
-		public JsonElement? Eg { get; init; }
+		public CategoryEg? Eg { get; init; }
 		[JsonPropertyName("vac[]")]
 		public List<long?>? Vac { get; init; }
 		[JsonPropertyName("vac_skip_game_check")]
 		public bool? VacSkipGameCheck { get; init; }
+		/// <summary>Default: no</summary>
 		[JsonPropertyName("rt")]
-		public string? Rt { get; init; }
+		public Rt? Rt { get; init; }
 		[JsonPropertyName("trade_ban")]
-		public string? TradeBan { get; init; }
+		public TradeBan? TradeBan { get; init; }
 		[JsonPropertyName("trade_limit")]
-		public string? TradeLimit { get; init; }
+		public TradeLimit? TradeLimit { get; init; }
 		[JsonPropertyName("daybreak")]
 		public long? Daybreak { get; init; }
 		[JsonPropertyName("limit")]
-		public string? Limit { get; init; }
+		public Limit? Limit { get; init; }
 		[JsonPropertyName("mafile")]
-		public string? Mafile { get; init; }
+		public Mafile? Mafile { get; init; }
 		[JsonPropertyName("reg")]
 		public long? Reg { get; init; }
 		[JsonPropertyName("reg_period")]
-		public string? RegPeriod { get; init; }
+		public RegPeriod? RegPeriod { get; init; }
 		[JsonPropertyName("lmin")]
 		public long? Lmin { get; init; }
 		[JsonPropertyName("lmax")]
@@ -933,7 +1830,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("no_vac")]
 		public bool? NoVac { get; init; }
 		[JsonPropertyName("mm_ban")]
-		public string? MmBan { get; init; }
+		public MmBan? MmBan { get; init; }
 		[JsonPropertyName("balance_min")]
 		public long? BalanceMin { get; init; }
 		[JsonPropertyName("balance_max")]
@@ -1013,11 +1910,11 @@ public static class CategoryApiTypes
 		[JsonPropertyName("last_trans_date")]
 		public long? LastTransDate { get; init; }
 		[JsonPropertyName("last_trans_date_period")]
-		public string? LastTransDatePeriod { get; init; }
+		public LastTransDatePeriod? LastTransDatePeriod { get; init; }
 		[JsonPropertyName("last_trans_date_later")]
 		public long? LastTransDateLater { get; init; }
 		[JsonPropertyName("last_trans_date_period_later")]
-		public string? LastTransDatePeriodLater { get; init; }
+		public LastTransDatePeriodLater? LastTransDatePeriodLater { get; init; }
 		[JsonPropertyName("no_trans")]
 		public bool? NoTrans { get; init; }
 		[JsonPropertyName("trans")]
@@ -1043,19 +1940,19 @@ public static class CategoryApiTypes
 		[JsonPropertyName("purchase_max")]
 		public double? PurchaseMax { get; init; }
 		[JsonPropertyName("has_activated_keys")]
-		public string? HasActivatedKeys { get; init; }
+		public HasActivatedKeys? HasActivatedKeys { get; init; }
 		[JsonPropertyName("elo_min")]
 		public long? EloMin { get; init; }
 		[JsonPropertyName("elo_max")]
 		public long? EloMax { get; init; }
 		[JsonPropertyName("cs2_map_rank")]
-		public JsonElement? Cs2MapRank { get; init; }
+		public Cs2MapRank? Cs2MapRank { get; init; }
 		[JsonPropertyName("cs2_map_rmin")]
 		public long? Cs2MapRmin { get; init; }
 		[JsonPropertyName("cs2_map_rmax")]
 		public long? Cs2MapRmax { get; init; }
 		[JsonPropertyName("has_faceit")]
-		public string? HasFaceit { get; init; }
+		public HasFaceit? HasFaceit { get; init; }
 		[JsonPropertyName("faceit_csgo_lvl_min")]
 		public long? FaceitCsgoLvlMin { get; init; }
 		[JsonPropertyName("faceit_csgo_lvl_max")]
@@ -1071,7 +1968,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("d2_last_match_date")]
 		public long? D2LastMatchDate { get; init; }
 		[JsonPropertyName("d2_last_match_date_period")]
-		public string? D2LastMatchDatePeriod { get; init; }
+		public D2LastMatchDatePeriod? D2LastMatchDatePeriod { get; init; }
 		[JsonPropertyName("cards_min")]
 		public long? CardsMin { get; init; }
 		[JsonPropertyName("cards_max")]
@@ -1321,7 +2218,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("tag_id[]")]
 		public List<long?>? TagId { get; init; }
 		[JsonPropertyName("not_tag_id[]")]
@@ -1345,7 +2242,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("sb_by_me")]
 		public bool? SbByMe { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("email_login_data")]
 		public bool? EmailLoginData { get; init; }
 		[JsonPropertyName("email_provider[]")]
@@ -1353,15 +2250,15 @@ public static class CategoryApiTypes
 		[JsonPropertyName("email_type[]")]
 		public JsonElement? EmailType { get; init; }
 		[JsonPropertyName("not_email_provider[]")]
-		public string? NotEmailProvider { get; init; }
+		public NotEmailProvider? NotEmailProvider { get; init; }
 		[JsonPropertyName("parse_same_item_ids")]
 		public bool? ParseSameItemIds { get; init; }
 		[JsonPropertyName("temp_email")]
-		public string? TempEmail { get; init; }
+		public TempEmail? TempEmail { get; init; }
 		[JsonPropertyName("item_domain")]
 		public string? ItemDomain { get; init; }
 		[JsonPropertyName("eg")]
-		public JsonElement? Eg { get; init; }
+		public CategoryEg? Eg { get; init; }
 		[JsonPropertyName("smin")]
 		public long? Smin { get; init; }
 		[JsonPropertyName("smax")]
@@ -1379,7 +2276,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("dance[]")]
 		public JsonElement? Dance { get; init; }
 		[JsonPropertyName("change_email")]
-		public string? ChangeEmail { get; init; }
+		public ChangeEmail? ChangeEmail { get; init; }
 		[JsonPropertyName("platform[]")]
 		public JsonElement? Platform { get; init; }
 		[JsonPropertyName("skins_shop_min")]
@@ -1415,7 +2312,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("gliders_shop_vbmax")]
 		public long? GlidersShopVbmax { get; init; }
 		[JsonPropertyName("bp")]
-		public string? Bp { get; init; }
+		public Bp? Bp { get; init; }
 		[JsonPropertyName("lmin")]
 		public long? Lmin { get; init; }
 		[JsonPropertyName("lmax")]
@@ -1427,13 +2324,13 @@ public static class CategoryApiTypes
 		[JsonPropertyName("last_trans_date")]
 		public long? LastTransDate { get; init; }
 		[JsonPropertyName("last_trans_date_period")]
-		public string? LastTransDatePeriod { get; init; }
+		public LastTransDatePeriod? LastTransDatePeriod { get; init; }
 		[JsonPropertyName("no_trans")]
 		public bool? NoTrans { get; init; }
 		[JsonPropertyName("xbox_linkable")]
-		public string? XboxLinkable { get; init; }
+		public XboxLinkable? XboxLinkable { get; init; }
 		[JsonPropertyName("psn_linkable")]
-		public string? PsnLinkable { get; init; }
+		public PsnLinkable? PsnLinkable { get; init; }
 		[JsonPropertyName("daybreak")]
 		public long? Daybreak { get; init; }
 		[JsonPropertyName("rl_purchases")]
@@ -1441,7 +2338,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("reg")]
 		public long? Reg { get; init; }
 		[JsonPropertyName("reg_period")]
-		public string? RegPeriod { get; init; }
+		public RegPeriod? RegPeriod { get; init; }
 		[JsonPropertyName("refund_credits_min")]
 		public long? RefundCreditsMin { get; init; }
 		[JsonPropertyName("refund_credits_max")]
@@ -1666,7 +2563,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("tag_id[]")]
 		public List<long?>? TagId { get; init; }
 		[JsonPropertyName("not_tag_id[]")]
@@ -1690,13 +2587,13 @@ public static class CategoryApiTypes
 		[JsonPropertyName("sb_by_me")]
 		public bool? SbByMe { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("email_login_data")]
 		public bool? EmailLoginData { get; init; }
 		[JsonPropertyName("email_provider[]")]
 		public JsonElement? EmailProvider { get; init; }
 		[JsonPropertyName("not_email_provider[]")]
-		public string? NotEmailProvider { get; init; }
+		public NotEmailProvider? NotEmailProvider { get; init; }
 		[JsonPropertyName("email_type[]")]
 		public JsonElement? EmailType { get; init; }
 		[JsonPropertyName("parse_same_item_ids")]
@@ -1704,11 +2601,11 @@ public static class CategoryApiTypes
 		[JsonPropertyName("item_domain")]
 		public string? ItemDomain { get; init; }
 		[JsonPropertyName("email")]
-		public string? Email { get; init; }
+		public Email? Email { get; init; }
 		[JsonPropertyName("ea")]
-		public string? Ea { get; init; }
+		public Ea? Ea { get; init; }
 		[JsonPropertyName("region")]
-		public JsonElement? Region { get; init; }
+		public Region? Region { get; init; }
 		[JsonPropertyName("not_region")]
 		public JsonElement? NotRegion { get; init; }
 		[JsonPropertyName("genshin_character[]")]
@@ -2142,7 +3039,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("tag_id[]")]
 		public List<long?>? TagId { get; init; }
 		[JsonPropertyName("not_tag_id[]")]
@@ -2166,13 +3063,13 @@ public static class CategoryApiTypes
 		[JsonPropertyName("sb_by_me")]
 		public bool? SbByMe { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("email_login_data")]
 		public bool? EmailLoginData { get; init; }
 		[JsonPropertyName("email_provider[]")]
 		public JsonElement? EmailProvider { get; init; }
 		[JsonPropertyName("not_email_provider[]")]
-		public string? NotEmailProvider { get; init; }
+		public NotEmailProvider? NotEmailProvider { get; init; }
 		[JsonPropertyName("parse_same_item_ids")]
 		public bool? ParseSameItemIds { get; init; }
 		[JsonPropertyName("email_type[]")]
@@ -2272,9 +3169,9 @@ public static class CategoryApiTypes
 		[JsonPropertyName("riot_max")]
 		public long? RiotMax { get; init; }
 		[JsonPropertyName("email")]
-		public string? Email { get; init; }
+		public Email? Email { get; init; }
 		[JsonPropertyName("tel")]
-		public string? Tel { get; init; }
+		public Tel? Tel { get; init; }
 		[JsonPropertyName("valorant_knife_min")]
 		public long? ValorantKnifeMin { get; init; }
 		[JsonPropertyName("valorant_knife_max")]
@@ -2459,7 +3356,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("tag_id[]")]
 		public List<long?>? TagId { get; init; }
 		[JsonPropertyName("not_tag_id[]")]
@@ -2483,25 +3380,25 @@ public static class CategoryApiTypes
 		[JsonPropertyName("sb_by_me")]
 		public bool? SbByMe { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("email_login_data")]
 		public bool? EmailLoginData { get; init; }
 		[JsonPropertyName("email_provider[]")]
 		public JsonElement? EmailProvider { get; init; }
 		[JsonPropertyName("not_email_provider[]")]
-		public string? NotEmailProvider { get; init; }
+		public NotEmailProvider? NotEmailProvider { get; init; }
 		[JsonPropertyName("parse_same_item_ids")]
 		public bool? ParseSameItemIds { get; init; }
 		[JsonPropertyName("spam")]
-		public string? Spam { get; init; }
+		public Spam? Spam { get; init; }
 		[JsonPropertyName("password")]
-		public string? Password { get; init; }
+		public Password? Password { get; init; }
 		[JsonPropertyName("premium")]
-		public string? Premium { get; init; }
+		public Premium? Premium { get; init; }
 		[JsonPropertyName("premium_expiration")]
 		public long? PremiumExpiration { get; init; }
 		[JsonPropertyName("premium_expiration_period")]
-		public string? PremiumExpirationPeriod { get; init; }
+		public PremiumExpirationPeriod? PremiumExpirationPeriod { get; init; }
 		[JsonPropertyName("country[]")]
 		public List<string>? Country { get; init; }
 		[JsonPropertyName("not_country[]")]
@@ -2543,11 +3440,11 @@ public static class CategoryApiTypes
 		[JsonPropertyName("birthday")]
 		public long? Birthday { get; init; }
 		[JsonPropertyName("birthday_period")]
-		public string? BirthdayPeriod { get; init; }
+		public BirthdayPeriod? BirthdayPeriod { get; init; }
 		[JsonPropertyName("birthday_after")]
 		public long? BirthdayAfter { get; init; }
 		[JsonPropertyName("birthday_after_period")]
-		public string? BirthdayAfterPeriod { get; init; }
+		public BirthdayAfterPeriod? BirthdayAfterPeriod { get; init; }
 		[JsonPropertyName("min_id")]
 		public long? MinId { get; init; }
 		[JsonPropertyName("max_id")]
@@ -2575,7 +3472,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("not_dc_id[]")]
 		public List<long?>? NotDcId { get; init; }
 		[JsonPropertyName("email")]
-		public string? Email { get; init; }
+		public Email? Email { get; init; }
 		[JsonPropertyName("min_bots")]
 		public long? MinBots { get; init; }
 		[JsonPropertyName("max_bots")]
@@ -2715,7 +3612,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("tag_id[]")]
 		public List<long?>? TagId { get; init; }
 		[JsonPropertyName("not_tag_id[]")]
@@ -2739,13 +3636,13 @@ public static class CategoryApiTypes
 		[JsonPropertyName("sb_by_me")]
 		public bool? SbByMe { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("email_login_data")]
 		public bool? EmailLoginData { get; init; }
 		[JsonPropertyName("email_provider[]")]
 		public JsonElement? EmailProvider { get; init; }
 		[JsonPropertyName("not_email_provider[]")]
-		public string? NotEmailProvider { get; init; }
+		public NotEmailProvider? NotEmailProvider { get; init; }
 		[JsonPropertyName("parse_same_item_ids")]
 		public bool? ParseSameItemIds { get; init; }
 		[JsonPropertyName("daybreak")]
@@ -2755,9 +3652,9 @@ public static class CategoryApiTypes
 		[JsonPropertyName("item_domain")]
 		public string? ItemDomain { get; init; }
 		[JsonPropertyName("eg")]
-		public JsonElement? Eg { get; init; }
+		public CategoryEg? Eg { get; init; }
 		[JsonPropertyName("tel")]
-		public string? Tel { get; init; }
+		public Tel? Tel { get; init; }
 		[JsonPropertyName("brawl_level_min")]
 		public long? BrawlLevelMin { get; init; }
 		[JsonPropertyName("brawl_level_max")]
@@ -2771,7 +3668,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("brawl_wins_max")]
 		public long? BrawlWinsMax { get; init; }
 		[JsonPropertyName("brawl_pass")]
-		public string? BrawlPass { get; init; }
+		public BrawlPass? BrawlPass { get; init; }
 		[JsonPropertyName("brawler[]")]
 		public JsonElement? Brawler { get; init; }
 		[JsonPropertyName("brawlers_min")]
@@ -2799,7 +3696,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("king_level_max")]
 		public long? KingLevelMax { get; init; }
 		[JsonPropertyName("royale_pass")]
-		public string? RoyalePass { get; init; }
+		public RoyalePass? RoyalePass { get; init; }
 		[JsonPropertyName("clash_level_min")]
 		public long? ClashLevelMin { get; init; }
 		[JsonPropertyName("clash_level_max")]
@@ -2813,7 +3710,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("clash_wins_max")]
 		public long? ClashWinsMax { get; init; }
 		[JsonPropertyName("clash_pass")]
-		public string? ClashPass { get; init; }
+		public ClashPass? ClashPass { get; init; }
 		[JsonPropertyName("total_heroes_level_min")]
 		public long? TotalHeroesLevelMin { get; init; }
 		[JsonPropertyName("total_heroes_level_max")]
@@ -2996,7 +3893,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("tag_id[]")]
 		public List<long?>? TagId { get; init; }
 		[JsonPropertyName("not_tag_id[]")]
@@ -3020,13 +3917,13 @@ public static class CategoryApiTypes
 		[JsonPropertyName("sb_by_me")]
 		public bool? SbByMe { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("email_login_data")]
 		public bool? EmailLoginData { get; init; }
 		[JsonPropertyName("email_provider[]")]
 		public JsonElement? EmailProvider { get; init; }
 		[JsonPropertyName("not_email_provider[]")]
-		public string? NotEmailProvider { get; init; }
+		public NotEmailProvider? NotEmailProvider { get; init; }
 		[JsonPropertyName("parse_same_item_ids")]
 		public bool? ParseSameItemIds { get; init; }
 		[JsonPropertyName("email_type[]")]
@@ -3052,25 +3949,25 @@ public static class CategoryApiTypes
 		[JsonPropertyName("al_level_max")]
 		public long? AlLevelMax { get; init; }
 		[JsonPropertyName("has_ban")]
-		public string? HasBan { get; init; }
+		public HasBan? HasBan { get; init; }
 		[JsonPropertyName("xbox_connected")]
-		public string? XboxConnected { get; init; }
+		public XboxConnected? XboxConnected { get; init; }
 		[JsonPropertyName("steam_connected")]
-		public string? SteamConnected { get; init; }
+		public SteamConnected? SteamConnected { get; init; }
 		[JsonPropertyName("psn_connected")]
-		public string? PsnConnected { get; init; }
+		public PsnConnected? PsnConnected { get; init; }
 		[JsonPropertyName("subscription")]
-		public string? Subscription { get; init; }
+		public CategorySubscription? Subscription { get; init; }
 		[JsonPropertyName("subscription_length")]
 		public long? SubscriptionLength { get; init; }
 		[JsonPropertyName("subscription_period")]
-		public string? SubscriptionPeriod { get; init; }
+		public SubscriptionPeriod? SubscriptionPeriod { get; init; }
 		[JsonPropertyName("hours_played")]
 		public JsonElement? HoursPlayed { get; init; }
 		[JsonPropertyName("hours_played_max")]
 		public JsonElement? HoursPlayedMax { get; init; }
 		[JsonPropertyName("transactions")]
-		public string? Transactions { get; init; }
+		public Transactions? Transactions { get; init; }
 	}
 
 	public sealed record CategoryEaResponse(
@@ -3216,7 +4113,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("tag_id[]")]
 		public List<long?>? TagId { get; init; }
 		[JsonPropertyName("not_tag_id[]")]
@@ -3240,13 +4137,13 @@ public static class CategoryApiTypes
 		[JsonPropertyName("sb_by_me")]
 		public bool? SbByMe { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("email_login_data")]
 		public bool? EmailLoginData { get; init; }
 		[JsonPropertyName("email_provider[]")]
 		public JsonElement? EmailProvider { get; init; }
 		[JsonPropertyName("not_email_provider[]")]
-		public string? NotEmailProvider { get; init; }
+		public NotEmailProvider? NotEmailProvider { get; init; }
 		[JsonPropertyName("parse_same_item_ids")]
 		public bool? ParseSameItemIds { get; init; }
 		[JsonPropertyName("email_type[]")]
@@ -3254,7 +4151,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("item_domain")]
 		public string? ItemDomain { get; init; }
 		[JsonPropertyName("tel")]
-		public string? Tel { get; init; }
+		public Tel? Tel { get; init; }
 		[JsonPropertyName("daybreak")]
 		public long? Daybreak { get; init; }
 		[JsonPropertyName("battles_min")]
@@ -3292,13 +4189,13 @@ public static class CategoryApiTypes
 		[JsonPropertyName("not_region[]")]
 		public JsonElement? NotRegion { get; init; }
 		[JsonPropertyName("premium")]
-		public string? Premium { get; init; }
+		public Premium? Premium { get; init; }
 		[JsonPropertyName("premium_expiration")]
 		public long? PremiumExpiration { get; init; }
 		[JsonPropertyName("premium_expiration_period")]
-		public string? PremiumExpirationPeriod { get; init; }
+		public PremiumExpirationPeriod? PremiumExpirationPeriod { get; init; }
 		[JsonPropertyName("clan")]
-		public string? Clan { get; init; }
+		public Clan? Clan { get; init; }
 		[JsonPropertyName("clan_role[]")]
 		public JsonElement? ClanRole { get; init; }
 		[JsonPropertyName("not_clan_role[]")]
@@ -3618,7 +4515,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("tag_id[]")]
 		public List<long?>? TagId { get; init; }
 		[JsonPropertyName("not_tag_id[]")]
@@ -3642,13 +4539,13 @@ public static class CategoryApiTypes
 		[JsonPropertyName("sb_by_me")]
 		public bool? SbByMe { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("email_login_data")]
 		public bool? EmailLoginData { get; init; }
 		[JsonPropertyName("email_provider[]")]
 		public JsonElement? EmailProvider { get; init; }
 		[JsonPropertyName("not_email_provider[]")]
-		public string? NotEmailProvider { get; init; }
+		public NotEmailProvider? NotEmailProvider { get; init; }
 		[JsonPropertyName("parse_same_item_ids")]
 		public bool? ParseSameItemIds { get; init; }
 		[JsonPropertyName("email_type[]")]
@@ -3656,7 +4553,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("item_domain")]
 		public string? ItemDomain { get; init; }
 		[JsonPropertyName("tel")]
-		public string? Tel { get; init; }
+		public Tel? Tel { get; init; }
 		[JsonPropertyName("daybreak")]
 		public long? Daybreak { get; init; }
 		[JsonPropertyName("battles_min")]
@@ -3694,13 +4591,13 @@ public static class CategoryApiTypes
 		[JsonPropertyName("not_region[]")]
 		public JsonElement? NotRegion { get; init; }
 		[JsonPropertyName("premium")]
-		public string? Premium { get; init; }
+		public Premium? Premium { get; init; }
 		[JsonPropertyName("premium_expiration")]
 		public long? PremiumExpiration { get; init; }
 		[JsonPropertyName("premium_expiration_period")]
-		public string? PremiumExpirationPeriod { get; init; }
+		public PremiumExpirationPeriod? PremiumExpirationPeriod { get; init; }
 		[JsonPropertyName("clan")]
-		public string? Clan { get; init; }
+		public Clan? Clan { get; init; }
 		[JsonPropertyName("clan_role[]")]
 		public JsonElement? ClanRole { get; init; }
 		[JsonPropertyName("not_clan_role[]")]
@@ -6279,7 +7176,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("tag_id[]")]
 		public List<long?>? TagId { get; init; }
 		[JsonPropertyName("not_tag_id[]")]
@@ -6303,21 +7200,21 @@ public static class CategoryApiTypes
 		[JsonPropertyName("sb_by_me")]
 		public bool? SbByMe { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("email_login_data")]
 		public bool? EmailLoginData { get; init; }
 		[JsonPropertyName("email_provider[]")]
 		public JsonElement? EmailProvider { get; init; }
 		[JsonPropertyName("not_email_provider[]")]
-		public string? NotEmailProvider { get; init; }
+		public NotEmailProvider? NotEmailProvider { get; init; }
 		[JsonPropertyName("parse_same_item_ids")]
 		public bool? ParseSameItemIds { get; init; }
 		[JsonPropertyName("subscription")]
-		public string? Subscription { get; init; }
+		public CategorySubscription? Subscription { get; init; }
 		[JsonPropertyName("subscription_length")]
 		public long? SubscriptionLength { get; init; }
 		[JsonPropertyName("subscription_period")]
-		public string? SubscriptionPeriod { get; init; }
+		public SubscriptionPeriod? SubscriptionPeriod { get; init; }
 	}
 
 	public sealed record CategoryGiftsResponse(
@@ -6430,7 +7327,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("tag_id[]")]
 		public List<long?>? TagId { get; init; }
 		[JsonPropertyName("not_tag_id[]")]
@@ -6454,13 +7351,13 @@ public static class CategoryApiTypes
 		[JsonPropertyName("sb_by_me")]
 		public bool? SbByMe { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("email_login_data")]
 		public bool? EmailLoginData { get; init; }
 		[JsonPropertyName("email_provider[]")]
 		public JsonElement? EmailProvider { get; init; }
 		[JsonPropertyName("not_email_provider[]")]
-		public string? NotEmailProvider { get; init; }
+		public NotEmailProvider? NotEmailProvider { get; init; }
 		[JsonPropertyName("parse_same_item_ids")]
 		public bool? ParseSameItemIds { get; init; }
 		[JsonPropertyName("email_type[]")]
@@ -6468,11 +7365,11 @@ public static class CategoryApiTypes
 		[JsonPropertyName("item_domain")]
 		public string? ItemDomain { get; init; }
 		[JsonPropertyName("eg")]
-		public JsonElement? Eg { get; init; }
+		public CategoryEg? Eg { get; init; }
 		[JsonPropertyName("game[]")]
 		public List<string>? Game { get; init; }
 		[JsonPropertyName("change_email")]
-		public string? ChangeEmail { get; init; }
+		public ChangeEmail? ChangeEmail { get; init; }
 		[JsonPropertyName("rl_purchases")]
 		public bool? RlPurchases { get; init; }
 		[JsonPropertyName("balance_min")]
@@ -6650,7 +7547,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("tag_id[]")]
 		public List<long?>? TagId { get; init; }
 		[JsonPropertyName("not_tag_id[]")]
@@ -6674,13 +7571,13 @@ public static class CategoryApiTypes
 		[JsonPropertyName("sb_by_me")]
 		public bool? SbByMe { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("email_login_data")]
 		public bool? EmailLoginData { get; init; }
 		[JsonPropertyName("email_provider[]")]
 		public JsonElement? EmailProvider { get; init; }
 		[JsonPropertyName("not_email_provider[]")]
-		public string? NotEmailProvider { get; init; }
+		public NotEmailProvider? NotEmailProvider { get; init; }
 		[JsonPropertyName("parse_same_item_ids")]
 		public bool? ParseSameItemIds { get; init; }
 		[JsonPropertyName("email_type[]")]
@@ -6688,21 +7585,21 @@ public static class CategoryApiTypes
 		[JsonPropertyName("item_domain")]
 		public string? ItemDomain { get; init; }
 		[JsonPropertyName("region")]
-		public string? Region { get; init; }
+		public Region? Region { get; init; }
 		[JsonPropertyName("version[]")]
 		public JsonElement? Version { get; init; }
 		[JsonPropertyName("reg")]
 		public long? Reg { get; init; }
 		[JsonPropertyName("reg_period")]
-		public string? RegPeriod { get; init; }
+		public RegPeriod? RegPeriod { get; init; }
 		[JsonPropertyName("level_min")]
 		public long? LevelMin { get; init; }
 		[JsonPropertyName("level_max")]
 		public long? LevelMax { get; init; }
 		[JsonPropertyName("pve")]
-		public string? Pve { get; init; }
+		public Pve? Pve { get; init; }
 		[JsonPropertyName("side")]
-		public string? Side { get; init; }
+		public Side? Side { get; init; }
 	}
 
 	public sealed record CategoryEscapeFromTarkovResponse(
@@ -6837,7 +7734,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("tag_id[]")]
 		public List<long?>? TagId { get; init; }
 		[JsonPropertyName("not_tag_id[]")]
@@ -6861,13 +7758,13 @@ public static class CategoryApiTypes
 		[JsonPropertyName("sb_by_me")]
 		public bool? SbByMe { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("email_login_data")]
 		public bool? EmailLoginData { get; init; }
 		[JsonPropertyName("email_provider[]")]
 		public JsonElement? EmailProvider { get; init; }
 		[JsonPropertyName("not_email_provider[]")]
-		public string? NotEmailProvider { get; init; }
+		public NotEmailProvider? NotEmailProvider { get; init; }
 		[JsonPropertyName("parse_same_item_ids")]
 		public bool? ParseSameItemIds { get; init; }
 		[JsonPropertyName("daybreak")]
@@ -7020,7 +7917,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("tag_id[]")]
 		public List<long?>? TagId { get; init; }
 		[JsonPropertyName("not_tag_id[]")]
@@ -7044,13 +7941,13 @@ public static class CategoryApiTypes
 		[JsonPropertyName("sb_by_me")]
 		public bool? SbByMe { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("email_login_data")]
 		public bool? EmailLoginData { get; init; }
 		[JsonPropertyName("email_provider[]")]
 		public JsonElement? EmailProvider { get; init; }
 		[JsonPropertyName("not_email_provider[]")]
-		public string? NotEmailProvider { get; init; }
+		public NotEmailProvider? NotEmailProvider { get; init; }
 		[JsonPropertyName("parse_same_item_ids")]
 		public bool? ParseSameItemIds { get; init; }
 		[JsonPropertyName("email_type[]")]
@@ -7070,11 +7967,11 @@ public static class CategoryApiTypes
 		[JsonPropertyName("gmax")]
 		public long? Gmax { get; init; }
 		[JsonPropertyName("subscription")]
-		public string? Subscription { get; init; }
+		public CategorySubscription? Subscription { get; init; }
 		[JsonPropertyName("subscription_length")]
 		public long? SubscriptionLength { get; init; }
 		[JsonPropertyName("subscription_period")]
-		public string? SubscriptionPeriod { get; init; }
+		public SubscriptionPeriod? SubscriptionPeriod { get; init; }
 		[JsonPropertyName("r6_level_min")]
 		public long? R6LevelMin { get; init; }
 		[JsonPropertyName("r6_level_max")]
@@ -7088,7 +7985,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("r6_operators_max")]
 		public long? R6OperatorsMax { get; init; }
 		[JsonPropertyName("r6_ban")]
-		public string? R6Ban { get; init; }
+		public R6Ban? R6Ban { get; init; }
 		[JsonPropertyName("r6_smin")]
 		public long? R6Smin { get; init; }
 		[JsonPropertyName("r6_smax")]
@@ -7098,21 +7995,21 @@ public static class CategoryApiTypes
 		[JsonPropertyName("r6_operator[]")]
 		public List<string>? R6Operator { get; init; }
 		[JsonPropertyName("xbox_connected")]
-		public string? XboxConnected { get; init; }
+		public XboxConnected? XboxConnected { get; init; }
 		[JsonPropertyName("psn_connected")]
-		public string? PsnConnected { get; init; }
+		public PsnConnected? PsnConnected { get; init; }
 		[JsonPropertyName("steam_connected")]
-		public string? SteamConnected { get; init; }
+		public SteamConnected? SteamConnected { get; init; }
 		[JsonPropertyName("balance_min")]
 		public double? BalanceMin { get; init; }
 		[JsonPropertyName("balance_max")]
 		public double? BalanceMax { get; init; }
 		[JsonPropertyName("transactions")]
-		public string? Transactions { get; init; }
+		public Transactions? Transactions { get; init; }
 		[JsonPropertyName("reg")]
 		public long? Reg { get; init; }
 		[JsonPropertyName("reg_period")]
-		public string? RegPeriod { get; init; }
+		public RegPeriod? RegPeriod { get; init; }
 	}
 
 	public sealed record CategoryUplayResponse(
@@ -7269,7 +8166,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("tag_id[]")]
 		public List<long?>? TagId { get; init; }
 		[JsonPropertyName("not_tag_id[]")]
@@ -7293,13 +8190,13 @@ public static class CategoryApiTypes
 		[JsonPropertyName("sb_by_me")]
 		public bool? SbByMe { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("email_login_data")]
 		public bool? EmailLoginData { get; init; }
 		[JsonPropertyName("email_provider[]")]
 		public JsonElement? EmailProvider { get; init; }
 		[JsonPropertyName("not_email_provider[]")]
-		public string? NotEmailProvider { get; init; }
+		public NotEmailProvider? NotEmailProvider { get; init; }
 		[JsonPropertyName("parse_same_item_ids")]
 		public bool? ParseSameItemIds { get; init; }
 		[JsonPropertyName("email_type[]")]
@@ -7307,25 +8204,25 @@ public static class CategoryApiTypes
 		[JsonPropertyName("item_domain")]
 		public string? ItemDomain { get; init; }
 		[JsonPropertyName("tel")]
-		public string? Tel { get; init; }
+		public Tel? Tel { get; init; }
 		[JsonPropertyName("nitro")]
-		public string? Nitro { get; init; }
+		public Nitro? Nitro { get; init; }
 		[JsonPropertyName("nitro_type[]")]
 		public JsonElement? NitroType { get; init; }
 		[JsonPropertyName("nitro_length")]
 		public long? NitroLength { get; init; }
 		[JsonPropertyName("nitro_period")]
-		public string? NitroPeriod { get; init; }
+		public NitroPeriod? NitroPeriod { get; init; }
 		[JsonPropertyName("boosts_min")]
 		public long? BoostsMin { get; init; }
 		[JsonPropertyName("boosts_max")]
 		public long? BoostsMax { get; init; }
 		[JsonPropertyName("billing")]
-		public string? Billing { get; init; }
+		public Billing? Billing { get; init; }
 		[JsonPropertyName("gifts")]
-		public string? Gifts { get; init; }
+		public Gifts? Gifts { get; init; }
 		[JsonPropertyName("transactions")]
-		public string? Transactions { get; init; }
+		public Transactions? Transactions { get; init; }
 		[JsonPropertyName("badge[]")]
 		public JsonElement? Badge { get; init; }
 		[JsonPropertyName("condition[]")]
@@ -7345,13 +8242,13 @@ public static class CategoryApiTypes
 		[JsonPropertyName("reg")]
 		public long? Reg { get; init; }
 		[JsonPropertyName("reg_period")]
-		public string? RegPeriod { get; init; }
+		public RegPeriod? RegPeriod { get; init; }
 		[JsonPropertyName("language[]")]
 		public List<string>? Language { get; init; }
 		[JsonPropertyName("not_language[]")]
 		public List<string>? NotLanguage { get; init; }
 		[JsonPropertyName("clans")]
-		public string? Clans { get; init; }
+		public Clans? Clans { get; init; }
 		[JsonPropertyName("min_admin_clans")]
 		public long? MinAdminClans { get; init; }
 		[JsonPropertyName("max_admin_clans")]
@@ -7369,7 +8266,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("max_servers")]
 		public long? MaxServers { get; init; }
 		[JsonPropertyName("2fa")]
-		public string? _2fa { get; init; }
+		public E2fa? _2fa { get; init; }
 		[JsonPropertyName("min_full_credits")]
 		public long? MinFullCredits { get; init; }
 		[JsonPropertyName("max_full_credits")]
@@ -7506,7 +8403,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("tag_id[]")]
 		public List<long?>? TagId { get; init; }
 		[JsonPropertyName("not_tag_id[]")]
@@ -7530,13 +8427,13 @@ public static class CategoryApiTypes
 		[JsonPropertyName("sb_by_me")]
 		public bool? SbByMe { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("email_login_data")]
 		public bool? EmailLoginData { get; init; }
 		[JsonPropertyName("email_provider[]")]
 		public JsonElement? EmailProvider { get; init; }
 		[JsonPropertyName("not_email_provider[]")]
-		public string? NotEmailProvider { get; init; }
+		public NotEmailProvider? NotEmailProvider { get; init; }
 		[JsonPropertyName("parse_same_item_ids")]
 		public bool? ParseSameItemIds { get; init; }
 		[JsonPropertyName("email_type[]")]
@@ -7544,11 +8441,11 @@ public static class CategoryApiTypes
 		[JsonPropertyName("item_domain")]
 		public string? ItemDomain { get; init; }
 		[JsonPropertyName("tel")]
-		public string? Tel { get; init; }
+		public Tel? Tel { get; init; }
 		[JsonPropertyName("reg")]
 		public long? Reg { get; init; }
 		[JsonPropertyName("reg_period")]
-		public string? RegPeriod { get; init; }
+		public RegPeriod? RegPeriod { get; init; }
 		[JsonPropertyName("followers_min")]
 		public long? FollowersMin { get; init; }
 		[JsonPropertyName("followers_max")]
@@ -7566,11 +8463,11 @@ public static class CategoryApiTypes
 		[JsonPropertyName("coins_max")]
 		public long? CoinsMax { get; init; }
 		[JsonPropertyName("cookie_login")]
-		public string? CookieLogin { get; init; }
+		public CookieLogin? CookieLogin { get; init; }
 		[JsonPropertyName("verified")]
-		public string? Verified { get; init; }
+		public Verified? Verified { get; init; }
 		[JsonPropertyName("email")]
-		public string? Email { get; init; }
+		public Email? Email { get; init; }
 	}
 
 	public sealed record CategoryTikTokResponse(
@@ -7706,7 +8603,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("tag_id[]")]
 		public List<long?>? TagId { get; init; }
 		[JsonPropertyName("not_tag_id[]")]
@@ -7730,13 +8627,13 @@ public static class CategoryApiTypes
 		[JsonPropertyName("sb_by_me")]
 		public bool? SbByMe { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("email_login_data")]
 		public bool? EmailLoginData { get; init; }
 		[JsonPropertyName("email_provider[]")]
 		public JsonElement? EmailProvider { get; init; }
 		[JsonPropertyName("not_email_provider[]")]
-		public string? NotEmailProvider { get; init; }
+		public NotEmailProvider? NotEmailProvider { get; init; }
 		[JsonPropertyName("parse_same_item_ids")]
 		public bool? ParseSameItemIds { get; init; }
 		[JsonPropertyName("email_type[]")]
@@ -7744,15 +8641,15 @@ public static class CategoryApiTypes
 		[JsonPropertyName("item_domain")]
 		public string? ItemDomain { get; init; }
 		[JsonPropertyName("tel")]
-		public string? Tel { get; init; }
+		public Tel? Tel { get; init; }
 		[JsonPropertyName("country[]")]
 		public List<string>? Country { get; init; }
 		[JsonPropertyName("not_country[]")]
 		public List<string>? NotCountry { get; init; }
 		[JsonPropertyName("cookies")]
-		public string? Cookies { get; init; }
+		public Cookies? Cookies { get; init; }
 		[JsonPropertyName("login_without_cookies")]
-		public string? LoginWithoutCookies { get; init; }
+		public LoginWithoutCookies? LoginWithoutCookies { get; init; }
 		[JsonPropertyName("followers_min")]
 		public long? FollowersMin { get; init; }
 		[JsonPropertyName("followers_max")]
@@ -7764,7 +8661,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("reg")]
 		public long? Reg { get; init; }
 		[JsonPropertyName("reg_period")]
-		public string? RegPeriod { get; init; }
+		public RegPeriod? RegPeriod { get; init; }
 	}
 
 	public sealed record CategoryInstagramResponse(
@@ -7891,7 +8788,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("tag_id[]")]
 		public List<long?>? TagId { get; init; }
 		[JsonPropertyName("not_tag_id[]")]
@@ -7915,13 +8812,13 @@ public static class CategoryApiTypes
 		[JsonPropertyName("sb_by_me")]
 		public bool? SbByMe { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("email_login_data")]
 		public bool? EmailLoginData { get; init; }
 		[JsonPropertyName("email_provider[]")]
 		public JsonElement? EmailProvider { get; init; }
 		[JsonPropertyName("not_email_provider[]")]
-		public string? NotEmailProvider { get; init; }
+		public NotEmailProvider? NotEmailProvider { get; init; }
 		[JsonPropertyName("parse_same_item_ids")]
 		public bool? ParseSameItemIds { get; init; }
 		[JsonPropertyName("email_type[]")]
@@ -7929,7 +8826,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("item_domain")]
 		public string? ItemDomain { get; init; }
 		[JsonPropertyName("eg")]
-		public JsonElement? Eg { get; init; }
+		public CategoryEg? Eg { get; init; }
 		[JsonPropertyName("game[]")]
 		public List<long?>? Game { get; init; }
 		[JsonPropertyName("daybreak")]
@@ -7939,17 +8836,17 @@ public static class CategoryApiTypes
 		[JsonPropertyName("not_country[]")]
 		public List<string>? NotCountry { get; init; }
 		[JsonPropertyName("tel")]
-		public string? Tel { get; init; }
+		public Tel? Tel { get; init; }
 		[JsonPropertyName("edit_btag")]
-		public string? EditBtag { get; init; }
+		public EditBtag? EditBtag { get; init; }
 		[JsonPropertyName("changeable_fn")]
-		public string? ChangeableFn { get; init; }
+		public ChangeableFn? ChangeableFn { get; init; }
 		[JsonPropertyName("real_id")]
-		public string? RealId { get; init; }
+		public RealId? RealId { get; init; }
 		[JsonPropertyName("parent_control")]
-		public string? ParentControl { get; init; }
+		public ParentControl? ParentControl { get; init; }
 		[JsonPropertyName("no_bans")]
-		public string? NoBans { get; init; }
+		public NoBans? NoBans { get; init; }
 		[JsonPropertyName("balance_min")]
 		public long? BalanceMin { get; init; }
 		[JsonPropertyName("balance_max")]
@@ -8114,7 +9011,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("tag_id[]")]
 		public List<long?>? TagId { get; init; }
 		[JsonPropertyName("not_tag_id[]")]
@@ -8138,13 +9035,13 @@ public static class CategoryApiTypes
 		[JsonPropertyName("sb_by_me")]
 		public bool? SbByMe { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("email_login_data")]
 		public bool? EmailLoginData { get; init; }
 		[JsonPropertyName("email_provider[]")]
 		public JsonElement? EmailProvider { get; init; }
 		[JsonPropertyName("not_email_provider[]")]
-		public string? NotEmailProvider { get; init; }
+		public NotEmailProvider? NotEmailProvider { get; init; }
 		[JsonPropertyName("parse_same_item_ids")]
 		public bool? ParseSameItemIds { get; init; }
 		[JsonPropertyName("email_type[]")]
@@ -8156,17 +9053,17 @@ public static class CategoryApiTypes
 		[JsonPropertyName("subscription_length")]
 		public long? SubscriptionLength { get; init; }
 		[JsonPropertyName("subscription_period")]
-		public string? SubscriptionPeriod { get; init; }
+		public SubscriptionPeriod? SubscriptionPeriod { get; init; }
 		[JsonPropertyName("autorenewal")]
-		public string? Autorenewal { get; init; }
+		public Autorenewal? Autorenewal { get; init; }
 		[JsonPropertyName("tel")]
-		public string? Tel { get; init; }
+		public Tel? Tel { get; init; }
 		[JsonPropertyName("transactions")]
-		public string? Transactions { get; init; }
+		public Transactions? Transactions { get; init; }
 		[JsonPropertyName("reg")]
 		public long? Reg { get; init; }
 		[JsonPropertyName("reg_period")]
-		public string? RegPeriod { get; init; }
+		public RegPeriod? RegPeriod { get; init; }
 		[JsonPropertyName("openai_tier[]")]
 		public JsonElement? OpenaiTier { get; init; }
 		[JsonPropertyName("openai_balance_min")]
@@ -8298,7 +9195,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("tag_id[]")]
 		public List<long?>? TagId { get; init; }
 		[JsonPropertyName("not_tag_id[]")]
@@ -8322,13 +9219,13 @@ public static class CategoryApiTypes
 		[JsonPropertyName("sb_by_me")]
 		public bool? SbByMe { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("email_login_data")]
 		public bool? EmailLoginData { get; init; }
 		[JsonPropertyName("email_provider[]")]
 		public JsonElement? EmailProvider { get; init; }
 		[JsonPropertyName("not_email_provider[]")]
-		public string? NotEmailProvider { get; init; }
+		public NotEmailProvider? NotEmailProvider { get; init; }
 		[JsonPropertyName("parse_same_item_ids")]
 		public bool? ParseSameItemIds { get; init; }
 		[JsonPropertyName("service[]")]
@@ -8336,9 +9233,9 @@ public static class CategoryApiTypes
 		[JsonPropertyName("subscription_length")]
 		public long? SubscriptionLength { get; init; }
 		[JsonPropertyName("subscription_period")]
-		public string? SubscriptionPeriod { get; init; }
+		public SubscriptionPeriod? SubscriptionPeriod { get; init; }
 		[JsonPropertyName("autorenewal")]
-		public string? Autorenewal { get; init; }
+		public Autorenewal? Autorenewal { get; init; }
 	}
 
 	public sealed record CategoryVpnResponse(
@@ -8452,7 +9349,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("tag_id[]")]
 		public List<long?>? TagId { get; init; }
 		[JsonPropertyName("not_tag_id[]")]
@@ -8476,17 +9373,17 @@ public static class CategoryApiTypes
 		[JsonPropertyName("sb_by_me")]
 		public bool? SbByMe { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("email_login_data")]
 		public bool? EmailLoginData { get; init; }
 		[JsonPropertyName("email_provider[]")]
 		public JsonElement? EmailProvider { get; init; }
 		[JsonPropertyName("not_email_provider[]")]
-		public string? NotEmailProvider { get; init; }
+		public NotEmailProvider? NotEmailProvider { get; init; }
 		[JsonPropertyName("parse_same_item_ids")]
 		public bool? ParseSameItemIds { get; init; }
 		[JsonPropertyName("email")]
-		public string? Email { get; init; }
+		public Email? Email { get; init; }
 		[JsonPropertyName("robux_min")]
 		public long? RobuxMin { get; init; }
 		[JsonPropertyName("robux_max")]
@@ -8506,23 +9403,23 @@ public static class CategoryApiTypes
 		[JsonPropertyName("reg")]
 		public long? Reg { get; init; }
 		[JsonPropertyName("reg_period")]
-		public string? RegPeriod { get; init; }
+		public RegPeriod? RegPeriod { get; init; }
 		[JsonPropertyName("subscription")]
-		public string? Subscription { get; init; }
+		public CategorySubscription? Subscription { get; init; }
 		[JsonPropertyName("subscription_length")]
 		public long? SubscriptionLength { get; init; }
 		[JsonPropertyName("subscription_period")]
-		public string? SubscriptionPeriod { get; init; }
+		public SubscriptionPeriod? SubscriptionPeriod { get; init; }
 		[JsonPropertyName("autorenewal")]
-		public string? Autorenewal { get; init; }
+		public Autorenewal? Autorenewal { get; init; }
 		[JsonPropertyName("xbox_connected")]
-		public string? XboxConnected { get; init; }
+		public XboxConnected? XboxConnected { get; init; }
 		[JsonPropertyName("psn_connected")]
-		public string? PsnConnected { get; init; }
+		public PsnConnected? PsnConnected { get; init; }
 		[JsonPropertyName("verified")]
-		public string? Verified { get; init; }
+		public Verified? Verified { get; init; }
 		[JsonPropertyName("age_verified")]
-		public string? AgeVerified { get; init; }
+		public AgeVerified? AgeVerified { get; init; }
 		[JsonPropertyName("incoming_robux_total_min")]
 		public long? IncomingRobuxTotalMin { get; init; }
 		[JsonPropertyName("incoming_robux_total_max")]
@@ -8536,7 +9433,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("gamepass_max")]
 		public long? GamepassMax { get; init; }
 		[JsonPropertyName("game_donations")]
-		public string? GameDonations { get; init; }
+		public GameDonations? GameDonations { get; init; }
 		[JsonPropertyName("inv_min")]
 		public long? InvMin { get; init; }
 		[JsonPropertyName("inv_max")]
@@ -8554,7 +9451,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("offsale_max")]
 		public long? OffsaleMax { get; init; }
 		[JsonPropertyName("voice")]
-		public string? Voice { get; init; }
+		public Voice? Voice { get; init; }
 		[JsonPropertyName("age_group[]")]
 		public List<string>? AgeGroup { get; init; }
 		[JsonPropertyName("not_age_group[]")]
@@ -8715,7 +9612,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("tag_id[]")]
 		public List<long?>? TagId { get; init; }
 		[JsonPropertyName("not_tag_id[]")]
@@ -8739,13 +9636,13 @@ public static class CategoryApiTypes
 		[JsonPropertyName("sb_by_me")]
 		public bool? SbByMe { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("email_login_data")]
 		public bool? EmailLoginData { get; init; }
 		[JsonPropertyName("email_provider[]")]
 		public JsonElement? EmailProvider { get; init; }
 		[JsonPropertyName("not_email_provider[]")]
-		public string? NotEmailProvider { get; init; }
+		public NotEmailProvider? NotEmailProvider { get; init; }
 		[JsonPropertyName("parse_same_item_ids")]
 		public bool? ParseSameItemIds { get; init; }
 		[JsonPropertyName("rank_min")]
@@ -8757,7 +9654,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("bonus_rank_max")]
 		public long? BonusRankMax { get; init; }
 		[JsonPropertyName("tel")]
-		public string? Tel { get; init; }
+		public Tel? Tel { get; init; }
 		[JsonPropertyName("daybreak")]
 		public long? Daybreak { get; init; }
 		[JsonPropertyName("kredits_min")]
@@ -8898,7 +9795,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("tag_id[]")]
 		public List<long?>? TagId { get; init; }
 		[JsonPropertyName("not_tag_id[]")]
@@ -8922,33 +9819,33 @@ public static class CategoryApiTypes
 		[JsonPropertyName("sb_by_me")]
 		public bool? SbByMe { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("email_login_data")]
 		public bool? EmailLoginData { get; init; }
 		[JsonPropertyName("email_provider[]")]
 		public JsonElement? EmailProvider { get; init; }
 		[JsonPropertyName("not_email_provider[]")]
-		public string? NotEmailProvider { get; init; }
+		public NotEmailProvider? NotEmailProvider { get; init; }
 		[JsonPropertyName("parse_same_item_ids")]
 		public bool? ParseSameItemIds { get; init; }
 		[JsonPropertyName("subscription")]
-		public string? Subscription { get; init; }
+		public CategorySubscription? Subscription { get; init; }
 		[JsonPropertyName("subscription_length")]
 		public long? SubscriptionLength { get; init; }
 		[JsonPropertyName("subscription_period")]
-		public string? SubscriptionPeriod { get; init; }
+		public SubscriptionPeriod? SubscriptionPeriod { get; init; }
 		[JsonPropertyName("autorenewal")]
-		public string? Autorenewal { get; init; }
+		public Autorenewal? Autorenewal { get; init; }
 		[JsonPropertyName("java")]
-		public string? Java { get; init; }
+		public Java? Java { get; init; }
 		[JsonPropertyName("bedrock")]
-		public string? Bedrock { get; init; }
+		public Bedrock? Bedrock { get; init; }
 		[JsonPropertyName("dungeons")]
-		public string? Dungeons { get; init; }
+		public Dungeons? Dungeons { get; init; }
 		[JsonPropertyName("legends")]
-		public string? Legends { get; init; }
+		public Legends? Legends { get; init; }
 		[JsonPropertyName("change_nickname")]
-		public string? ChangeNickname { get; init; }
+		public ChangeNickname? ChangeNickname { get; init; }
 		[JsonPropertyName("capes[]")]
 		public List<string>? Capes { get; init; }
 		[JsonPropertyName("capes_min")]
@@ -8960,9 +9857,9 @@ public static class CategoryApiTypes
 		[JsonPropertyName("not_country[]")]
 		public List<string>? NotCountry { get; init; }
 		[JsonPropertyName("hypixel_ban")]
-		public string? HypixelBan { get; init; }
+		public HypixelBan? HypixelBan { get; init; }
 		[JsonPropertyName("hypixel_skyblock_api_enabled")]
-		public string? HypixelSkyblockApiEnabled { get; init; }
+		public HypixelSkyblockApiEnabled? HypixelSkyblockApiEnabled { get; init; }
 		[JsonPropertyName("rank_hypixel[]")]
 		public JsonElement? RankHypixel { get; init; }
 		[JsonPropertyName("level_hypixel_min")]
@@ -8984,19 +9881,19 @@ public static class CategoryApiTypes
 		[JsonPropertyName("reg")]
 		public long? Reg { get; init; }
 		[JsonPropertyName("reg_period")]
-		public string? RegPeriod { get; init; }
+		public RegPeriod? RegPeriod { get; init; }
 		[JsonPropertyName("last_login_hypixel")]
 		public long? LastLoginHypixel { get; init; }
 		[JsonPropertyName("last_login_hypixel_period")]
-		public string? LastLoginHypixelPeriod { get; init; }
+		public LastLoginHypixelPeriod? LastLoginHypixelPeriod { get; init; }
 		[JsonPropertyName("can_change_details")]
-		public string? CanChangeDetails { get; init; }
+		public CanChangeDetails? CanChangeDetails { get; init; }
 		[JsonPropertyName("nickname_length_min")]
 		public long? NicknameLengthMin { get; init; }
 		[JsonPropertyName("nickname_length_max")]
 		public long? NicknameLengthMax { get; init; }
 		[JsonPropertyName("hypixel_ban_parsed")]
-		public string? HypixelBanParsed { get; init; }
+		public HypixelBanParsed? HypixelBanParsed { get; init; }
 		[JsonPropertyName("minecoins_min")]
 		public long? MinecoinsMin { get; init; }
 		[JsonPropertyName("minecoins_max")]
@@ -9142,7 +10039,7 @@ public static class CategoryApiTypes
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("tag_id[]")]
 		public List<long?>? TagId { get; init; }
 		[JsonPropertyName("not_tag_id[]")]
@@ -9166,13 +10063,13 @@ public static class CategoryApiTypes
 		[JsonPropertyName("sb_by_me")]
 		public bool? SbByMe { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("email_login_data")]
 		public bool? EmailLoginData { get; init; }
 		[JsonPropertyName("email_provider[]")]
 		public JsonElement? EmailProvider { get; init; }
 		[JsonPropertyName("not_email_provider[]")]
-		public string? NotEmailProvider { get; init; }
+		public NotEmailProvider? NotEmailProvider { get; init; }
 		[JsonPropertyName("parse_same_item_ids")]
 		public bool? ParseSameItemIds { get; init; }
 		[JsonPropertyName("edition[]")]
@@ -9418,7 +10315,7 @@ public static class CustomDiscountsApiTypes
 		[JsonPropertyName("user_id")]
 		public required long? UserId { get; init; }
 		[JsonPropertyName("category_id")]
-		public required JsonElement CategoryId { get; init; }
+		public required CategoryId CategoryId { get; init; }
 		[JsonPropertyName("discount_percent")]
 		public required double? DiscountPercent { get; init; }
 		[JsonPropertyName("min_price")]
@@ -9426,7 +10323,7 @@ public static class CustomDiscountsApiTypes
 		[JsonPropertyName("max_price")]
 		public double? MaxPrice { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 	}
 
 	public sealed record CustomDiscountsCreateResponse(
@@ -9510,11 +10407,11 @@ public static class ListApiTypes
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
 		[JsonPropertyName("category_id")]
-		public JsonElement? CategoryId { get; init; }
+		public CategoryId? CategoryId { get; init; }
 		[JsonPropertyName("page")]
 		public long? Page { get; init; }
 		[JsonPropertyName("show")]
-		public string? Show { get; init; }
+		public Show? Show { get; init; }
 		[JsonPropertyName("delete_reason")]
 		public string? DeleteReason { get; init; }
 		[JsonPropertyName("title")]
@@ -9530,7 +10427,7 @@ public static class ListApiTypes
 		[JsonPropertyName("not_origin[]")]
 		public JsonElement? NotOrigin { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("sb")]
 		public bool? Sb { get; init; }
 		[JsonPropertyName("sb_by_me")]
@@ -9578,11 +10475,11 @@ public static class ListApiTypes
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
 		[JsonPropertyName("category_id")]
-		public JsonElement? CategoryId { get; init; }
+		public CategoryId? CategoryId { get; init; }
 		[JsonPropertyName("page")]
 		public long? Page { get; init; }
 		[JsonPropertyName("show")]
-		public string? Show { get; init; }
+		public Show? Show { get; init; }
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("pmin")]
@@ -9596,7 +10493,7 @@ public static class ListApiTypes
 		[JsonPropertyName("not_origin[]")]
 		public JsonElement? NotOrigin { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("sb")]
 		public bool? Sb { get; init; }
 		[JsonPropertyName("sb_by_me")]
@@ -9622,7 +10519,7 @@ public static class ListApiTypes
 	public sealed record ListStatesParams
 	{
 		[JsonPropertyName("user_id")]
-		public JsonElement? UserId { get; init; }
+		public Lolzteam.Api.Runtime.StringOrLong? UserId { get; init; }
 	}
 
 	public sealed record ListStatesResponse(
@@ -9728,15 +10625,15 @@ public static class ListApiTypes
 	public sealed record ListDownloadParams
 	{
 		[JsonPropertyName("format")]
-		public string? Format { get; init; }
+		public Format? Format { get; init; }
 		[JsonPropertyName("custom_format")]
 		public string? CustomFormat { get; init; }
 		[JsonPropertyName("category_id")]
-		public JsonElement? CategoryId { get; init; }
+		public CategoryId? CategoryId { get; init; }
 		[JsonPropertyName("page")]
 		public long? Page { get; init; }
 		[JsonPropertyName("show")]
-		public string? Show { get; init; }
+		public Show? Show { get; init; }
 		[JsonPropertyName("delete_reason")]
 		public string? DeleteReason { get; init; }
 		[JsonPropertyName("title")]
@@ -9750,7 +10647,7 @@ public static class ListApiTypes
 		[JsonPropertyName("not_origin[]")]
 		public JsonElement? NotOrigin { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("sb")]
 		public bool? Sb { get; init; }
 		[JsonPropertyName("sb_by_me")]
@@ -9781,14 +10678,14 @@ public static class ListApiTypes
 		public bool? FilterByDeleteDate { get; init; }
 	}
 
-	public sealed record ListDownloadResponse(JsonElement Data);
+	public sealed record ListDownloadResponse(string Data);
 
 	public sealed record ListFavoritesParams
 	{
 		[JsonPropertyName("page")]
 		public long? Page { get; init; }
 		[JsonPropertyName("show")]
-		public string? Show { get; init; }
+		public Show? Show { get; init; }
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("pmin")]
@@ -9800,7 +10697,7 @@ public static class ListApiTypes
 		[JsonPropertyName("not_origin[]")]
 		public JsonElement? NotOrigin { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("sb")]
 		public bool? Sb { get; init; }
 		[JsonPropertyName("sb_by_me")]
@@ -9828,7 +10725,7 @@ public static class ListApiTypes
 		[JsonPropertyName("page")]
 		public long? Page { get; init; }
 		[JsonPropertyName("show")]
-		public string? Show { get; init; }
+		public Show? Show { get; init; }
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("pmin")]
@@ -9840,7 +10737,7 @@ public static class ListApiTypes
 		[JsonPropertyName("not_origin[]")]
 		public JsonElement? NotOrigin { get; init; }
 		[JsonPropertyName("order_by")]
-		public string? OrderBy { get; init; }
+		public OrderBy? OrderBy { get; init; }
 		[JsonPropertyName("sb")]
 		public bool? Sb { get; init; }
 		[JsonPropertyName("sb_by_me")]
@@ -10090,9 +10987,9 @@ public static class ManagingApiTypes
 	public sealed record ManagingSteamInventoryValueParams
 	{
 		[JsonPropertyName("app_id")]
-		public JsonElement? AppId { get; init; }
+		public AppId? AppId { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("ignore_cache")]
 		public bool? IgnoreCache { get; init; }
 	}
@@ -10148,9 +11045,9 @@ public static class ManagingApiTypes
 		[JsonPropertyName("link")]
 		public string? Link { get; init; }
 		[JsonPropertyName("app_id")]
-		public JsonElement? AppId { get; init; }
+		public AppId? AppId { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("ignore_cache")]
 		public bool? IgnoreCache { get; init; }
 	}
@@ -10204,10 +11101,10 @@ public static class ManagingApiTypes
 	public sealed record ManagingSteamPreviewParams
 	{
 		[JsonPropertyName("type")]
-		public string? Type { get; init; }
+		public ManagingType? Type { get; init; }
 	}
 
-	public sealed record ManagingSteamPreviewResponse(JsonElement Data);
+	public sealed record ManagingSteamPreviewResponse(string Data);
 
 	public sealed record ManagingEditBody
 	{
@@ -10218,13 +11115,13 @@ public static class ManagingApiTypes
 		[JsonPropertyName("price")]
 		public long? Price { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("item_origin")]
-		public string? ItemOrigin { get; init; }
+		public ManagingItemOrigin? ItemOrigin { get; init; }
 		[JsonPropertyName("email_login_data")]
 		public string? EmailLoginData { get; init; }
 		[JsonPropertyName("email_type")]
-		public string? EmailType { get; init; }
+		public EmailType? EmailType { get; init; }
 		[JsonPropertyName("allow_ask_discount")]
 		public bool? AllowAskDiscount { get; init; }
 		[JsonPropertyName("proxy_id")]
@@ -10268,7 +11165,7 @@ public static class ManagingApiTypes
 		[JsonPropertyName("all")]
 		public bool? All { get; init; }
 		[JsonPropertyName("app_id")]
-		public JsonElement? AppId { get; init; }
+		public AppId? AppId { get; init; }
 		[JsonPropertyName("authorize")]
 		public bool? Authorize { get; init; }
 	}
@@ -10318,7 +11215,7 @@ public static class ManagingApiTypes
 	public sealed record ManagingImageParams
 	{
 		[JsonPropertyName("type")]
-		public string? Type { get; init; }
+		public ManagingType? Type { get; init; }
 	}
 
 	public sealed record ManagingImageResponse(
@@ -10470,7 +11367,7 @@ public static class ManagingApiTypes
 	public sealed record ManagingChangePasswordBody
 	{
 		[JsonPropertyName("_cancel")]
-		public string? Cancel { get; init; }
+		public Cancel? Cancel { get; init; }
 	}
 
 	public sealed record ManagingChangePasswordResponse(
@@ -10634,7 +11531,7 @@ public static class PaymentsApiTypes
 	public sealed record PaymentsInvoiceCreateBody
 	{
 		[JsonPropertyName("currency")]
-		public required string Currency { get; init; }
+		public required Currency Currency { get; init; }
 		[JsonPropertyName("amount")]
 		public required double? Amount { get; init; }
 		[JsonPropertyName("payment_id")]
@@ -10651,8 +11548,9 @@ public static class PaymentsApiTypes
 		public long? RequiredTelegramId { get; init; }
 		[JsonPropertyName("required_telegram_username")]
 		public string? RequiredTelegramUsername { get; init; }
+		/// <summary>Default: 3600</summary>
 		[JsonPropertyName("lifetime")]
-		public double? Lifetime { get; init; }
+		public double? Lifetime { get; init; } = 3600;
 		[JsonPropertyName("additional_data")]
 		public string? AdditionalData { get; init; }
 		[JsonPropertyName("is_test")]
@@ -10669,9 +11567,9 @@ public static class PaymentsApiTypes
 		[JsonPropertyName("page")]
 		public long? Page { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("status")]
-		public string? Status { get; init; }
+		public Status? Status { get; init; }
 		[JsonPropertyName("amount")]
 		public double? Amount { get; init; }
 		[JsonPropertyName("merchant_id")]
@@ -11241,7 +12139,7 @@ public static class PaymentsApiTypes
 		[JsonPropertyName("amount")]
 		public required long? Amount { get; init; }
 		[JsonPropertyName("currency")]
-		public required string Currency { get; init; }
+		public required Currency Currency { get; init; }
 		[JsonPropertyName("comment")]
 		public string? Comment { get; init; }
 		[JsonPropertyName("telegram_deal")]
@@ -11253,7 +12151,7 @@ public static class PaymentsApiTypes
 		[JsonPropertyName("hold_length_value")]
 		public long? HoldLengthValue { get; init; }
 		[JsonPropertyName("hold_length_option")]
-		public string? HoldLengthOption { get; init; }
+		public HoldLengthOption? HoldLengthOption { get; init; }
 	}
 
 	public sealed record PaymentsTransferResponse(
@@ -11296,13 +12194,13 @@ public static class PaymentsApiTypes
 	public sealed record PaymentsHistoryParams
 	{
 		[JsonPropertyName("type")]
-		public string? Type { get; init; }
+		public PaymentsType? Type { get; init; }
 		[JsonPropertyName("pmin")]
 		public long? Pmin { get; init; }
 		[JsonPropertyName("pmax")]
 		public long? Pmax { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("page")]
 		public long? Page { get; init; }
 		[JsonPropertyName("operation_id_lt")]
@@ -11558,7 +12456,7 @@ public static class PaymentsApiTypes
 		[JsonPropertyName("amount")]
 		public required double? Amount { get; init; }
 		[JsonPropertyName("currency")]
-		public required string Currency { get; init; }
+		public required Currency Currency { get; init; }
 		[JsonPropertyName("include_fee")]
 		public bool? IncludeFee { get; init; }
 		[JsonPropertyName("extra")]
@@ -11579,9 +12477,9 @@ public static class ProfileApiTypes
 	public sealed record ProfileClaimsParams
 	{
 		[JsonPropertyName("type")]
-		public string? Type { get; init; }
+		public ProfileType? Type { get; init; }
 		[JsonPropertyName("claim_state")]
-		public string? ClaimState { get; init; }
+		public ClaimState? ClaimState { get; init; }
 	}
 
 	public sealed record ProfileClaimsResponse(
@@ -11787,13 +12685,13 @@ public static class PublishingApiTypes
 		[JsonPropertyName("price")]
 		public required double? Price { get; init; }
 		[JsonPropertyName("category_id")]
-		public required JsonElement CategoryId { get; init; }
+		public required CategoryId CategoryId { get; init; }
 		[JsonPropertyName("currency")]
-		public required string Currency { get; init; }
+		public required Currency Currency { get; init; }
 		[JsonPropertyName("item_origin")]
-		public required string ItemOrigin { get; init; }
+		public required PublishingItemOrigin ItemOrigin { get; init; }
 		[JsonPropertyName("extended_guarantee")]
-		public JsonElement? ExtendedGuarantee { get; init; }
+		public ExtendedGuarantee? ExtendedGuarantee { get; init; }
 		[JsonPropertyName("allow_ask_discount")]
 		public bool? AllowAskDiscount { get; init; }
 		[JsonPropertyName("proxy_id")]
@@ -11815,7 +12713,7 @@ public static class PublishingApiTypes
 		[JsonPropertyName("email_login_data")]
 		public string? EmailLoginData { get; init; }
 		[JsonPropertyName("email_type")]
-		public string? EmailType { get; init; }
+		public EmailType? EmailType { get; init; }
 		[JsonPropertyName("extra")]
 		public JsonElement? Extra { get; init; }
 	}
@@ -11835,13 +12733,13 @@ public static class PublishingApiTypes
 		[JsonPropertyName("price")]
 		public required double? Price { get; init; }
 		[JsonPropertyName("category_id")]
-		public required JsonElement CategoryId { get; init; }
+		public required CategoryId CategoryId { get; init; }
 		[JsonPropertyName("currency")]
-		public required string Currency { get; init; }
+		public required Currency Currency { get; init; }
 		[JsonPropertyName("item_origin")]
-		public required string ItemOrigin { get; init; }
+		public required PublishingItemOrigin ItemOrigin { get; init; }
 		[JsonPropertyName("extended_guarantee")]
-		public JsonElement? ExtendedGuarantee { get; init; }
+		public ExtendedGuarantee? ExtendedGuarantee { get; init; }
 		[JsonPropertyName("description")]
 		public string? Description { get; init; }
 		[JsonPropertyName("information")]
@@ -11855,7 +12753,7 @@ public static class PublishingApiTypes
 		[JsonPropertyName("email_login_data")]
 		public string? EmailLoginData { get; init; }
 		[JsonPropertyName("email_type")]
-		public string? EmailType { get; init; }
+		public EmailType? EmailType { get; init; }
 		[JsonPropertyName("allow_ask_discount")]
 		public bool? AllowAskDiscount { get; init; }
 		[JsonPropertyName("proxy_id")]
@@ -11887,7 +12785,7 @@ public static class PublishingApiTypes
 		[JsonPropertyName("email_login_data")]
 		public string? EmailLoginData { get; init; }
 		[JsonPropertyName("email_type")]
-		public string? EmailType { get; init; }
+		public EmailType? EmailType { get; init; }
 		[JsonPropertyName("extra")]
 		public JsonElement? Extra { get; init; }
 	}
@@ -12067,7 +12965,7 @@ public static class PublishingApiTypes
 	public sealed record PublishingExternalBody
 	{
 		[JsonPropertyName("type")]
-		public required string Type { get; init; }
+		public required PublishingType Type { get; init; }
 		[JsonPropertyName("login")]
 		public string? Login { get; init; }
 		[JsonPropertyName("email_login_data")]

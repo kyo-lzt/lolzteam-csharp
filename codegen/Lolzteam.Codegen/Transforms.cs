@@ -243,6 +243,12 @@ internal static partial class Transforms
 			{
 				return "string";
 			}
+			// string | integer → StringOrLong
+			var sorted = nonNull.OrderBy(s => s).ToList();
+			if (sorted.Count == 2 && sorted[0] == "integer" && sorted[1] == "string")
+			{
+				return "Lolzteam.Api.Runtime.StringOrLong";
+			}
 			return "JsonElement";
 		}
 
@@ -270,6 +276,83 @@ internal static partial class Transforms
 			_ when tsType.StartsWith('"') || Regex.IsMatch(tsType, @"^\d+$") => "string",
 			_ => "JsonElement",
 		};
+	}
+
+	// ─── Enum Value Extraction ────────────────────────────────────────
+
+	/// <summary>Extract raw enum values from a schema node (after deref).</summary>
+	internal static List<EnumVariant>? ExtractEnumValues(JsonNode? schema, JsonNode spec)
+	{
+		if (schema is null) return null;
+
+		// Follow $ref
+		if (schema is JsonObject refObj)
+		{
+			var refNode = refObj["$ref"];
+			if (refNode is JsonValue jv && jv.TryGetValue<string>(out _))
+			{
+				var resolved = DerefShallow(schema, spec);
+				return ExtractEnumValues(resolved, spec);
+			}
+		}
+
+		if (schema is not JsonObject sObj) return null;
+
+		var enumArr = sObj["enum"];
+		if (enumArr is not JsonArray arr || arr.Count == 0) return null;
+
+		var typeNode = sObj["type"];
+		string? type = null;
+		if (typeNode is JsonValue tv && tv.TryGetValue<string>(out var ts))
+		{
+			type = ts;
+		}
+
+		var values = new List<EnumVariant>();
+		foreach (var el in arr)
+		{
+			if (el is not JsonValue ev) continue;
+
+			if (type == "integer" || (type is null && ev.TryGetValue<long>(out _)))
+			{
+				if (ev.TryGetValue<long>(out var longVal))
+				{
+					values.Add(new EnumVariant.IntVariant(longVal));
+				}
+			}
+			else
+			{
+				if (ev.TryGetValue<string>(out var strVal))
+				{
+					values.Add(new EnumVariant.StringVariant(strVal));
+				}
+				else
+				{
+					// Numeric value in a string enum context — treat as string
+					values.Add(new EnumVariant.StringVariant(ev.ToString()));
+				}
+			}
+		}
+
+		return values.Count > 0 ? values : null;
+	}
+
+	// ─── Default Value Extraction ────────────────────────────────────
+
+	/// <summary>Extract the "default" value from a schema node as a string, or null if absent.</summary>
+	internal static string? ExtractDefaultValue(JsonNode? schema)
+	{
+		if (schema is not JsonObject sObj) return null;
+		var defaultNode = sObj["default"];
+		if (defaultNode is null) return null;
+		if (defaultNode is JsonValue jv)
+		{
+			if (jv.TryGetValue<string>(out var s)) return s;
+			if (jv.TryGetValue<bool>(out var b)) return b ? "true" : "false";
+			if (jv.TryGetValue<long>(out var l)) return l.ToString();
+			if (jv.TryGetValue<double>(out var d)) return d.ToString(System.Globalization.CultureInfo.InvariantCulture);
+		}
+		return defaultNode.ToJsonString();
 	}
 
 	// ─── Parameter Extraction ─────────────────────────────────────────
@@ -302,14 +385,19 @@ internal static partial class Transforms
 			var nameNode = paramObj["name"];
 			if (nameNode is null) continue;
 			var name = nameNode.GetValue<string>();
-			var type = SchemaToTypeString(paramObj["schema"], spec);
+			var paramSchema = paramObj["schema"];
+			var type = SchemaToTypeString(paramSchema, spec);
 			var requiredNode = paramObj["required"];
 			var required = requiredNode is JsonValue rv && rv.TryGetValue<bool>(out var rBool) && rBool;
+			var enumValues = ExtractEnumValues(paramSchema, spec);
+			var defaultValue = ExtractDefaultValue(paramSchema);
 
 			var parsed = new ParsedParameter(
 				name,
 				type,
-				inValue == "path" || required
+				inValue == "path" || required,
+				enumValues,
+				defaultValue
 			);
 
 			if (inValue == "path")
@@ -323,6 +411,123 @@ internal static partial class Transforms
 		}
 
 		return new OperationParameters(pathParams, queryParams);
+	}
+
+	// ─── Discriminated OneOf Detection ───────────────────────────────
+
+	/// <summary>Try to detect a discriminated union from oneOf variants.</summary>
+	internal static List<OneOfVariant>? TryExtractDiscriminatedOneOf(JsonArray oneOfArr, JsonNode spec)
+	{
+		if (oneOfArr.Count < 2) return null;
+
+		// All variants must have properties
+		foreach (var variant in oneOfArr)
+		{
+			if (variant is not JsonObject vObj) return null;
+			if (vObj["properties"] is not JsonObject) return null;
+		}
+
+		// Find discriminator field
+		var firstObj = (JsonObject)oneOfArr[0]!;
+		var firstProps = (JsonObject)firstObj["properties"]!;
+		string? discriminatorField = null;
+
+		foreach (var kvp in firstProps)
+		{
+			if (kvp.Value is not JsonObject propSchema) continue;
+			var enumArr = propSchema["enum"];
+			if (enumArr is not JsonArray ea || ea.Count != 1) continue;
+
+			var allMatch = true;
+			for (var i = 1; i < oneOfArr.Count; i++)
+			{
+				var vObj = (JsonObject)oneOfArr[i]!;
+				var vProps = (JsonObject)vObj["properties"]!;
+				var vProp = vProps[kvp.Key];
+				if (vProp is not JsonObject vPropObj)
+				{
+					allMatch = false;
+					break;
+				}
+				var vEnum = vPropObj["enum"];
+				if (vEnum is not JsonArray ve || ve.Count != 1)
+				{
+					allMatch = false;
+					break;
+				}
+			}
+			if (allMatch)
+			{
+				discriminatorField = kvp.Key;
+				break;
+			}
+		}
+
+		if (discriminatorField is null) return null;
+
+		var variants = new List<OneOfVariant>();
+		foreach (var variant in oneOfArr)
+		{
+			var vObj = (JsonObject)variant!;
+			var title = vObj["title"]?.GetValue<string>() ?? "Unknown";
+			var props = (JsonObject)vObj["properties"]!;
+
+			var requiredSet = new HashSet<string>();
+			var reqArr = vObj["required"];
+			if (reqArr is JsonArray rArr)
+			{
+				foreach (var r in rArr) requiredSet.Add(r!.GetValue<string>());
+			}
+
+			var discProp = (JsonObject)props[discriminatorField]!;
+			var discEnum = (JsonArray)discProp["enum"]!;
+			var discValue = discEnum[0]!.ToString();
+
+			var bodyProps = new List<BodyProperty>();
+			foreach (var kvp in props)
+			{
+				if (kvp.Key == discriminatorField) continue;
+				var propEnumValues = ExtractEnumValues(kvp.Value, spec);
+				var propDefaultValue = ExtractDefaultValue(kvp.Value);
+				bodyProps.Add(new BodyProperty(
+					kvp.Key,
+					SchemaToTypeString(kvp.Value, spec),
+					requiredSet.Contains(kvp.Key),
+					propEnumValues,
+					propDefaultValue
+				));
+			}
+
+			variants.Add(new OneOfVariant(title, discriminatorField, discValue, bodyProps));
+		}
+
+		return variants;
+	}
+
+	/// <summary>Extract discriminated oneOf variants from an operation's request body.</summary>
+	internal static List<OneOfVariant>? ExtractOneOfVariants(JsonNode operation, JsonNode spec)
+	{
+		var rawRequestBody = (operation as JsonObject)?["requestBody"];
+		if (rawRequestBody is null) return null;
+
+		var requestBody = DerefShallow(rawRequestBody, spec);
+		if (requestBody is not JsonObject rbObj) return null;
+
+		var content = rbObj["content"];
+		if (content is not JsonObject contentObj) return null;
+
+		JsonNode? mediaType = contentObj["application/x-www-form-urlencoded"];
+		mediaType ??= contentObj["application/json"];
+		mediaType ??= contentObj["multipart/form-data"];
+		if (mediaType is not JsonObject mtObj) return null;
+
+		var schema = mtObj["schema"];
+		if (schema is not JsonObject schemaObj) return null;
+
+		var oneOf = schemaObj["oneOf"];
+		if (oneOf is not JsonArray oneOfArr) return null;
+
+		return TryExtractDiscriminatedOneOf(oneOfArr, spec);
 	}
 
 	// ─── Body Extraction ──────────────────────────────────────────────
@@ -469,10 +674,14 @@ internal static partial class Transforms
 					}
 				}
 
+				var mergedEnumValues = ExtractEnumValues(mergedSchema, spec);
+				var mergedDefaultValue = ExtractDefaultValue(mergedSchema);
 				bodyProperties.Add(new BodyProperty(
 					kvp.Key,
 					SchemaToTypeString(mergedSchema, spec),
-					isRequired
+					isRequired,
+					mergedEnumValues,
+					mergedDefaultValue
 				));
 			}
 		}
@@ -505,12 +714,30 @@ internal static partial class Transforms
 						}
 					}
 					var propType = format == "binary" ? "Blob" : SchemaToTypeString(propSchema, spec);
-					bodyProperties.Add(new BodyProperty(propName, propType, requiredSet.Contains(propName)));
+					var propEnumValues = format == "binary" ? null : ExtractEnumValues(propSchema, spec);
+					var propDefaultValue = format == "binary" ? null : ExtractDefaultValue(propSchema);
+					bodyProperties.Add(new BodyProperty(propName, propType, requiredSet.Contains(propName), propEnumValues, propDefaultValue));
 				}
 			}
 		}
 
 		return new BodyExtractionResult(bodyProperties, false, null, bodyEncoding);
+	}
+
+	// ─── Response Content Type Detection ──────────────────────────────
+
+	/// <summary>Check if the response content type is text/html (not application/json).</summary>
+	internal static bool IsHtmlResponse(JsonNode operation, JsonNode spec)
+	{
+		var responses = (operation as JsonObject)?["responses"];
+		if (responses is not JsonObject respObj) return false;
+		var rawSuccess = respObj["200"] ?? respObj["201"];
+		if (rawSuccess is null) return false;
+		var success = DerefShallow(rawSuccess, spec);
+		if (success is not JsonObject successObj) return false;
+		var content = successObj["content"];
+		if (content is not JsonObject contentObj) return false;
+		return contentObj["text/html"] is not null && contentObj["application/json"] is null;
 	}
 
 	// ─── Response Extraction ──────────────────────────────────────────
@@ -674,10 +901,21 @@ internal static partial class Transforms
 
 		if (schema is not JsonObject sObj) return ("JsonElement", null);
 
-		// Multi-type array: type: ['string', 'integer'] → JsonElement
+		// Multi-type array: type: ['string', 'integer'] → StringOrLong, etc.
 		var typeEl = sObj["type"];
-		if (typeEl is JsonArray)
+		if (typeEl is JsonArray typeArr)
 		{
+			var nonNullTypes = new List<string>();
+			foreach (var t in typeArr)
+			{
+				var ts = t!.GetValue<string>();
+				if (ts != "null") nonNullTypes.Add(ts);
+			}
+			var sortedTypes = nonNullTypes.OrderBy(s => s).ToList();
+			if (sortedTypes.Count == 2 && sortedTypes[0] == "integer" && sortedTypes[1] == "string")
+			{
+				return ("Lolzteam.Api.Runtime.StringOrLong", null);
+			}
 			return ("JsonElement", null);
 		}
 
@@ -755,7 +993,9 @@ internal static partial class Transforms
 		var emptySpec = new JsonObject();
 		var parameters = ExtractParameters(operation, emptySpec);
 		var body = ExtractBody(operation, emptySpec);
+		var oneOfVariants = ExtractOneOfVariants(operation, emptySpec);
 		var responseType = ExtractResponseType(operation, emptySpec);
+		var returnsHtml = IsHtmlResponse(operation, emptySpec);
 		var (responseSchema, rawResponseSchema) = ExtractResponseSchemaWithRaw(rawOperation, rawSpec, componentSchemaNames);
 
 		var isGet = httpMethod.Equals("GET", StringComparison.OrdinalIgnoreCase);
@@ -767,7 +1007,7 @@ internal static partial class Transforms
 			var combined = new List<ParsedParameter>(parameters.QueryParams);
 			foreach (var prop in body.Properties)
 			{
-				combined.Add(new ParsedParameter(prop.Name, prop.Type, false));
+				combined.Add(new ParsedParameter(prop.Name, prop.Type, false, prop.EnumValues, prop.DefaultValue));
 			}
 			effectiveQueryParams = combined;
 		}
@@ -816,7 +1056,9 @@ internal static partial class Transforms
 			isGet ? null : body.BodyArrayItemType,
 			isGet ? "form" : body.BodyEncoding,
 			responseSchema,
-			rawResponseSchema
+			rawResponseSchema,
+			isGet ? null : oneOfVariants,
+			returnsHtml
 		);
 	}
 }

@@ -594,7 +594,7 @@ public sealed class ListApi
 
 	public async Task<ListApiTypes.ListDownloadResponse> DownloadAsync(string Type, ListApiTypes.ListDownloadParams? @params = null, CancellationToken cancellationToken = default)
 	{
-		var __result = await _http.RequestAsync(new RequestOptions
+		var __result = await _http.RequestRawAsync(new RequestOptions
 		{
 			Method = "GET",
 			Path = $"/user/{Type}/download",
@@ -706,7 +706,7 @@ public sealed class ManagingApi
 
 	public async Task<ManagingApiTypes.ManagingSteamPreviewResponse> SteamPreviewAsync(long ItemId, ManagingApiTypes.ManagingSteamPreviewParams? @params = null, CancellationToken cancellationToken = default)
 	{
-		var __result = await _http.RequestAsync(new RequestOptions
+		var __result = await _http.RequestRawAsync(new RequestOptions
 		{
 			Method = "GET",
 			Path = $"/{ItemId}/steam-preview",

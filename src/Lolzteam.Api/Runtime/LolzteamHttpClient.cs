@@ -48,6 +48,38 @@ public sealed class LolzteamHttpClient : IDisposable
 		}
 	}
 
+	/// <summary>
+	/// Send a request and return the raw response body as a string.
+	/// Used for endpoints that return non-JSON content (e.g. text/html).
+	/// </summary>
+	public async Task<string> RequestRawAsync(RequestOptions options, CancellationToken cancellationToken = default)
+	{
+		ObjectDisposedException.ThrowIf(_disposed, this);
+
+		if (_rateLimiter is not null)
+		{
+			await _rateLimiter.AcquireAsync(cancellationToken).ConfigureAwait(false);
+		}
+
+		if (options.IsSearch && _searchRateLimiter is not null)
+		{
+			await _searchRateLimiter.AcquireAsync(cancellationToken).ConfigureAwait(false);
+		}
+
+		if (_config.Retry is not { } retryConfig)
+		{
+			return await ExecuteRawAsync(options, cancellationToken).ConfigureAwait(false);
+		}
+
+		return await RetryHandler.WithRetryAsync(
+				retryConfig,
+				() => ExecuteRawAsync(options, cancellationToken),
+				_config.OnRetry,
+				options.Method,
+				options.Path)
+			.ConfigureAwait(false);
+	}
+
 	public async Task<JsonElement> RequestAsync(RequestOptions options, CancellationToken cancellationToken = default)
 	{
 		ObjectDisposedException.ThrowIf(_disposed, this);
@@ -74,6 +106,42 @@ public sealed class LolzteamHttpClient : IDisposable
 				options.Method,
 				options.Path)
 			.ConfigureAwait(false);
+	}
+
+	private async Task<string> ExecuteRawAsync(RequestOptions options, CancellationToken cancellationToken)
+	{
+		try
+		{
+			var url = BuildUrl(options.Path, options.Query);
+			using var request = new HttpRequestMessage(new HttpMethod(options.Method), url);
+			SetBody(request, options);
+
+			using var response = await _httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
+			var responseBody = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+
+			if (!response.IsSuccessStatusCode)
+			{
+				throw HttpException.Create((int)response.StatusCode, responseBody, response.Headers);
+			}
+
+			return responseBody;
+		}
+		catch (LolzteamException)
+		{
+			throw;
+		}
+		catch (HttpRequestException ex)
+		{
+			throw new NetworkException("HTTP request failed.", ex);
+		}
+		catch (TaskCanceledException ex) when (ex.InnerException is TimeoutException)
+		{
+			throw new NetworkException("Request timed out.", ex);
+		}
+		catch (TaskCanceledException)
+		{
+			throw;
+		}
 	}
 
 	private async Task<JsonElement> ExecuteAsync(RequestOptions options, CancellationToken cancellationToken)

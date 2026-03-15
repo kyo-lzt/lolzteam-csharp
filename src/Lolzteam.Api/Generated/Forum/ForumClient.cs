@@ -962,7 +962,7 @@ public sealed class ProfilePostsApi
 		_http = http;
 	}
 
-	public async Task<ProfilePostsApiTypes.ProfilePostsListResponse> ListAsync(string UserId, ProfilePostsApiTypes.ProfilePostsListParams? @params = null, CancellationToken cancellationToken = default)
+	public async Task<ProfilePostsApiTypes.ProfilePostsListResponse> ListAsync(Lolzteam.Api.Runtime.StringOrLong UserId, ProfilePostsApiTypes.ProfilePostsListParams? @params = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -1241,7 +1241,7 @@ public sealed class SearchApi
 		return JsonSerializer.Deserialize<SearchApiTypes.SearchTaggedResponse>(__result)!;
 	}
 
-	public async Task<SearchApiTypes.SearchResultsResponse> ResultsAsync(string SearchId, SearchApiTypes.SearchResultsParams? @params = null, CancellationToken cancellationToken = default)
+	public async Task<SearchApiTypes.SearchResultsResponse> ResultsAsync(Lolzteam.Api.Runtime.StringOrLong SearchId, SearchApiTypes.SearchResultsParams? @params = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -1598,7 +1598,7 @@ public sealed class UsersApi
 		return JsonSerializer.Deserialize<UsersApiTypes.UsersFindResponse>(__result)!;
 	}
 
-	public async Task<UsersApiTypes.UsersGetResponse> GetAsync(string UserId, UsersApiTypes.UsersGetParams? @params = null, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersGetResponse> GetAsync(Lolzteam.Api.Runtime.StringOrLong UserId, UsersApiTypes.UsersGetParams? @params = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -1609,7 +1609,7 @@ public sealed class UsersApi
 		return JsonSerializer.Deserialize<UsersApiTypes.UsersGetResponse>(__result)!;
 	}
 
-	public async Task<UsersApiTypes.UsersEditResponse> EditAsync(string UserId, UsersApiTypes.UsersEditBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersEditResponse> EditAsync(Lolzteam.Api.Runtime.StringOrLong UserId, UsersApiTypes.UsersEditBody? body = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -1621,7 +1621,7 @@ public sealed class UsersApi
 		return JsonSerializer.Deserialize<UsersApiTypes.UsersEditResponse>(__result)!;
 	}
 
-	public async Task<UsersApiTypes.UsersClaimsResponse> ClaimsAsync(string UserId, UsersApiTypes.UsersClaimsParams? @params = null, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersClaimsResponse> ClaimsAsync(Lolzteam.Api.Runtime.StringOrLong UserId, UsersApiTypes.UsersClaimsParams? @params = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -1632,7 +1632,7 @@ public sealed class UsersApi
 		return JsonSerializer.Deserialize<UsersApiTypes.UsersClaimsResponse>(__result)!;
 	}
 
-	public async Task<UsersApiTypes.UsersAvatarUploadResponse> AvatarUploadAsync(string UserId, UsersApiTypes.UsersAvatarUploadBody body, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersAvatarUploadResponse> AvatarUploadAsync(Lolzteam.Api.Runtime.StringOrLong UserId, UsersApiTypes.UsersAvatarUploadBody body, CancellationToken cancellationToken = default)
 	{
 		var jsonObj = new System.Text.Json.Nodes.JsonObject();
 		if (body.X is not null) jsonObj["x"] = System.Text.Json.Nodes.JsonValue.Create(body.X);
@@ -1651,7 +1651,7 @@ public sealed class UsersApi
 		return JsonSerializer.Deserialize<UsersApiTypes.UsersAvatarUploadResponse>(__result)!;
 	}
 
-	public async Task<UsersApiTypes.UsersAvatarDeleteResponse> AvatarDeleteAsync(string UserId, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersAvatarDeleteResponse> AvatarDeleteAsync(Lolzteam.Api.Runtime.StringOrLong UserId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -1661,7 +1661,7 @@ public sealed class UsersApi
 		return JsonSerializer.Deserialize<UsersApiTypes.UsersAvatarDeleteResponse>(__result)!;
 	}
 
-	public async Task<UsersApiTypes.UsersAvatarCropResponse> AvatarCropAsync(string UserId, UsersApiTypes.UsersAvatarCropBody? body = null, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersAvatarCropResponse> AvatarCropAsync(Lolzteam.Api.Runtime.StringOrLong UserId, UsersApiTypes.UsersAvatarCropBody? body = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -1673,7 +1673,7 @@ public sealed class UsersApi
 		return JsonSerializer.Deserialize<UsersApiTypes.UsersAvatarCropResponse>(__result)!;
 	}
 
-	public async Task<UsersApiTypes.UsersBackgroundUploadResponse> BackgroundUploadAsync(string UserId, UsersApiTypes.UsersBackgroundUploadBody body, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersBackgroundUploadResponse> BackgroundUploadAsync(Lolzteam.Api.Runtime.StringOrLong UserId, UsersApiTypes.UsersBackgroundUploadBody body, CancellationToken cancellationToken = default)
 	{
 		var jsonObj = new System.Text.Json.Nodes.JsonObject();
 		if (body.X is not null) jsonObj["x"] = System.Text.Json.Nodes.JsonValue.Create(body.X);
@@ -1692,7 +1692,7 @@ public sealed class UsersApi
 		return JsonSerializer.Deserialize<UsersApiTypes.UsersBackgroundUploadResponse>(__result)!;
 	}
 
-	public async Task<UsersApiTypes.UsersBackgroundDeleteResponse> BackgroundDeleteAsync(string UserId, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersBackgroundDeleteResponse> BackgroundDeleteAsync(Lolzteam.Api.Runtime.StringOrLong UserId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -1702,7 +1702,7 @@ public sealed class UsersApi
 		return JsonSerializer.Deserialize<UsersApiTypes.UsersBackgroundDeleteResponse>(__result)!;
 	}
 
-	public async Task<UsersApiTypes.UsersBackgroundCropResponse> BackgroundCropAsync(string UserId, UsersApiTypes.UsersBackgroundCropBody body, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersBackgroundCropResponse> BackgroundCropAsync(Lolzteam.Api.Runtime.StringOrLong UserId, UsersApiTypes.UsersBackgroundCropBody body, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -1714,7 +1714,7 @@ public sealed class UsersApi
 		return JsonSerializer.Deserialize<UsersApiTypes.UsersBackgroundCropResponse>(__result)!;
 	}
 
-	public async Task<UsersApiTypes.UsersFollowersResponse> FollowersAsync(string UserId, UsersApiTypes.UsersFollowersParams? @params = null, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersFollowersResponse> FollowersAsync(Lolzteam.Api.Runtime.StringOrLong UserId, UsersApiTypes.UsersFollowersParams? @params = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -1725,7 +1725,7 @@ public sealed class UsersApi
 		return JsonSerializer.Deserialize<UsersApiTypes.UsersFollowersResponse>(__result)!;
 	}
 
-	public async Task<UsersApiTypes.UsersFollowResponse> FollowAsync(string UserId, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersFollowResponse> FollowAsync(Lolzteam.Api.Runtime.StringOrLong UserId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -1735,7 +1735,7 @@ public sealed class UsersApi
 		return JsonSerializer.Deserialize<UsersApiTypes.UsersFollowResponse>(__result)!;
 	}
 
-	public async Task<UsersApiTypes.UsersUnfollowResponse> UnfollowAsync(string UserId, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersUnfollowResponse> UnfollowAsync(Lolzteam.Api.Runtime.StringOrLong UserId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -1745,7 +1745,7 @@ public sealed class UsersApi
 		return JsonSerializer.Deserialize<UsersApiTypes.UsersUnfollowResponse>(__result)!;
 	}
 
-	public async Task<UsersApiTypes.UsersFollowingsResponse> FollowingsAsync(string UserId, UsersApiTypes.UsersFollowingsParams? @params = null, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersFollowingsResponse> FollowingsAsync(Lolzteam.Api.Runtime.StringOrLong UserId, UsersApiTypes.UsersFollowingsParams? @params = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -1756,7 +1756,7 @@ public sealed class UsersApi
 		return JsonSerializer.Deserialize<UsersApiTypes.UsersFollowingsResponse>(__result)!;
 	}
 
-	public async Task<UsersApiTypes.UsersLikesResponse> LikesAsync(string UserId, UsersApiTypes.UsersLikesParams? @params = null, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersLikesResponse> LikesAsync(Lolzteam.Api.Runtime.StringOrLong UserId, UsersApiTypes.UsersLikesParams? @params = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -1778,7 +1778,7 @@ public sealed class UsersApi
 		return JsonSerializer.Deserialize<UsersApiTypes.UsersIgnoredResponse>(__result)!;
 	}
 
-	public async Task<UsersApiTypes.UsersIgnoreResponse> IgnoreAsync(string UserId, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersIgnoreResponse> IgnoreAsync(Lolzteam.Api.Runtime.StringOrLong UserId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -1788,7 +1788,7 @@ public sealed class UsersApi
 		return JsonSerializer.Deserialize<UsersApiTypes.UsersIgnoreResponse>(__result)!;
 	}
 
-	public async Task<UsersApiTypes.UsersIgnoreEditResponse> IgnoreEditAsync(string UserId, UsersApiTypes.UsersIgnoreEditParams? @params = null, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersIgnoreEditResponse> IgnoreEditAsync(Lolzteam.Api.Runtime.StringOrLong UserId, UsersApiTypes.UsersIgnoreEditParams? @params = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -1799,7 +1799,7 @@ public sealed class UsersApi
 		return JsonSerializer.Deserialize<UsersApiTypes.UsersIgnoreEditResponse>(__result)!;
 	}
 
-	public async Task<UsersApiTypes.UsersUnignoreResponse> UnignoreAsync(string UserId, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersUnignoreResponse> UnignoreAsync(Lolzteam.Api.Runtime.StringOrLong UserId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -1809,7 +1809,7 @@ public sealed class UsersApi
 		return JsonSerializer.Deserialize<UsersApiTypes.UsersUnignoreResponse>(__result)!;
 	}
 
-	public async Task<UsersApiTypes.UsersContentsResponse> ContentsAsync(string UserId, UsersApiTypes.UsersContentsParams? @params = null, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersContentsResponse> ContentsAsync(Lolzteam.Api.Runtime.StringOrLong UserId, UsersApiTypes.UsersContentsParams? @params = null, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{
@@ -1820,7 +1820,7 @@ public sealed class UsersApi
 		return JsonSerializer.Deserialize<UsersApiTypes.UsersContentsResponse>(__result)!;
 	}
 
-	public async Task<UsersApiTypes.UsersTrophiesResponse> TrophiesAsync(string UserId, CancellationToken cancellationToken = default)
+	public async Task<UsersApiTypes.UsersTrophiesResponse> TrophiesAsync(Lolzteam.Api.Runtime.StringOrLong UserId, CancellationToken cancellationToken = default)
 	{
 		var __result = await _http.RequestAsync(new RequestOptions
 		{

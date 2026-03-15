@@ -5,6 +5,390 @@ using System.Text.Json;
 
 namespace Lolzteam.Api.Generated.Forum;
 
+// ─── Enums ────────────────────────────────────────────────────
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<AllowInviteGroup>))]
+public enum AllowInviteGroup
+{
+	[Lolzteam.Api.Runtime.EnumValue("none")] None,
+	[Lolzteam.Api.Runtime.EnumValue("members")] Members,
+	[Lolzteam.Api.Runtime.EnumValue("followed")] Followed,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<AllowPostProfile>))]
+public enum AllowPostProfile
+{
+	[Lolzteam.Api.Runtime.EnumValue("none")] None,
+	[Lolzteam.Api.Runtime.EnumValue("members")] Members,
+	[Lolzteam.Api.Runtime.EnumValue("followed")] Followed,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<AllowReceiveNewsFeed>))]
+public enum AllowReceiveNewsFeed
+{
+	[Lolzteam.Api.Runtime.EnumValue("none")] None,
+	[Lolzteam.Api.Runtime.EnumValue("members")] Members,
+	[Lolzteam.Api.Runtime.EnumValue("followed")] Followed,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<AllowSendPersonalConversation>))]
+public enum AllowSendPersonalConversation
+{
+	[Lolzteam.Api.Runtime.EnumValue("none")] None,
+	[Lolzteam.Api.Runtime.EnumValue("members")] Members,
+	[Lolzteam.Api.Runtime.EnumValue("followed")] Followed,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<AllowViewProfile>))]
+public enum AllowViewProfile
+{
+	[Lolzteam.Api.Runtime.EnumValue("none")] None,
+	[Lolzteam.Api.Runtime.EnumValue("members")] Members,
+	[Lolzteam.Api.Runtime.EnumValue("followed")] Followed,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<CategoriesOrder>))]
+public enum CategoriesOrder
+{
+	[Lolzteam.Api.Runtime.EnumValue("natural")] Natural,
+	[Lolzteam.Api.Runtime.EnumValue("list")] List,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<ClaimState>))]
+public enum ClaimState
+{
+	[Lolzteam.Api.Runtime.EnumValue("active")] Active,
+	[Lolzteam.Api.Runtime.EnumValue("solved")] Solved,
+	[Lolzteam.Api.Runtime.EnumValue("rejected")] Rejected,
+	[Lolzteam.Api.Runtime.EnumValue("settled")] Settled,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<ContentType>))]
+public enum ContentType
+{
+	[Lolzteam.Api.Runtime.EnumValue("post")] Post,
+	[Lolzteam.Api.Runtime.EnumValue("post_comment")] PostComment,
+	[Lolzteam.Api.Runtime.EnumValue("profile_post")] ProfilePost,
+	[Lolzteam.Api.Runtime.EnumValue("profile_post_comment")] ProfilePostComment,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<ContestType>))]
+public enum ContestType
+{
+	[Lolzteam.Api.Runtime.EnumValue("by_finish_date")] ByFinishDate,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<ConversationsOrder>))]
+public enum ConversationsOrder
+{
+	[Lolzteam.Api.Runtime.EnumValue("natural")] Natural,
+	[Lolzteam.Api.Runtime.EnumValue("natural_reverse")] NaturalReverse,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Currency>))]
+public enum Currency
+{
+	[Lolzteam.Api.Runtime.EnumValue("rub")] Rub,
+	[Lolzteam.Api.Runtime.EnumValue("uah")] Uah,
+	[Lolzteam.Api.Runtime.EnumValue("kzt")] Kzt,
+	[Lolzteam.Api.Runtime.EnumValue("byn")] Byn,
+	[Lolzteam.Api.Runtime.EnumValue("usd")] Usd,
+	[Lolzteam.Api.Runtime.EnumValue("eur")] Eur,
+	[Lolzteam.Api.Runtime.EnumValue("gbp")] Gbp,
+	[Lolzteam.Api.Runtime.EnumValue("cny")] Cny,
+	[Lolzteam.Api.Runtime.EnumValue("try")] Try,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<DeleteType>))]
+public enum DeleteType
+{
+	[Lolzteam.Api.Runtime.EnumValue("delete")] Delete,
+	[Lolzteam.Api.Runtime.EnumValue("delete_ignore")] DeleteIgnore,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Direction>))]
+public enum Direction
+{
+	[Lolzteam.Api.Runtime.EnumValue("asc")] Asc,
+	[Lolzteam.Api.Runtime.EnumValue("desc")] Desc,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Duration>))]
+public enum Duration
+{
+	[Lolzteam.Api.Runtime.EnumValue("day")] Day,
+	[Lolzteam.Api.Runtime.EnumValue("week")] Week,
+	[Lolzteam.Api.Runtime.EnumValue("month")] Month,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Folder>))]
+public enum Folder
+{
+	[Lolzteam.Api.Runtime.EnumValue("all")] All,
+	[Lolzteam.Api.Runtime.EnumValue("unread")] Unread,
+	[Lolzteam.Api.Runtime.EnumValue("groups")] Groups,
+	[Lolzteam.Api.Runtime.EnumValue("market")] Market,
+	[Lolzteam.Api.Runtime.EnumValue("market_replacements")] MarketReplacements,
+	[Lolzteam.Api.Runtime.EnumValue("staff")] Staff,
+	[Lolzteam.Api.Runtime.EnumValue("giveaways")] Giveaways,
+	[Lolzteam.Api.Runtime.EnumValue("p2p")] P2p,
+}
+
+public enum FormId : long
+{
+	V1 = 1,
+	V3 = 3,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Gender>))]
+public enum Gender
+{
+	[Lolzteam.Api.Runtime.EnumValue("")] None,
+	[Lolzteam.Api.Runtime.EnumValue("male")] Male,
+	[Lolzteam.Api.Runtime.EnumValue("female")] Female,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<GrantType>))]
+public enum GrantType
+{
+	[Lolzteam.Api.Runtime.EnumValue("client_credentials")] ClientCredentials,
+	[Lolzteam.Api.Runtime.EnumValue("authorization_code")] AuthorizationCode,
+	[Lolzteam.Api.Runtime.EnumValue("refresh_token")] RefreshToken,
+	[Lolzteam.Api.Runtime.EnumValue("password")] Password,
+}
+
+public enum LanguageId : long
+{
+	V1 = 1,
+	V2 = 2,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<LengthOption>))]
+public enum LengthOption
+{
+	[Lolzteam.Api.Runtime.EnumValue("minutes")] Minutes,
+	[Lolzteam.Api.Runtime.EnumValue("hours")] Hours,
+	[Lolzteam.Api.Runtime.EnumValue("days")] Days,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<LikeType>))]
+public enum LikeType
+{
+	[Lolzteam.Api.Runtime.EnumValue("like")] Like,
+	[Lolzteam.Api.Runtime.EnumValue("like2")] Like2,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<NotificationsType>))]
+public enum NotificationsType
+{
+	[Lolzteam.Api.Runtime.EnumValue("market")] Market,
+	[Lolzteam.Api.Runtime.EnumValue("nomarket")] Nomarket,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<PayClaim>))]
+public enum PayClaim
+{
+	[Lolzteam.Api.Runtime.EnumValue("now")] Now,
+	[Lolzteam.Api.Runtime.EnumValue("later")] Later,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Period>))]
+public enum Period
+{
+	[Lolzteam.Api.Runtime.EnumValue("day")] Day,
+	[Lolzteam.Api.Runtime.EnumValue("week")] Week,
+	[Lolzteam.Api.Runtime.EnumValue("month")] Month,
+	[Lolzteam.Api.Runtime.EnumValue("year")] Year,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<PostsOrder>))]
+public enum PostsOrder
+{
+	[Lolzteam.Api.Runtime.EnumValue("natural")] Natural,
+	[Lolzteam.Api.Runtime.EnumValue("natural_reverse")] NaturalReverse,
+	[Lolzteam.Api.Runtime.EnumValue("post_likes")] PostLikes,
+	[Lolzteam.Api.Runtime.EnumValue("post_likes_reverse")] PostLikesReverse,
+}
+
+public enum PrizeDataUpgrade : long
+{
+	V1 = 1,
+	V6 = 6,
+	V12 = 12,
+	V14 = 14,
+	V17 = 17,
+	V19 = 19,
+	V20 = 20,
+	V21 = 21,
+	V22 = 22,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<PrizeType>))]
+public enum PrizeType
+{
+	[Lolzteam.Api.Runtime.EnumValue("money")] Money,
+	[Lolzteam.Api.Runtime.EnumValue("upgrades")] Upgrades,
+}
+
+public enum ReplyGroup : long
+{
+	V0 = 0,
+	V2 = 2,
+	V21 = 21,
+	V22 = 22,
+	V23 = 23,
+	V60 = 60,
+	V351 = 351,
+}
+
+public enum RoomId : long
+{
+	V1 = 1,
+	V2 = 2,
+	V3 = 3,
+	V4 = 4,
+	V13 = 13,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<State>))]
+public enum State
+{
+	[Lolzteam.Api.Runtime.EnumValue("active")] Active,
+	[Lolzteam.Api.Runtime.EnumValue("closed")] Closed,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<ThreadsOrder>))]
+public enum ThreadsOrder
+{
+	[Lolzteam.Api.Runtime.EnumValue("post_date")] PostDate,
+	[Lolzteam.Api.Runtime.EnumValue("last_post_date")] LastPostDate,
+	[Lolzteam.Api.Runtime.EnumValue("reply_count")] ReplyCount,
+	[Lolzteam.Api.Runtime.EnumValue("reply_count_asc")] ReplyCountAsc,
+	[Lolzteam.Api.Runtime.EnumValue("first_post_likes")] FirstPostLikes,
+	[Lolzteam.Api.Runtime.EnumValue("vote_count")] VoteCount,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Timezone>))]
+public enum Timezone
+{
+	[Lolzteam.Api.Runtime.EnumValue("Pacific/Midway")] PacificMidway,
+	[Lolzteam.Api.Runtime.EnumValue("Pacific/Honolulu")] PacificHonolulu,
+	[Lolzteam.Api.Runtime.EnumValue("Pacific/Marquesas")] PacificMarquesas,
+	[Lolzteam.Api.Runtime.EnumValue("America/Anchorage")] AmericaAnchorage,
+	[Lolzteam.Api.Runtime.EnumValue("America/Los_Angeles")] AmericaLosAngeles,
+	[Lolzteam.Api.Runtime.EnumValue("America/Santa_Isabel")] AmericaSantaIsabel,
+	[Lolzteam.Api.Runtime.EnumValue("America/Tijuana")] AmericaTijuana,
+	[Lolzteam.Api.Runtime.EnumValue("America/Denver")] AmericaDenver,
+	[Lolzteam.Api.Runtime.EnumValue("America/Chihuahua")] AmericaChihuahua,
+	[Lolzteam.Api.Runtime.EnumValue("America/Phoenix")] AmericaPhoenix,
+	[Lolzteam.Api.Runtime.EnumValue("America/Chicago")] AmericaChicago,
+	[Lolzteam.Api.Runtime.EnumValue("America/Belize")] AmericaBelize,
+	[Lolzteam.Api.Runtime.EnumValue("America/Mexico_City")] AmericaMexicoCity,
+	[Lolzteam.Api.Runtime.EnumValue("Pacific/Easter")] PacificEaster,
+	[Lolzteam.Api.Runtime.EnumValue("America/New_York")] AmericaNewYork,
+	[Lolzteam.Api.Runtime.EnumValue("America/Havana")] AmericaHavana,
+	[Lolzteam.Api.Runtime.EnumValue("America/Bogota")] AmericaBogota,
+	[Lolzteam.Api.Runtime.EnumValue("America/Caracas")] AmericaCaracas,
+	[Lolzteam.Api.Runtime.EnumValue("America/Halifax")] AmericaHalifax,
+	[Lolzteam.Api.Runtime.EnumValue("America/Goose_Bay")] AmericaGooseBay,
+	[Lolzteam.Api.Runtime.EnumValue("America/Asuncion")] AmericaAsuncion,
+	[Lolzteam.Api.Runtime.EnumValue("America/Santiago")] AmericaSantiago,
+	[Lolzteam.Api.Runtime.EnumValue("America/Cuiaba")] AmericaCuiaba,
+	[Lolzteam.Api.Runtime.EnumValue("America/La_Paz")] AmericaLaPaz,
+	[Lolzteam.Api.Runtime.EnumValue("America/St_Johns")] AmericaStJohns,
+	[Lolzteam.Api.Runtime.EnumValue("America/Argentina/Buenos_Aires")] AmericaArgentinaBuenosAires,
+	[Lolzteam.Api.Runtime.EnumValue("America/Argentina/San_Luis")] AmericaArgentinaSanLuis,
+	[Lolzteam.Api.Runtime.EnumValue("America/Argentina/Mendoza")] AmericaArgentinaMendoza,
+	[Lolzteam.Api.Runtime.EnumValue("Atlantic/Stanley")] AtlanticStanley,
+	[Lolzteam.Api.Runtime.EnumValue("America/Godthab")] AmericaGodthab,
+	[Lolzteam.Api.Runtime.EnumValue("America/Montevideo")] AmericaMontevideo,
+	[Lolzteam.Api.Runtime.EnumValue("America/Sao_Paulo")] AmericaSaoPaulo,
+	[Lolzteam.Api.Runtime.EnumValue("America/Miquelon")] AmericaMiquelon,
+	[Lolzteam.Api.Runtime.EnumValue("America/Noronha")] AmericaNoronha,
+	[Lolzteam.Api.Runtime.EnumValue("Atlantic/Cape_Verde")] AtlanticCapeVerde,
+	[Lolzteam.Api.Runtime.EnumValue("Atlantic/Azores")] AtlanticAzores,
+	[Lolzteam.Api.Runtime.EnumValue("Europe/London")] EuropeLondon,
+	[Lolzteam.Api.Runtime.EnumValue("Africa/Casablanca")] AfricaCasablanca,
+	[Lolzteam.Api.Runtime.EnumValue("Atlantic/Reykjavik")] AtlanticReykjavik,
+	[Lolzteam.Api.Runtime.EnumValue("Europe/Amsterdam")] EuropeAmsterdam,
+	[Lolzteam.Api.Runtime.EnumValue("Africa/Algiers")] AfricaAlgiers,
+	[Lolzteam.Api.Runtime.EnumValue("Africa/Windhoek")] AfricaWindhoek,
+	[Lolzteam.Api.Runtime.EnumValue("Africa/Tunis")] AfricaTunis,
+	[Lolzteam.Api.Runtime.EnumValue("Europe/Athens")] EuropeAthens,
+	[Lolzteam.Api.Runtime.EnumValue("Africa/Johannesburg")] AfricaJohannesburg,
+	[Lolzteam.Api.Runtime.EnumValue("Europe/Kaliningrad")] EuropeKaliningrad,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Amman")] AsiaAmman,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Beirut")] AsiaBeirut,
+	[Lolzteam.Api.Runtime.EnumValue("Africa/Cairo")] AfricaCairo,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Jerusalem")] AsiaJerusalem,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Gaza")] AsiaGaza,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Damascus")] AsiaDamascus,
+	[Lolzteam.Api.Runtime.EnumValue("Europe/Moscow")] EuropeMoscow,
+	[Lolzteam.Api.Runtime.EnumValue("Europe/Minsk")] EuropeMinsk,
+	[Lolzteam.Api.Runtime.EnumValue("Africa/Nairobi")] AfricaNairobi,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Tehran")] AsiaTehran,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Dubai")] AsiaDubai,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Yerevan")] AsiaYerevan,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Baku")] AsiaBaku,
+	[Lolzteam.Api.Runtime.EnumValue("Indian/Mauritius")] IndianMauritius,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Kabul")] AsiaKabul,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Yekaterinburg")] AsiaYekaterinburg,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Tashkent")] AsiaTashkent,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Kolkata")] AsiaKolkata,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Kathmandu")] AsiaKathmandu,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Novosibirsk")] AsiaNovosibirsk,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Dhaka")] AsiaDhaka,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Almaty")] AsiaAlmaty,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Rangoon")] AsiaRangoon,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Krasnoyarsk")] AsiaKrasnoyarsk,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Bangkok")] AsiaBangkok,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Irkutsk")] AsiaIrkutsk,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Hong_Kong")] AsiaHongKong,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Singapore")] AsiaSingapore,
+	[Lolzteam.Api.Runtime.EnumValue("Australia/Perth")] AustraliaPerth,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Yakutsk")] AsiaYakutsk,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Tokyo")] AsiaTokyo,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Seoul")] AsiaSeoul,
+	[Lolzteam.Api.Runtime.EnumValue("Australia/Adelaide")] AustraliaAdelaide,
+	[Lolzteam.Api.Runtime.EnumValue("Australia/Darwin")] AustraliaDarwin,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Vladivostok")] AsiaVladivostok,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Magadan")] AsiaMagadan,
+	[Lolzteam.Api.Runtime.EnumValue("Australia/Brisbane")] AustraliaBrisbane,
+	[Lolzteam.Api.Runtime.EnumValue("Australia/Sydney")] AustraliaSydney,
+	[Lolzteam.Api.Runtime.EnumValue("Pacific/Noumea")] PacificNoumea,
+	[Lolzteam.Api.Runtime.EnumValue("Pacific/Norfolk")] PacificNorfolk,
+	[Lolzteam.Api.Runtime.EnumValue("Asia/Anadyr")] AsiaAnadyr,
+	[Lolzteam.Api.Runtime.EnumValue("Pacific/Auckland")] PacificAuckland,
+	[Lolzteam.Api.Runtime.EnumValue("Pacific/Fiji")] PacificFiji,
+	[Lolzteam.Api.Runtime.EnumValue("Pacific/Chatham")] PacificChatham,
+	[Lolzteam.Api.Runtime.EnumValue("Pacific/Tongatapu")] PacificTongatapu,
+	[Lolzteam.Api.Runtime.EnumValue("Pacific/Apia")] PacificApia,
+	[Lolzteam.Api.Runtime.EnumValue("Pacific/Kiritimati")] PacificKiritimati,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<TransferType>))]
+public enum TransferType
+{
+	[Lolzteam.Api.Runtime.EnumValue("guarantor")] Guarantor,
+	[Lolzteam.Api.Runtime.EnumValue("safe")] Safe,
+	[Lolzteam.Api.Runtime.EnumValue("notsafe")] Notsafe,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<UsersOrder>))]
+public enum UsersOrder
+{
+	[Lolzteam.Api.Runtime.EnumValue("natural")] Natural,
+	[Lolzteam.Api.Runtime.EnumValue("follow_date")] FollowDate,
+	[Lolzteam.Api.Runtime.EnumValue("follow_date_reverse")] FollowDateReverse,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<UsersType>))]
+public enum UsersType
+{
+	[Lolzteam.Api.Runtime.EnumValue("gotten")] Gotten,
+	[Lolzteam.Api.Runtime.EnumValue("given")] Given,
+}
+
 // ─── Component Schemas ────────────────────────────────────────
 
 public sealed record Resp_ChatboxMessageModel(
@@ -754,7 +1138,7 @@ public static class CategoriesApiTypes
 		[JsonPropertyName("parent_forum_id")]
 		public long? ParentForumId { get; init; }
 		[JsonPropertyName("order")]
-		public string? Order { get; init; }
+		public CategoriesOrder? Order { get; init; }
 	}
 
 	public sealed record CategoriesListResponse(
@@ -818,7 +1202,7 @@ public static class ChatboxApiTypes
 	public sealed record ChatboxIndexParams
 	{
 		[JsonPropertyName("room_id")]
-		public JsonElement? RoomId { get; init; }
+		public RoomId? RoomId { get; init; }
 	}
 
 	public sealed record ChatboxIndexResponse(
@@ -893,7 +1277,7 @@ public static class ChatboxApiTypes
 	public sealed record ChatboxGetMessagesParams
 	{
 		[JsonPropertyName("room_id")]
-		public JsonElement? RoomId { get; init; }
+		public RoomId? RoomId { get; init; }
 		[JsonPropertyName("before_message_id")]
 		public long? BeforeMessageId { get; init; }
 	}
@@ -906,7 +1290,7 @@ public static class ChatboxApiTypes
 	public sealed record ChatboxPostMessageBody
 	{
 		[JsonPropertyName("room_id")]
-		public required JsonElement RoomId { get; init; }
+		public required RoomId RoomId { get; init; }
 		[JsonPropertyName("reply_message_id")]
 		public long? ReplyMessageId { get; init; }
 		[JsonPropertyName("message")]
@@ -946,7 +1330,7 @@ public static class ChatboxApiTypes
 	public sealed record ChatboxOnlineParams
 	{
 		[JsonPropertyName("room_id")]
-		public JsonElement? RoomId { get; init; }
+		public RoomId? RoomId { get; init; }
 	}
 
 	public sealed record ChatboxOnlineResponse(
@@ -1027,7 +1411,7 @@ public static class ChatboxApiTypes
 	public sealed record ChatboxGetLeaderboardParams
 	{
 		[JsonPropertyName("duration")]
-		public string? Duration { get; init; }
+		public Duration? Duration { get; init; }
 	}
 
 	public sealed record ChatboxGetLeaderboardResponse(
@@ -1120,7 +1504,7 @@ public static class ChatboxApiTypes
 	public sealed record ChatboxPostIgnoreBody
 	{
 		[JsonPropertyName("user_id")]
-		public required JsonElement UserId { get; init; }
+		public required Lolzteam.Api.Runtime.StringOrLong UserId { get; init; }
 	}
 
 	public sealed record ChatboxPostIgnoreResponse(
@@ -1132,7 +1516,7 @@ public static class ChatboxApiTypes
 	public sealed record ChatboxDeleteIgnoreBody
 	{
 		[JsonPropertyName("user_id")]
-		public required JsonElement UserId { get; init; }
+		public required Lolzteam.Api.Runtime.StringOrLong UserId { get; init; }
 	}
 
 	public sealed record ChatboxDeleteIgnoreResponse(
@@ -1149,7 +1533,7 @@ public static class ConversationsApiTypes
 	public sealed record ConversationsListParams
 	{
 		[JsonPropertyName("folder")]
-		public string? Folder { get; init; }
+		public Folder? Folder { get; init; }
 		[JsonPropertyName("page")]
 		public long? Page { get; init; }
 		[JsonPropertyName("limit")]
@@ -1182,8 +1566,9 @@ public static class ConversationsApiTypes
 		public long? RecipientId { get; init; }
 		[JsonPropertyName("recipients")]
 		public List<string>? Recipients { get; init; }
+		/// <summary>Default: false</summary>
 		[JsonPropertyName("is_group")]
-		public bool? IsGroup { get; init; }
+		public bool? IsGroup { get; init; } = false;
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("open_invite")]
@@ -1231,7 +1616,7 @@ public static class ConversationsApiTypes
 		[JsonPropertyName("conversation_id")]
 		public required long? ConversationId { get; init; }
 		[JsonPropertyName("delete_type")]
-		public required string DeleteType { get; init; }
+		public required DeleteType DeleteType { get; init; }
 	}
 
 	public sealed record ConversationsDeleteResponse(
@@ -1243,7 +1628,7 @@ public static class ConversationsApiTypes
 	public sealed record ConversationsStartBody
 	{
 		[JsonPropertyName("user_id")]
-		public required JsonElement UserId { get; init; }
+		public required Lolzteam.Api.Runtime.StringOrLong UserId { get; init; }
 	}
 
 	public sealed record ConversationsStartResponse(
@@ -1275,7 +1660,7 @@ public static class ConversationsApiTypes
 		[JsonPropertyName("limit")]
 		public long? Limit { get; init; }
 		[JsonPropertyName("order")]
-		public string? Order { get; init; }
+		public ConversationsOrder? Order { get; init; }
 		[JsonPropertyName("before")]
 		public long? Before { get; init; }
 		[JsonPropertyName("after")]
@@ -1458,10 +1843,21 @@ public static class FormsApiTypes
 	[property: JsonPropertyName("fields")] List<FormsListResponseFormsFields> Fields
 );
 
-	public sealed record FormsCreateBody
+	[JsonDerivedType(typeof(FormsCreateBodyP2PTrade), "1")]
+	[JsonDerivedType(typeof(FormsCreateBodyComplaint), "3")]
+	public abstract record FormsCreateBody;
+
+	public sealed record FormsCreateBodyP2PTrade : FormsCreateBody
 	{
 		[JsonPropertyName("form_id")]
-		public required JsonElement FormId { get; init; }
+		public long FormId => 1;
+		[JsonPropertyName("fields")]
+		public required JsonElement Fields { get; init; }
+	}
+	public sealed record FormsCreateBodyComplaint : FormsCreateBody
+	{
+		[JsonPropertyName("form_id")]
+		public long FormId => 3;
 		[JsonPropertyName("fields")]
 		public required JsonElement Fields { get; init; }
 	}
@@ -1526,7 +1922,7 @@ public static class ForumsApiTypes
 		[JsonPropertyName("parent_forum_id")]
 		public long? ParentForumId { get; init; }
 		[JsonPropertyName("order")]
-		public string? Order { get; init; }
+		public CategoriesOrder? Order { get; init; }
 	}
 
 	public sealed record ForumsListResponse(
@@ -1906,7 +2302,7 @@ public static class NotificationsApiTypes
 	public sealed record NotificationsListParams
 	{
 		[JsonPropertyName("type")]
-		public string? Type { get; init; }
+		public NotificationsType? Type { get; init; }
 		[JsonPropertyName("page")]
 		public long? Page { get; init; }
 		[JsonPropertyName("limit")]
@@ -1950,26 +2346,63 @@ public static class NotificationsApiTypes
 
 public static class OAuthApiTypes
 {
-	public sealed record OAuthTokenBody
+	[JsonDerivedType(typeof(OAuthTokenBodyClientCredentials), "client_credentials")]
+	[JsonDerivedType(typeof(OAuthTokenBodyAuthorizationCode), "authorization_code")]
+	[JsonDerivedType(typeof(OAuthTokenBodyRefreshToken), "refresh_token")]
+	[JsonDerivedType(typeof(OAuthTokenBodyPassword), "password")]
+	public abstract record OAuthTokenBody;
+
+	public sealed record OAuthTokenBodyClientCredentials : OAuthTokenBody
 	{
 		[JsonPropertyName("grant_type")]
-		public required string GrantType { get; init; }
+		public string GrantType => "client_credentials";
 		[JsonPropertyName("client_id")]
 		public required string ClientId { get; init; }
 		[JsonPropertyName("client_secret")]
 		public required string ClientSecret { get; init; }
 		[JsonPropertyName("scope")]
-		public JsonElement? Scope { get; init; }
+		public required JsonElement Scope { get; init; }
+	}
+	public sealed record OAuthTokenBodyAuthorizationCode : OAuthTokenBody
+	{
+		[JsonPropertyName("grant_type")]
+		public string GrantType => "authorization_code";
 		[JsonPropertyName("code")]
-		public string? Code { get; init; }
+		public required string Code { get; init; }
+		[JsonPropertyName("client_id")]
+		public required string ClientId { get; init; }
+		[JsonPropertyName("client_secret")]
+		public required string ClientSecret { get; init; }
 		[JsonPropertyName("redirect_uri")]
-		public string? RedirectUri { get; init; }
+		public required string RedirectUri { get; init; }
+		[JsonPropertyName("scope")]
+		public required JsonElement Scope { get; init; }
+	}
+	public sealed record OAuthTokenBodyRefreshToken : OAuthTokenBody
+	{
+		[JsonPropertyName("grant_type")]
+		public string GrantType => "refresh_token";
 		[JsonPropertyName("refresh_token")]
-		public string? RefreshToken { get; init; }
+		public required string RefreshToken { get; init; }
+		[JsonPropertyName("client_id")]
+		public required string ClientId { get; init; }
+		[JsonPropertyName("client_secret")]
+		public required string ClientSecret { get; init; }
+	}
+	public sealed record OAuthTokenBodyPassword : OAuthTokenBody
+	{
+		[JsonPropertyName("grant_type")]
+		public string GrantType => "password";
 		[JsonPropertyName("username")]
-		public string? Username { get; init; }
+		public required string Username { get; init; }
 		[JsonPropertyName("password")]
-		public string? Password { get; init; }
+		public required string Password { get; init; }
+		[JsonPropertyName("client_id")]
+		public required string ClientId { get; init; }
+		[JsonPropertyName("client_secret")]
+		public required string ClientSecret { get; init; }
+		[JsonPropertyName("scope")]
+		public required JsonElement Scope { get; init; }
 	}
 
 	public sealed record OAuthTokenResponse(
@@ -1990,7 +2423,7 @@ public static class PagesApiTypes
 		[JsonPropertyName("parent_page_id")]
 		public long? ParentPageId { get; init; }
 		[JsonPropertyName("order")]
-		public string? Order { get; init; }
+		public CategoriesOrder? Order { get; init; }
 	}
 
 	public sealed record PagesListResponse(
@@ -2062,7 +2495,7 @@ public static class PostsApiTypes
 		[JsonPropertyName("limit")]
 		public long? Limit { get; init; }
 		[JsonPropertyName("order")]
-		public string? Order { get; init; }
+		public PostsOrder? Order { get; init; }
 	}
 
 	public sealed record PostsListResponse(
@@ -2429,7 +2862,7 @@ public static class ProfilePostsApiTypes
 	public sealed record ProfilePostsCreateBody
 	{
 		[JsonPropertyName("user_id")]
-		public required JsonElement UserId { get; init; }
+		public required Lolzteam.Api.Runtime.StringOrLong UserId { get; init; }
 		[JsonPropertyName("post_body")]
 		public required string PostBody { get; init; }
 	}
@@ -2694,7 +3127,7 @@ public static class SearchApiTypes
 		[JsonPropertyName("forum_id")]
 		public long? ForumId { get; init; }
 		[JsonPropertyName("user_id")]
-		public JsonElement? UserId { get; init; }
+		public Lolzteam.Api.Runtime.StringOrLong? UserId { get; init; }
 		[JsonPropertyName("page")]
 		public long? Page { get; init; }
 		[JsonPropertyName("limit")]
@@ -2904,7 +3337,7 @@ public static class SearchApiTypes
 		[JsonPropertyName("forum_id")]
 		public long? ForumId { get; init; }
 		[JsonPropertyName("user_id")]
-		public JsonElement? UserId { get; init; }
+		public Lolzteam.Api.Runtime.StringOrLong? UserId { get; init; }
 		[JsonPropertyName("page")]
 		public long? Page { get; init; }
 		[JsonPropertyName("limit")]
@@ -3060,7 +3493,7 @@ public static class SearchApiTypes
 		[JsonPropertyName("forum_id")]
 		public long? ForumId { get; init; }
 		[JsonPropertyName("user_id")]
-		public JsonElement? UserId { get; init; }
+		public Lolzteam.Api.Runtime.StringOrLong? UserId { get; init; }
 		[JsonPropertyName("page")]
 		public long? Page { get; init; }
 		[JsonPropertyName("limit")]
@@ -3870,9 +4303,9 @@ public static class ThreadsApiTypes
 		[JsonPropertyName("tab")]
 		public string? Tab { get; init; }
 		[JsonPropertyName("state")]
-		public string? State { get; init; }
+		public State? State { get; init; }
 		[JsonPropertyName("period")]
-		public string? Period { get; init; }
+		public Period? Period { get; init; }
 		[JsonPropertyName("title")]
 		public string? Title { get; init; }
 		[JsonPropertyName("title_only")]
@@ -3892,9 +4325,9 @@ public static class ThreadsApiTypes
 		[JsonPropertyName("limit")]
 		public long? Limit { get; init; }
 		[JsonPropertyName("order")]
-		public string? Order { get; init; }
+		public ThreadsOrder? Order { get; init; }
 		[JsonPropertyName("direction")]
-		public string? Direction { get; init; }
+		public Direction? Direction { get; init; }
 		[JsonPropertyName("thread_create_date")]
 		public long? ThreadCreateDate { get; init; }
 		[JsonPropertyName("thread_update_date")]
@@ -3968,8 +4401,9 @@ public static class ThreadsApiTypes
 		public bool? HideContacts { get; init; }
 		[JsonPropertyName("allow_ask_hidden_content")]
 		public bool? AllowAskHiddenContent { get; init; }
+		/// <summary>Default: 2</summary>
 		[JsonPropertyName("reply_group")]
-		public JsonElement? ReplyGroup { get; init; }
+		public ReplyGroup? ReplyGroup { get; init; }
 		[JsonPropertyName("comment_ignore_group")]
 		public bool? CommentIgnoreGroup { get; init; }
 		[JsonPropertyName("dont_alert_followers")]
@@ -3999,14 +4433,15 @@ public static class ThreadsApiTypes
 		public string? Title { get; init; }
 		[JsonPropertyName("title_en")]
 		public string? TitleEn { get; init; }
+		/// <summary>Default: by_finish_date</summary>
 		[JsonPropertyName("contest_type")]
-		public required string ContestType { get; init; }
+		public required ContestType ContestType { get; init; }
 		[JsonPropertyName("length_value")]
 		public long? LengthValue { get; init; }
 		[JsonPropertyName("length_option")]
-		public string? LengthOption { get; init; }
+		public LengthOption? LengthOption { get; init; }
 		[JsonPropertyName("prize_type")]
-		public required string PrizeType { get; init; }
+		public required PrizeType PrizeType { get; init; }
 		[JsonPropertyName("count_winners")]
 		public long? CountWinners { get; init; }
 		[JsonPropertyName("prize_data_money")]
@@ -4016,7 +4451,7 @@ public static class ThreadsApiTypes
 		[JsonPropertyName("prize_data_places")]
 		public List<double?>? PrizeDataPlaces { get; init; }
 		[JsonPropertyName("prize_data_upgrade")]
-		public JsonElement? PrizeDataUpgrade { get; init; }
+		public PrizeDataUpgrade? PrizeDataUpgrade { get; init; }
 		[JsonPropertyName("require_like_count")]
 		public required long? RequireLikeCount { get; init; }
 		[JsonPropertyName("require_total_like_count")]
@@ -4025,8 +4460,9 @@ public static class ThreadsApiTypes
 		public string? SecretAnswer { get; init; }
 		[JsonPropertyName("tags")]
 		public List<string>? Tags { get; init; }
+		/// <summary>Default: 2</summary>
 		[JsonPropertyName("reply_group")]
-		public JsonElement? ReplyGroup { get; init; }
+		public ReplyGroup? ReplyGroup { get; init; }
 		[JsonPropertyName("comment_ignore_group")]
 		public bool? CommentIgnoreGroup { get; init; }
 		[JsonPropertyName("dont_alert_followers")]
@@ -4065,11 +4501,11 @@ public static class ThreadsApiTypes
 		[JsonPropertyName("as_amount")]
 		public required double? AsAmount { get; init; }
 		[JsonPropertyName("currency")]
-		public string? Currency { get; init; }
+		public Currency? Currency { get; init; }
 		[JsonPropertyName("transfer_type")]
-		public required string TransferType { get; init; }
+		public required TransferType TransferType { get; init; }
 		[JsonPropertyName("pay_claim")]
-		public string? PayClaim { get; init; }
+		public PayClaim? PayClaim { get; init; }
 		[JsonPropertyName("as_funds_receipt")]
 		public string? AsFundsReceipt { get; init; }
 		[JsonPropertyName("as_tg_login_screenshot")]
@@ -4080,8 +4516,9 @@ public static class ThreadsApiTypes
 		public bool? HideContacts { get; init; }
 		[JsonPropertyName("allow_ask_hidden_content")]
 		public bool? AllowAskHiddenContent { get; init; }
+		/// <summary>Default: 2</summary>
 		[JsonPropertyName("reply_group")]
-		public JsonElement? ReplyGroup { get; init; }
+		public ReplyGroup? ReplyGroup { get; init; }
 		[JsonPropertyName("comment_ignore_group")]
 		public bool? CommentIgnoreGroup { get; init; }
 		[JsonPropertyName("dont_alert_followers")]
@@ -4133,7 +4570,7 @@ public static class ThreadsApiTypes
 		[JsonPropertyName("allow_ask_hidden_content")]
 		public bool? AllowAskHiddenContent { get; init; }
 		[JsonPropertyName("reply_group")]
-		public JsonElement? ReplyGroup { get; init; }
+		public ReplyGroup? ReplyGroup { get; init; }
 		[JsonPropertyName("comment_ignore_group")]
 		public bool? CommentIgnoreGroup { get; init; }
 	}
@@ -4871,11 +5308,11 @@ public static class UsersApiTypes
 		[JsonPropertyName("short_link")]
 		public string? ShortLink { get; init; }
 		[JsonPropertyName("language_id")]
-		public JsonElement? LanguageId { get; init; }
+		public LanguageId? LanguageId { get; init; }
 		[JsonPropertyName("gender")]
-		public string? Gender { get; init; }
+		public Gender? Gender { get; init; }
 		[JsonPropertyName("timezone")]
-		public string? Timezone { get; init; }
+		public Timezone? Timezone { get; init; }
 		[JsonPropertyName("receive_admin_email")]
 		public bool? ReceiveAdminEmail { get; init; }
 		[JsonPropertyName("activity_visible")]
@@ -4887,15 +5324,15 @@ public static class UsersApiTypes
 		[JsonPropertyName("hide_username_change_logs")]
 		public bool? HideUsernameChangeLogs { get; init; }
 		[JsonPropertyName("allow_view_profile")]
-		public string? AllowViewProfile { get; init; }
+		public AllowViewProfile? AllowViewProfile { get; init; }
 		[JsonPropertyName("allow_post_profile")]
-		public string? AllowPostProfile { get; init; }
+		public AllowPostProfile? AllowPostProfile { get; init; }
 		[JsonPropertyName("allow_send_personal_conversation")]
-		public string? AllowSendPersonalConversation { get; init; }
+		public AllowSendPersonalConversation? AllowSendPersonalConversation { get; init; }
 		[JsonPropertyName("allow_invite_group")]
-		public string? AllowInviteGroup { get; init; }
+		public AllowInviteGroup? AllowInviteGroup { get; init; }
 		[JsonPropertyName("allow_receive_news_feed")]
-		public string? AllowReceiveNewsFeed { get; init; }
+		public AllowReceiveNewsFeed? AllowReceiveNewsFeed { get; init; }
 		[JsonPropertyName("alert")]
 		public JsonElement? Alert { get; init; }
 		[JsonPropertyName("fields")]
@@ -4911,9 +5348,9 @@ public static class UsersApiTypes
 	public sealed record UsersClaimsParams
 	{
 		[JsonPropertyName("type")]
-		public string? Type { get; init; }
+		public NotificationsType? Type { get; init; }
 		[JsonPropertyName("claim_state")]
-		public string? ClaimState { get; init; }
+		public ClaimState? ClaimState { get; init; }
 	}
 
 	public sealed record UsersClaimsResponse(
@@ -5036,7 +5473,7 @@ public static class UsersApiTypes
 	public sealed record UsersFollowersParams
 	{
 		[JsonPropertyName("order")]
-		public string? Order { get; init; }
+		public UsersOrder? Order { get; init; }
 		[JsonPropertyName("page")]
 		public long? Page { get; init; }
 		[JsonPropertyName("limit")]
@@ -5127,7 +5564,7 @@ public static class UsersApiTypes
 	public sealed record UsersFollowingsParams
 	{
 		[JsonPropertyName("order")]
-		public string? Order { get; init; }
+		public UsersOrder? Order { get; init; }
 		[JsonPropertyName("page")]
 		public long? Page { get; init; }
 		[JsonPropertyName("limit")]
@@ -5219,13 +5656,15 @@ public static class UsersApiTypes
 		[JsonPropertyName("node_id")]
 		public long? NodeId { get; init; }
 		[JsonPropertyName("like_type")]
-		public string? LikeType { get; init; }
+		public LikeType? LikeType { get; init; }
+		/// <summary>Default: gotten</summary>
 		[JsonPropertyName("type")]
-		public string? Type { get; init; }
+		public NotificationsType? Type { get; init; }
 		[JsonPropertyName("page")]
 		public long? Page { get; init; }
+		/// <summary>Default: post</summary>
 		[JsonPropertyName("content_type")]
-		public string? ContentType { get; init; }
+		public ContentType? ContentType { get; init; }
 		[JsonPropertyName("search_user_id")]
 		public long? SearchUserId { get; init; }
 		[JsonPropertyName("stats")]
