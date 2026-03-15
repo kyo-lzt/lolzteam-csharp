@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Lolzteam.Api</RootNamespace>
+    <PackageId>Lolzteam.Api</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>Lolzteam</Authors>
+    <Description>C# wrapper for Lolzteam Forum and Market APIs</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Lolzteam.Api.Tests" />
+  </ItemGroup>
+
+</Project>
