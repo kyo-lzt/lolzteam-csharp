@@ -76,7 +76,9 @@ internal static partial class Naming
 
 	internal static string SnakeToPascal(string name)
 	{
-		var camel = SnakePattern().Replace(name, m => m.Groups[1].Value.ToUpperInvariant());
+		// Normalize hyphens to underscores before conversion
+		var normalized = name.Replace('-', '_');
+		var camel = SnakePattern().Replace(normalized, m => m.Groups[1].Value.ToUpperInvariant());
 		return CapitalizeFirst(camel);
 	}
 

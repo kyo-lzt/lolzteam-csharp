@@ -45,7 +45,7 @@ foreach (var config in apis)
 	}
 
 	// Write Types
-	var typesContent = Emitter.EmitCSharpTypesFile(result.Groups, config.SubPackage);
+	var typesContent = Emitter.EmitCSharpTypesFile(result.Groups, config.SubPackage, result.ComponentSchemas, rawSpec);
 	File.WriteAllText(Path.Combine(config.OutputDir, "Types.cs"), typesContent);
 	Console.WriteLine("  Types.cs");
 

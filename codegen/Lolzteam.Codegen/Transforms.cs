@@ -465,6 +465,158 @@ internal static partial class Transforms
 		return SchemaToTypeString(schema, spec);
 	}
 
+	// ─── Response Schema Extraction (with $ref preservation) ─────────
+
+	/// <summary>
+	/// Extract typed response schema info from the raw (pre-deref) operation,
+	/// preserving component schema $ref names.
+	/// </summary>
+	internal static ResponseSchemaInfo? ExtractResponseSchema(
+		JsonNode? rawOperation, JsonNode rawSpec, HashSet<string> componentSchemaNames)
+	{
+		if (rawOperation is not JsonObject rawOpObj) return null;
+
+		var responses = rawOpObj["responses"];
+		if (responses is not JsonObject respObj) return null;
+		var rawSuccess = respObj["200"] ?? respObj["201"];
+		if (rawSuccess is null) return null;
+		var success = DerefShallow(rawSuccess, rawSpec);
+		if (success is not JsonObject successObj) return null;
+		var content = successObj["content"];
+		if (content is not JsonObject contentObj) return null;
+		var jsonContent = contentObj["application/json"];
+		if (jsonContent is not JsonObject jsonObj) return null;
+		var rawSchema = jsonObj["schema"];
+		if (rawSchema is null) return null;
+		var schema = DerefShallow(rawSchema, rawSpec);
+		if (schema is not JsonObject schemaObj) return null;
+
+		var properties = schemaObj["properties"];
+		if (properties is not JsonObject propsObj || propsObj.Count == 0) return null;
+
+		var requiredSet = new HashSet<string>();
+		var requiredArr = schemaObj["required"];
+		if (requiredArr is JsonArray reqArr)
+		{
+			foreach (var r in reqArr)
+			{
+				requiredSet.Add(r!.GetValue<string>());
+			}
+		}
+
+		var result = new List<ResponseProperty>();
+		foreach (var kvp in propsObj)
+		{
+			var propName = kvp.Key;
+			var propSchema = kvp.Value;
+			if (propSchema is null) continue;
+
+			var required = requiredSet.Contains(propName);
+			var (csharpType, componentRef) = ResolvePropertyType(propSchema, rawSpec, componentSchemaNames);
+			result.Add(new ResponseProperty(propName, csharpType, required, componentRef));
+		}
+
+		return result.Count > 0 ? new ResponseSchemaInfo(result) : null;
+	}
+
+	/// <summary>
+	/// Resolve a property schema to a C# type, preserving component schema references.
+	/// Returns (csharpType, componentSchemaRef or null).
+	/// </summary>
+	private static (string CSharpType, string? ComponentRef) ResolvePropertyType(
+		JsonNode schema, JsonNode rawSpec, HashSet<string> componentSchemaNames)
+	{
+		// Direct $ref to component schema
+		if (schema is JsonObject refObj)
+		{
+			var refNode = refObj["$ref"];
+			if (refNode is JsonValue jv && jv.TryGetValue<string>(out var refStr))
+			{
+				if (refStr.StartsWith("#/components/schemas/"))
+				{
+					var schemaName = refStr["#/components/schemas/".Length..];
+					if (componentSchemaNames.Contains(schemaName))
+					{
+						return (schemaName, schemaName);
+					}
+				}
+				// Resolve and recurse
+				var resolved = ResolveRef(refStr, rawSpec);
+				if (resolved is not null)
+				{
+					return ResolvePropertyType(resolved, rawSpec, componentSchemaNames);
+				}
+			}
+		}
+
+		if (schema is not JsonObject sObj) return ("JsonElement", null);
+
+		// Multi-type array: type: ['string', 'integer'] → JsonElement
+		var typeEl = sObj["type"];
+		if (typeEl is JsonArray)
+		{
+			return ("JsonElement", null);
+		}
+
+		string? type = null;
+		if (typeEl is JsonValue typeVal && typeVal.TryGetValue<string>(out var tv))
+		{
+			type = tv;
+		}
+
+		// Array — check if items ref a component schema
+		if (type == "array")
+		{
+			var items = sObj["items"];
+			if (items is not null)
+			{
+				var (itemType, itemRef) = ResolvePropertyType(items, rawSpec, componentSchemaNames);
+				return ($"List<{itemType}>", itemRef);
+			}
+			return ("List<JsonElement>", null);
+		}
+
+		// Object with properties → inline object (will be JsonElement for now, could be nested record)
+		if (type == "object" || sObj["properties"] is not null)
+		{
+			var props = sObj["properties"];
+			if (props is not null && props is JsonObject propsObj && propsObj.Count > 0)
+			{
+				return ("JsonElement", null);
+			}
+			return ("JsonElement", null);
+		}
+
+		// Primitives
+		if (type is not null)
+		{
+			var csharp = type switch
+			{
+				"string" => "string",
+				"integer" => "long",
+				"number" => "double",
+				"boolean" => "bool",
+				_ => "JsonElement",
+			};
+			return (csharp, null);
+		}
+
+		// enum → string
+		var enumValues = sObj["enum"];
+		if (enumValues is JsonArray enumArr && enumArr.Count > 0)
+		{
+			return ("string", null);
+		}
+
+		// oneOf / anyOf → JsonElement
+		if (sObj["oneOf"] is JsonArray || sObj["anyOf"] is JsonArray)
+		{
+			return ("JsonElement", null);
+		}
+
+		return ("JsonElement", null);
+	}
+
 	// ─── Method Definition ────────────────────────────────────────────
 
 	internal static MethodDefinition ExtractMethodDefinition(
@@ -472,12 +624,16 @@ internal static partial class Transforms
 		string methodName,
 		string httpMethod,
 		string path,
-		JsonNode operation)
+		JsonNode operation,
+		JsonNode? rawOperation,
+		JsonNode rawSpec,
+		HashSet<string> componentSchemaNames)
 	{
 		var emptySpec = new JsonObject();
 		var parameters = ExtractParameters(operation, emptySpec);
 		var body = ExtractBody(operation, emptySpec);
 		var responseType = ExtractResponseType(operation, emptySpec);
+		var responseSchema = ExtractResponseSchema(rawOperation, rawSpec, componentSchemaNames);
 
 		var isGet = httpMethod.Equals("GET", StringComparison.OrdinalIgnoreCase);
 
@@ -526,7 +682,8 @@ internal static partial class Transforms
 			responseType,
 			!isGet && body.BodyIsArray,
 			isGet ? null : body.BodyArrayItemType,
-			isGet ? "form" : body.BodyEncoding
+			isGet ? "form" : body.BodyEncoding,
+			responseSchema
 		);
 	}
 }

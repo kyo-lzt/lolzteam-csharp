@@ -10,7 +10,11 @@ internal sealed record ApiConfig(
 	int DefaultSearchRateLimit
 );
 
-internal sealed record ParseResult(List<ParsedGroup> Groups, string BaseUrl);
+internal sealed record ParseResult(
+	List<ParsedGroup> Groups,
+	string BaseUrl,
+	Dictionary<string, System.Text.Json.Nodes.JsonObject> ComponentSchemas
+);
 
 internal sealed record ParsedGroup(string GroupName, List<MethodDefinition> Methods);
 
@@ -27,6 +31,10 @@ internal sealed record BodyExtractionResult(
 	string BodyEncoding = "form"
 );
 
+internal sealed record ResponseProperty(string Name, string CSharpType, bool Required, string? ComponentSchemaRef);
+
+internal sealed record ResponseSchemaInfo(List<ResponseProperty> Properties);
+
 internal sealed record MethodDefinition(
 	string OperationId,
 	string MethodName,
@@ -39,5 +47,6 @@ internal sealed record MethodDefinition(
 	string ResponseType,
 	bool BodyIsArray,
 	string? BodyArrayItemType,
-	string BodyEncoding
+	string BodyEncoding,
+	ResponseSchemaInfo? ResponseSchema = null
 );

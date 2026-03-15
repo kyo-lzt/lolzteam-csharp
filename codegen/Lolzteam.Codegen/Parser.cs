@@ -8,13 +8,17 @@ internal static class Parser
 
 	internal static ParseResult ParseSpec(JsonNode rawSpec)
 	{
+		// Extract component schemas before dereferencing (we need $ref info preserved)
+		var componentSchemas = ExtractComponentSchemas(rawSpec);
+		var componentSchemaNames = new HashSet<string>(componentSchemas.Keys);
+
 		// Resolve all $refs first
 		var spec = Transforms.DerefDeep(rawSpec, rawSpec, []);
 
 		var paths = (spec as JsonObject)?["paths"];
 		if (paths is not JsonObject pathsObj)
 		{
-			return new ParseResult([], "https://localhost");
+			return new ParseResult([], "https://localhost", componentSchemas);
 		}
 
 		var groupMap = new Dictionary<string, List<MethodDefinition>>();
@@ -37,8 +41,12 @@ internal static class Parser
 				var group = Naming.OperationIdToGroup(operationId);
 				var methodName = Naming.OperationIdToMethod(operationId);
 
+				// Get operation from RAW spec (before deref) for response schema $ref detection
+				var rawOperation = GetRawOperation(rawSpec, path, method);
+
 				var methodDef = Transforms.ExtractMethodDefinition(
-					operationId, methodName, method, path, operation
+					operationId, methodName, method, path, operation,
+					rawOperation, rawSpec, componentSchemaNames
 				);
 
 				if (!groupMap.TryGetValue(group, out var methods))
@@ -71,6 +79,40 @@ internal static class Parser
 			}
 		}
 
-		return new ParseResult(groups, baseUrl);
+		return new ParseResult(groups, baseUrl, componentSchemas);
+	}
+
+	private static Dictionary<string, JsonObject> ExtractComponentSchemas(JsonNode rawSpec)
+	{
+		var result = new Dictionary<string, JsonObject>();
+		if (rawSpec is not JsonObject root) return result;
+		var components = root["components"];
+		if (components is not JsonObject compObj) return result;
+		var schemas = compObj["schemas"];
+		if (schemas is not JsonObject schemasObj) return result;
+
+		foreach (var kvp in schemasObj)
+		{
+			if (kvp.Value is JsonObject schemaObj)
+			{
+				// Deep clone so we can resolve $refs within component schemas later
+				var cloned = JsonNode.Parse(schemaObj.ToJsonString());
+				if (cloned is JsonObject clonedObj)
+				{
+					result[kvp.Key] = clonedObj;
+				}
+			}
+		}
+		return result;
+	}
+
+	private static JsonNode? GetRawOperation(JsonNode rawSpec, string path, string method)
+	{
+		if (rawSpec is not JsonObject root) return null;
+		var paths = root["paths"];
+		if (paths is not JsonObject pathsObj) return null;
+		var pathItem = pathsObj[path];
+		if (pathItem is not JsonObject pathItemObj) return null;
+		return pathItemObj[method];
 	}
 }

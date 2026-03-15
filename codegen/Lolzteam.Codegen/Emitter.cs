@@ -1,10 +1,141 @@
 using System.Text;
+using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
 
 namespace Lolzteam.Codegen;
 
 internal static partial class Emitter
 {
+	// ─── Component Schema Records ─────────────────────────────────────
+
+	/// <summary>Generate a sealed record for a component schema.</summary>
+	private static string EmitComponentSchemaRecord(
+		string name, JsonObject schema, JsonNode rawSpec, HashSet<string> componentSchemaNames)
+	{
+		var sb = new StringBuilder();
+		sb.Append("public sealed record ").Append(name).Append("(\n");
+
+		var requiredSet = new HashSet<string>();
+		var requiredArr = schema["required"];
+		if (requiredArr is JsonArray reqArr)
+		{
+			foreach (var r in reqArr)
+			{
+				requiredSet.Add(r!.GetValue<string>());
+			}
+		}
+
+		var properties = schema["properties"];
+		if (properties is not JsonObject propsObj || propsObj.Count == 0)
+		{
+			sb.Append(");\n");
+			return sb.ToString();
+		}
+
+		var entries = new List<(string jsonName, string csharpType, bool required)>();
+		foreach (var kvp in propsObj)
+		{
+			var propName = kvp.Key;
+			var propSchema = kvp.Value;
+			if (propSchema is null) continue;
+
+			var required = requiredSet.Contains(propName);
+			var csharpType = ResolveComponentPropertyType(propSchema, rawSpec, componentSchemaNames);
+			entries.Add((propName, csharpType, required));
+		}
+
+		for (var i = 0; i < entries.Count; i++)
+		{
+			var (jsonName, csharpType, required) = entries[i];
+			var propName = Naming.SafeCSharpName(jsonName);
+			var typeStr = required ? csharpType : MakeNullable(csharpType);
+
+			sb.Append("\t[property: JsonPropertyName(\"").Append(jsonName).Append("\")] ");
+			sb.Append(typeStr).Append(' ').Append(propName);
+
+			if (i < entries.Count - 1)
+				sb.Append(",\n");
+			else
+				sb.Append('\n');
+		}
+
+		sb.Append(");\n");
+		return sb.ToString();
+	}
+
+	/// <summary>Resolve a property type within a component schema.</summary>
+	private static string ResolveComponentPropertyType(
+		JsonNode schema, JsonNode rawSpec, HashSet<string> componentSchemaNames)
+	{
+		// $ref to another component schema
+		if (schema is JsonObject refObj)
+		{
+			var refNode = refObj["$ref"];
+			if (refNode is JsonValue jv && jv.TryGetValue<string>(out var refStr))
+			{
+				if (refStr.StartsWith("#/components/schemas/"))
+				{
+					var schemaName = refStr["#/components/schemas/".Length..];
+					if (componentSchemaNames.Contains(schemaName))
+					{
+						return schemaName;
+					}
+				}
+				var resolved = Transforms.ResolveRef(refStr, rawSpec);
+				if (resolved is not null)
+				{
+					return ResolveComponentPropertyType(resolved, rawSpec, componentSchemaNames);
+				}
+			}
+		}
+
+		if (schema is not JsonObject sObj) return "JsonElement";
+
+		var typeEl = sObj["type"];
+
+		// Multi-type array
+		if (typeEl is JsonArray) return "JsonElement";
+
+		string? type = null;
+		if (typeEl is JsonValue typeVal && typeVal.TryGetValue<string>(out var tv))
+		{
+			type = tv;
+		}
+
+		if (type == "array")
+		{
+			var items = sObj["items"];
+			if (items is not null)
+			{
+				var itemType = ResolveComponentPropertyType(items, rawSpec, componentSchemaNames);
+				return $"List<{itemType}>";
+			}
+			return "List<JsonElement>";
+		}
+
+		if (type == "object" || sObj["properties"] is not null)
+		{
+			return "JsonElement";
+		}
+
+		if (type is not null)
+		{
+			return type switch
+			{
+				"string" => "string",
+				"integer" => "long",
+				"number" => "double",
+				"boolean" => "bool",
+				_ => "JsonElement",
+			};
+		}
+
+		if (sObj["enum"] is JsonArray) return "string";
+		if (sObj["oneOf"] is JsonArray || sObj["anyOf"] is JsonArray) return "JsonElement";
+
+		return "JsonElement";
+	}
+
 	// ─── Types File ───────────────────────────────────────────────────
 
 	private static string? EmitQueryParamsRecord(string group, MethodDefinition method)
@@ -73,19 +204,60 @@ internal static partial class Emitter
 	private static string EmitResponseRecord(string group, MethodDefinition method)
 	{
 		var typeName = Naming.BuildTypeName(group, method.MethodName) + "Response";
+
+		// If we have typed response schema, emit a record with proper fields
+		if (method.ResponseSchema is { } schema && schema.Properties.Count > 0)
+		{
+			var sb = new StringBuilder();
+			sb.Append("\tpublic sealed record ").Append(typeName).Append("(\n");
+
+			for (var i = 0; i < schema.Properties.Count; i++)
+			{
+				var prop = schema.Properties[i];
+				var propName = Naming.SafeCSharpName(prop.Name);
+				var typeStr = prop.Required ? prop.CSharpType : MakeNullable(prop.CSharpType);
+
+				sb.Append("\t\t[property: JsonPropertyName(\"").Append(prop.Name).Append("\")] ");
+				sb.Append(typeStr).Append(' ').Append(propName);
+
+				if (i < schema.Properties.Count - 1)
+					sb.Append(",\n");
+				else
+					sb.Append('\n');
+			}
+
+			sb.Append("\t);");
+			return sb.ToString();
+		}
+
+		// Fallback: opaque JsonElement
 		var csharpType = Transforms.ToCSharpType(method.ResponseType);
 		return $"\tpublic sealed record {typeName}({csharpType} Data);";
 	}
 
-	internal static string EmitCSharpTypesFile(List<ParsedGroup> groups, string subPackage)
+	internal static string EmitCSharpTypesFile(
+		List<ParsedGroup> groups, string subPackage,
+		Dictionary<string, JsonObject> componentSchemas, JsonNode rawSpec)
 	{
 		var sb = new StringBuilder();
 		var ns = "Lolzteam.Api.Generated." + Naming.CapitalizeFirst(subPackage);
+		var componentSchemaNames = new HashSet<string>(componentSchemas.Keys);
 
 		sb.Append("// Auto-generated. Do not edit manually.\n\n");
 		sb.Append("using System.Text.Json.Serialization;\n");
 		sb.Append("using System.Text.Json;\n\n");
 		sb.Append("namespace ").Append(ns).Append(";\n\n");
+
+		// Emit component schema records first
+		if (componentSchemas.Count > 0)
+		{
+			sb.Append("// ─── Component Schemas ────────────────────────────────────────\n\n");
+			foreach (var kvp in componentSchemas)
+			{
+				sb.Append(EmitComponentSchemaRecord(kvp.Key, kvp.Value, rawSpec, componentSchemaNames));
+				sb.Append('\n');
+			}
+		}
 
 		foreach (var group in groups)
 		{
@@ -132,16 +304,26 @@ internal static partial class Emitter
 	}
 
 	/// <summary>Emit a return statement that constructs the response record from __result.</summary>
-	private static void EmitReturnStatement(StringBuilder sb, string responseTypeName, string dataCSharpType, string indent)
+	private static void EmitReturnStatement(StringBuilder sb, string responseTypeName, MethodDefinition method, string indent)
 	{
-		if (dataCSharpType == "JsonElement")
+		if (method.ResponseSchema is { } schema && schema.Properties.Count > 0)
 		{
-			sb.Append(indent).Append("return new ").Append(responseTypeName).Append("(__result);\n");
+			// Typed response — deserialize directly to the record
+			sb.Append(indent).Append("return JsonSerializer.Deserialize<").Append(responseTypeName)
+				.Append(">(__result)!;\n");
 		}
 		else
 		{
-			sb.Append(indent).Append("return new ").Append(responseTypeName)
-				.Append("(JsonSerializer.Deserialize<").Append(dataCSharpType).Append(">(__result)!);\n");
+			var dataCSharpType = Transforms.ToCSharpType(method.ResponseType);
+			if (dataCSharpType == "JsonElement")
+			{
+				sb.Append(indent).Append("return new ").Append(responseTypeName).Append("(__result);\n");
+			}
+			else
+			{
+				sb.Append(indent).Append("return new ").Append(responseTypeName)
+					.Append("(JsonSerializer.Deserialize<").Append(dataCSharpType).Append(">(__result)!);\n");
+			}
 		}
 	}
 
@@ -234,13 +416,12 @@ internal static partial class Emitter
 		var isMultipart = method.BodyEncoding == "multipart";
 
 		var responseTypeName = className + "Types." + typeName + "Response";
-		var responseCSharpType = Transforms.ToCSharpType(method.ResponseType);
 		sb.Append("\tpublic async Task<").Append(responseTypeName).Append("> ").Append(method.MethodName)
 			.Append("Async(").Append(argStr).Append(")\n\t{\n");
 
 		if (isMultipart && hasByteArrayFields)
 		{
-			EmitMultipartByteArrayMethod(sb, method, pathExpr, hasQueryType, isSearch, responseTypeName, responseCSharpType);
+			EmitMultipartByteArrayMethod(sb, method, pathExpr, hasQueryType, isSearch, responseTypeName);
 		}
 		else
 		{
@@ -278,7 +459,7 @@ internal static partial class Emitter
 			}
 
 			sb.Append("\t\t}, cancellationToken).ConfigureAwait(false);\n");
-			EmitReturnStatement(sb, responseTypeName, responseCSharpType, "\t\t");
+			EmitReturnStatement(sb, responseTypeName, method, "\t\t");
 		}
 
 		sb.Append("\t}");
@@ -287,7 +468,7 @@ internal static partial class Emitter
 
 	private static void EmitMultipartByteArrayMethod(
 		StringBuilder sb, MethodDefinition method, string pathExpr,
-		bool hasQueryType, bool isSearch, string responseTypeName, string responseCSharpType)
+		bool hasQueryType, bool isSearch, string responseTypeName)
 	{
 		var serializableProps = method.BodyProperties.FindAll(p => p.Type != "Blob");
 		var byteArrayFieldNames = method.BodyProperties.FindAll(p => p.Type == "Blob")
@@ -352,7 +533,7 @@ internal static partial class Emitter
 				sb.Append(indent).Append("\tIsSearch = true,\n");
 			}
 			sb.Append(indent).Append("}, cancellationToken).ConfigureAwait(false);\n");
-			EmitReturnStatement(sb, responseTypeName, responseCSharpType, indent);
+			EmitReturnStatement(sb, responseTypeName, method, indent);
 		}
 
 		if (method.BodyRequired)
@@ -378,7 +559,7 @@ internal static partial class Emitter
 				sb.Append("\t\t\t\tIsSearch = true,\n");
 			}
 			sb.Append("\t\t\t}, cancellationToken).ConfigureAwait(false);\n");
-			EmitReturnStatement(sb, responseTypeName, responseCSharpType, "\t\t\t");
+			EmitReturnStatement(sb, responseTypeName, method, "\t\t\t");
 			sb.Append("\t\t}\n");
 		}
 	}
