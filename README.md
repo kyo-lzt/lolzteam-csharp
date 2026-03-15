@@ -60,6 +60,8 @@ var config = new ClientConfig
         MaxDelay = TimeSpan.FromSeconds(30),        // default: 30s
     },
     RateLimit = new RateLimitConfig(200),
+    SearchRateLimit = new RateLimitConfig(30),
+    OnRetry = info => Console.WriteLine($"Retry #{info.Attempt}: {info.StatusCode}"),
 };
 ```
 
@@ -70,6 +72,8 @@ var config = new ClientConfig
 | `Proxy` | `ProxyConfig?` | `null` | Proxy URL (http/https/socks5) |
 | `Retry` | `RetryConfig` | 3 retries, 1s base, 30s max | Retry behavior |
 | `RateLimit` | `RateLimitConfig?` | Forum: 300/min, Market: 120/min | Requests per minute |
+| `SearchRateLimit` | `RateLimitConfig?` | Market: 20/min | Search rate limit |
+| `OnRetry` | `Action<RetryInfo>?` | `null` | Callback on each retry attempt |
 
 ## Retry Logic
 
@@ -93,7 +97,7 @@ var client = new ForumClient(new ClientConfig { Token = "...", Retry = null });
 var client = new ForumClient(new ClientConfig
 {
     Token = "...",
-    Retry = new RetryConfig { OnRetry = info => Console.WriteLine($"Retry #{info.Attempt}") },
+    OnRetry = info => Console.WriteLine($"Retry #{info.Attempt}"),
 });
 ```
 
