@@ -230,6 +230,13 @@ public enum PrizeType
 	[Lolzteam.Api.Runtime.EnumValue("upgrades")] Upgrades,
 }
 
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<ProfilePostsFieldsInclude>))]
+public enum ProfilePostsFieldsInclude
+{
+	[Lolzteam.Api.Runtime.EnumValue("*")] Value1240085564,
+	[Lolzteam.Api.Runtime.EnumValue("latest_comments")] LatestComments,
+}
+
 public enum ReplyGroup : long
 {
 	V0 = 0,
@@ -255,6 +262,13 @@ public enum State
 {
 	[Lolzteam.Api.Runtime.EnumValue("active")] Active,
 	[Lolzteam.Api.Runtime.EnumValue("closed")] Closed,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<ThreadsFieldsInclude>))]
+public enum ThreadsFieldsInclude
+{
+	[Lolzteam.Api.Runtime.EnumValue("*")] Value1240085564,
+	[Lolzteam.Api.Runtime.EnumValue("latest_posts")] LatestPosts,
 }
 
 [JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<ThreadsOrder>))]
@@ -372,6 +386,13 @@ public enum TransferType
 	[Lolzteam.Api.Runtime.EnumValue("guarantor")] Guarantor,
 	[Lolzteam.Api.Runtime.EnumValue("safe")] Safe,
 	[Lolzteam.Api.Runtime.EnumValue("notsafe")] Notsafe,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<UsersFieldsInclude>))]
+public enum UsersFieldsInclude
+{
+	[Lolzteam.Api.Runtime.EnumValue("*")] Value1240085564,
+	[Lolzteam.Api.Runtime.EnumValue("alerts")] Alerts,
 }
 
 [JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<UsersOrder>))]
@@ -1277,7 +1298,7 @@ public static class ChatboxApiTypes
 	public sealed record ChatboxGetMessagesParams
 	{
 		[JsonPropertyName("room_id")]
-		public RoomId? RoomId { get; init; }
+		public required RoomId RoomId { get; init; }
 		[JsonPropertyName("before_message_id")]
 		public long? BeforeMessageId { get; init; }
 	}
@@ -1330,7 +1351,7 @@ public static class ChatboxApiTypes
 	public sealed record ChatboxOnlineParams
 	{
 		[JsonPropertyName("room_id")]
-		public RoomId? RoomId { get; init; }
+		public required RoomId RoomId { get; init; }
 	}
 
 	public sealed record ChatboxOnlineResponse(
@@ -1386,7 +1407,7 @@ public static class ChatboxApiTypes
 	public sealed record ChatboxReportReasonsParams
 	{
 		[JsonPropertyName("message_id")]
-		public long? MessageId { get; init; }
+		public required long? MessageId { get; init; }
 	}
 
 	public sealed record ChatboxReportReasonsResponse(
@@ -2598,7 +2619,7 @@ public static class PostsApiTypes
 	public sealed record PostsCommentsGetParams
 	{
 		[JsonPropertyName("post_id")]
-		public long? PostId { get; init; }
+		public required long? PostId { get; init; }
 		[JsonPropertyName("before")]
 		public long? Before { get; init; }
 		[JsonPropertyName("before_comment")]
@@ -2756,7 +2777,7 @@ public static class ProfilePostsApiTypes
 		[JsonPropertyName("limit")]
 		public long? Limit { get; init; }
 		[JsonPropertyName("fields_include")]
-		public JsonElement? FieldsInclude { get; init; }
+		public List<ProfilePostsFieldsInclude>? FieldsInclude { get; init; }
 	}
 
 	public sealed record ProfilePostsListResponse(
@@ -2948,7 +2969,7 @@ public static class ProfilePostsApiTypes
 	public sealed record ProfilePostsCommentsListParams
 	{
 		[JsonPropertyName("profile_post_id")]
-		public long? ProfilePostId { get; init; }
+		public required long? ProfilePostId { get; init; }
 		[JsonPropertyName("before")]
 		public long? Before { get; init; }
 		[JsonPropertyName("limit")]
@@ -4282,7 +4303,7 @@ public static class TagsApiTypes
 	public sealed record TagsFindParams
 	{
 		[JsonPropertyName("tag")]
-		public string? Tag { get; init; }
+		public required string Tag { get; init; }
 	}
 
 	public sealed record TagsFindResponse(
@@ -4333,7 +4354,7 @@ public static class ThreadsApiTypes
 		[JsonPropertyName("thread_update_date")]
 		public long? ThreadUpdateDate { get; init; }
 		[JsonPropertyName("fields_include")]
-		public JsonElement? FieldsInclude { get; init; }
+		public List<ThreadsFieldsInclude>? FieldsInclude { get; init; }
 	}
 
 	public sealed record ThreadsListResponse(
@@ -4545,7 +4566,7 @@ public static class ThreadsApiTypes
 	public sealed record ThreadsGetParams
 	{
 		[JsonPropertyName("fields_include")]
-		public JsonElement? FieldsInclude { get; init; }
+		public List<ThreadsFieldsInclude>? FieldsInclude { get; init; }
 	}
 
 	public sealed record ThreadsGetResponse(
@@ -4677,7 +4698,7 @@ public static class ThreadsApiTypes
 		[JsonPropertyName("total")]
 		public bool? Total { get; init; }
 		[JsonPropertyName("fields_include")]
-		public JsonElement? FieldsInclude { get; init; }
+		public List<ThreadsFieldsInclude>? FieldsInclude { get; init; }
 	}
 
 	public sealed record ThreadsFollowedResponse(
@@ -5226,7 +5247,7 @@ public static class UsersApiTypes
 		[JsonPropertyName("limit")]
 		public long? Limit { get; init; }
 		[JsonPropertyName("fields_include")]
-		public JsonElement? FieldsInclude { get; init; }
+		public List<UsersFieldsInclude>? FieldsInclude { get; init; }
 	}
 
 	public sealed record UsersListResponse(
@@ -5262,7 +5283,7 @@ public static class UsersApiTypes
 		[JsonPropertyName("custom_fields")]
 		public JsonElement? CustomFields { get; init; }
 		[JsonPropertyName("fields_include")]
-		public JsonElement? FieldsInclude { get; init; }
+		public List<UsersFieldsInclude>? FieldsInclude { get; init; }
 	}
 
 	public sealed record UsersFindResponse(
@@ -5273,7 +5294,7 @@ public static class UsersApiTypes
 	public sealed record UsersGetParams
 	{
 		[JsonPropertyName("fields_include")]
-		public JsonElement? FieldsInclude { get; init; }
+		public List<UsersFieldsInclude>? FieldsInclude { get; init; }
 	}
 
 	public sealed record UsersGetResponse(
@@ -5659,7 +5680,7 @@ public static class UsersApiTypes
 		public LikeType? LikeType { get; init; }
 		/// <summary>Default: gotten</summary>
 		[JsonPropertyName("type")]
-		public NotificationsType? Type { get; init; }
+		public UsersType? Type { get; init; } = UsersType.Gotten;
 		[JsonPropertyName("page")]
 		public long? Page { get; init; }
 		/// <summary>Default: post</summary>

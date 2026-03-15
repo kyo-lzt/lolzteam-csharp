@@ -7,10 +7,11 @@ namespace Lolzteam.Codegen;
 internal static class EnumCollector
 {
 	/// <summary>
-	/// Tracks where an enum was seen (group + param name + values).
+	/// Tracks where an enum was seen (group + operation + param name + values).
 	/// </summary>
 	private sealed record EnumOccurrence(
 		string GroupName,
+		string OperationId,
 		string ParamName,
 		bool IsIntEnum,
 		List<EnumVariant> Values
@@ -33,7 +34,7 @@ internal static class EnumCollector
 					if (param.EnumValues is { Count: > 0 } values)
 					{
 						occurrences.Add(new EnumOccurrence(
-							group.GroupName, param.Name, values[0] is EnumVariant.IntVariant, values));
+							group.GroupName, method.OperationId, param.Name, values[0] is EnumVariant.IntVariant, values));
 					}
 				}
 				foreach (var prop in method.BodyProperties)
@@ -41,7 +42,7 @@ internal static class EnumCollector
 					if (prop.EnumValues is { Count: > 0 } values)
 					{
 						occurrences.Add(new EnumOccurrence(
-							group.GroupName, prop.Name, values[0] is EnumVariant.IntVariant, values));
+							group.GroupName, method.OperationId, prop.Name, values[0] is EnumVariant.IntVariant, values));
 					}
 				}
 				if (method.BodyOneOfVariants is { Count: > 0 } variants)
@@ -53,7 +54,7 @@ internal static class EnumCollector
 							if (prop.EnumValues is { Count: > 0 } values)
 							{
 								occurrences.Add(new EnumOccurrence(
-									group.GroupName, prop.Name, values[0] is EnumVariant.IntVariant, values));
+									group.GroupName, method.OperationId, prop.Name, values[0] is EnumVariant.IntVariant, values));
 							}
 						}
 					}
@@ -80,7 +81,7 @@ internal static class EnumCollector
 
 		// Step 3: for each param name, check if all occurrences share the same values
 		var enumDefs = new Dictionary<string, EnumDefinition>();
-		// Maps "groupName:paramName" → enum type name
+		// Maps "operationId:paramName" → enum type name
 		var paramToEnumType = new Dictionary<string, string>();
 
 		foreach (var (paramName, occs) in byName)
@@ -100,7 +101,7 @@ internal static class EnumCollector
 				// Map all occurrences
 				foreach (var occ in occs)
 				{
-					var key = occ.GroupName + ":" + occ.ParamName;
+					var key = occ.OperationId + ":" + occ.ParamName;
 					paramToEnumType.TryAdd(key, typeName);
 				}
 			}
@@ -135,7 +136,7 @@ internal static class EnumCollector
 
 					foreach (var occ in groupsForSet)
 					{
-						var key = occ.GroupName + ":" + occ.ParamName;
+						var key = occ.OperationId + ":" + occ.ParamName;
 						paramToEnumType.TryAdd(key, typeName);
 					}
 				}

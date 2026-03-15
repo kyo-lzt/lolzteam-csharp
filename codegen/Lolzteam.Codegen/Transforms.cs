@@ -390,6 +390,19 @@ internal static partial class Transforms
 			var requiredNode = paramObj["required"];
 			var required = requiredNode is JsonValue rv && rv.TryGetValue<bool>(out var rBool) && rBool;
 			var enumValues = ExtractEnumValues(paramSchema, spec);
+			// For array params, extract enum values from items schema
+			if (enumValues is null && paramSchema is JsonObject paramSchemaObj)
+			{
+				var paramTypeNode = paramSchemaObj["type"];
+				if (paramTypeNode is JsonValue ptv && ptv.TryGetValue<string>(out var paramType) && paramType == "array")
+				{
+					var itemsSchema = paramSchemaObj["items"];
+					if (itemsSchema is not null)
+					{
+						enumValues = ExtractEnumValues(itemsSchema, spec);
+					}
+				}
+			}
 			var defaultValue = ExtractDefaultValue(paramSchema);
 
 			var parsed = new ParsedParameter(
@@ -715,6 +728,19 @@ internal static partial class Transforms
 					}
 					var propType = format == "binary" ? "Blob" : SchemaToTypeString(propSchema, spec);
 					var propEnumValues = format == "binary" ? null : ExtractEnumValues(propSchema, spec);
+					// For array properties, extract enum values from items schema
+					if (propEnumValues is null && propSchema is JsonObject propSchemaObj2)
+					{
+						var propTypeNode = propSchemaObj2["type"];
+						if (propTypeNode is JsonValue ptv2 && ptv2.TryGetValue<string>(out var pt2) && pt2 == "array")
+						{
+							var itemsSchema = propSchemaObj2["items"];
+							if (itemsSchema is not null)
+							{
+								propEnumValues = ExtractEnumValues(itemsSchema, spec);
+							}
+						}
+					}
 					var propDefaultValue = format == "binary" ? null : ExtractDefaultValue(propSchema);
 					bodyProperties.Add(new BodyProperty(propName, propType, requiredSet.Contains(propName), propEnumValues, propDefaultValue));
 				}

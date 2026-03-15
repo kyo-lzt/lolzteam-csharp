@@ -432,9 +432,9 @@ internal static partial class Emitter
 
 		foreach (var param in method.Params.QueryParams)
 		{
-			var enumKey = group + ":" + param.Name;
+			var enumKey = method.OperationId + ":" + param.Name;
 			var csharpType = paramToEnumType.TryGetValue(enumKey, out var enumTypeName)
-				? enumTypeName
+				? (param.Type.StartsWith("Array<") ? "List<" + enumTypeName + ">" : enumTypeName)
 				: Transforms.ToCSharpType(param.Type);
 			var propName = Naming.SafeCSharpName(param.Name);
 			if (param.DefaultValue is not null)
@@ -448,7 +448,12 @@ internal static partial class Emitter
 			var defaultLiteral = param.DefaultValue is not null
 				? FormatDefaultLiteral(param.DefaultValue, csharpType, enumDefs, propName)
 				: null;
-			if (defaultLiteral is not null)
+			if (param.Required && defaultLiteral is null)
+			{
+				// Required param without default: non-nullable with required keyword
+				sb.Append("\t\tpublic required ").Append(csharpType).Append(' ').Append(propName).Append(" { get; init; }\n");
+			}
+			else if (defaultLiteral is not null)
 			{
 				sb.Append("\t\tpublic ").Append(MakeNullable(csharpType)).Append(' ').Append(propName)
 					.Append(" { get; init; } = ").Append(defaultLiteral).Append(";\n");
@@ -488,11 +493,11 @@ internal static partial class Emitter
 
 		foreach (var prop in method.BodyProperties)
 		{
-			var enumKey = group + ":" + prop.Name;
+			var enumKey = method.OperationId + ":" + prop.Name;
 			var csharpType = prop.Type == "Blob"
 				? "byte[]"
 				: paramToEnumType.TryGetValue(enumKey, out var enumTypeName)
-					? enumTypeName
+					? (prop.Type.StartsWith("Array<") ? "List<" + enumTypeName + ">" : enumTypeName)
 					: Transforms.ToCSharpType(prop.Type);
 			var propName = Naming.SafeCSharpName(prop.Name);
 
@@ -581,11 +586,11 @@ internal static partial class Emitter
 
 			foreach (var prop in variant.Properties)
 			{
-				var enumKey = group + ":" + prop.Name;
+				var enumKey = method.OperationId + ":" + prop.Name;
 				var csharpType = prop.Type == "Blob"
 					? "byte[]"
 					: paramToEnumType.TryGetValue(enumKey, out var enumTypeName)
-						? enumTypeName
+						? (prop.Type.StartsWith("Array<") ? "List<" + enumTypeName + ">" : enumTypeName)
 						: Transforms.ToCSharpType(prop.Type);
 				var propName = Naming.SafeCSharpName(prop.Name);
 
