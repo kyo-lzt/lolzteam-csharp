@@ -70,6 +70,12 @@ internal static partial class Emitter
 		return sb.ToString();
 	}
 
+	private static string EmitResponseRecord(string group, MethodDefinition method)
+	{
+		var typeName = Naming.BuildTypeName(group, method.MethodName) + "Response";
+		return $"\tpublic sealed record {typeName}(JsonElement Data);";
+	}
+
 	internal static string EmitCSharpTypesFile(List<ParsedGroup> groups, string subPackage)
 	{
 		var sb = new StringBuilder();
@@ -92,6 +98,8 @@ internal static partial class Emitter
 
 				var bodyType = EmitBodyRecord(group.GroupName, method);
 				if (bodyType is not null) groupTypes.Add(bodyType);
+
+				groupTypes.Add(EmitResponseRecord(group.GroupName, method));
 			}
 
 			if (groupTypes.Count > 0)
@@ -202,17 +210,18 @@ internal static partial class Emitter
 		var hasByteArrayFields = method.BodyProperties.Exists(p => p.Type == "Blob");
 		var isMultipart = method.BodyEncoding == "multipart";
 
-		sb.Append("\tpublic async Task<JsonElement> ").Append(method.MethodName)
+		var responseTypeName = className + "Types." + typeName + "Response";
+		sb.Append("\tpublic async Task<").Append(responseTypeName).Append("> ").Append(method.MethodName)
 			.Append("Async(").Append(argStr).Append(")\n\t{\n");
 
 		if (isMultipart && hasByteArrayFields)
 		{
-			EmitMultipartByteArrayMethod(sb, method, pathExpr, hasQueryType, isSearch);
+			EmitMultipartByteArrayMethod(sb, method, pathExpr, hasQueryType, isSearch, responseTypeName);
 		}
 		else
 		{
 			var encodingLiteral = BodyEncodingLiteral(method.BodyEncoding);
-			sb.Append("\t\treturn await _http.RequestAsync(new RequestOptions\n");
+			sb.Append("\t\tvar __result = await _http.RequestAsync(new RequestOptions\n");
 			sb.Append("\t\t{\n");
 			sb.Append("\t\t\tMethod = \"").Append(method.HttpMethod).Append("\",\n");
 			sb.Append("\t\t\tPath = ").Append(pathExpr).Append(",\n");
@@ -245,6 +254,7 @@ internal static partial class Emitter
 			}
 
 			sb.Append("\t\t}, cancellationToken).ConfigureAwait(false);\n");
+			sb.Append("\t\treturn new ").Append(responseTypeName).Append("(__result);\n");
 		}
 
 		sb.Append("\t}");
@@ -253,7 +263,7 @@ internal static partial class Emitter
 
 	private static void EmitMultipartByteArrayMethod(
 		StringBuilder sb, MethodDefinition method, string pathExpr,
-		bool hasQueryType, bool isSearch)
+		bool hasQueryType, bool isSearch, string responseTypeName)
 	{
 		var serializableProps = method.BodyProperties.FindAll(p => p.Type != "Blob");
 		var byteArrayFieldNames = method.BodyProperties.FindAll(p => p.Type == "Blob")
@@ -297,7 +307,7 @@ internal static partial class Emitter
 				}
 			}
 
-			sb.Append(indent).Append("return await _http.RequestAsync(new RequestOptions\n");
+			sb.Append(indent).Append("var __result = await _http.RequestAsync(new RequestOptions\n");
 			sb.Append(indent).Append("{\n");
 			sb.Append(indent).Append("\tMethod = \"").Append(method.HttpMethod).Append("\",\n");
 			sb.Append(indent).Append("\tPath = ").Append(pathExpr).Append(",\n");
@@ -318,6 +328,7 @@ internal static partial class Emitter
 				sb.Append(indent).Append("\tIsSearch = true,\n");
 			}
 			sb.Append(indent).Append("}, cancellationToken).ConfigureAwait(false);\n");
+			sb.Append(indent).Append("return new ").Append(responseTypeName).Append("(__result);\n");
 		}
 
 		if (method.BodyRequired)
@@ -329,7 +340,7 @@ internal static partial class Emitter
 			sb.Append("\t\tif (body is not null)\n\t\t{\n");
 			EmitBody();
 			sb.Append("\t\t}\n\t\telse\n\t\t{\n");
-			sb.Append("\t\t\treturn await _http.RequestAsync(new RequestOptions\n");
+			sb.Append("\t\t\tvar __result = await _http.RequestAsync(new RequestOptions\n");
 			sb.Append("\t\t\t{\n");
 			sb.Append("\t\t\t\tMethod = \"").Append(method.HttpMethod).Append("\",\n");
 			sb.Append("\t\t\t\tPath = ").Append(pathExpr).Append(",\n");
@@ -343,6 +354,7 @@ internal static partial class Emitter
 				sb.Append("\t\t\t\tIsSearch = true,\n");
 			}
 			sb.Append("\t\t\t}, cancellationToken).ConfigureAwait(false);\n");
+			sb.Append("\t\t\treturn new ").Append(responseTypeName).Append("(__result);\n");
 			sb.Append("\t\t}\n");
 		}
 	}

@@ -30,6 +30,8 @@ public static class OAuthApiTypes
 		[JsonPropertyName("password")]
 		public string? Password { get; init; }
 	}
+
+	public sealed record OAuthTokenResponse(JsonElement Data);
 }
 
 // ─── AssetsApi Types ────────────────────────────────────────
@@ -41,6 +43,8 @@ public static class AssetsApiTypes
 		[JsonPropertyName("css")]
 		public List<string>? Css { get; init; }
 	}
+
+	public sealed record AssetsCssResponse(JsonElement Data);
 }
 
 // ─── CategoriesApi Types ────────────────────────────────────────
@@ -56,6 +60,10 @@ public static class CategoriesApiTypes
 		[JsonPropertyName("order")]
 		public string? Order { get; init; }
 	}
+
+	public sealed record CategoriesListResponse(JsonElement Data);
+
+	public sealed record CategoriesGetResponse(JsonElement Data);
 }
 
 // ─── ForumsApi Types ────────────────────────────────────────
@@ -72,6 +80,14 @@ public static class ForumsApiTypes
 		public string? Order { get; init; }
 	}
 
+	public sealed record ForumsListResponse(JsonElement Data);
+
+	public sealed record ForumsGroupedResponse(JsonElement Data);
+
+	public sealed record ForumsGetResponse(JsonElement Data);
+
+	public sealed record ForumsFollowersResponse(JsonElement Data);
+
 	public sealed record ForumsFollowBody
 	{
 		[JsonPropertyName("post")]
@@ -86,11 +102,19 @@ public static class ForumsApiTypes
 		public int? MinimalContestAmount { get; init; }
 	}
 
+	public sealed record ForumsFollowResponse(JsonElement Data);
+
+	public sealed record ForumsUnfollowResponse(JsonElement Data);
+
 	public sealed record ForumsFollowedParams
 	{
 		[JsonPropertyName("total")]
 		public bool? Total { get; init; }
 	}
+
+	public sealed record ForumsFollowedResponse(JsonElement Data);
+
+	public sealed record ForumsGetFeedOptionsResponse(JsonElement Data);
 
 	public sealed record ForumsEditFeedOptionsBody
 	{
@@ -99,6 +123,17 @@ public static class ForumsApiTypes
 		[JsonPropertyName("keywords")]
 		public List<string>? Keywords { get; init; }
 	}
+
+	public sealed record ForumsEditFeedOptionsResponse(JsonElement Data);
+}
+
+// ─── LinksApi Types ────────────────────────────────────────
+
+public static class LinksApiTypes
+{
+	public sealed record LinksListResponse(JsonElement Data);
+
+	public sealed record LinksGetResponse(JsonElement Data);
 }
 
 // ─── PagesApi Types ────────────────────────────────────────
@@ -112,6 +147,10 @@ public static class PagesApiTypes
 		[JsonPropertyName("order")]
 		public string? Order { get; init; }
 	}
+
+	public sealed record PagesListResponse(JsonElement Data);
+
+	public sealed record PagesGetResponse(JsonElement Data);
 }
 
 // ─── NavigationApi Types ────────────────────────────────────────
@@ -123,6 +162,8 @@ public static class NavigationApiTypes
 		[JsonPropertyName("parent")]
 		public int? Parent { get; init; }
 	}
+
+	public sealed record NavigationListResponse(JsonElement Data);
 }
 
 // ─── ThreadsApi Types ────────────────────────────────────────
@@ -169,6 +210,8 @@ public static class ThreadsApiTypes
 		public JsonElement? FieldsInclude { get; init; }
 	}
 
+	public sealed record ThreadsListResponse(JsonElement Data);
+
 	public sealed record ThreadsCreateBody
 	{
 		[JsonPropertyName("post_body")]
@@ -204,6 +247,8 @@ public static class ThreadsApiTypes
 		[JsonPropertyName("watch_thread_email")]
 		public bool? WatchThreadEmail { get; init; }
 	}
+
+	public sealed record ThreadsCreateResponse(JsonElement Data);
 
 	public sealed record ThreadsCreateContestBody
 	{
@@ -261,6 +306,8 @@ public static class ThreadsApiTypes
 		public bool? WatchThreadEmail { get; init; }
 	}
 
+	public sealed record ThreadsCreateContestResponse(JsonElement Data);
+
 	public sealed record ThreadsClaimBody
 	{
 		[JsonPropertyName("as_responder")]
@@ -309,11 +356,15 @@ public static class ThreadsApiTypes
 		public required string PostBody { get; init; }
 	}
 
+	public sealed record ThreadsClaimResponse(JsonElement Data);
+
 	public sealed record ThreadsGetParams
 	{
 		[JsonPropertyName("fields_include")]
 		public JsonElement? FieldsInclude { get; init; }
 	}
+
+	public sealed record ThreadsGetResponse(JsonElement Data);
 
 	public sealed record ThreadsEditBody
 	{
@@ -337,11 +388,15 @@ public static class ThreadsApiTypes
 		public bool? CommentIgnoreGroup { get; init; }
 	}
 
+	public sealed record ThreadsEditResponse(JsonElement Data);
+
 	public sealed record ThreadsDeleteBody
 	{
 		[JsonPropertyName("reason")]
 		public string? Reason { get; init; }
 	}
+
+	public sealed record ThreadsDeleteResponse(JsonElement Data);
 
 	public sealed record ThreadsMoveBody
 	{
@@ -359,11 +414,27 @@ public static class ThreadsApiTypes
 		public bool? SendAlert { get; init; }
 	}
 
+	public sealed record ThreadsMoveResponse(JsonElement Data);
+
+	public sealed record ThreadsBumpResponse(JsonElement Data);
+
+	public sealed record ThreadsHideResponse(JsonElement Data);
+
+	public sealed record ThreadsStarResponse(JsonElement Data);
+
+	public sealed record ThreadsUnstarResponse(JsonElement Data);
+
+	public sealed record ThreadsFollowersResponse(JsonElement Data);
+
 	public sealed record ThreadsFollowBody
 	{
 		[JsonPropertyName("email")]
 		public bool? Email { get; init; }
 	}
+
+	public sealed record ThreadsFollowResponse(JsonElement Data);
+
+	public sealed record ThreadsUnfollowResponse(JsonElement Data);
 
 	public sealed record ThreadsFollowedParams
 	{
@@ -373,6 +444,12 @@ public static class ThreadsApiTypes
 		public JsonElement? FieldsInclude { get; init; }
 	}
 
+	public sealed record ThreadsFollowedResponse(JsonElement Data);
+
+	public sealed record ThreadsNavigationResponse(JsonElement Data);
+
+	public sealed record ThreadsPollGetResponse(JsonElement Data);
+
 	public sealed record ThreadsPollVoteBody
 	{
 		[JsonPropertyName("response_id")]
@@ -380,6 +457,8 @@ public static class ThreadsApiTypes
 		[JsonPropertyName("response_ids")]
 		public List<int?>? ResponseIds { get; init; }
 	}
+
+	public sealed record ThreadsPollVoteResponse(JsonElement Data);
 
 	public sealed record ThreadsUnreadParams
 	{
@@ -390,6 +469,8 @@ public static class ThreadsApiTypes
 		[JsonPropertyName("data_limit")]
 		public int? DataLimit { get; init; }
 	}
+
+	public sealed record ThreadsUnreadResponse(JsonElement Data);
 
 	public sealed record ThreadsRecentParams
 	{
@@ -402,6 +483,10 @@ public static class ThreadsApiTypes
 		[JsonPropertyName("data_limit")]
 		public int? DataLimit { get; init; }
 	}
+
+	public sealed record ThreadsRecentResponse(JsonElement Data);
+
+	public sealed record ThreadsFinishResponse(JsonElement Data);
 }
 
 // ─── PostsApi Types ────────────────────────────────────────
@@ -422,6 +507,8 @@ public static class PostsApiTypes
 		public string? Order { get; init; }
 	}
 
+	public sealed record PostsListResponse(JsonElement Data);
+
 	public sealed record PostsCreateBody
 	{
 		[JsonPropertyName("post_body")]
@@ -432,17 +519,25 @@ public static class PostsApiTypes
 		public int? QuotePostId { get; init; }
 	}
 
+	public sealed record PostsCreateResponse(JsonElement Data);
+
+	public sealed record PostsGetResponse(JsonElement Data);
+
 	public sealed record PostsEditBody
 	{
 		[JsonPropertyName("post_body")]
 		public string? PostBody { get; init; }
 	}
 
+	public sealed record PostsEditResponse(JsonElement Data);
+
 	public sealed record PostsDeleteBody
 	{
 		[JsonPropertyName("reason")]
 		public string? Reason { get; init; }
 	}
+
+	public sealed record PostsDeleteResponse(JsonElement Data);
 
 	public sealed record PostsLikesParams
 	{
@@ -452,11 +547,21 @@ public static class PostsApiTypes
 		public int? Limit { get; init; }
 	}
 
+	public sealed record PostsLikesResponse(JsonElement Data);
+
+	public sealed record PostsLikeResponse(JsonElement Data);
+
+	public sealed record PostsUnlikeResponse(JsonElement Data);
+
+	public sealed record PostsReportReasonsResponse(JsonElement Data);
+
 	public sealed record PostsReportBody
 	{
 		[JsonPropertyName("message")]
 		public required string Message { get; init; }
 	}
+
+	public sealed record PostsReportResponse(JsonElement Data);
 
 	public sealed record PostsCommentsGetParams
 	{
@@ -468,6 +573,8 @@ public static class PostsApiTypes
 		public int? BeforeComment { get; init; }
 	}
 
+	public sealed record PostsCommentsGetResponse(JsonElement Data);
+
 	public sealed record PostsCommentsCreateBody
 	{
 		[JsonPropertyName("post_id")]
@@ -475,6 +582,8 @@ public static class PostsApiTypes
 		[JsonPropertyName("comment_body")]
 		public required string CommentBody { get; init; }
 	}
+
+	public sealed record PostsCommentsCreateResponse(JsonElement Data);
 
 	public sealed record PostsCommentsEditBody
 	{
@@ -484,6 +593,8 @@ public static class PostsApiTypes
 		public required string CommentBody { get; init; }
 	}
 
+	public sealed record PostsCommentsEditResponse(JsonElement Data);
+
 	public sealed record PostsCommentsDeleteBody
 	{
 		[JsonPropertyName("post_comment_id")]
@@ -492,6 +603,8 @@ public static class PostsApiTypes
 		public string? Reason { get; init; }
 	}
 
+	public sealed record PostsCommentsDeleteResponse(JsonElement Data);
+
 	public sealed record PostsCommentsReportBody
 	{
 		[JsonPropertyName("post_comment_id")]
@@ -499,6 +612,8 @@ public static class PostsApiTypes
 		[JsonPropertyName("message")]
 		public required string Message { get; init; }
 	}
+
+	public sealed record PostsCommentsReportResponse(JsonElement Data);
 }
 
 // ─── UsersApi Types ────────────────────────────────────────
@@ -515,6 +630,10 @@ public static class UsersApiTypes
 		public JsonElement? FieldsInclude { get; init; }
 	}
 
+	public sealed record UsersListResponse(JsonElement Data);
+
+	public sealed record UsersFieldsResponse(JsonElement Data);
+
 	public sealed record UsersFindParams
 	{
 		[JsonPropertyName("username")]
@@ -525,11 +644,15 @@ public static class UsersApiTypes
 		public JsonElement? FieldsInclude { get; init; }
 	}
 
+	public sealed record UsersFindResponse(JsonElement Data);
+
 	public sealed record UsersGetParams
 	{
 		[JsonPropertyName("fields_include")]
 		public JsonElement? FieldsInclude { get; init; }
 	}
+
+	public sealed record UsersGetResponse(JsonElement Data);
 
 	public sealed record UsersEditBody
 	{
@@ -589,6 +712,8 @@ public static class UsersApiTypes
 		public JsonElement? Fields { get; init; }
 	}
 
+	public sealed record UsersEditResponse(JsonElement Data);
+
 	public sealed record UsersClaimsParams
 	{
 		[JsonPropertyName("type")]
@@ -597,6 +722,8 @@ public static class UsersApiTypes
 		public string? ClaimState { get; init; }
 	}
 
+	public sealed record UsersClaimsResponse(JsonElement Data);
+
 	public sealed record UsersAvatarUploadBody
 	{
 		public required byte[] Avatar { get; init; }
@@ -604,6 +731,10 @@ public static class UsersApiTypes
 		public int? Y { get; init; }
 		public int? Crop { get; init; }
 	}
+
+	public sealed record UsersAvatarUploadResponse(JsonElement Data);
+
+	public sealed record UsersAvatarDeleteResponse(JsonElement Data);
 
 	public sealed record UsersAvatarCropBody
 	{
@@ -615,6 +746,8 @@ public static class UsersApiTypes
 		public int? Crop { get; init; }
 	}
 
+	public sealed record UsersAvatarCropResponse(JsonElement Data);
+
 	public sealed record UsersBackgroundUploadBody
 	{
 		public required byte[] Background { get; init; }
@@ -622,6 +755,10 @@ public static class UsersApiTypes
 		public int? Y { get; init; }
 		public int? Crop { get; init; }
 	}
+
+	public sealed record UsersBackgroundUploadResponse(JsonElement Data);
+
+	public sealed record UsersBackgroundDeleteResponse(JsonElement Data);
 
 	public sealed record UsersBackgroundCropBody
 	{
@@ -633,6 +770,8 @@ public static class UsersApiTypes
 		public int? Crop { get; init; }
 	}
 
+	public sealed record UsersBackgroundCropResponse(JsonElement Data);
+
 	public sealed record UsersFollowersParams
 	{
 		[JsonPropertyName("order")]
@@ -643,6 +782,12 @@ public static class UsersApiTypes
 		public int? Limit { get; init; }
 	}
 
+	public sealed record UsersFollowersResponse(JsonElement Data);
+
+	public sealed record UsersFollowResponse(JsonElement Data);
+
+	public sealed record UsersUnfollowResponse(JsonElement Data);
+
 	public sealed record UsersFollowingsParams
 	{
 		[JsonPropertyName("order")]
@@ -652,6 +797,8 @@ public static class UsersApiTypes
 		[JsonPropertyName("limit")]
 		public int? Limit { get; init; }
 	}
+
+	public sealed record UsersFollowingsResponse(JsonElement Data);
 
 	public sealed record UsersLikesParams
 	{
@@ -671,11 +818,17 @@ public static class UsersApiTypes
 		public bool? Stats { get; init; }
 	}
 
+	public sealed record UsersLikesResponse(JsonElement Data);
+
 	public sealed record UsersIgnoredParams
 	{
 		[JsonPropertyName("total")]
 		public bool? Total { get; init; }
 	}
+
+	public sealed record UsersIgnoredResponse(JsonElement Data);
+
+	public sealed record UsersIgnoreResponse(JsonElement Data);
 
 	public sealed record UsersIgnoreEditParams
 	{
@@ -687,6 +840,10 @@ public static class UsersApiTypes
 		public bool? RestrictViewProfile { get; init; }
 	}
 
+	public sealed record UsersIgnoreEditResponse(JsonElement Data);
+
+	public sealed record UsersUnignoreResponse(JsonElement Data);
+
 	public sealed record UsersContentsParams
 	{
 		[JsonPropertyName("page")]
@@ -694,6 +851,16 @@ public static class UsersApiTypes
 		[JsonPropertyName("limit")]
 		public int? Limit { get; init; }
 	}
+
+	public sealed record UsersContentsResponse(JsonElement Data);
+
+	public sealed record UsersTrophiesResponse(JsonElement Data);
+
+	public sealed record UsersSecretAnswerTypesResponse(JsonElement Data);
+
+	public sealed record UsersSaResetResponse(JsonElement Data);
+
+	public sealed record UsersSaCancelResetResponse(JsonElement Data);
 }
 
 // ─── ProfilePostsApi Types ────────────────────────────────────────
@@ -712,6 +879,10 @@ public static class ProfilePostsApiTypes
 		public JsonElement? FieldsInclude { get; init; }
 	}
 
+	public sealed record ProfilePostsListResponse(JsonElement Data);
+
+	public sealed record ProfilePostsGetResponse(JsonElement Data);
+
 	public sealed record ProfilePostsEditBody
 	{
 		[JsonPropertyName("post_body")]
@@ -720,17 +891,25 @@ public static class ProfilePostsApiTypes
 		public bool? DisableComments { get; init; }
 	}
 
+	public sealed record ProfilePostsEditResponse(JsonElement Data);
+
 	public sealed record ProfilePostsDeleteParams
 	{
 		[JsonPropertyName("reason")]
 		public string? Reason { get; init; }
 	}
 
+	public sealed record ProfilePostsDeleteResponse(JsonElement Data);
+
+	public sealed record ProfilePostsReportReasonsResponse(JsonElement Data);
+
 	public sealed record ProfilePostsReportBody
 	{
 		[JsonPropertyName("message")]
 		public required string Message { get; init; }
 	}
+
+	public sealed record ProfilePostsReportResponse(JsonElement Data);
 
 	public sealed record ProfilePostsCreateBody
 	{
@@ -739,6 +918,18 @@ public static class ProfilePostsApiTypes
 		[JsonPropertyName("post_body")]
 		public required string PostBody { get; init; }
 	}
+
+	public sealed record ProfilePostsCreateResponse(JsonElement Data);
+
+	public sealed record ProfilePostsStickResponse(JsonElement Data);
+
+	public sealed record ProfilePostsUnstickResponse(JsonElement Data);
+
+	public sealed record ProfilePostsLikesResponse(JsonElement Data);
+
+	public sealed record ProfilePostsLikeResponse(JsonElement Data);
+
+	public sealed record ProfilePostsUnlikeResponse(JsonElement Data);
 
 	public sealed record ProfilePostsCommentsListParams
 	{
@@ -750,6 +941,8 @@ public static class ProfilePostsApiTypes
 		public int? Limit { get; init; }
 	}
 
+	public sealed record ProfilePostsCommentsListResponse(JsonElement Data);
+
 	public sealed record ProfilePostsCommentsCreateBody
 	{
 		[JsonPropertyName("profile_post_id")]
@@ -757,6 +950,8 @@ public static class ProfilePostsApiTypes
 		[JsonPropertyName("comment_body")]
 		public required string CommentBody { get; init; }
 	}
+
+	public sealed record ProfilePostsCommentsCreateResponse(JsonElement Data);
 
 	public sealed record ProfilePostsCommentsEditBody
 	{
@@ -766,17 +961,25 @@ public static class ProfilePostsApiTypes
 		public required string CommentBody { get; init; }
 	}
 
+	public sealed record ProfilePostsCommentsEditResponse(JsonElement Data);
+
 	public sealed record ProfilePostsCommentsDeleteBody
 	{
 		[JsonPropertyName("comment_id")]
 		public required int? CommentId { get; init; }
 	}
 
+	public sealed record ProfilePostsCommentsDeleteResponse(JsonElement Data);
+
+	public sealed record ProfilePostsCommentsGetResponse(JsonElement Data);
+
 	public sealed record ProfilePostsCommentsReportBody
 	{
 		[JsonPropertyName("message")]
 		public required string Message { get; init; }
 	}
+
+	public sealed record ProfilePostsCommentsReportResponse(JsonElement Data);
 }
 
 // ─── ConversationsApi Types ────────────────────────────────────────
@@ -792,6 +995,8 @@ public static class ConversationsApiTypes
 		[JsonPropertyName("limit")]
 		public int? Limit { get; init; }
 	}
+
+	public sealed record ConversationsListResponse(JsonElement Data);
 
 	public sealed record ConversationsCreateBody
 	{
@@ -815,6 +1020,8 @@ public static class ConversationsApiTypes
 		public string? MessageBody { get; init; }
 	}
 
+	public sealed record ConversationsCreateResponse(JsonElement Data);
+
 	public sealed record ConversationsUpdateBody
 	{
 		[JsonPropertyName("conversation_id")]
@@ -833,6 +1040,8 @@ public static class ConversationsApiTypes
 		public bool? AllowDeleteOwnMessages { get; init; }
 	}
 
+	public sealed record ConversationsUpdateResponse(JsonElement Data);
+
 	public sealed record ConversationsDeleteBody
 	{
 		[JsonPropertyName("conversation_id")]
@@ -841,17 +1050,25 @@ public static class ConversationsApiTypes
 		public required string DeleteType { get; init; }
 	}
 
+	public sealed record ConversationsDeleteResponse(JsonElement Data);
+
 	public sealed record ConversationsStartBody
 	{
 		[JsonPropertyName("user_id")]
 		public required JsonElement UserId { get; init; }
 	}
 
+	public sealed record ConversationsStartResponse(JsonElement Data);
+
 	public sealed record ConversationsSaveBody
 	{
 		[JsonPropertyName("link")]
 		public required string Link { get; init; }
 	}
+
+	public sealed record ConversationsSaveResponse(JsonElement Data);
+
+	public sealed record ConversationsGetResponse(JsonElement Data);
 
 	public sealed record ConversationsMessagesListParams
 	{
@@ -867,6 +1084,8 @@ public static class ConversationsApiTypes
 		public int? After { get; init; }
 	}
 
+	public sealed record ConversationsMessagesListResponse(JsonElement Data);
+
 	public sealed record ConversationsMessagesCreateBody
 	{
 		[JsonPropertyName("reply_message_id")]
@@ -874,6 +1093,8 @@ public static class ConversationsApiTypes
 		[JsonPropertyName("message_body")]
 		public required string MessageBody { get; init; }
 	}
+
+	public sealed record ConversationsMessagesCreateResponse(JsonElement Data);
 
 	public sealed record ConversationsSearchBody
 	{
@@ -885,11 +1106,19 @@ public static class ConversationsApiTypes
 		public bool? SearchRecipients { get; init; }
 	}
 
+	public sealed record ConversationsSearchResponse(JsonElement Data);
+
+	public sealed record ConversationsMessagesGetResponse(JsonElement Data);
+
 	public sealed record ConversationsMessagesEditBody
 	{
 		[JsonPropertyName("message_body")]
 		public required string MessageBody { get; init; }
 	}
+
+	public sealed record ConversationsMessagesEditResponse(JsonElement Data);
+
+	public sealed record ConversationsMessagesDeleteResponse(JsonElement Data);
 
 	public sealed record ConversationsInviteBody
 	{
@@ -897,11 +1126,31 @@ public static class ConversationsApiTypes
 		public required List<string> Recipients { get; init; }
 	}
 
+	public sealed record ConversationsInviteResponse(JsonElement Data);
+
 	public sealed record ConversationsKickBody
 	{
 		[JsonPropertyName("user_id")]
 		public required int? UserId { get; init; }
 	}
+
+	public sealed record ConversationsKickResponse(JsonElement Data);
+
+	public sealed record ConversationsReadResponse(JsonElement Data);
+
+	public sealed record ConversationsReadAllResponse(JsonElement Data);
+
+	public sealed record ConversationsMessagesStickResponse(JsonElement Data);
+
+	public sealed record ConversationsMessagesUnstickResponse(JsonElement Data);
+
+	public sealed record ConversationsStarResponse(JsonElement Data);
+
+	public sealed record ConversationsUnstarResponse(JsonElement Data);
+
+	public sealed record ConversationsAlertsEnableResponse(JsonElement Data);
+
+	public sealed record ConversationsAlertsDisableResponse(JsonElement Data);
 }
 
 // ─── NotificationsApi Types ────────────────────────────────────────
@@ -918,17 +1167,25 @@ public static class NotificationsApiTypes
 		public int? Limit { get; init; }
 	}
 
+	public sealed record NotificationsListResponse(JsonElement Data);
+
+	public sealed record NotificationsGetResponse(JsonElement Data);
+
 	public sealed record NotificationsReadBody
 	{
 		[JsonPropertyName("notification_id")]
 		public int? NotificationId { get; init; }
 	}
+
+	public sealed record NotificationsReadResponse(JsonElement Data);
 }
 
 // ─── TagsApi Types ────────────────────────────────────────
 
 public static class TagsApiTypes
 {
+	public sealed record TagsPopularResponse(JsonElement Data);
+
 	public sealed record TagsListParams
 	{
 		[JsonPropertyName("page")]
@@ -936,6 +1193,8 @@ public static class TagsApiTypes
 		[JsonPropertyName("limit")]
 		public int? Limit { get; init; }
 	}
+
+	public sealed record TagsListResponse(JsonElement Data);
 
 	public sealed record TagsGetParams
 	{
@@ -945,11 +1204,15 @@ public static class TagsApiTypes
 		public int? Limit { get; init; }
 	}
 
+	public sealed record TagsGetResponse(JsonElement Data);
+
 	public sealed record TagsFindParams
 	{
 		[JsonPropertyName("tag")]
 		public string? Tag { get; init; }
 	}
+
+	public sealed record TagsFindResponse(JsonElement Data);
 }
 
 // ─── SearchApi Types ────────────────────────────────────────
@@ -972,6 +1235,8 @@ public static class SearchApiTypes
 		public int? Limit { get; init; }
 	}
 
+	public sealed record SearchAllResponse(JsonElement Data);
+
 	public sealed record SearchThreadsBody
 	{
 		[JsonPropertyName("q")]
@@ -989,6 +1254,8 @@ public static class SearchApiTypes
 		[JsonPropertyName("data_limit")]
 		public int? DataLimit { get; init; }
 	}
+
+	public sealed record SearchThreadsResponse(JsonElement Data);
 
 	public sealed record SearchPostsBody
 	{
@@ -1008,11 +1275,15 @@ public static class SearchApiTypes
 		public int? DataLimit { get; init; }
 	}
 
+	public sealed record SearchPostsResponse(JsonElement Data);
+
 	public sealed record SearchUsersBody
 	{
 		[JsonPropertyName("q")]
 		public string? Q { get; init; }
 	}
+
+	public sealed record SearchUsersResponse(JsonElement Data);
 
 	public sealed record SearchProfilePostsBody
 	{
@@ -1026,6 +1297,8 @@ public static class SearchApiTypes
 		public int? Limit { get; init; }
 	}
 
+	public sealed record SearchProfilePostsResponse(JsonElement Data);
+
 	public sealed record SearchTaggedBody
 	{
 		[JsonPropertyName("tag")]
@@ -1038,6 +1311,8 @@ public static class SearchApiTypes
 		public int? Limit { get; init; }
 	}
 
+	public sealed record SearchTaggedResponse(JsonElement Data);
+
 	public sealed record SearchResultsParams
 	{
 		[JsonPropertyName("page")]
@@ -1045,6 +1320,15 @@ public static class SearchApiTypes
 		[JsonPropertyName("limit")]
 		public int? Limit { get; init; }
 	}
+
+	public sealed record SearchResultsResponse(JsonElement Data);
+}
+
+// ─── BatchApi Types ────────────────────────────────────────
+
+public static class BatchApiTypes
+{
+	public sealed record BatchExecuteResponse(JsonElement Data);
 }
 
 // ─── ChatboxApi Types ────────────────────────────────────────
@@ -1057,6 +1341,8 @@ public static class ChatboxApiTypes
 		public JsonElement? RoomId { get; init; }
 	}
 
+	public sealed record ChatboxIndexResponse(JsonElement Data);
+
 	public sealed record ChatboxGetMessagesParams
 	{
 		[JsonPropertyName("room_id")]
@@ -1064,6 +1350,8 @@ public static class ChatboxApiTypes
 		[JsonPropertyName("before_message_id")]
 		public int? BeforeMessageId { get; init; }
 	}
+
+	public sealed record ChatboxGetMessagesResponse(JsonElement Data);
 
 	public sealed record ChatboxPostMessageBody
 	{
@@ -1075,6 +1363,8 @@ public static class ChatboxApiTypes
 		public required string Message { get; init; }
 	}
 
+	public sealed record ChatboxPostMessageResponse(JsonElement Data);
+
 	public sealed record ChatboxEditMessageBody
 	{
 		[JsonPropertyName("message_id")]
@@ -1083,11 +1373,15 @@ public static class ChatboxApiTypes
 		public required string Message { get; init; }
 	}
 
+	public sealed record ChatboxEditMessageResponse(JsonElement Data);
+
 	public sealed record ChatboxDeleteMessageBody
 	{
 		[JsonPropertyName("message_id")]
 		public required int? MessageId { get; init; }
 	}
+
+	public sealed record ChatboxDeleteMessageResponse(JsonElement Data);
 
 	public sealed record ChatboxOnlineParams
 	{
@@ -1095,11 +1389,15 @@ public static class ChatboxApiTypes
 		public JsonElement? RoomId { get; init; }
 	}
 
+	public sealed record ChatboxOnlineResponse(JsonElement Data);
+
 	public sealed record ChatboxReportReasonsParams
 	{
 		[JsonPropertyName("message_id")]
 		public int? MessageId { get; init; }
 	}
+
+	public sealed record ChatboxReportReasonsResponse(JsonElement Data);
 
 	public sealed record ChatboxReportBody
 	{
@@ -1109,11 +1407,17 @@ public static class ChatboxApiTypes
 		public required string Reason { get; init; }
 	}
 
+	public sealed record ChatboxReportResponse(JsonElement Data);
+
 	public sealed record ChatboxGetLeaderboardParams
 	{
 		[JsonPropertyName("duration")]
 		public string? Duration { get; init; }
 	}
+
+	public sealed record ChatboxGetLeaderboardResponse(JsonElement Data);
+
+	public sealed record ChatboxGetIgnoreResponse(JsonElement Data);
 
 	public sealed record ChatboxPostIgnoreBody
 	{
@@ -1121,11 +1425,15 @@ public static class ChatboxApiTypes
 		public required JsonElement UserId { get; init; }
 	}
 
+	public sealed record ChatboxPostIgnoreResponse(JsonElement Data);
+
 	public sealed record ChatboxDeleteIgnoreBody
 	{
 		[JsonPropertyName("user_id")]
 		public required JsonElement UserId { get; init; }
 	}
+
+	public sealed record ChatboxDeleteIgnoreResponse(JsonElement Data);
 }
 
 // ─── FormsApi Types ────────────────────────────────────────
@@ -1138,6 +1446,8 @@ public static class FormsApiTypes
 		public int? Page { get; init; }
 	}
 
+	public sealed record FormsListResponse(JsonElement Data);
+
 	public sealed record FormsCreateBody
 	{
 		[JsonPropertyName("form_id")]
@@ -1145,5 +1455,7 @@ public static class FormsApiTypes
 		[JsonPropertyName("fields")]
 		public JsonElement? Fields { get; init; }
 	}
+
+	public sealed record FormsCreateResponse(JsonElement Data);
 }
 

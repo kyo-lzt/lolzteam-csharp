@@ -8,36 +8,33 @@ public static class RetryHandler
 		RetryConfig config,
 		Func<Task<T>> block,
 		Action<RetryInfo>? onRetry = null,
-		string? method = null,
-		string? path = null)
+		string method = "",
+		string path = "")
 	{
-		Exception lastException = null!;
-
 		for (var attempt = 0; attempt <= config.MaxRetries; attempt++)
 		{
 			try
 			{
 				return await block().ConfigureAwait(false);
 			}
-			catch (Exception ex) when (attempt < config.MaxRetries && IsRetryable(ex))
+			catch (Exception ex) when (IsRetryable(ex) && attempt < config.MaxRetries)
 			{
-				lastException = ex;
 				var delay = ComputeDelay(config, attempt, ex);
 
-				if (onRetry is not null && ex is LolzteamException lolzEx)
+				if (onRetry is not null)
 				{
-					onRetry(new RetryInfo(attempt + 1, delay, lolzEx, method ?? "", path ?? ""));
+					onRetry(new RetryInfo(attempt + 1, delay, ex, method, path));
 				}
 
 				await Task.Delay(delay).ConfigureAwait(false);
 			}
-			catch
+			catch (Exception ex) when (IsRetryable(ex) && attempt > 0)
 			{
-				throw;
+				throw new RetryExhaustedException(attempt + 1, ex);
 			}
 		}
 
-		throw lastException;
+		throw new InvalidOperationException("Unreachable");
 	}
 
 	private static bool IsRetryable(Exception ex) => ex switch

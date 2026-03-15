@@ -55,6 +55,8 @@ public static class CategoryApiTypes
 		public bool? ParseSameItemIds { get; init; }
 	}
 
+	public sealed record CategoryAllResponse(JsonElement Data);
+
 	public sealed record CategorySteamParams
 	{
 		[JsonPropertyName("page")]
@@ -297,6 +299,8 @@ public static class CategoryApiTypes
 		public bool? SkipVacInv { get; init; }
 	}
 
+	public sealed record CategorySteamResponse(JsonElement Data);
+
 	public sealed record CategoryFortniteParams
 	{
 		[JsonPropertyName("page")]
@@ -450,6 +454,8 @@ public static class CategoryApiTypes
 		[JsonPropertyName("not_country[]")]
 		public List<string>? NotCountry { get; init; }
 	}
+
+	public sealed record CategoryFortniteResponse(JsonElement Data);
 
 	public sealed record CategoryMihoyoParams
 	{
@@ -619,6 +625,8 @@ public static class CategoryApiTypes
 		public int? Daybreak { get; init; }
 	}
 
+	public sealed record CategoryMihoyoResponse(JsonElement Data);
+
 	public sealed record CategoryRiotParams
 	{
 		[JsonPropertyName("page")]
@@ -779,6 +787,8 @@ public static class CategoryApiTypes
 		public JsonElement? LolRank { get; init; }
 	}
 
+	public sealed record CategoryRiotResponse(JsonElement Data);
+
 	public sealed record CategoryTelegramParams
 	{
 		[JsonPropertyName("page")]
@@ -916,6 +926,8 @@ public static class CategoryApiTypes
 		[JsonPropertyName("max_bot_active_users")]
 		public int? MaxBotActiveUsers { get; init; }
 	}
+
+	public sealed record CategoryTelegramResponse(JsonElement Data);
 
 	public sealed record CategorySupercellParams
 	{
@@ -1065,6 +1077,8 @@ public static class CategoryApiTypes
 		public int? CreationYearMax { get; init; }
 	}
 
+	public sealed record CategorySupercellResponse(JsonElement Data);
+
 	public sealed record CategoryEaParams
 	{
 		[JsonPropertyName("page")]
@@ -1152,6 +1166,8 @@ public static class CategoryApiTypes
 		[JsonPropertyName("transactions")]
 		public string? Transactions { get; init; }
 	}
+
+	public sealed record CategoryEaResponse(JsonElement Data);
 
 	public sealed record CategoryWotParams
 	{
@@ -1269,6 +1285,8 @@ public static class CategoryApiTypes
 		public List<string>? NotCountry { get; init; }
 	}
 
+	public sealed record CategoryWotResponse(JsonElement Data);
+
 	public sealed record CategoryWotBlitzParams
 	{
 		[JsonPropertyName("page")]
@@ -1385,6 +1403,8 @@ public static class CategoryApiTypes
 		public List<string>? NotCountry { get; init; }
 	}
 
+	public sealed record CategoryWotBlitzResponse(JsonElement Data);
+
 	public sealed record CategoryGiftsParams
 	{
 		[JsonPropertyName("page")]
@@ -1436,6 +1456,8 @@ public static class CategoryApiTypes
 		[JsonPropertyName("subscription_period")]
 		public string? SubscriptionPeriod { get; init; }
 	}
+
+	public sealed record CategoryGiftsResponse(JsonElement Data);
 
 	public sealed record CategoryEpicGamesParams
 	{
@@ -1517,6 +1539,8 @@ public static class CategoryApiTypes
 		public JsonElement? HoursPlayedMax { get; init; }
 	}
 
+	public sealed record CategoryEpicGamesResponse(JsonElement Data);
+
 	public sealed record CategoryEscapeFromTarkovParams
 	{
 		[JsonPropertyName("page")]
@@ -1583,6 +1607,8 @@ public static class CategoryApiTypes
 		public string? Side { get; init; }
 	}
 
+	public sealed record CategoryEscapeFromTarkovResponse(JsonElement Data);
+
 	public sealed record CategorySocialClubParams
 	{
 		[JsonPropertyName("page")]
@@ -1644,6 +1670,8 @@ public static class CategoryApiTypes
 		[JsonPropertyName("game[]")]
 		public List<string>? Game { get; init; }
 	}
+
+	public sealed record CategorySocialClubResponse(JsonElement Data);
 
 	public sealed record CategoryUplayParams
 	{
@@ -1750,6 +1778,8 @@ public static class CategoryApiTypes
 		[JsonPropertyName("reg_period")]
 		public string? RegPeriod { get; init; }
 	}
+
+	public sealed record CategoryUplayResponse(JsonElement Data);
 
 	public sealed record CategoryDiscordParams
 	{
@@ -1877,6 +1907,8 @@ public static class CategoryApiTypes
 		public int? MaxOrbs { get; init; }
 	}
 
+	public sealed record CategoryDiscordResponse(JsonElement Data);
+
 	public sealed record CategoryTikTokParams
 	{
 		[JsonPropertyName("page")]
@@ -1955,6 +1987,8 @@ public static class CategoryApiTypes
 		public string? Email { get; init; }
 	}
 
+	public sealed record CategoryTikTokResponse(JsonElement Data);
+
 	public sealed record CategoryInstagramParams
 	{
 		[JsonPropertyName("page")]
@@ -2026,6 +2060,8 @@ public static class CategoryApiTypes
 		[JsonPropertyName("reg_period")]
 		public string? RegPeriod { get; init; }
 	}
+
+	public sealed record CategoryInstagramResponse(JsonElement Data);
 
 	public sealed record CategoryBattleNetParams
 	{
@@ -2103,6 +2139,8 @@ public static class CategoryApiTypes
 		public int? BalanceMax { get; init; }
 	}
 
+	public sealed record CategoryBattleNetResponse(JsonElement Data);
+
 	public sealed record CategoryChatGPTParams
 	{
 		[JsonPropertyName("page")]
@@ -2175,6 +2213,8 @@ public static class CategoryApiTypes
 		public int? OpenaiBalanceMax { get; init; }
 	}
 
+	public sealed record CategoryChatGPTResponse(JsonElement Data);
+
 	public sealed record CategoryVpnParams
 	{
 		[JsonPropertyName("page")]
@@ -2228,6 +2268,8 @@ public static class CategoryApiTypes
 		[JsonPropertyName("autorenewal")]
 		public string? Autorenewal { get; init; }
 	}
+
+	public sealed record CategoryVpnResponse(JsonElement Data);
 
 	public sealed record CategoryRobloxParams
 	{
@@ -2349,6 +2391,8 @@ public static class CategoryApiTypes
 		public List<string>? NotAgeGroup { get; init; }
 	}
 
+	public sealed record CategoryRobloxResponse(JsonElement Data);
+
 	public sealed record CategoryWarfaceParams
 	{
 		[JsonPropertyName("page")]
@@ -2414,6 +2458,8 @@ public static class CategoryApiTypes
 		[JsonPropertyName("total_kredits_max")]
 		public int? TotalKreditsMax { get; init; }
 	}
+
+	public sealed record CategoryWarfaceResponse(JsonElement Data);
 
 	public sealed record CategoryMinecraftParams
 	{
@@ -2531,6 +2577,8 @@ public static class CategoryApiTypes
 		public int? MinecoinsMax { get; init; }
 	}
 
+	public sealed record CategoryMinecraftResponse(JsonElement Data);
+
 	public sealed record CategoryHytaleParams
 	{
 		[JsonPropertyName("page")]
@@ -2583,11 +2631,19 @@ public static class CategoryApiTypes
 		public int? ProfilesMax { get; init; }
 	}
 
+	public sealed record CategoryHytaleResponse(JsonElement Data);
+
 	public sealed record CategoryListParams
 	{
 		[JsonPropertyName("top_queries")]
 		public bool? TopQueries { get; init; }
 	}
+
+	public sealed record CategoryListResponse(JsonElement Data);
+
+	public sealed record CategoryParamsResponse(JsonElement Data);
+
+	public sealed record CategoryGamesResponse(JsonElement Data);
 }
 
 // ─── ListApi Types ────────────────────────────────────────
@@ -2650,6 +2706,8 @@ public static class ListApiTypes
 		public bool? FilterByDeleteDate { get; init; }
 	}
 
+	public sealed record ListUserResponse(JsonElement Data);
+
 	public sealed record ListOrdersParams
 	{
 		[JsonPropertyName("user_id")]
@@ -2684,11 +2742,15 @@ public static class ListApiTypes
 		public bool? NsbByMe { get; init; }
 	}
 
+	public sealed record ListOrdersResponse(JsonElement Data);
+
 	public sealed record ListStatesParams
 	{
 		[JsonPropertyName("user_id")]
 		public JsonElement? UserId { get; init; }
 	}
+
+	public sealed record ListStatesResponse(JsonElement Data);
 
 	public sealed record ListDownloadParams
 	{
@@ -2746,6 +2808,8 @@ public static class ListApiTypes
 		public bool? FilterByDeleteDate { get; init; }
 	}
 
+	public sealed record ListDownloadResponse(JsonElement Data);
+
 	public sealed record ListFavoritesParams
 	{
 		[JsonPropertyName("page")]
@@ -2774,6 +2838,8 @@ public static class ListApiTypes
 		public bool? NsbByMe { get; init; }
 	}
 
+	public sealed record ListFavoritesResponse(JsonElement Data);
+
 	public sealed record ListViewedParams
 	{
 		[JsonPropertyName("page")]
@@ -2801,6 +2867,8 @@ public static class ListApiTypes
 		[JsonPropertyName("nsb_by_me")]
 		public bool? NsbByMe { get; init; }
 	}
+
+	public sealed record ListViewedResponse(JsonElement Data);
 }
 
 // ─── ManagingApi Types ────────────────────────────────────────
@@ -2813,11 +2881,15 @@ public static class ManagingApiTypes
 		public bool? ParseSameItemIds { get; init; }
 	}
 
+	public sealed record ManagingGetResponse(JsonElement Data);
+
 	public sealed record ManagingDeleteBody
 	{
 		[JsonPropertyName("reason")]
 		public required string Reason { get; init; }
 	}
+
+	public sealed record ManagingDeleteResponse(JsonElement Data);
 
 	public sealed record ManagingCreateClaimBody
 	{
@@ -2827,6 +2899,8 @@ public static class ManagingApiTypes
 		public required string PostBody { get; init; }
 	}
 
+	public sealed record ManagingCreateClaimResponse(JsonElement Data);
+
 	public sealed record ManagingBulkGetBody
 	{
 		[JsonPropertyName("item_id")]
@@ -2834,6 +2908,8 @@ public static class ManagingApiTypes
 		[JsonPropertyName("parse_same_item_ids")]
 		public bool? ParseSameItemIds { get; init; }
 	}
+
+	public sealed record ManagingBulkGetResponse(JsonElement Data);
 
 	public sealed record ManagingSteamInventoryValueParams
 	{
@@ -2844,6 +2920,8 @@ public static class ManagingApiTypes
 		[JsonPropertyName("ignore_cache")]
 		public bool? IgnoreCache { get; init; }
 	}
+
+	public sealed record ManagingSteamInventoryValueResponse(JsonElement Data);
 
 	public sealed record ManagingSteamValueParams
 	{
@@ -2857,11 +2935,15 @@ public static class ManagingApiTypes
 		public bool? IgnoreCache { get; init; }
 	}
 
+	public sealed record ManagingSteamValueResponse(JsonElement Data);
+
 	public sealed record ManagingSteamPreviewParams
 	{
 		[JsonPropertyName("type")]
 		public string? Type { get; init; }
 	}
+
+	public sealed record ManagingSteamPreviewResponse(JsonElement Data);
 
 	public sealed record ManagingEditBody
 	{
@@ -2889,11 +2971,19 @@ public static class ManagingApiTypes
 		public string? Information { get; init; }
 	}
 
+	public sealed record ManagingEditResponse(JsonElement Data);
+
+	public sealed record ManagingAIPriceResponse(JsonElement Data);
+
+	public sealed record ManagingAutoBuyPriceResponse(JsonElement Data);
+
 	public sealed record ManagingNoteBody
 	{
 		[JsonPropertyName("text")]
 		public string? Text { get; init; }
 	}
+
+	public sealed record ManagingNoteResponse(JsonElement Data);
 
 	public sealed record ManagingSteamUpdateValueBody
 	{
@@ -2905,17 +2995,33 @@ public static class ManagingApiTypes
 		public bool? Authorize { get; init; }
 	}
 
+	public sealed record ManagingSteamUpdateValueResponse(JsonElement Data);
+
+	public sealed record ManagingBumpResponse(JsonElement Data);
+
 	public sealed record ManagingAutoBumpBody
 	{
 		[JsonPropertyName("hour")]
 		public required int? Hour { get; init; }
 	}
 
+	public sealed record ManagingAutoBumpResponse(JsonElement Data);
+
+	public sealed record ManagingAutoBumpDisableResponse(JsonElement Data);
+
+	public sealed record ManagingOpenResponse(JsonElement Data);
+
+	public sealed record ManagingCloseResponse(JsonElement Data);
+
 	public sealed record ManagingImageParams
 	{
 		[JsonPropertyName("type")]
 		public string? Type { get; init; }
 	}
+
+	public sealed record ManagingImageResponse(JsonElement Data);
+
+	public sealed record ManagingEmailCodeResponse(JsonElement Data);
 
 	public sealed record ManagingGetLetters2Params
 	{
@@ -2929,6 +3035,16 @@ public static class ManagingApiTypes
 		public int? Limit { get; init; }
 	}
 
+	public sealed record ManagingGetLetters2Response(JsonElement Data);
+
+	public sealed record ManagingSteamGetMafileResponse(JsonElement Data);
+
+	public sealed record ManagingSteamAddMafileResponse(JsonElement Data);
+
+	public sealed record ManagingSteamRemoveMafileResponse(JsonElement Data);
+
+	public sealed record ManagingSteamMafileCodeResponse(JsonElement Data);
+
 	public sealed record ManagingSteamSDABody
 	{
 		[JsonPropertyName("id")]
@@ -2937,11 +3053,23 @@ public static class ManagingApiTypes
 		public int? Nonce { get; init; }
 	}
 
+	public sealed record ManagingSteamSDAResponse(JsonElement Data);
+
+	public sealed record ManagingTelegramCodeResponse(JsonElement Data);
+
+	public sealed record ManagingTelegramResetAuthResponse(JsonElement Data);
+
+	public sealed record ManagingRefuseGuaranteeResponse(JsonElement Data);
+
 	public sealed record ManagingDeclineVideoRecordingBody
 	{
 		[JsonPropertyName("i_voluntarily_and_with_full_awareness_of_my_actions_waive_any_claims_regarding_this_item")]
 		public required bool? IVoluntarilyAndWithFullAwarenessOfMyActionsWaiveAnyClaimsRegardingThisItem { get; init; }
 	}
+
+	public sealed record ManagingDeclineVideoRecordingResponse(JsonElement Data);
+
+	public sealed record ManagingCheckGuaranteeResponse(JsonElement Data);
 
 	public sealed record ManagingChangePasswordBody
 	{
@@ -2949,11 +3077,17 @@ public static class ManagingApiTypes
 		public string? Cancel { get; init; }
 	}
 
+	public sealed record ManagingChangePasswordResponse(JsonElement Data);
+
+	public sealed record ManagingTempEmailPasswordResponse(JsonElement Data);
+
 	public sealed record ManagingTagBody
 	{
 		[JsonPropertyName("tag_id")]
 		public required int? TagId { get; init; }
 	}
+
+	public sealed record ManagingTagResponse(JsonElement Data);
 
 	public sealed record ManagingUntagBody
 	{
@@ -2961,17 +3095,31 @@ public static class ManagingApiTypes
 		public required int? TagId { get; init; }
 	}
 
+	public sealed record ManagingUntagResponse(JsonElement Data);
+
 	public sealed record ManagingPublicTagBody
 	{
 		[JsonPropertyName("tag_id")]
 		public required int? TagId { get; init; }
 	}
 
+	public sealed record ManagingPublicTagResponse(JsonElement Data);
+
 	public sealed record ManagingPublicUntagBody
 	{
 		[JsonPropertyName("tag_id")]
 		public required int? TagId { get; init; }
 	}
+
+	public sealed record ManagingPublicUntagResponse(JsonElement Data);
+
+	public sealed record ManagingFavoriteResponse(JsonElement Data);
+
+	public sealed record ManagingUnfavoriteResponse(JsonElement Data);
+
+	public sealed record ManagingStickResponse(JsonElement Data);
+
+	public sealed record ManagingUnstickResponse(JsonElement Data);
 
 	public sealed record ManagingTransferBody
 	{
@@ -2980,6 +3128,8 @@ public static class ManagingApiTypes
 		[JsonPropertyName("secret_answer")]
 		public required string SecretAnswer { get; init; }
 	}
+
+	public sealed record ManagingTransferResponse(JsonElement Data);
 }
 
 // ─── ProfileApi Types ────────────────────────────────────────
@@ -2994,11 +3144,15 @@ public static class ProfileApiTypes
 		public string? ClaimState { get; init; }
 	}
 
+	public sealed record ProfileClaimsResponse(JsonElement Data);
+
 	public sealed record ProfileGetParams
 	{
 		[JsonPropertyName("fields_include")]
 		public JsonElement? FieldsInclude { get; init; }
 	}
+
+	public sealed record ProfileGetResponse(JsonElement Data);
 
 	public sealed record ProfileEditBody
 	{
@@ -3027,6 +3181,8 @@ public static class ProfileApiTypes
 		[JsonPropertyName("clear_telegram_client")]
 		public bool? ClearTelegramClient { get; init; }
 	}
+
+	public sealed record ProfileEditResponse(JsonElement Data);
 }
 
 // ─── CartApi Types ────────────────────────────────────────
@@ -3081,17 +3237,23 @@ public static class CartApiTypes
 		public bool? ParseSameItemIds { get; init; }
 	}
 
+	public sealed record CartGetResponse(JsonElement Data);
+
 	public sealed record CartAddBody
 	{
 		[JsonPropertyName("item_id")]
 		public required int? ItemId { get; init; }
 	}
 
+	public sealed record CartAddResponse(JsonElement Data);
+
 	public sealed record CartDeleteBody
 	{
 		[JsonPropertyName("item_id")]
 		public int? ItemId { get; init; }
 	}
+
+	public sealed record CartDeleteResponse(JsonElement Data);
 }
 
 // ─── PurchasingApi Types ────────────────────────────────────────
@@ -3106,6 +3268,10 @@ public static class PurchasingApiTypes
 		public int? BalanceId { get; init; }
 	}
 
+	public sealed record PurchasingFastBuyResponse(JsonElement Data);
+
+	public sealed record PurchasingCheckResponse(JsonElement Data);
+
 	public sealed record PurchasingConfirmBody
 	{
 		[JsonPropertyName("price")]
@@ -3114,6 +3280,8 @@ public static class PurchasingApiTypes
 		public int? BalanceId { get; init; }
 	}
 
+	public sealed record PurchasingConfirmResponse(JsonElement Data);
+
 	public sealed record PurchasingDiscountRequestBody
 	{
 		[JsonPropertyName("discount_price")]
@@ -3121,12 +3289,18 @@ public static class PurchasingApiTypes
 		[JsonPropertyName("message")]
 		public string? Message { get; init; }
 	}
+
+	public sealed record PurchasingDiscountRequestResponse(JsonElement Data);
+
+	public sealed record PurchasingDiscountCancelResponse(JsonElement Data);
 }
 
 // ─── CustomDiscountsApi Types ────────────────────────────────────────
 
 public static class CustomDiscountsApiTypes
 {
+	public sealed record CustomDiscountsGetResponse(JsonElement Data);
+
 	public sealed record CustomDiscountsCreateBody
 	{
 		[JsonPropertyName("user_id")]
@@ -3143,6 +3317,8 @@ public static class CustomDiscountsApiTypes
 		public string? Currency { get; init; }
 	}
 
+	public sealed record CustomDiscountsCreateResponse(JsonElement Data);
+
 	public sealed record CustomDiscountsEditBody
 	{
 		[JsonPropertyName("discount_id")]
@@ -3155,11 +3331,15 @@ public static class CustomDiscountsApiTypes
 		public double? MaxPrice { get; init; }
 	}
 
+	public sealed record CustomDiscountsEditResponse(JsonElement Data);
+
 	public sealed record CustomDiscountsDeleteBody
 	{
 		[JsonPropertyName("discount_id")]
 		public required int? DiscountId { get; init; }
 	}
+
+	public sealed record CustomDiscountsDeleteResponse(JsonElement Data);
 }
 
 // ─── PublishingApi Types ────────────────────────────────────────
@@ -3208,6 +3388,8 @@ public static class PublishingApiTypes
 		public JsonElement? Extra { get; init; }
 	}
 
+	public sealed record PublishingFastSellResponse(JsonElement Data);
+
 	public sealed record PublishingAddBody
 	{
 		[JsonPropertyName("title")]
@@ -3246,6 +3428,8 @@ public static class PublishingApiTypes
 		public bool? RandomProxy { get; init; }
 	}
 
+	public sealed record PublishingAddResponse(JsonElement Data);
+
 	public sealed record PublishingCheckBody
 	{
 		[JsonPropertyName("resell_item_id")]
@@ -3268,6 +3452,8 @@ public static class PublishingApiTypes
 		public JsonElement? Extra { get; init; }
 	}
 
+	public sealed record PublishingCheckResponse(JsonElement Data);
+
 	public sealed record PublishingExternalBody
 	{
 		[JsonPropertyName("type")]
@@ -3279,6 +3465,8 @@ public static class PublishingApiTypes
 		[JsonPropertyName("cookies")]
 		public string? Cookies { get; init; }
 	}
+
+	public sealed record PublishingExternalResponse(JsonElement Data);
 }
 
 // ─── PaymentsApi Types ────────────────────────────────────────
@@ -3292,6 +3480,8 @@ public static class PaymentsApiTypes
 		[JsonPropertyName("payment_id")]
 		public string? PaymentId { get; init; }
 	}
+
+	public sealed record PaymentsInvoiceGetResponse(JsonElement Data);
 
 	public sealed record PaymentsInvoiceCreateBody
 	{
@@ -3321,6 +3511,8 @@ public static class PaymentsApiTypes
 		public bool? IsTest { get; init; }
 	}
 
+	public sealed record PaymentsInvoiceCreateResponse(JsonElement Data);
+
 	public sealed record PaymentsInvoiceListParams
 	{
 		[JsonPropertyName("page")]
@@ -3335,6 +3527,12 @@ public static class PaymentsApiTypes
 		public int? MerchantId { get; init; }
 	}
 
+	public sealed record PaymentsInvoiceListResponse(JsonElement Data);
+
+	public sealed record PaymentsCurrencyResponse(JsonElement Data);
+
+	public sealed record PaymentsBalanceListResponse(JsonElement Data);
+
 	public sealed record PaymentsBalanceExchangeBody
 	{
 		[JsonPropertyName("from_balance")]
@@ -3344,6 +3542,8 @@ public static class PaymentsApiTypes
 		[JsonPropertyName("amount")]
 		public required int? Amount { get; init; }
 	}
+
+	public sealed record PaymentsBalanceExchangeResponse(JsonElement Data);
 
 	public sealed record PaymentsTransferBody
 	{
@@ -3369,17 +3569,23 @@ public static class PaymentsApiTypes
 		public string? HoldLengthOption { get; init; }
 	}
 
+	public sealed record PaymentsTransferResponse(JsonElement Data);
+
 	public sealed record PaymentsFeeParams
 	{
 		[JsonPropertyName("amount")]
 		public double? Amount { get; init; }
 	}
 
+	public sealed record PaymentsFeeResponse(JsonElement Data);
+
 	public sealed record PaymentsCancelBody
 	{
 		[JsonPropertyName("payment_id")]
 		public required int? PaymentId { get; init; }
 	}
+
+	public sealed record PaymentsCancelResponse(JsonElement Data);
 
 	public sealed record PaymentsHistoryParams
 	{
@@ -3415,6 +3621,10 @@ public static class PaymentsApiTypes
 		public bool? ShowPaymentStats { get; init; }
 	}
 
+	public sealed record PaymentsHistoryResponse(JsonElement Data);
+
+	public sealed record PaymentsPayoutServicesResponse(JsonElement Data);
+
 	public sealed record PaymentsPayoutBody
 	{
 		[JsonPropertyName("payment_system")]
@@ -3430,12 +3640,16 @@ public static class PaymentsApiTypes
 		[JsonPropertyName("extra")]
 		public JsonElement? Extra { get; init; }
 	}
+
+	public sealed record PaymentsPayoutResponse(JsonElement Data);
 }
 
 // ─── AutoPaymentsApi Types ────────────────────────────────────────
 
 public static class AutoPaymentsApiTypes
 {
+	public sealed record AutoPaymentsListResponse(JsonElement Data);
+
 	public sealed record AutoPaymentsCreateBody
 	{
 		[JsonPropertyName("secret_answer")]
@@ -3452,17 +3666,23 @@ public static class AutoPaymentsApiTypes
 		public string? Description { get; init; }
 	}
 
+	public sealed record AutoPaymentsCreateResponse(JsonElement Data);
+
 	public sealed record AutoPaymentsDeleteBody
 	{
 		[JsonPropertyName("auto_payment_id")]
 		public required int? AutoPaymentId { get; init; }
 	}
+
+	public sealed record AutoPaymentsDeleteResponse(JsonElement Data);
 }
 
 // ─── ProxyApi Types ────────────────────────────────────────
 
 public static class ProxyApiTypes
 {
+	public sealed record ProxyGetResponse(JsonElement Data);
+
 	public sealed record ProxyAddBody
 	{
 		[JsonPropertyName("proxy_ip")]
@@ -3477,6 +3697,8 @@ public static class ProxyApiTypes
 		public string? ProxyRow { get; init; }
 	}
 
+	public sealed record ProxyAddResponse(JsonElement Data);
+
 	public sealed record ProxyDeleteBody
 	{
 		[JsonPropertyName("proxy_id")]
@@ -3484,6 +3706,8 @@ public static class ProxyApiTypes
 		[JsonPropertyName("delete_all")]
 		public bool? DeleteAll { get; init; }
 	}
+
+	public sealed record ProxyDeleteResponse(JsonElement Data);
 }
 
 // ─── ImapApi Types ────────────────────────────────────────
@@ -3502,10 +3726,21 @@ public static class ImapApiTypes
 		public required bool? Secure { get; init; }
 	}
 
+	public sealed record ImapCreateResponse(JsonElement Data);
+
 	public sealed record ImapDeleteBody
 	{
 		[JsonPropertyName("domain")]
 		public required string Domain { get; init; }
 	}
+
+	public sealed record ImapDeleteResponse(JsonElement Data);
+}
+
+// ─── BatchApi Types ────────────────────────────────────────
+
+public static class BatchApiTypes
+{
+	public sealed record BatchBatchResponse(JsonElement Data);
 }
 

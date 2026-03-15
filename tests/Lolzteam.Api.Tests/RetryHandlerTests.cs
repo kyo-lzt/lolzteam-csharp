@@ -86,10 +86,10 @@ public class RetryHandlerTests
 	}
 
 	[Fact]
-	public async Task ThrowsAfterMaxRetriesExhausted()
+	public async Task ThrowsRetryExhaustedAfterMaxRetries()
 	{
 		var attempts = 0;
-		await Assert.ThrowsAsync<RateLimitException>(() =>
+		var ex = await Assert.ThrowsAsync<RetryExhaustedException>(() =>
 			RetryHandler.WithRetryAsync<string>(FastConfig, () =>
 			{
 				attempts++;
@@ -97,5 +97,23 @@ public class RetryHandlerTests
 			}));
 
 		Assert.Equal(3, attempts); // initial + 2 retries
+		Assert.Equal(3, ex.Attempts);
+		Assert.IsType<RateLimitException>(ex.LastError);
+	}
+
+	[Fact]
+	public async Task ThrowsRetryExhaustedForServerException()
+	{
+		var attempts = 0;
+		var ex = await Assert.ThrowsAsync<RetryExhaustedException>(() =>
+			RetryHandler.WithRetryAsync<string>(FastConfig, () =>
+			{
+				attempts++;
+				throw new ServerException(502, "bad gateway", EmptyHeaders);
+			}));
+
+		Assert.Equal(3, attempts);
+		Assert.Equal(3, ex.Attempts);
+		Assert.IsType<ServerException>(ex.LastError);
 	}
 }
