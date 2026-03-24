@@ -2,8 +2,9 @@ namespace Lolzteam.Api.Runtime;
 
 public static class RetryHandler
 {
-	private static readonly Random Rng = new();
-
+#if !NET6_0_OR_GREATER
+	private static readonly Random SharedRandom = new();
+#endif
 	public static async Task<T> WithRetryAsync<T>(
 		RetryConfig config,
 		Func<Task<T>> block,
@@ -11,14 +12,23 @@ public static class RetryHandler
 		string method = "",
 		string path = "")
 	{
+		Exception? lastError = null;
+
 		for (var attempt = 0; attempt <= config.MaxRetries; attempt++)
 		{
 			try
 			{
 				return await block().ConfigureAwait(false);
 			}
-			catch (Exception ex) when (IsRetryable(ex) && attempt < config.MaxRetries)
+			catch (Exception ex) when (IsRetryable(ex))
 			{
+				lastError = ex;
+
+				if (attempt >= config.MaxRetries)
+				{
+					break;
+				}
+
 				var delay = ComputeDelay(config, attempt, ex);
 
 				if (onRetry is not null)
@@ -28,13 +38,14 @@ public static class RetryHandler
 
 				await Task.Delay(delay).ConfigureAwait(false);
 			}
-			catch (Exception ex) when (IsRetryable(ex) && attempt > 0)
-			{
-				throw new RetryExhaustedException(attempt + 1, ex);
-			}
 		}
 
-		throw new InvalidOperationException("Unreachable");
+		if (lastError is not null && config.MaxRetries > 0)
+		{
+			throw new RetryExhaustedException(config.MaxRetries + 1, lastError);
+		}
+
+		throw lastError ?? new InvalidOperationException("Unreachable");
 	}
 
 	private static bool IsRetryable(Exception ex) => ex switch
@@ -54,11 +65,15 @@ public static class RetryHandler
 
 		var baseMs = config.BaseDelay.TotalMilliseconds;
 		var exponential = baseMs * Math.Pow(2, attempt);
+#if NET6_0_OR_GREATER
+		var jitter = Random.Shared.NextDouble() * baseMs;
+#else
 		double jitter;
-		lock (Rng)
+		lock (SharedRandom)
 		{
-			jitter = Rng.NextDouble() * baseMs;
+			jitter = SharedRandom.NextDouble() * baseMs;
 		}
+#endif
 		var totalMs = exponential + jitter;
 		var delay = TimeSpan.FromMilliseconds(totalMs);
 

@@ -11,15 +11,22 @@ public sealed class RateLimiter : IDisposable
 
 	public RateLimiter(int requestsPerMinute)
 	{
+		if (requestsPerMinute <= 0)
+			throw new ConfigException("requestsPerMinute must be greater than 0");
+
 		_maxTokens = requestsPerMinute;
 		_refillRate = requestsPerMinute / 60000.0;
 		_tokens = requestsPerMinute;
-		_lastRefillTimestamp = Environment.TickCount64;
+		_lastRefillTimestamp = GetTickCount64();
 	}
 
 	public async Task AcquireAsync(CancellationToken cancellationToken = default)
 	{
+#if NET7_0_OR_GREATER
 		ObjectDisposedException.ThrowIf(_disposed, this);
+#else
+		if (_disposed) throw new ObjectDisposedException(GetType().FullName);
+#endif
 
 		while (true)
 		{
@@ -39,9 +46,19 @@ public sealed class RateLimiter : IDisposable
 		}
 	}
 
+	private static long GetTickCount64()
+	{
+#if NETSTANDARD2_0
+		return System.Diagnostics.Stopwatch.GetTimestamp()
+			/ (System.Diagnostics.Stopwatch.Frequency / 1000);
+#else
+		return Environment.TickCount64;
+#endif
+	}
+
 	private void Refill()
 	{
-		var now = Environment.TickCount64;
+		var now = GetTickCount64();
 		var elapsed = now - _lastRefillTimestamp;
 		if (elapsed > 0)
 		{

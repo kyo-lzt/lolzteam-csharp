@@ -1173,6 +1173,10 @@ internal static partial class Emitter
 
 		sb.Append("\t}\n\n");
 
+		sb.Append("\tpublic static ").Append(clientName).Append(" Create(string token)\n\t{\n");
+		sb.Append("\t\treturn new ").Append(clientName).Append("(new ClientConfig { Token = token });\n");
+		sb.Append("\t}\n\n");
+
 		// Dispose
 		sb.Append("\tpublic void Dispose()\n\t{\n");
 		sb.Append("\t\t_http.Dispose();\n");

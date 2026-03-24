@@ -1913,6 +1913,11 @@ public sealed class ForumClient : IDisposable
 		Users = new UsersApi(_http);
 	}
 
+	public static ForumClient Create(string token)
+	{
+		return new ForumClient(new ClientConfig { Token = token });
+	}
+
 	public void Dispose()
 	{
 		_http.Dispose();

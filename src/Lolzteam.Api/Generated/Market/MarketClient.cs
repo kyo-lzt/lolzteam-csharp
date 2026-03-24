@@ -1481,6 +1481,11 @@ public sealed class MarketClient : IDisposable
 		Purchasing = new PurchasingApi(_http);
 	}
 
+	public static MarketClient Create(string token)
+	{
+		return new MarketClient(new ClientConfig { Token = token });
+	}
+
 	public void Dispose()
 	{
 		_http.Dispose();

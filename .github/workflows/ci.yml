@@ -29,7 +29,8 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: "8.0.x"
-      - run: dotnet build codegen/Lolzteam.Codegen/Lolzteam.Codegen.csproj
+      - run: dotnet format --verify-no-changes
+      - run: dotnet build --configuration Release /p:EnforceCodeStyleInBuild=true
 
   test:
     name: Tests
