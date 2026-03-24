@@ -27,6 +27,7 @@ public class ConfigTests
             BaseUrl = "https://api.example.com",
         };
 
+        Assert.NotNull(config.Retry);
         Assert.Equal(3, config.Retry.MaxRetries);
     }
 
