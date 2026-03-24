@@ -4,10 +4,10 @@ namespace Lolzteam.Api.Runtime;
 [AttributeUsage(AttributeTargets.Field)]
 public sealed class EnumValueAttribute : Attribute
 {
-	public string Value { get; }
+    public string Value { get; }
 
-	public EnumValueAttribute(string value)
-	{
-		Value = value;
-	}
+    public EnumValueAttribute(string value)
+    {
+        Value = value;
+    }
 }

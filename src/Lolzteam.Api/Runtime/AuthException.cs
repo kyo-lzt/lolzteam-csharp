@@ -4,6 +4,6 @@ namespace Lolzteam.Api.Runtime;
 
 public sealed class AuthException : HttpException
 {
-	public AuthException(int statusCode, string responseBody, HttpResponseHeaders headers)
-		: base(statusCode, responseBody, headers) { }
+    public AuthException(int statusCode, string responseBody, HttpResponseHeaders headers)
+        : base(statusCode, responseBody, headers) { }
 }
