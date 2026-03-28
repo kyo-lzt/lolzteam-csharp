@@ -199,6 +199,11 @@ internal static partial class Transforms
                 }
                 return "Record<string, unknown>";
             }
+            // Objects with all-numeric property keys → treat as dictionary
+            if (HasAllNumericKeys(propsObj))
+            {
+                return "Record<string, string>";
+            }
             return "{}";
         }
 
@@ -216,6 +221,20 @@ internal static partial class Transforms
         "null" => "null",
         _ => "unknown",
     };
+
+    /// <summary>Check if all property names of a JSON object are numeric (e.g. "1", "2", "3").</summary>
+    [GeneratedRegex(@"^\d+$")]
+    private static partial Regex NumericKeyPattern();
+
+    internal static bool HasAllNumericKeys(JsonObject propsObj)
+    {
+        if (propsObj.Count == 0) return false;
+        foreach (var kvp in propsObj)
+        {
+            if (!NumericKeyPattern().IsMatch(kvp.Key)) return false;
+        }
+        return true;
+    }
 
     /// <summary>Map intermediate type string to C# type.</summary>
     internal static string ToCSharpType(string tsType)
@@ -404,13 +423,16 @@ internal static partial class Transforms
                 }
             }
             var defaultValue = ExtractDefaultValue(paramSchema);
+            var descNode = paramObj["description"];
+            string? description = descNode is JsonValue dv && dv.TryGetValue<string>(out var desc) ? desc : null;
 
             var parsed = new ParsedParameter(
                 name,
                 type,
                 inValue == "path" || required,
                 enumValues,
-                defaultValue
+                defaultValue,
+                description
             );
 
             if (inValue == "path")
@@ -502,12 +524,15 @@ internal static partial class Transforms
                 if (kvp.Key == discriminatorField) continue;
                 var propEnumValues = ExtractEnumValues(kvp.Value, spec);
                 var propDefaultValue = ExtractDefaultValue(kvp.Value);
+                var vpDescNode = kvp.Value is JsonObject vpDescObj ? vpDescObj["description"] : null;
+                string? vpDescription = vpDescNode is JsonValue vpDv && vpDv.TryGetValue<string>(out var vpDesc) ? vpDesc : null;
                 bodyProps.Add(new BodyProperty(
                     kvp.Key,
                     SchemaToTypeString(kvp.Value, spec),
                     requiredSet.Contains(kvp.Key),
                     propEnumValues,
-                    propDefaultValue
+                    propDefaultValue,
+                    vpDescription
                 ));
             }
 
@@ -689,12 +714,15 @@ internal static partial class Transforms
 
                 var mergedEnumValues = ExtractEnumValues(mergedSchema, spec);
                 var mergedDefaultValue = ExtractDefaultValue(mergedSchema);
+                var mergedDescNode = mergedSchema is JsonObject mdObj ? mdObj["description"] : null;
+                string? mergedDescription = mergedDescNode is JsonValue mdv && mdv.TryGetValue<string>(out var mdesc) ? mdesc : null;
                 bodyProperties.Add(new BodyProperty(
                     kvp.Key,
                     SchemaToTypeString(mergedSchema, spec),
                     isRequired,
                     mergedEnumValues,
-                    mergedDefaultValue
+                    mergedDefaultValue,
+                    mergedDescription
                 ));
             }
         }
@@ -742,7 +770,9 @@ internal static partial class Transforms
                         }
                     }
                     var propDefaultValue = format == "binary" ? null : ExtractDefaultValue(propSchema);
-                    bodyProperties.Add(new BodyProperty(propName, propType, requiredSet.Contains(propName), propEnumValues, propDefaultValue));
+                    var propDescNode = propSchema is JsonObject pDescObj ? pDescObj["description"] : null;
+                    string? propDescription = propDescNode is JsonValue pdv && pdv.TryGetValue<string>(out var pdesc) ? pdesc : null;
+                    bodyProperties.Add(new BodyProperty(propName, propType, requiredSet.Contains(propName), propEnumValues, propDefaultValue, propDescription));
                 }
             }
         }
@@ -969,6 +999,11 @@ internal static partial class Transforms
             var props = sObj["properties"];
             if (props is not null && props is JsonObject propsObj && propsObj.Count > 0)
             {
+                // Objects with all-numeric property keys → JsonElement (API may return array or mixed values)
+                if (HasAllNumericKeys(propsObj))
+                {
+                    return ("JsonElement", null);
+                }
                 return ("JsonElement", null);
             }
             return ("JsonElement", null);
@@ -980,9 +1015,10 @@ internal static partial class Transforms
             var csharp = type switch
             {
                 "string" => "string",
-                "integer" => "long",
+                "integer" => "double",
                 "number" => "double",
-                "boolean" => "bool",
+                // boolean with default:null → API may return object instead of bool (e.g. guarantee)
+                "boolean" => "JsonElement",
                 _ => "JsonElement",
             };
             return (csharp, null);
@@ -1033,7 +1069,7 @@ internal static partial class Transforms
             var combined = new List<ParsedParameter>(parameters.QueryParams);
             foreach (var prop in body.Properties)
             {
-                combined.Add(new ParsedParameter(prop.Name, prop.Type, false, prop.EnumValues, prop.DefaultValue));
+                combined.Add(new ParsedParameter(prop.Name, prop.Type, false, prop.EnumValues, prop.DefaultValue, prop.Description));
             }
             effectiveQueryParams = combined;
         }
@@ -1068,6 +1104,11 @@ internal static partial class Transforms
             bodyRequired = false;
         }
 
+        var summaryNode = (operation as JsonObject)?["summary"];
+        string? summary = summaryNode is JsonValue smv && smv.TryGetValue<string>(out var smStr) ? smStr : null;
+        var descriptionNode = (operation as JsonObject)?["description"];
+        string? description = descriptionNode is JsonValue dsv && dsv.TryGetValue<string>(out var dsStr) ? dsStr : null;
+
         return new MethodDefinition(
             operationId,
             methodName,
@@ -1084,7 +1125,9 @@ internal static partial class Transforms
             responseSchema,
             rawResponseSchema,
             isGet ? null : oneOfVariants,
-            returnsHtml
+            returnsHtml,
+            summary,
+            description
         );
     }
 }

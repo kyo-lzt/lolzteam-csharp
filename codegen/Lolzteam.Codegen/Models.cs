@@ -32,11 +32,11 @@ internal sealed record ParseResult(
 
 internal sealed record ParsedGroup(string GroupName, List<MethodDefinition> Methods);
 
-internal sealed record ParsedParameter(string Name, string Type, bool Required, List<EnumVariant>? EnumValues = null, string? DefaultValue = null);
+internal sealed record ParsedParameter(string Name, string Type, bool Required, List<EnumVariant>? EnumValues = null, string? DefaultValue = null, string? Description = null);
 
 internal sealed record OperationParameters(List<ParsedParameter> PathParams, List<ParsedParameter> QueryParams);
 
-internal sealed record BodyProperty(string Name, string Type, bool Required, List<EnumVariant>? EnumValues = null, string? DefaultValue = null);
+internal sealed record BodyProperty(string Name, string Type, bool Required, List<EnumVariant>? EnumValues = null, string? DefaultValue = null, string? Description = null);
 
 internal sealed record OneOfVariant(
     string Title,
@@ -73,5 +73,7 @@ internal sealed record MethodDefinition(
     ResponseSchemaInfo? ResponseSchema = null,
     System.Text.Json.Nodes.JsonObject? RawResponseSchema = null,
     List<OneOfVariant>? BodyOneOfVariants = null,
-    bool ReturnsHtml = false
+    bool ReturnsHtml = false,
+    string? Summary = null,
+    string? Description = null
 );

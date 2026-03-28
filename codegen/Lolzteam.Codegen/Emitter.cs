@@ -19,6 +19,22 @@ internal static partial class Emitter
             .Replace("\"", "&quot;");
     }
 
+    /// <summary>Escape XML special characters and strip markdown formatting.</summary>
+    private static string EscapeXml(string text)
+    {
+        var escaped = text
+            .Replace("&", "&amp;")
+            .Replace("<", "&lt;")
+            .Replace(">", "&gt;")
+            .Replace("\"", "&quot;");
+        // Strip bold markdown (**text** → text)
+        escaped = BoldPattern().Replace(escaped, "$1");
+        return escaped;
+    }
+
+    [GeneratedRegex(@"\*\*(.+?)\*\*")]
+    private static partial Regex BoldPattern();
+
     /// <summary>
     /// Format a default value as a C# literal for a property initializer.
     /// Returns null if the default cannot be represented as a compile-time constant.
@@ -39,8 +55,6 @@ internal static partial class Emitter
         {
             case "string":
                 return "\"" + defaultValue.Replace("\\", "\\\\").Replace("\"", "\\\"") + "\"";
-            case "long":
-                return long.TryParse(defaultValue, out _) ? defaultValue : null;
             case "double":
                 return double.TryParse(defaultValue, System.Globalization.NumberStyles.Float,
                     System.Globalization.CultureInfo.InvariantCulture, out var d)
@@ -257,9 +271,10 @@ internal static partial class Emitter
         var seenNames = new HashSet<string>();
         for (var i = 0; i < entries.Count; i++)
         {
-            var (jsonName, csharpType, required) = entries[i];
+            var (jsonName, csharpType, _) = entries[i];
             var propName = DeduplicateName(Naming.SafeCSharpName(jsonName), seenNames);
-            var typeStr = required ? csharpType : MakeNullable(csharpType);
+            // All fields nullable to tolerate null/missing values from the API
+            var typeStr = MakeNullable(csharpType);
 
             sb.Append("\t[property: JsonPropertyName(\"").Append(jsonName).Append("\")] ");
             sb.Append(typeStr).Append(' ').Append(propName);
@@ -286,7 +301,7 @@ internal static partial class Emitter
         JsonNode schema, JsonNode rawSpec, HashSet<string> componentSchemaNames,
         string? parentTypeName = null, string? propName = null, List<string>? nestedRecords = null)
     {
-        // $ref to another component schema
+        // $ref to another component schema → JsonElement (API may return [] where object expected)
         if (schema is JsonObject refObj)
         {
             var refNode = refObj["$ref"];
@@ -294,11 +309,7 @@ internal static partial class Emitter
             {
                 if (refStr.StartsWith("#/components/schemas/"))
                 {
-                    var schemaName = refStr["#/components/schemas/".Length..];
-                    if (componentSchemaNames.Contains(schemaName))
-                    {
-                        return schemaName;
-                    }
+                    return "JsonElement";
                 }
                 var resolved = Transforms.ResolveRef(refStr, rawSpec);
                 if (resolved is not null)
@@ -351,50 +362,58 @@ internal static partial class Emitter
         if (type == "object" || sObj["properties"] is not null)
         {
             var props = sObj["properties"];
-            if (props is JsonObject propsObj && propsObj.Count > 0
-                && parentTypeName is not null && propName is not null && nestedRecords is not null)
+            if (props is JsonObject propsObj && propsObj.Count > 0)
             {
-                // Generate a nested record for inline objects with properties
-                var nestedName = parentTypeName + Naming.SnakeToPascal(Naming.SanitizeName(propName));
-                var nestedSb = new StringBuilder();
-                nestedSb.Append("public sealed record ").Append(nestedName).Append("(\n");
-
-                var requiredSet = new HashSet<string>();
-                var reqArr = sObj["required"];
-                if (reqArr is JsonArray rArr)
+                // Objects with all-numeric property keys → JsonElement (API may return array or mixed values)
+                if (Transforms.HasAllNumericKeys(propsObj))
                 {
-                    foreach (var r in rArr)
+                    return "JsonElement";
+                }
+
+                if (parentTypeName is not null && propName is not null && nestedRecords is not null)
+                {
+                    // Generate a nested record for inline objects with properties
+                    var nestedName = parentTypeName + Naming.SnakeToPascal(Naming.SanitizeName(propName));
+                    var nestedSb = new StringBuilder();
+                    nestedSb.Append("public sealed record ").Append(nestedName).Append("(\n");
+
+                    var requiredSet = new HashSet<string>();
+                    var reqArr = sObj["required"];
+                    if (reqArr is JsonArray rArr)
                     {
-                        requiredSet.Add(r!.GetValue<string>());
+                        foreach (var r in rArr)
+                        {
+                            requiredSet.Add(r!.GetValue<string>());
+                        }
                     }
-                }
 
-                var entries = new List<(string jsonName, string csharpType, bool required)>();
-                foreach (var kvp in propsObj)
-                {
-                    var pName = kvp.Key;
-                    var pSchema = kvp.Value;
-                    if (pSchema is null) continue;
-                    var req = requiredSet.Contains(pName);
-                    var cType = ResolveComponentPropertyType(
-                        pSchema, rawSpec, componentSchemaNames, nestedName, pName, nestedRecords);
-                    entries.Add((pName, cType, req));
-                }
+                    var entries = new List<(string jsonName, string csharpType, bool required)>();
+                    foreach (var kvp in propsObj)
+                    {
+                        var pName = kvp.Key;
+                        var pSchema = kvp.Value;
+                        if (pSchema is null) continue;
+                        var req = requiredSet.Contains(pName);
+                        var cType = ResolveComponentPropertyType(
+                            pSchema, rawSpec, componentSchemaNames, nestedName, pName, nestedRecords);
+                        entries.Add((pName, cType, req));
+                    }
 
-                var nestedSeen = new HashSet<string>();
-                for (var i = 0; i < entries.Count; i++)
-                {
-                    var (jn, ct, rq) = entries[i];
-                    var pn = DeduplicateName(Naming.SafeCSharpName(jn), nestedSeen);
-                    var ts = rq ? ct : MakeNullable(ct);
-                    nestedSb.Append("\t[property: JsonPropertyName(\"").Append(jn).Append("\")] ");
-                    nestedSb.Append(ts).Append(' ').Append(pn);
-                    nestedSb.Append(i < entries.Count - 1 ? ",\n" : "\n");
-                }
+                    var nestedSeen = new HashSet<string>();
+                    for (var i = 0; i < entries.Count; i++)
+                    {
+                        var (jn, ct, _) = entries[i];
+                        var pn = DeduplicateName(Naming.SafeCSharpName(jn), nestedSeen);
+                        var ts = MakeNullable(ct);
+                        nestedSb.Append("\t[property: JsonPropertyName(\"").Append(jn).Append("\")] ");
+                        nestedSb.Append(ts).Append(' ').Append(pn);
+                        nestedSb.Append(i < entries.Count - 1 ? ",\n" : "\n");
+                    }
 
-                nestedSb.Append(");\n");
-                nestedRecords.Add(nestedSb.ToString());
-                return nestedName;
+                    nestedSb.Append(");\n");
+                    nestedRecords.Add(nestedSb.ToString());
+                    return nestedName;
+                }
             }
             return "JsonElement";
         }
@@ -404,9 +423,10 @@ internal static partial class Emitter
             return type switch
             {
                 "string" => "string",
-                "integer" => "long",
+                "integer" => "double",
                 "number" => "double",
-                "boolean" => "bool",
+                // boolean → JsonElement (API may return object where boolean expected, e.g. guarantee)
+                "boolean" => "JsonElement",
                 _ => "JsonElement",
             };
         }
@@ -437,9 +457,12 @@ internal static partial class Emitter
                 ? (param.Type.StartsWith("Array<") ? "List<" + enumTypeName + ">" : enumTypeName)
                 : Transforms.ToCSharpType(param.Type);
             var propName = Naming.SafeCSharpName(param.Name);
-            if (param.DefaultValue is not null)
+            if (param.Description is not null || param.DefaultValue is not null)
             {
-                sb.Append("\t\t/// <summary>Default: ").Append(FormatDefaultValue(param.DefaultValue)).Append("</summary>\n");
+                var parts = new List<string>();
+                if (param.Description is not null) parts.Add(EscapeXml(param.Description.ReplaceLineEndings(" ")));
+                if (param.DefaultValue is not null) parts.Add("Default: " + FormatDefaultValue(param.DefaultValue) + ".");
+                sb.Append("\t\t/// <summary>").Append(string.Join(" ", parts)).Append("</summary>\n");
             }
             if (Naming.NeedsJsonPropertyName(param.Name))
             {
@@ -501,9 +524,12 @@ internal static partial class Emitter
                     : Transforms.ToCSharpType(prop.Type);
             var propName = Naming.SafeCSharpName(prop.Name);
 
-            if (prop.DefaultValue is not null)
+            if (prop.Description is not null || prop.DefaultValue is not null)
             {
-                sb.Append("\t\t/// <summary>Default: ").Append(FormatDefaultValue(prop.DefaultValue)).Append("</summary>\n");
+                var parts = new List<string>();
+                if (prop.Description is not null) parts.Add(EscapeXml(prop.Description.ReplaceLineEndings(" ")));
+                if (prop.DefaultValue is not null) parts.Add("Default: " + FormatDefaultValue(prop.DefaultValue) + ".");
+                sb.Append("\t\t/// <summary>").Append(string.Join(" ", parts)).Append("</summary>\n");
             }
             if (Naming.NeedsJsonPropertyName(prop.Name))
             {
@@ -594,9 +620,12 @@ internal static partial class Emitter
                         : Transforms.ToCSharpType(prop.Type);
                 var propName = Naming.SafeCSharpName(prop.Name);
 
-                if (prop.DefaultValue is not null)
+                if (prop.Description is not null || prop.DefaultValue is not null)
                 {
-                    sb.Append("\t\t/// <summary>Default: ").Append(FormatDefaultValue(prop.DefaultValue)).Append("</summary>\n");
+                    var parts = new List<string>();
+                    if (prop.Description is not null) parts.Add(EscapeXml(prop.Description.ReplaceLineEndings(" ")));
+                    if (prop.DefaultValue is not null) parts.Add("Default: " + FormatDefaultValue(prop.DefaultValue) + ".");
+                    sb.Append("\t\t/// <summary>").Append(string.Join(" ", parts)).Append("</summary>\n");
                 }
                 if (Naming.NeedsJsonPropertyName(prop.Name))
                 {
@@ -692,9 +721,10 @@ internal static partial class Emitter
             var seenNames = new HashSet<string>();
             for (var i = 0; i < entries.Count; i++)
             {
-                var (jsonName, csharpType, required) = entries[i];
+                var (jsonName, csharpType, _) = entries[i];
                 var propName = DeduplicateName(Naming.SafeCSharpName(jsonName), seenNames);
-                var typeStr = required ? csharpType : MakeNullable(csharpType);
+                // All response fields are nullable to tolerate null/missing values from the API
+                var typeStr = MakeNullable(csharpType);
 
                 sb.Append("\t\t[property: JsonPropertyName(\"").Append(jsonName).Append("\")] ");
                 sb.Append(typeStr).Append(' ').Append(propName);
@@ -923,6 +953,31 @@ internal static partial class Emitter
         var isMultipart = method.BodyEncoding == "multipart";
 
         var responseTypeName = className + "Types." + typeName + "Response";
+
+        // XML doc comments
+        if (method.Summary is not null)
+        {
+            sb.Append("\t/// <summary>").Append(EscapeXml(method.Summary)).Append("</summary>\n");
+        }
+        if (method.Description is not null)
+        {
+            sb.Append("\t/// <remarks>\n");
+            foreach (var line in method.Description.Split('\n'))
+            {
+                var trimmed = line.TrimEnd('\r');
+                sb.Append("\t/// ").Append(EscapeXml(trimmed)).Append('\n');
+            }
+            sb.Append("\t/// </remarks>\n");
+        }
+        foreach (var param in method.Params.PathParams)
+        {
+            if (param.Description is not null)
+            {
+                var paramName = Naming.SnakeToPascal(Naming.SanitizeName(param.Name));
+                sb.Append("\t/// <param name=\"").Append(paramName).Append("\">").Append(EscapeXml(param.Description.ReplaceLineEndings(" "))).Append("</param>\n");
+            }
+        }
+
         sb.Append("\tpublic async Task<").Append(responseTypeName).Append("> ").Append(method.MethodName)
             .Append("Async(").Append(argStr).Append(")\n\t{\n");
 
