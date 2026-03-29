@@ -28,7 +28,7 @@ public sealed class AutoPaymentsApi
 			Method = "GET",
 			Path = "/auto-payments",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<AutoPaymentsApiTypes.AutoPaymentsListResponse>(__result)!;
+		return JsonSerializer.Deserialize<AutoPaymentsApiTypes.AutoPaymentsListResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Create Auto Payment</summary>
@@ -47,7 +47,7 @@ public sealed class AutoPaymentsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<AutoPaymentsApiTypes.AutoPaymentsCreateResponse>(__result)!;
+		return JsonSerializer.Deserialize<AutoPaymentsApiTypes.AutoPaymentsCreateResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Delete Auto Payment</summary>
@@ -66,7 +66,7 @@ public sealed class AutoPaymentsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<AutoPaymentsApiTypes.AutoPaymentsDeleteResponse>(__result)!;
+		return JsonSerializer.Deserialize<AutoPaymentsApiTypes.AutoPaymentsDeleteResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -95,7 +95,7 @@ public sealed class BatchApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<BatchApiTypes.BatchBatchResponse>(__result)!;
+		return JsonSerializer.Deserialize<BatchApiTypes.BatchBatchResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -120,7 +120,7 @@ public sealed class CartApi
 			Path = "/cart",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CartApiTypes.CartGetResponse>(__result)!;
+		return JsonSerializer.Deserialize<CartApiTypes.CartGetResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Add Item to Cart</summary>
@@ -136,7 +136,7 @@ public sealed class CartApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CartApiTypes.CartAddResponse>(__result)!;
+		return JsonSerializer.Deserialize<CartApiTypes.CartAddResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Delete Item From Cart</summary>
@@ -152,7 +152,7 @@ public sealed class CartApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CartApiTypes.CartDeleteResponse>(__result)!;
+		return JsonSerializer.Deserialize<CartApiTypes.CartDeleteResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -178,7 +178,7 @@ public sealed class CategoryApi
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryAllResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryAllResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Steam</summary>
@@ -194,7 +194,7 @@ public sealed class CategoryApi
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategorySteamResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategorySteamResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Fortnite</summary>
@@ -210,7 +210,7 @@ public sealed class CategoryApi
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryFortniteResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryFortniteResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>miHoYo</summary>
@@ -226,7 +226,7 @@ public sealed class CategoryApi
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryMihoyoResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryMihoyoResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Riot</summary>
@@ -242,7 +242,7 @@ public sealed class CategoryApi
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryRiotResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryRiotResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Telegram</summary>
@@ -258,7 +258,7 @@ public sealed class CategoryApi
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryTelegramResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryTelegramResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Supercell</summary>
@@ -274,7 +274,7 @@ public sealed class CategoryApi
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategorySupercellResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategorySupercellResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>EA (Origin)</summary>
@@ -290,7 +290,7 @@ public sealed class CategoryApi
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryEaResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryEaResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>World of Tanks</summary>
@@ -306,7 +306,7 @@ public sealed class CategoryApi
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryWotResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryWotResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>WoT Blitz</summary>
@@ -322,7 +322,7 @@ public sealed class CategoryApi
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryWotBlitzResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryWotBlitzResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Gifts</summary>
@@ -338,7 +338,7 @@ public sealed class CategoryApi
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryGiftsResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryGiftsResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Epic Games</summary>
@@ -354,7 +354,7 @@ public sealed class CategoryApi
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryEpicGamesResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryEpicGamesResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Escape from Tarkov</summary>
@@ -370,7 +370,7 @@ public sealed class CategoryApi
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryEscapeFromTarkovResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryEscapeFromTarkovResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Social Club</summary>
@@ -386,7 +386,7 @@ public sealed class CategoryApi
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategorySocialClubResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategorySocialClubResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Uplay</summary>
@@ -402,7 +402,7 @@ public sealed class CategoryApi
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryUplayResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryUplayResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Discord</summary>
@@ -418,7 +418,7 @@ public sealed class CategoryApi
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryDiscordResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryDiscordResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>TikTok</summary>
@@ -434,7 +434,7 @@ public sealed class CategoryApi
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryTikTokResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryTikTokResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Instagram</summary>
@@ -450,7 +450,7 @@ public sealed class CategoryApi
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryInstagramResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryInstagramResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>BattleNet</summary>
@@ -466,7 +466,7 @@ public sealed class CategoryApi
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryBattleNetResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryBattleNetResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>ChatGPT</summary>
@@ -482,7 +482,7 @@ public sealed class CategoryApi
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryChatGPTResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryChatGPTResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>VPN</summary>
@@ -498,7 +498,7 @@ public sealed class CategoryApi
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryVpnResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryVpnResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Roblox</summary>
@@ -514,7 +514,7 @@ public sealed class CategoryApi
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryRobloxResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryRobloxResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Warface</summary>
@@ -530,7 +530,7 @@ public sealed class CategoryApi
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryWarfaceResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryWarfaceResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Minecraft</summary>
@@ -546,7 +546,7 @@ public sealed class CategoryApi
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryMinecraftResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryMinecraftResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Hytale</summary>
@@ -562,7 +562,7 @@ public sealed class CategoryApi
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryHytaleResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryHytaleResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Categories</summary>
@@ -578,7 +578,7 @@ public sealed class CategoryApi
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryListResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryListResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Category Search Params</summary>
@@ -594,7 +594,7 @@ public sealed class CategoryApi
 			Path = $"/{CategoryName}/params",
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryParamsResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryParamsResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Category Games</summary>
@@ -610,7 +610,7 @@ public sealed class CategoryApi
 			Path = $"/{CategoryName}/games",
 			IsSearch = true,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryGamesResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoryApiTypes.CategoryGamesResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -634,7 +634,7 @@ public sealed class CustomDiscountsApi
 			Method = "GET",
 			Path = "/custom-discounts",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CustomDiscountsApiTypes.CustomDiscountsGetResponse>(__result)!;
+		return JsonSerializer.Deserialize<CustomDiscountsApiTypes.CustomDiscountsGetResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Create Custom Discount</summary>
@@ -650,7 +650,7 @@ public sealed class CustomDiscountsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CustomDiscountsApiTypes.CustomDiscountsCreateResponse>(__result)!;
+		return JsonSerializer.Deserialize<CustomDiscountsApiTypes.CustomDiscountsCreateResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Edit Custom Discount</summary>
@@ -666,7 +666,7 @@ public sealed class CustomDiscountsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CustomDiscountsApiTypes.CustomDiscountsEditResponse>(__result)!;
+		return JsonSerializer.Deserialize<CustomDiscountsApiTypes.CustomDiscountsEditResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Delete Custom Discount</summary>
@@ -682,7 +682,7 @@ public sealed class CustomDiscountsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CustomDiscountsApiTypes.CustomDiscountsDeleteResponse>(__result)!;
+		return JsonSerializer.Deserialize<CustomDiscountsApiTypes.CustomDiscountsDeleteResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -708,7 +708,7 @@ public sealed class ImapApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ImapApiTypes.ImapCreateResponse>(__result)!;
+		return JsonSerializer.Deserialize<ImapApiTypes.ImapCreateResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Delete IMAP Configuration</summary>
@@ -724,7 +724,7 @@ public sealed class ImapApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ImapApiTypes.ImapDeleteResponse>(__result)!;
+		return JsonSerializer.Deserialize<ImapApiTypes.ImapDeleteResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -749,7 +749,7 @@ public sealed class ListApi
 			Path = "/user/items",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ListApiTypes.ListUserResponse>(__result)!;
+		return JsonSerializer.Deserialize<ListApiTypes.ListUserResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get All Purchased Accounts</summary>
@@ -764,7 +764,7 @@ public sealed class ListApi
 			Path = "/user/orders",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ListApiTypes.ListOrdersResponse>(__result)!;
+		return JsonSerializer.Deserialize<ListApiTypes.ListOrdersResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get User Items States</summary>
@@ -779,7 +779,7 @@ public sealed class ListApi
 			Path = "/user/item-states",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ListApiTypes.ListStatesResponse>(__result)!;
+		return JsonSerializer.Deserialize<ListApiTypes.ListStatesResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Download Accounts Data</summary>
@@ -810,7 +810,7 @@ public sealed class ListApi
 			Path = "/fave",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ListApiTypes.ListFavoritesResponse>(__result)!;
+		return JsonSerializer.Deserialize<ListApiTypes.ListFavoritesResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get All Viewed Accounts</summary>
@@ -825,7 +825,7 @@ public sealed class ListApi
 			Path = "/viewed",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ListApiTypes.ListViewedResponse>(__result)!;
+		return JsonSerializer.Deserialize<ListApiTypes.ListViewedResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -851,7 +851,7 @@ public sealed class ManagingApi
 			Path = $"/{ItemId}",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingGetResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingGetResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Delete Account</summary>
@@ -868,7 +868,7 @@ public sealed class ManagingApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingDeleteResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingDeleteResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Create Claim</summary>
@@ -884,7 +884,7 @@ public sealed class ManagingApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingCreateClaimResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingCreateClaimResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Bulk Get Accounts</summary>
@@ -900,7 +900,7 @@ public sealed class ManagingApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingBulkGetResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingBulkGetResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Account Steam Inventory Value</summary>
@@ -916,7 +916,7 @@ public sealed class ManagingApi
 			Path = $"/{ItemId}/inventory-value",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingSteamInventoryValueResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingSteamInventoryValueResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Steam Inventory Value</summary>
@@ -932,7 +932,7 @@ public sealed class ManagingApi
 			Path = "/steam-value",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingSteamValueResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingSteamValueResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Steam HTML</summary>
@@ -965,7 +965,7 @@ public sealed class ManagingApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingEditResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingEditResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get AI Price</summary>
@@ -980,7 +980,7 @@ public sealed class ManagingApi
 			Method = "GET",
 			Path = $"/{ItemId}/ai-price",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingAIPriceResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingAIPriceResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Auto Buy Price</summary>
@@ -995,7 +995,7 @@ public sealed class ManagingApi
 			Method = "GET",
 			Path = $"/{ItemId}/auto-buy-price",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingAutoBuyPriceResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingAutoBuyPriceResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Edit Note</summary>
@@ -1012,7 +1012,7 @@ public sealed class ManagingApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingNoteResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingNoteResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Update Inventory Value</summary>
@@ -1029,7 +1029,7 @@ public sealed class ManagingApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingSteamUpdateValueResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingSteamUpdateValueResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Bump Account</summary>
@@ -1044,7 +1044,7 @@ public sealed class ManagingApi
 			Method = "POST",
 			Path = $"/{ItemId}/bump",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingBumpResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingBumpResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Auto Bump</summary>
@@ -1061,7 +1061,7 @@ public sealed class ManagingApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingAutoBumpResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingAutoBumpResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Disable Auto Bump</summary>
@@ -1076,7 +1076,7 @@ public sealed class ManagingApi
 			Method = "DELETE",
 			Path = $"/{ItemId}/auto-bump",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingAutoBumpDisableResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingAutoBumpDisableResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Open Account</summary>
@@ -1091,7 +1091,7 @@ public sealed class ManagingApi
 			Method = "POST",
 			Path = $"/{ItemId}/open",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingOpenResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingOpenResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Close Account</summary>
@@ -1106,7 +1106,7 @@ public sealed class ManagingApi
 			Method = "POST",
 			Path = $"/{ItemId}/close",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingCloseResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingCloseResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Account Image</summary>
@@ -1122,7 +1122,7 @@ public sealed class ManagingApi
 			Path = $"/{ItemId}/image",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingImageResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingImageResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Email Confirmation Code</summary>
@@ -1139,7 +1139,7 @@ public sealed class ManagingApi
 			Method = "GET",
 			Path = $"/{ItemId}/email-code",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingEmailCodeResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingEmailCodeResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Email Letters</summary>
@@ -1156,7 +1156,7 @@ public sealed class ManagingApi
 			Path = "/letters2",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingGetLetters2Response>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingGetLetters2Response>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Mafile</summary>
@@ -1172,7 +1172,7 @@ public sealed class ManagingApi
 			Method = "GET",
 			Path = $"/{ItemId}/mafile",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingSteamGetMafileResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingSteamGetMafileResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Add Mafile</summary>
@@ -1187,7 +1187,7 @@ public sealed class ManagingApi
 			Method = "POST",
 			Path = $"/{ItemId}/mafile",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingSteamAddMafileResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingSteamAddMafileResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Remove Mafile</summary>
@@ -1203,7 +1203,7 @@ public sealed class ManagingApi
 			Method = "DELETE",
 			Path = $"/{ItemId}/mafile",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingSteamRemoveMafileResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingSteamRemoveMafileResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Mafile Confirmation Code</summary>
@@ -1218,7 +1218,7 @@ public sealed class ManagingApi
 			Method = "GET",
 			Path = $"/{ItemId}/guard-code",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingSteamMafileCodeResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingSteamMafileCodeResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Confirm SDA</summary>
@@ -1239,7 +1239,7 @@ public sealed class ManagingApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingSteamSDAResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingSteamSDAResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Telegram Confirmation Code</summary>
@@ -1254,7 +1254,7 @@ public sealed class ManagingApi
 			Method = "GET",
 			Path = $"/{ItemId}/telegram-login-code",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingTelegramCodeResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingTelegramCodeResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Telegram Reset Auth</summary>
@@ -1269,7 +1269,7 @@ public sealed class ManagingApi
 			Method = "POST",
 			Path = $"/{ItemId}/telegram-reset-authorizations",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingTelegramResetAuthResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingTelegramResetAuthResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Cancel Guarantee</summary>
@@ -1284,7 +1284,7 @@ public sealed class ManagingApi
 			Method = "POST",
 			Path = $"/{ItemId}/refuse-guarantee",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingRefuseGuaranteeResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingRefuseGuaranteeResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Decline Video Recording Request</summary>
@@ -1301,7 +1301,7 @@ public sealed class ManagingApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingDeclineVideoRecordingResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingDeclineVideoRecordingResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Check Guarantee</summary>
@@ -1316,7 +1316,7 @@ public sealed class ManagingApi
 			Method = "POST",
 			Path = $"/{ItemId}/check-guarantee",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingCheckGuaranteeResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingCheckGuaranteeResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Change Password</summary>
@@ -1333,7 +1333,7 @@ public sealed class ManagingApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingChangePasswordResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingChangePasswordResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Temp Email Password</summary>
@@ -1349,7 +1349,7 @@ public sealed class ManagingApi
 			Method = "GET",
 			Path = $"/{ItemId}/temp-email-password",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingTempEmailPasswordResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingTempEmailPasswordResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Add a Tag</summary>
@@ -1366,7 +1366,7 @@ public sealed class ManagingApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingTagResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingTagResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Remove a Tag</summary>
@@ -1383,7 +1383,7 @@ public sealed class ManagingApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingUntagResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingUntagResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Add a Public Tag</summary>
@@ -1400,7 +1400,7 @@ public sealed class ManagingApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingPublicTagResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingPublicTagResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Remove a Public Tag</summary>
@@ -1417,7 +1417,7 @@ public sealed class ManagingApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingPublicUntagResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingPublicUntagResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Favorite</summary>
@@ -1432,7 +1432,7 @@ public sealed class ManagingApi
 			Method = "POST",
 			Path = $"/{ItemId}/star",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingFavoriteResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingFavoriteResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Unfavorite</summary>
@@ -1447,7 +1447,7 @@ public sealed class ManagingApi
 			Method = "DELETE",
 			Path = $"/{ItemId}/star",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingUnfavoriteResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingUnfavoriteResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Stick Account</summary>
@@ -1462,7 +1462,7 @@ public sealed class ManagingApi
 			Method = "POST",
 			Path = $"/{ItemId}/stick",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingStickResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingStickResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Unstick Account</summary>
@@ -1477,7 +1477,7 @@ public sealed class ManagingApi
 			Method = "DELETE",
 			Path = $"/{ItemId}/stick",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingUnstickResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingUnstickResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Change Account Owner</summary>
@@ -1494,7 +1494,7 @@ public sealed class ManagingApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingTransferResponse>(__result)!;
+		return JsonSerializer.Deserialize<ManagingApiTypes.ManagingTransferResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -1522,7 +1522,7 @@ public sealed class PaymentsApi
 			Path = "/invoice",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsInvoiceGetResponse>(__result)!;
+		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsInvoiceGetResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Create Invoice</summary>
@@ -1541,7 +1541,7 @@ public sealed class PaymentsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsInvoiceCreateResponse>(__result)!;
+		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsInvoiceCreateResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Invoice List</summary>
@@ -1559,7 +1559,7 @@ public sealed class PaymentsApi
 			Path = "/invoice/list",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsInvoiceListResponse>(__result)!;
+		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsInvoiceListResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Currency</summary>
@@ -1573,7 +1573,7 @@ public sealed class PaymentsApi
 			Method = "GET",
 			Path = "/currency",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsCurrencyResponse>(__result)!;
+		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsCurrencyResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get List Of Balances</summary>
@@ -1587,7 +1587,7 @@ public sealed class PaymentsApi
 			Method = "GET",
 			Path = "/balance/exchange",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsBalanceListResponse>(__result)!;
+		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsBalanceListResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Exchange Balance</summary>
@@ -1603,7 +1603,7 @@ public sealed class PaymentsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsBalanceExchangeResponse>(__result)!;
+		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsBalanceExchangeResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Transfer Money</summary>
@@ -1622,7 +1622,7 @@ public sealed class PaymentsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsTransferResponse>(__result)!;
+		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsTransferResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Check Transfer Fee</summary>
@@ -1640,7 +1640,7 @@ public sealed class PaymentsApi
 			Path = "/balance/transfer/fee",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsFeeResponse>(__result)!;
+		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsFeeResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Cancel Transfer</summary>
@@ -1659,7 +1659,7 @@ public sealed class PaymentsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsCancelResponse>(__result)!;
+		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsCancelResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Payments History</summary>
@@ -1677,7 +1677,7 @@ public sealed class PaymentsApi
 			Path = "/user/payments",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsHistoryResponse>(__result)!;
+		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsHistoryResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Payout Services</summary>
@@ -1691,7 +1691,7 @@ public sealed class PaymentsApi
 			Method = "GET",
 			Path = "/balance/payout/services",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsPayoutServicesResponse>(__result)!;
+		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsPayoutServicesResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Create Payout</summary>
@@ -1707,7 +1707,7 @@ public sealed class PaymentsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsPayoutResponse>(__result)!;
+		return JsonSerializer.Deserialize<PaymentsApiTypes.PaymentsPayoutResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -1732,7 +1732,7 @@ public sealed class ProfileApi
 			Path = "/claims",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfileApiTypes.ProfileClaimsResponse>(__result)!;
+		return JsonSerializer.Deserialize<ProfileApiTypes.ProfileClaimsResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Profile</summary>
@@ -1747,7 +1747,7 @@ public sealed class ProfileApi
 			Path = "/me",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfileApiTypes.ProfileGetResponse>(__result)!;
+		return JsonSerializer.Deserialize<ProfileApiTypes.ProfileGetResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Edit Market Settings</summary>
@@ -1763,7 +1763,7 @@ public sealed class ProfileApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfileApiTypes.ProfileEditResponse>(__result)!;
+		return JsonSerializer.Deserialize<ProfileApiTypes.ProfileEditResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -1787,7 +1787,7 @@ public sealed class ProxyApi
 			Method = "GET",
 			Path = "/proxy",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProxyApiTypes.ProxyGetResponse>(__result)!;
+		return JsonSerializer.Deserialize<ProxyApiTypes.ProxyGetResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Add Proxy</summary>
@@ -1817,7 +1817,7 @@ public sealed class ProxyApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProxyApiTypes.ProxyAddResponse>(__result)!;
+		return JsonSerializer.Deserialize<ProxyApiTypes.ProxyAddResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Delete Proxy</summary>
@@ -1833,7 +1833,7 @@ public sealed class ProxyApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProxyApiTypes.ProxyDeleteResponse>(__result)!;
+		return JsonSerializer.Deserialize<ProxyApiTypes.ProxyDeleteResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -1861,7 +1861,7 @@ public sealed class PublishingApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PublishingApiTypes.PublishingFastSellResponse>(__result)!;
+		return JsonSerializer.Deserialize<PublishingApiTypes.PublishingFastSellResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Add Account</summary>
@@ -1882,7 +1882,7 @@ public sealed class PublishingApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PublishingApiTypes.PublishingAddResponse>(__result)!;
+		return JsonSerializer.Deserialize<PublishingApiTypes.PublishingAddResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Check Account Details</summary>
@@ -1901,7 +1901,7 @@ public sealed class PublishingApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PublishingApiTypes.PublishingCheckResponse>(__result)!;
+		return JsonSerializer.Deserialize<PublishingApiTypes.PublishingCheckResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Add an External Account</summary>
@@ -1920,7 +1920,7 @@ public sealed class PublishingApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PublishingApiTypes.PublishingExternalResponse>(__result)!;
+		return JsonSerializer.Deserialize<PublishingApiTypes.PublishingExternalResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -1949,7 +1949,7 @@ public sealed class PurchasingApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PurchasingApiTypes.PurchasingFastBuyResponse>(__result)!;
+		return JsonSerializer.Deserialize<PurchasingApiTypes.PurchasingFastBuyResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Check Account</summary>
@@ -1966,7 +1966,7 @@ public sealed class PurchasingApi
 			Method = "POST",
 			Path = $"/{ItemId}/check-account",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PurchasingApiTypes.PurchasingCheckResponse>(__result)!;
+		return JsonSerializer.Deserialize<PurchasingApiTypes.PurchasingCheckResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Confirm Buy</summary>
@@ -1985,7 +1985,7 @@ public sealed class PurchasingApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PurchasingApiTypes.PurchasingConfirmResponse>(__result)!;
+		return JsonSerializer.Deserialize<PurchasingApiTypes.PurchasingConfirmResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Discount Request</summary>
@@ -2002,7 +2002,7 @@ public sealed class PurchasingApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PurchasingApiTypes.PurchasingDiscountRequestResponse>(__result)!;
+		return JsonSerializer.Deserialize<PurchasingApiTypes.PurchasingDiscountRequestResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Cancel Discount Request</summary>
@@ -2017,7 +2017,7 @@ public sealed class PurchasingApi
 			Method = "DELETE",
 			Path = $"/{ItemId}/discount",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PurchasingApiTypes.PurchasingDiscountCancelResponse>(__result)!;
+		return JsonSerializer.Deserialize<PurchasingApiTypes.PurchasingDiscountCancelResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 

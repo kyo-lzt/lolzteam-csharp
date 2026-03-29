@@ -278,8 +278,15 @@ internal static partial class Transforms
             return "List<" + ToCSharpType(arrayMatch.Groups[1].Value) + ">";
         }
 
+        // Record<string, T> → Dictionary<string, T>
+        if (tsType.StartsWith("Record<string, ", StringComparison.Ordinal) && tsType.EndsWith('>'))
+        {
+            var inner = tsType["Record<string, ".Length..^1];
+            return "Dictionary<string, " + ToCSharpType(inner) + ">";
+        }
+
         // Inline objects
-        if (tsType.StartsWith('{') || tsType.Contains("Record<"))
+        if (tsType.StartsWith('{'))
         {
             return "JsonElement";
         }

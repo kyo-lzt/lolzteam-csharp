@@ -2651,7 +2651,7 @@ public enum ExtendedGuarantee : long
 [JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<FieldsInclude>))]
 public enum FieldsInclude
 {
-	[Lolzteam.Api.Runtime.EnumValue("*")] Value622456125,
+	[Lolzteam.Api.Runtime.EnumValue("*")] Value1243483987,
 	[Lolzteam.Api.Runtime.EnumValue("searchHistory")] SearchHistory,
 	[Lolzteam.Api.Runtime.EnumValue("savedSearch")] SavedSearch,
 }
@@ -13552,19 +13552,19 @@ public enum ZenlessWeapon : long
 // ─── Component Schemas ────────────────────────────────────────
 
 public sealed record BalanceModel(
-	[property: JsonPropertyName("balance")] string? Balance,
-	[property: JsonPropertyName("balance_id")] double? BalanceId,
-	[property: JsonPropertyName("custom_title")] JsonElement? CustomTitle,
-	[property: JsonPropertyName("fullTitle")] string? FullTitle,
-	[property: JsonPropertyName("merchant_id")] double? MerchantId,
-	[property: JsonPropertyName("title")] string? Title,
-	[property: JsonPropertyName("type")] string? Type,
-	[property: JsonPropertyName("user_id")] double? UserId
+	[property: JsonPropertyName("balance")] string Balance,
+	[property: JsonPropertyName("balance_id")] double BalanceId,
+	[property: JsonPropertyName("custom_title")] JsonElement CustomTitle,
+	[property: JsonPropertyName("fullTitle")] string FullTitle,
+	[property: JsonPropertyName("merchant_id")] double MerchantId,
+	[property: JsonPropertyName("title")] string Title,
+	[property: JsonPropertyName("type")] string Type,
+	[property: JsonPropertyName("user_id")] double UserId
 );
 
 public sealed record ConfirmationCodeModel(
-	[property: JsonPropertyName("item")] JsonElement? Item,
-	[property: JsonPropertyName("codeData")] ConfirmationCodeModelCodeData? CodeData
+	[property: JsonPropertyName("item")] JsonElement Item,
+	[property: JsonPropertyName("codeData")] ConfirmationCodeModelCodeData CodeData
 );
 
 public sealed record ConfirmationCodeModelCodeData(
@@ -13574,13 +13574,13 @@ public sealed record ConfirmationCodeModelCodeData(
 );
 
 public sealed record DiscountModel(
-	[property: JsonPropertyName("category_id")] double? CategoryId,
-	[property: JsonPropertyName("discount_id")] double? DiscountId,
-	[property: JsonPropertyName("discount_percent")] double? DiscountPercent,
-	[property: JsonPropertyName("discount_user_id")] double? DiscountUserId,
-	[property: JsonPropertyName("max_price")] double? MaxPrice,
-	[property: JsonPropertyName("min_price")] double? MinPrice,
-	[property: JsonPropertyName("user_id")] double? UserId
+	[property: JsonPropertyName("category_id")] double CategoryId,
+	[property: JsonPropertyName("discount_id")] double DiscountId,
+	[property: JsonPropertyName("discount_percent")] double DiscountPercent,
+	[property: JsonPropertyName("discount_user_id")] double DiscountUserId,
+	[property: JsonPropertyName("max_price")] double MaxPrice,
+	[property: JsonPropertyName("min_price")] double MinPrice,
+	[property: JsonPropertyName("user_id")] double UserId
 );
 
 public sealed record ExtraModel(
@@ -13613,23 +13613,23 @@ public sealed record ExtraModel(
 );
 
 public sealed record InvoiceModel(
-	[property: JsonPropertyName("additional_data")] string? AdditionalData,
-	[property: JsonPropertyName("amount")] double? Amount,
-	[property: JsonPropertyName("comment")] string? Comment,
-	[property: JsonPropertyName("expires_at")] double? ExpiresAt,
-	[property: JsonPropertyName("invoice_date")] double? InvoiceDate,
-	[property: JsonPropertyName("invoice_id")] double? InvoiceId,
-	[property: JsonPropertyName("is_test")] JsonElement? IsTest,
-	[property: JsonPropertyName("merchant_id")] double? MerchantId,
-	[property: JsonPropertyName("paid_date")] double? PaidDate,
-	[property: JsonPropertyName("payer_user_id")] double? PayerUserId,
-	[property: JsonPropertyName("payment_id")] string? PaymentId,
-	[property: JsonPropertyName("resend_attempts")] double? ResendAttempts,
-	[property: JsonPropertyName("status")] string? Status,
-	[property: JsonPropertyName("url")] string? Url,
-	[property: JsonPropertyName("url_callback")] string? UrlCallback,
-	[property: JsonPropertyName("url_success")] string? UrlSuccess,
-	[property: JsonPropertyName("user_id")] double? UserId
+	[property: JsonPropertyName("additional_data")] string AdditionalData,
+	[property: JsonPropertyName("amount")] double Amount,
+	[property: JsonPropertyName("comment")] string Comment,
+	[property: JsonPropertyName("expires_at")] double ExpiresAt,
+	[property: JsonPropertyName("invoice_date")] double InvoiceDate,
+	[property: JsonPropertyName("invoice_id")] double InvoiceId,
+	[property: JsonPropertyName("is_test")] JsonElement IsTest,
+	[property: JsonPropertyName("merchant_id")] double MerchantId,
+	[property: JsonPropertyName("paid_date")] double PaidDate,
+	[property: JsonPropertyName("payer_user_id")] double PayerUserId,
+	[property: JsonPropertyName("payment_id")] string PaymentId,
+	[property: JsonPropertyName("resend_attempts")] double ResendAttempts,
+	[property: JsonPropertyName("status")] string Status,
+	[property: JsonPropertyName("url")] string Url,
+	[property: JsonPropertyName("url_callback")] string UrlCallback,
+	[property: JsonPropertyName("url_success")] string UrlSuccess,
+	[property: JsonPropertyName("user_id")] double UserId
 );
 
 public sealed record ItemFromListModel(
@@ -13700,118 +13700,118 @@ public sealed record ItemFromListModelSeller(
 );
 
 public sealed record ItemListModel(
-	[property: JsonPropertyName("items")] List<JsonElement>? Items,
-	[property: JsonPropertyName("totalItems")] double? TotalItems,
-	[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-	[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-	[property: JsonPropertyName("perPage")] double? PerPage,
-	[property: JsonPropertyName("page")] double? Page,
-	[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-	[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-	[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+	[property: JsonPropertyName("items")] List<JsonElement> Items,
+	[property: JsonPropertyName("totalItems")] double TotalItems,
+	[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+	[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+	[property: JsonPropertyName("perPage")] double PerPage,
+	[property: JsonPropertyName("page")] double Page,
+	[property: JsonPropertyName("searchUrl")] string SearchUrl,
+	[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+	[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 );
 
 public sealed record ItemModel(
-	[property: JsonPropertyName("item_id")] double? ItemId,
-	[property: JsonPropertyName("item_state")] string? ItemState,
-	[property: JsonPropertyName("category_id")] double? CategoryId,
-	[property: JsonPropertyName("published_date")] double? PublishedDate,
-	[property: JsonPropertyName("title")] string? Title,
-	[property: JsonPropertyName("description")] string? Description,
-	[property: JsonPropertyName("price")] double? Price,
-	[property: JsonPropertyName("update_stat_date")] double? UpdateStatDate,
-	[property: JsonPropertyName("refreshed_date")] double? RefreshedDate,
-	[property: JsonPropertyName("edit_date")] double? EditDate,
-	[property: JsonPropertyName("pending_deletion_date")] double? PendingDeletionDate,
-	[property: JsonPropertyName("login")] string? Login,
-	[property: JsonPropertyName("temp_email")] string? TempEmail,
-	[property: JsonPropertyName("view_count")] double? ViewCount,
-	[property: JsonPropertyName("is_sticky")] double? IsSticky,
-	[property: JsonPropertyName("information")] string? Information,
-	[property: JsonPropertyName("item_origin")] string? ItemOrigin,
-	[property: JsonPropertyName("extended_guarantee")] double? ExtendedGuarantee,
-	[property: JsonPropertyName("nsb")] double? Nsb,
-	[property: JsonPropertyName("allow_ask_discount")] double? AllowAskDiscount,
-	[property: JsonPropertyName("title_en")] string? TitleEn,
-	[property: JsonPropertyName("description_en")] string? DescriptionEn,
-	[property: JsonPropertyName("information_en")] string? InformationEn,
-	[property: JsonPropertyName("email_type")] string? EmailType,
-	[property: JsonPropertyName("email_provider")] string? EmailProvider,
-	[property: JsonPropertyName("item_domain")] string? ItemDomain,
-	[property: JsonPropertyName("resale_item_origin")] string? ResaleItemOrigin,
-	[property: JsonPropertyName("note_text")] string? NoteText,
-	[property: JsonPropertyName("content_type")] JsonElement? ContentType,
-	[property: JsonPropertyName("content_id")] JsonElement? ContentId,
-	[property: JsonPropertyName("delete_date")] double? DeleteDate,
-	[property: JsonPropertyName("delete_user_id")] double? DeleteUserId,
-	[property: JsonPropertyName("delete_username")] string? DeleteUsername,
-	[property: JsonPropertyName("delete_reason")] string? DeleteReason,
-	[property: JsonPropertyName("user_allow_ask_discount")] double? UserAllowAskDiscount,
-	[property: JsonPropertyName("max_discount_percent")] double? MaxDiscountPercent,
-	[property: JsonPropertyName("market_custom_title")] string? MarketCustomTitle,
-	[property: JsonPropertyName("feedback_data")] string? FeedbackData,
-	[property: JsonPropertyName("buyer_display_icon_group_id")] double? BuyerDisplayIconGroupId,
-	[property: JsonPropertyName("buyer_uniq_banner")] string? BuyerUniqBanner,
-	[property: JsonPropertyName("buyer_avatar_date")] double? BuyerAvatarDate,
-	[property: JsonPropertyName("buyer_user_group_id")] double? BuyerUserGroupId,
-	[property: JsonPropertyName("is_fave")] JsonElement? IsFave,
-	[property: JsonPropertyName("in_cart")] JsonElement? InCart,
-	[property: JsonPropertyName("cart_price")] JsonElement? CartPrice,
-	[property: JsonPropertyName("canResellItem")] JsonElement? CanResellItem,
-	[property: JsonPropertyName("priceWithSellerFee")] double? PriceWithSellerFee,
-	[property: JsonPropertyName("guarantee")] ItemModelGuarantee? Guarantee,
-	[property: JsonPropertyName("canViewLoginData")] JsonElement? CanViewLoginData,
-	[property: JsonPropertyName("canUpdateItemStats")] JsonElement? CanUpdateItemStats,
-	[property: JsonPropertyName("canReportItem")] JsonElement? CanReportItem,
-	[property: JsonPropertyName("canViewItemViews")] JsonElement? CanViewItemViews,
-	[property: JsonPropertyName("loginData")] ItemModelLoginData? LoginData,
-	[property: JsonPropertyName("canViewEmailLoginData")] JsonElement? CanViewEmailLoginData,
-	[property: JsonPropertyName("copyFormatData")] ItemModelCopyFormatData? CopyFormatData,
-	[property: JsonPropertyName("showGetEmailCodeButton")] JsonElement? ShowGetEmailCodeButton,
-	[property: JsonPropertyName("getEmailCodeDisplayLogin")] JsonElement? GetEmailCodeDisplayLogin,
-	[property: JsonPropertyName("buyer")] ItemModelBuyer? Buyer,
-	[property: JsonPropertyName("isPersonalAccount")] JsonElement? IsPersonalAccount,
-	[property: JsonPropertyName("rub_price")] double? RubPrice,
-	[property: JsonPropertyName("price_currency")] string? PriceCurrency,
-	[property: JsonPropertyName("priceWithSellerFeeLabel")] string? PriceWithSellerFeeLabel,
-	[property: JsonPropertyName("canValidateAccount")] JsonElement? CanValidateAccount,
-	[property: JsonPropertyName("canResellItemAfterPurchase")] JsonElement? CanResellItemAfterPurchase,
-	[property: JsonPropertyName("isSmallExf")] JsonElement? IsSmallExf,
-	[property: JsonPropertyName("account_last_activity")] double? AccountLastActivity,
-	[property: JsonPropertyName("canViewAccountLink")] JsonElement? CanViewAccountLink,
-	[property: JsonPropertyName("accountLinks")] List<ItemModelAccountLinks>? AccountLinks,
-	[property: JsonPropertyName("accountLink")] string? AccountLink,
-	[property: JsonPropertyName("imagePreviewLinks")] List<string>? ImagePreviewLinks,
-	[property: JsonPropertyName("canChangePassword")] JsonElement? CanChangePassword,
-	[property: JsonPropertyName("canChangeEmailPassword")] JsonElement? CanChangeEmailPassword,
-	[property: JsonPropertyName("uniqueKeyExists")] JsonElement? UniqueKeyExists,
-	[property: JsonPropertyName("itemOriginPhrase")] string? ItemOriginPhrase,
-	[property: JsonPropertyName("visitorIsAuthor")] JsonElement? VisitorIsAuthor,
-	[property: JsonPropertyName("canAskDiscount")] JsonElement? CanAskDiscount,
-	[property: JsonPropertyName("tags")] JsonElement? Tags,
-	[property: JsonPropertyName("customFields")] ItemModelCustomFields? CustomFields,
-	[property: JsonPropertyName("externalAuth")] List<JsonElement>? ExternalAuth,
-	[property: JsonPropertyName("isTrusted")] JsonElement? IsTrusted,
-	[property: JsonPropertyName("isBirthdayToday")] JsonElement? IsBirthdayToday,
-	[property: JsonPropertyName("isIgnored")] JsonElement? IsIgnored,
-	[property: JsonPropertyName("deposit")] double? Deposit,
-	[property: JsonPropertyName("extraPrices")] List<ItemModelExtraPrices>? ExtraPrices,
-	[property: JsonPropertyName("canViewAccountLoginAndTempEmail")] JsonElement? CanViewAccountLoginAndTempEmail,
-	[property: JsonPropertyName("bumpSettings")] ItemModelBumpSettings? BumpSettings,
-	[property: JsonPropertyName("canCheckGuarantee")] JsonElement? CanCheckGuarantee,
-	[property: JsonPropertyName("canShareItem")] JsonElement? CanShareItem,
-	[property: JsonPropertyName("canCheckAiPrice")] JsonElement? CanCheckAiPrice,
-	[property: JsonPropertyName("aiPrice")] double? AiPrice,
-	[property: JsonPropertyName("aiPriceCheckDate")] double? AiPriceCheckDate,
-	[property: JsonPropertyName("needToRequireVideoToViewLoginData")] JsonElement? NeedToRequireVideoToViewLoginData,
-	[property: JsonPropertyName("canCheckAutoBuyPrice")] JsonElement? CanCheckAutoBuyPrice,
-	[property: JsonPropertyName("autoBuyPrice")] double? AutoBuyPrice,
-	[property: JsonPropertyName("autoBuyPriceCheckDate")] double? AutoBuyPriceCheckDate,
-	[property: JsonPropertyName("descriptionHtml")] string? DescriptionHtml,
-	[property: JsonPropertyName("descriptionEnHtml")] string? DescriptionEnHtml,
-	[property: JsonPropertyName("descriptionPlain")] string? DescriptionPlain,
-	[property: JsonPropertyName("descriptionEnPlain")] string? DescriptionEnPlain,
-	[property: JsonPropertyName("seller")] ItemModelSeller? Seller
+	[property: JsonPropertyName("item_id")] double ItemId,
+	[property: JsonPropertyName("item_state")] string ItemState,
+	[property: JsonPropertyName("category_id")] double CategoryId,
+	[property: JsonPropertyName("published_date")] double PublishedDate,
+	[property: JsonPropertyName("title")] string Title,
+	[property: JsonPropertyName("description")] string Description,
+	[property: JsonPropertyName("price")] double Price,
+	[property: JsonPropertyName("update_stat_date")] double UpdateStatDate,
+	[property: JsonPropertyName("refreshed_date")] double RefreshedDate,
+	[property: JsonPropertyName("edit_date")] double EditDate,
+	[property: JsonPropertyName("pending_deletion_date")] double PendingDeletionDate,
+	[property: JsonPropertyName("login")] string Login,
+	[property: JsonPropertyName("temp_email")] string TempEmail,
+	[property: JsonPropertyName("view_count")] double ViewCount,
+	[property: JsonPropertyName("is_sticky")] double IsSticky,
+	[property: JsonPropertyName("information")] string Information,
+	[property: JsonPropertyName("item_origin")] string ItemOrigin,
+	[property: JsonPropertyName("extended_guarantee")] double ExtendedGuarantee,
+	[property: JsonPropertyName("nsb")] double Nsb,
+	[property: JsonPropertyName("allow_ask_discount")] double AllowAskDiscount,
+	[property: JsonPropertyName("title_en")] string TitleEn,
+	[property: JsonPropertyName("description_en")] string DescriptionEn,
+	[property: JsonPropertyName("information_en")] string InformationEn,
+	[property: JsonPropertyName("email_type")] string EmailType,
+	[property: JsonPropertyName("email_provider")] string EmailProvider,
+	[property: JsonPropertyName("item_domain")] string ItemDomain,
+	[property: JsonPropertyName("resale_item_origin")] string ResaleItemOrigin,
+	[property: JsonPropertyName("note_text")] string NoteText,
+	[property: JsonPropertyName("content_type")] JsonElement ContentType,
+	[property: JsonPropertyName("content_id")] JsonElement ContentId,
+	[property: JsonPropertyName("delete_date")] double DeleteDate,
+	[property: JsonPropertyName("delete_user_id")] double DeleteUserId,
+	[property: JsonPropertyName("delete_username")] string DeleteUsername,
+	[property: JsonPropertyName("delete_reason")] string DeleteReason,
+	[property: JsonPropertyName("user_allow_ask_discount")] double UserAllowAskDiscount,
+	[property: JsonPropertyName("max_discount_percent")] double MaxDiscountPercent,
+	[property: JsonPropertyName("market_custom_title")] string MarketCustomTitle,
+	[property: JsonPropertyName("feedback_data")] string FeedbackData,
+	[property: JsonPropertyName("buyer_display_icon_group_id")] double BuyerDisplayIconGroupId,
+	[property: JsonPropertyName("buyer_uniq_banner")] string BuyerUniqBanner,
+	[property: JsonPropertyName("buyer_avatar_date")] double BuyerAvatarDate,
+	[property: JsonPropertyName("buyer_user_group_id")] double BuyerUserGroupId,
+	[property: JsonPropertyName("is_fave")] JsonElement IsFave,
+	[property: JsonPropertyName("in_cart")] JsonElement InCart,
+	[property: JsonPropertyName("cart_price")] JsonElement CartPrice,
+	[property: JsonPropertyName("canResellItem")] JsonElement CanResellItem,
+	[property: JsonPropertyName("priceWithSellerFee")] double PriceWithSellerFee,
+	[property: JsonPropertyName("guarantee")] ItemModelGuarantee Guarantee,
+	[property: JsonPropertyName("canViewLoginData")] JsonElement CanViewLoginData,
+	[property: JsonPropertyName("canUpdateItemStats")] JsonElement CanUpdateItemStats,
+	[property: JsonPropertyName("canReportItem")] JsonElement CanReportItem,
+	[property: JsonPropertyName("canViewItemViews")] JsonElement CanViewItemViews,
+	[property: JsonPropertyName("loginData")] ItemModelLoginData LoginData,
+	[property: JsonPropertyName("canViewEmailLoginData")] JsonElement CanViewEmailLoginData,
+	[property: JsonPropertyName("copyFormatData")] ItemModelCopyFormatData CopyFormatData,
+	[property: JsonPropertyName("showGetEmailCodeButton")] JsonElement ShowGetEmailCodeButton,
+	[property: JsonPropertyName("getEmailCodeDisplayLogin")] JsonElement GetEmailCodeDisplayLogin,
+	[property: JsonPropertyName("buyer")] ItemModelBuyer Buyer,
+	[property: JsonPropertyName("isPersonalAccount")] JsonElement IsPersonalAccount,
+	[property: JsonPropertyName("rub_price")] double RubPrice,
+	[property: JsonPropertyName("price_currency")] string PriceCurrency,
+	[property: JsonPropertyName("priceWithSellerFeeLabel")] string PriceWithSellerFeeLabel,
+	[property: JsonPropertyName("canValidateAccount")] JsonElement CanValidateAccount,
+	[property: JsonPropertyName("canResellItemAfterPurchase")] JsonElement CanResellItemAfterPurchase,
+	[property: JsonPropertyName("isSmallExf")] JsonElement IsSmallExf,
+	[property: JsonPropertyName("account_last_activity")] double AccountLastActivity,
+	[property: JsonPropertyName("canViewAccountLink")] JsonElement CanViewAccountLink,
+	[property: JsonPropertyName("accountLinks")] List<ItemModelAccountLinks> AccountLinks,
+	[property: JsonPropertyName("accountLink")] string AccountLink,
+	[property: JsonPropertyName("imagePreviewLinks")] List<string> ImagePreviewLinks,
+	[property: JsonPropertyName("canChangePassword")] JsonElement CanChangePassword,
+	[property: JsonPropertyName("canChangeEmailPassword")] JsonElement CanChangeEmailPassword,
+	[property: JsonPropertyName("uniqueKeyExists")] JsonElement UniqueKeyExists,
+	[property: JsonPropertyName("itemOriginPhrase")] string ItemOriginPhrase,
+	[property: JsonPropertyName("visitorIsAuthor")] JsonElement VisitorIsAuthor,
+	[property: JsonPropertyName("canAskDiscount")] JsonElement CanAskDiscount,
+	[property: JsonPropertyName("tags")] JsonElement Tags,
+	[property: JsonPropertyName("customFields")] ItemModelCustomFields CustomFields,
+	[property: JsonPropertyName("externalAuth")] List<JsonElement> ExternalAuth,
+	[property: JsonPropertyName("isTrusted")] JsonElement IsTrusted,
+	[property: JsonPropertyName("isBirthdayToday")] JsonElement IsBirthdayToday,
+	[property: JsonPropertyName("isIgnored")] JsonElement IsIgnored,
+	[property: JsonPropertyName("deposit")] double Deposit,
+	[property: JsonPropertyName("extraPrices")] List<ItemModelExtraPrices> ExtraPrices,
+	[property: JsonPropertyName("canViewAccountLoginAndTempEmail")] JsonElement CanViewAccountLoginAndTempEmail,
+	[property: JsonPropertyName("bumpSettings")] ItemModelBumpSettings BumpSettings,
+	[property: JsonPropertyName("canCheckGuarantee")] JsonElement CanCheckGuarantee,
+	[property: JsonPropertyName("canShareItem")] JsonElement CanShareItem,
+	[property: JsonPropertyName("canCheckAiPrice")] JsonElement CanCheckAiPrice,
+	[property: JsonPropertyName("aiPrice")] double AiPrice,
+	[property: JsonPropertyName("aiPriceCheckDate")] double AiPriceCheckDate,
+	[property: JsonPropertyName("needToRequireVideoToViewLoginData")] JsonElement NeedToRequireVideoToViewLoginData,
+	[property: JsonPropertyName("canCheckAutoBuyPrice")] JsonElement CanCheckAutoBuyPrice,
+	[property: JsonPropertyName("autoBuyPrice")] double AutoBuyPrice,
+	[property: JsonPropertyName("autoBuyPriceCheckDate")] double AutoBuyPriceCheckDate,
+	[property: JsonPropertyName("descriptionHtml")] string DescriptionHtml,
+	[property: JsonPropertyName("descriptionEnHtml")] string DescriptionEnHtml,
+	[property: JsonPropertyName("descriptionPlain")] string DescriptionPlain,
+	[property: JsonPropertyName("descriptionEnPlain")] string DescriptionEnPlain,
+	[property: JsonPropertyName("seller")] ItemModelSeller Seller
 );
 
 public sealed record ItemModelGuarantee(
@@ -13911,74 +13911,74 @@ public sealed record ItemModelSeller(
 );
 
 public sealed record Resp_SystemInfo(
-	[property: JsonPropertyName("visitor_id")] double? VisitorId,
-	[property: JsonPropertyName("time")] double? Time,
-	[property: JsonPropertyName("log_id")] double? LogId
+	[property: JsonPropertyName("visitor_id")] double VisitorId,
+	[property: JsonPropertyName("time")] double Time,
+	[property: JsonPropertyName("log_id")] double LogId
 );
 
 public sealed record UserModel(
-	[property: JsonPropertyName("active_items_count")] double? ActiveItemsCount,
-	[property: JsonPropertyName("activity_visible")] JsonElement? ActivityVisible,
-	[property: JsonPropertyName("age")] double? Age,
-	[property: JsonPropertyName("balance")] string? Balance,
-	[property: JsonPropertyName("balances")] List<UserModelBalances>? Balances,
-	[property: JsonPropertyName("bump_item_period")] double? BumpItemPeriod,
-	[property: JsonPropertyName("can_edit")] JsonElement? CanEdit,
-	[property: JsonPropertyName("can_follow")] JsonElement? CanFollow,
-	[property: JsonPropertyName("can_ignore")] JsonElement? CanIgnore,
-	[property: JsonPropertyName("can_post_profile")] JsonElement? CanPostProfile,
-	[property: JsonPropertyName("can_view_profile")] JsonElement? CanViewProfile,
-	[property: JsonPropertyName("can_view_profile_posts")] JsonElement? CanViewProfilePosts,
-	[property: JsonPropertyName("can_warn")] JsonElement? CanWarn,
-	[property: JsonPropertyName("contest_count")] double? ContestCount,
-	[property: JsonPropertyName("conv_welcome_message")] string? ConvWelcomeMessage,
-	[property: JsonPropertyName("convertedBalance")] double? ConvertedBalance,
-	[property: JsonPropertyName("convertedDeposit")] double? ConvertedDeposit,
-	[property: JsonPropertyName("convertedHold")] double? ConvertedHold,
-	[property: JsonPropertyName("currency")] string? Currency,
-	[property: JsonPropertyName("currencyPhrase")] string? CurrencyPhrase,
-	[property: JsonPropertyName("custom_account_download_format")] string? CustomAccountDownloadFormat,
-	[property: JsonPropertyName("custom_fields")] UserModelCustomFields? CustomFields,
-	[property: JsonPropertyName("custom_title")] string? CustomTitle,
-	[property: JsonPropertyName("deposit")] double? Deposit,
-	[property: JsonPropertyName("dob")] UserModelDob? Dob,
-	[property: JsonPropertyName("feedback_data")] JsonElement? FeedbackData,
-	[property: JsonPropertyName("hold")] string? Hold,
-	[property: JsonPropertyName("homepage")] string? Homepage,
-	[property: JsonPropertyName("imap_data")] UserModelImapData? ImapData,
-	[property: JsonPropertyName("is_admin")] JsonElement? IsAdmin,
-	[property: JsonPropertyName("is_banned")] JsonElement? IsBanned,
-	[property: JsonPropertyName("is_followed")] JsonElement? IsFollowed,
-	[property: JsonPropertyName("is_ignored")] JsonElement? IsIgnored,
-	[property: JsonPropertyName("is_moderator")] JsonElement? IsModerator,
-	[property: JsonPropertyName("is_staff")] JsonElement? IsStaff,
-	[property: JsonPropertyName("is_super_admin")] JsonElement? IsSuperAdmin,
-	[property: JsonPropertyName("joined_date")] double? JoinedDate,
-	[property: JsonPropertyName("last_activity")] double? LastActivity,
-	[property: JsonPropertyName("like2_count")] double? Like2Count,
-	[property: JsonPropertyName("like_count")] double? LikeCount,
-	[property: JsonPropertyName("location")] string? Location,
-	[property: JsonPropertyName("market_custom_title")] string? MarketCustomTitle,
-	[property: JsonPropertyName("max_discount_percent")] double? MaxDiscountPercent,
-	[property: JsonPropertyName("message_count")] double? MessageCount,
-	[property: JsonPropertyName("paid_mail_left")] double? PaidMailLeft,
-	[property: JsonPropertyName("public_tags")] List<UserModelPublicTags>? PublicTags,
-	[property: JsonPropertyName("register_date")] double? RegisterDate,
-	[property: JsonPropertyName("rendered")] UserModelRendered? Rendered,
-	[property: JsonPropertyName("restore_count")] double? RestoreCount,
-	[property: JsonPropertyName("restore_data")] JsonElement? RestoreData,
-	[property: JsonPropertyName("short_link")] string? ShortLink,
-	[property: JsonPropertyName("sold_items_count")] double? SoldItemsCount,
-	[property: JsonPropertyName("tags")] List<UserModelTags>? Tags,
-	[property: JsonPropertyName("telegram_client")] UserModelTelegramClient? TelegramClient,
-	[property: JsonPropertyName("trophy_points")] double? TrophyPoints,
-	[property: JsonPropertyName("user_allow_ask_discount")] JsonElement? UserAllowAskDiscount,
-	[property: JsonPropertyName("user_id")] double? UserId,
-	[property: JsonPropertyName("user_title")] string? UserTitle,
-	[property: JsonPropertyName("username")] string? Username,
-	[property: JsonPropertyName("view_url")] string? ViewUrl,
-	[property: JsonPropertyName("visible")] JsonElement? Visible,
-	[property: JsonPropertyName("warning_points")] double? WarningPoints
+	[property: JsonPropertyName("active_items_count")] double ActiveItemsCount,
+	[property: JsonPropertyName("activity_visible")] JsonElement ActivityVisible,
+	[property: JsonPropertyName("age")] double Age,
+	[property: JsonPropertyName("balance")] string Balance,
+	[property: JsonPropertyName("balances")] List<UserModelBalances> Balances,
+	[property: JsonPropertyName("bump_item_period")] double BumpItemPeriod,
+	[property: JsonPropertyName("can_edit")] JsonElement CanEdit,
+	[property: JsonPropertyName("can_follow")] JsonElement CanFollow,
+	[property: JsonPropertyName("can_ignore")] JsonElement CanIgnore,
+	[property: JsonPropertyName("can_post_profile")] JsonElement CanPostProfile,
+	[property: JsonPropertyName("can_view_profile")] JsonElement CanViewProfile,
+	[property: JsonPropertyName("can_view_profile_posts")] JsonElement CanViewProfilePosts,
+	[property: JsonPropertyName("can_warn")] JsonElement CanWarn,
+	[property: JsonPropertyName("contest_count")] double ContestCount,
+	[property: JsonPropertyName("conv_welcome_message")] string ConvWelcomeMessage,
+	[property: JsonPropertyName("convertedBalance")] double ConvertedBalance,
+	[property: JsonPropertyName("convertedDeposit")] double ConvertedDeposit,
+	[property: JsonPropertyName("convertedHold")] double ConvertedHold,
+	[property: JsonPropertyName("currency")] string Currency,
+	[property: JsonPropertyName("currencyPhrase")] string CurrencyPhrase,
+	[property: JsonPropertyName("custom_account_download_format")] string CustomAccountDownloadFormat,
+	[property: JsonPropertyName("custom_fields")] UserModelCustomFields CustomFields,
+	[property: JsonPropertyName("custom_title")] string CustomTitle,
+	[property: JsonPropertyName("deposit")] double Deposit,
+	[property: JsonPropertyName("dob")] UserModelDob Dob,
+	[property: JsonPropertyName("feedback_data")] JsonElement FeedbackData,
+	[property: JsonPropertyName("hold")] string Hold,
+	[property: JsonPropertyName("homepage")] string Homepage,
+	[property: JsonPropertyName("imap_data")] UserModelImapData ImapData,
+	[property: JsonPropertyName("is_admin")] JsonElement IsAdmin,
+	[property: JsonPropertyName("is_banned")] JsonElement IsBanned,
+	[property: JsonPropertyName("is_followed")] JsonElement IsFollowed,
+	[property: JsonPropertyName("is_ignored")] JsonElement IsIgnored,
+	[property: JsonPropertyName("is_moderator")] JsonElement IsModerator,
+	[property: JsonPropertyName("is_staff")] JsonElement IsStaff,
+	[property: JsonPropertyName("is_super_admin")] JsonElement IsSuperAdmin,
+	[property: JsonPropertyName("joined_date")] double JoinedDate,
+	[property: JsonPropertyName("last_activity")] double LastActivity,
+	[property: JsonPropertyName("like2_count")] double Like2Count,
+	[property: JsonPropertyName("like_count")] double LikeCount,
+	[property: JsonPropertyName("location")] string Location,
+	[property: JsonPropertyName("market_custom_title")] string MarketCustomTitle,
+	[property: JsonPropertyName("max_discount_percent")] double MaxDiscountPercent,
+	[property: JsonPropertyName("message_count")] double MessageCount,
+	[property: JsonPropertyName("paid_mail_left")] double PaidMailLeft,
+	[property: JsonPropertyName("public_tags")] List<UserModelPublicTags> PublicTags,
+	[property: JsonPropertyName("register_date")] double RegisterDate,
+	[property: JsonPropertyName("rendered")] UserModelRendered Rendered,
+	[property: JsonPropertyName("restore_count")] double RestoreCount,
+	[property: JsonPropertyName("restore_data")] JsonElement RestoreData,
+	[property: JsonPropertyName("short_link")] string ShortLink,
+	[property: JsonPropertyName("sold_items_count")] double SoldItemsCount,
+	[property: JsonPropertyName("tags")] List<UserModelTags> Tags,
+	[property: JsonPropertyName("telegram_client")] UserModelTelegramClient TelegramClient,
+	[property: JsonPropertyName("trophy_points")] double TrophyPoints,
+	[property: JsonPropertyName("user_allow_ask_discount")] JsonElement UserAllowAskDiscount,
+	[property: JsonPropertyName("user_id")] double UserId,
+	[property: JsonPropertyName("user_title")] string UserTitle,
+	[property: JsonPropertyName("username")] string Username,
+	[property: JsonPropertyName("view_url")] string ViewUrl,
+	[property: JsonPropertyName("visible")] JsonElement Visible,
+	[property: JsonPropertyName("warning_points")] double WarningPoints
 );
 
 public sealed record UserModelBalances(
@@ -14082,8 +14082,8 @@ public sealed record UserModelTelegramClient(
 public static class AutoPaymentsApiTypes
 {
 	public sealed record AutoPaymentsListResponse(
-		[property: JsonPropertyName("payments")] JsonElement? Payments,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("payments")] JsonElement Payments,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record AutoPaymentsCreateBody
@@ -14108,10 +14108,10 @@ public static class AutoPaymentsApiTypes
 	}
 
 	public sealed record AutoPaymentsCreateResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("auto_payment_id")] double? AutoPaymentId,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("auto_payment_id")] double AutoPaymentId,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record AutoPaymentsDeleteBody
@@ -14122,9 +14122,9 @@ public static class AutoPaymentsApiTypes
 	}
 
 	public sealed record AutoPaymentsDeleteResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 }
 
@@ -14133,7 +14133,7 @@ public static class AutoPaymentsApiTypes
 public static class BatchApiTypes
 {
 	public sealed record BatchBatchResponse(
-		[property: JsonPropertyName("jobs")] BatchBatchResponseJobs? Jobs,
+		[property: JsonPropertyName("jobs")] BatchBatchResponseJobs Jobs,
 		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
 	);
 
@@ -14222,15 +14222,15 @@ public static class CartApiTypes
 	}
 
 	public sealed record CartGetResponse(
-		[property: JsonPropertyName("items")] List<JsonElement>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<JsonElement> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CartAddBody
@@ -14241,8 +14241,8 @@ public static class CartApiTypes
 	}
 
 	public sealed record CartAddResponse(
-		[property: JsonPropertyName("success")] JsonElement? Success,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("success")] JsonElement Success,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CartDeleteBody
@@ -14253,8 +14253,8 @@ public static class CartApiTypes
 	}
 
 	public sealed record CartDeleteResponse(
-		[property: JsonPropertyName("success")] JsonElement? Success,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("success")] JsonElement Success,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 }
 
@@ -14330,15 +14330,15 @@ public static class CategoryApiTypes
 	}
 
 	public sealed record CategoryAllResponse(
-		[property: JsonPropertyName("items")] List<JsonElement>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<JsonElement> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategorySteamParams
@@ -14417,10 +14417,10 @@ public static class CategoryApiTypes
 		public List<long?>? Game { get; init; }
 		/// <summary>List of minimum hours played by game.</summary>
 		[JsonPropertyName("hours_played")]
-		public JsonElement? HoursPlayed { get; init; }
+		public Dictionary<string, long?>? HoursPlayed { get; init; }
 		/// <summary>List of maximum hours played by game.</summary>
 		[JsonPropertyName("hours_played_max")]
-		public JsonElement? HoursPlayedMax { get; init; }
+		public Dictionary<string, long?>? HoursPlayedMax { get; init; }
 		/// <summary>Guarantee type.</summary>
 		[JsonPropertyName("eg")]
 		public CategoryEg? Eg { get; init; }
@@ -14703,19 +14703,19 @@ public static class CategoryApiTypes
 	}
 
 	public sealed record CategorySteamResponse(
-		[property: JsonPropertyName("items")] List<CategorySteamResponseItems>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("wasCached")] JsonElement? WasCached,
-		[property: JsonPropertyName("cacheTTL")] double? CacheTTL,
-		[property: JsonPropertyName("lastModified")] double? LastModified,
-		[property: JsonPropertyName("serverTime")] double? ServerTime,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<CategorySteamResponseItems> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("wasCached")] JsonElement WasCached,
+		[property: JsonPropertyName("cacheTTL")] double CacheTTL,
+		[property: JsonPropertyName("lastModified")] double LastModified,
+		[property: JsonPropertyName("serverTime")] double ServerTime,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategorySteamResponseItemsSteamFullGames(
@@ -15144,19 +15144,19 @@ public static class CategoryApiTypes
 	}
 
 	public sealed record CategoryFortniteResponse(
-		[property: JsonPropertyName("items")] List<CategoryFortniteResponseItems>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("wasCached")] JsonElement? WasCached,
-		[property: JsonPropertyName("cacheTTL")] double? CacheTTL,
-		[property: JsonPropertyName("lastModified")] double? LastModified,
-		[property: JsonPropertyName("serverTime")] double? ServerTime,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<CategoryFortniteResponseItems> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("wasCached")] JsonElement WasCached,
+		[property: JsonPropertyName("cacheTTL")] double CacheTTL,
+		[property: JsonPropertyName("lastModified")] double LastModified,
+		[property: JsonPropertyName("serverTime")] double ServerTime,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategoryFortniteResponseItemsBumpSettings(
@@ -15422,10 +15422,10 @@ public static class CategoryApiTypes
 		public List<GenshinCharacter>? GenshinCharacter { get; init; }
 		/// <summary>List of minimum constellations on characters.</summary>
 		[JsonPropertyName("genshin_character_constellations")]
-		public JsonElement? GenshinCharacterConstellations { get; init; }
+		public Dictionary<string, long?>? GenshinCharacterConstellations { get; init; }
 		/// <summary>List of maximum constellations on characters.</summary>
 		[JsonPropertyName("genshin_character_constellations_max")]
-		public JsonElement? GenshinCharacterConstellationsMax { get; init; }
+		public Dictionary<string, long?>? GenshinCharacterConstellationsMax { get; init; }
 		/// <summary>List of weapons.</summary>
 		[JsonPropertyName("genshin_weapon[]")]
 		public List<GenshinWeapon>? GenshinWeapon { get; init; }
@@ -15476,10 +15476,10 @@ public static class CategoryApiTypes
 		public List<HonkaiCharacter>? HonkaiCharacter { get; init; }
 		/// <summary>List of minimum eidolons on characters.</summary>
 		[JsonPropertyName("honkai_character_eidolons")]
-		public JsonElement? HonkaiCharacterEidolons { get; init; }
+		public Dictionary<string, long?>? HonkaiCharacterEidolons { get; init; }
 		/// <summary>List of maximum eidolons on characters.</summary>
 		[JsonPropertyName("honkai_character_eidolons_max")]
-		public JsonElement? HonkaiCharacterEidolonsMax { get; init; }
+		public Dictionary<string, long?>? HonkaiCharacterEidolonsMax { get; init; }
 		/// <summary>List of weapons.</summary>
 		[JsonPropertyName("honkai_weapon[]")]
 		public List<HonkaiWeapon>? HonkaiWeapon { get; init; }
@@ -15530,10 +15530,10 @@ public static class CategoryApiTypes
 		public List<ZenlessCharacter>? ZenlessCharacter { get; init; }
 		/// <summary>List of minimum cinemas on characters.</summary>
 		[JsonPropertyName("zenless_character_cinemas")]
-		public JsonElement? ZenlessCharacterCinemas { get; init; }
+		public Dictionary<string, long?>? ZenlessCharacterCinemas { get; init; }
 		/// <summary>List of maximum cinemas on characters.</summary>
 		[JsonPropertyName("zenless_character_cinemas_max")]
-		public JsonElement? ZenlessCharacterCinemasMax { get; init; }
+		public Dictionary<string, long?>? ZenlessCharacterCinemasMax { get; init; }
 		/// <summary>List of Zenless Zone Zero weapons.</summary>
 		[JsonPropertyName("zenless_weapon[]")]
 		public List<ZenlessWeapon>? ZenlessWeapon { get; init; }
@@ -15585,19 +15585,19 @@ public static class CategoryApiTypes
 	}
 
 	public sealed record CategoryMihoyoResponse(
-		[property: JsonPropertyName("items")] List<CategoryMihoyoResponseItems>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("wasCached")] JsonElement? WasCached,
-		[property: JsonPropertyName("cacheTTL")] double? CacheTTL,
-		[property: JsonPropertyName("lastModified")] double? LastModified,
-		[property: JsonPropertyName("serverTime")] double? ServerTime,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<CategoryMihoyoResponseItems> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("wasCached")] JsonElement WasCached,
+		[property: JsonPropertyName("cacheTTL")] double CacheTTL,
+		[property: JsonPropertyName("lastModified")] double LastModified,
+		[property: JsonPropertyName("serverTime")] double ServerTime,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategoryMihoyoResponseItemsBumpSettings(
@@ -16131,19 +16131,19 @@ public static class CategoryApiTypes
 	}
 
 	public sealed record CategoryRiotResponse(
-		[property: JsonPropertyName("items")] List<CategoryRiotResponseItems>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("wasCached")] JsonElement? WasCached,
-		[property: JsonPropertyName("cacheTTL")] double? CacheTTL,
-		[property: JsonPropertyName("lastModified")] double? LastModified,
-		[property: JsonPropertyName("serverTime")] double? ServerTime,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<CategoryRiotResponseItems> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("wasCached")] JsonElement WasCached,
+		[property: JsonPropertyName("cacheTTL")] double CacheTTL,
+		[property: JsonPropertyName("lastModified")] double LastModified,
+		[property: JsonPropertyName("serverTime")] double ServerTime,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategoryRiotResponseItemsBumpSettings(
@@ -16493,19 +16493,19 @@ public static class CategoryApiTypes
 	}
 
 	public sealed record CategoryTelegramResponse(
-		[property: JsonPropertyName("items")] List<CategoryTelegramResponseItems>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("wasCached")] JsonElement? WasCached,
-		[property: JsonPropertyName("cacheTTL")] double? CacheTTL,
-		[property: JsonPropertyName("lastModified")] double? LastModified,
-		[property: JsonPropertyName("serverTime")] double? ServerTime,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<CategoryTelegramResponseItems> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("wasCached")] JsonElement WasCached,
+		[property: JsonPropertyName("cacheTTL")] double CacheTTL,
+		[property: JsonPropertyName("lastModified")] double LastModified,
+		[property: JsonPropertyName("serverTime")] double ServerTime,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategoryTelegramResponseItemsBumpSettings(
@@ -16831,19 +16831,19 @@ public static class CategoryApiTypes
 	}
 
 	public sealed record CategorySupercellResponse(
-		[property: JsonPropertyName("items")] List<CategorySupercellResponseItems>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("wasCached")] JsonElement? WasCached,
-		[property: JsonPropertyName("cacheTTL")] double? CacheTTL,
-		[property: JsonPropertyName("lastModified")] double? LastModified,
-		[property: JsonPropertyName("serverTime")] double? ServerTime,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<CategorySupercellResponseItems> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("wasCached")] JsonElement WasCached,
+		[property: JsonPropertyName("cacheTTL")] double CacheTTL,
+		[property: JsonPropertyName("lastModified")] double LastModified,
+		[property: JsonPropertyName("serverTime")] double ServerTime,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategorySupercellResponseItemsBumpSettings(
@@ -17084,29 +17084,29 @@ public static class CategoryApiTypes
 		public SubscriptionPeriod? SubscriptionPeriod { get; init; }
 		/// <summary>List of minimum hours played by game.</summary>
 		[JsonPropertyName("hours_played")]
-		public JsonElement? HoursPlayed { get; init; }
+		public Dictionary<string, long?>? HoursPlayed { get; init; }
 		/// <summary>List of maximum hours played by game.</summary>
 		[JsonPropertyName("hours_played_max")]
-		public JsonElement? HoursPlayedMax { get; init; }
+		public Dictionary<string, long?>? HoursPlayedMax { get; init; }
 		/// <summary>Has transactions.</summary>
 		[JsonPropertyName("transactions")]
 		public Transactions? Transactions { get; init; }
 	}
 
 	public sealed record CategoryEaResponse(
-		[property: JsonPropertyName("items")] List<CategoryEaResponseItems>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("wasCached")] JsonElement? WasCached,
-		[property: JsonPropertyName("cacheTTL")] double? CacheTTL,
-		[property: JsonPropertyName("lastModified")] double? LastModified,
-		[property: JsonPropertyName("serverTime")] double? ServerTime,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<CategoryEaResponseItems> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("wasCached")] JsonElement WasCached,
+		[property: JsonPropertyName("cacheTTL")] double CacheTTL,
+		[property: JsonPropertyName("lastModified")] double LastModified,
+		[property: JsonPropertyName("serverTime")] double ServerTime,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategoryEaResponseItemsEaGamesApexLegends(
@@ -17398,19 +17398,19 @@ public static class CategoryApiTypes
 	}
 
 	public sealed record CategoryWotResponse(
-		[property: JsonPropertyName("items")] List<CategoryWotResponseItems>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("wasCached")] JsonElement? WasCached,
-		[property: JsonPropertyName("cacheTTL")] double? CacheTTL,
-		[property: JsonPropertyName("lastModified")] double? LastModified,
-		[property: JsonPropertyName("serverTime")] double? ServerTime,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<CategoryWotResponseItems> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("wasCached")] JsonElement WasCached,
+		[property: JsonPropertyName("cacheTTL")] double CacheTTL,
+		[property: JsonPropertyName("lastModified")] double LastModified,
+		[property: JsonPropertyName("serverTime")] double ServerTime,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategoryWotResponseItemsBumpSettings(
@@ -17694,19 +17694,19 @@ public static class CategoryApiTypes
 	}
 
 	public sealed record CategoryWotBlitzResponse(
-		[property: JsonPropertyName("items")] List<CategoryWotBlitzResponseItems>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("wasCached")] JsonElement? WasCached,
-		[property: JsonPropertyName("cacheTTL")] double? CacheTTL,
-		[property: JsonPropertyName("lastModified")] double? LastModified,
-		[property: JsonPropertyName("serverTime")] double? ServerTime,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<CategoryWotBlitzResponseItems> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("wasCached")] JsonElement WasCached,
+		[property: JsonPropertyName("cacheTTL")] double CacheTTL,
+		[property: JsonPropertyName("lastModified")] double LastModified,
+		[property: JsonPropertyName("serverTime")] double ServerTime,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategoryWotBlitzResponseItemsBumpSettings(
@@ -17894,19 +17894,19 @@ public static class CategoryApiTypes
 	}
 
 	public sealed record CategoryGiftsResponse(
-		[property: JsonPropertyName("items")] List<CategoryGiftsResponseItems>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("wasCached")] JsonElement? WasCached,
-		[property: JsonPropertyName("cacheTTL")] double? CacheTTL,
-		[property: JsonPropertyName("lastModified")] double? LastModified,
-		[property: JsonPropertyName("serverTime")] double? ServerTime,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<CategoryGiftsResponseItems> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("wasCached")] JsonElement WasCached,
+		[property: JsonPropertyName("cacheTTL")] double CacheTTL,
+		[property: JsonPropertyName("lastModified")] double LastModified,
+		[property: JsonPropertyName("serverTime")] double ServerTime,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategoryGiftsResponseItemsBumpSettings(
@@ -18104,26 +18104,26 @@ public static class CategoryApiTypes
 		public long? Daybreak { get; init; }
 		/// <summary>List of minimum hours played by game.</summary>
 		[JsonPropertyName("hours_played")]
-		public JsonElement? HoursPlayed { get; init; }
+		public Dictionary<string, long?>? HoursPlayed { get; init; }
 		/// <summary>List of maximum hours played by game.</summary>
 		[JsonPropertyName("hours_played_max")]
-		public JsonElement? HoursPlayedMax { get; init; }
+		public Dictionary<string, long?>? HoursPlayedMax { get; init; }
 	}
 
 	public sealed record CategoryEpicGamesResponse(
-		[property: JsonPropertyName("items")] List<CategoryEpicGamesResponseItems>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("wasCached")] JsonElement? WasCached,
-		[property: JsonPropertyName("cacheTTL")] double? CacheTTL,
-		[property: JsonPropertyName("lastModified")] double? LastModified,
-		[property: JsonPropertyName("serverTime")] double? ServerTime,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<CategoryEpicGamesResponseItems> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("wasCached")] JsonElement WasCached,
+		[property: JsonPropertyName("cacheTTL")] double CacheTTL,
+		[property: JsonPropertyName("lastModified")] double LastModified,
+		[property: JsonPropertyName("serverTime")] double ServerTime,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategoryEpicGamesResponseItemsBumpSettings(
@@ -18331,19 +18331,19 @@ public static class CategoryApiTypes
 	}
 
 	public sealed record CategoryEscapeFromTarkovResponse(
-		[property: JsonPropertyName("items")] List<CategoryEscapeFromTarkovResponseItems>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("wasCached")] JsonElement? WasCached,
-		[property: JsonPropertyName("cacheTTL")] double? CacheTTL,
-		[property: JsonPropertyName("lastModified")] double? LastModified,
-		[property: JsonPropertyName("serverTime")] double? ServerTime,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<CategoryEscapeFromTarkovResponseItems> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("wasCached")] JsonElement WasCached,
+		[property: JsonPropertyName("cacheTTL")] double CacheTTL,
+		[property: JsonPropertyName("lastModified")] double LastModified,
+		[property: JsonPropertyName("serverTime")] double ServerTime,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategoryEscapeFromTarkovResponseItemsBumpSettings(
@@ -18543,19 +18543,19 @@ public static class CategoryApiTypes
 	}
 
 	public sealed record CategorySocialClubResponse(
-		[property: JsonPropertyName("items")] List<CategorySocialClubResponseItems>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("wasCached")] JsonElement? WasCached,
-		[property: JsonPropertyName("cacheTTL")] double? CacheTTL,
-		[property: JsonPropertyName("lastModified")] double? LastModified,
-		[property: JsonPropertyName("serverTime")] double? ServerTime,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<CategorySocialClubResponseItems> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("wasCached")] JsonElement WasCached,
+		[property: JsonPropertyName("cacheTTL")] double CacheTTL,
+		[property: JsonPropertyName("lastModified")] double LastModified,
+		[property: JsonPropertyName("serverTime")] double ServerTime,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategorySocialClubResponseItemsSocialclubGames(
@@ -18821,19 +18821,19 @@ public static class CategoryApiTypes
 	}
 
 	public sealed record CategoryUplayResponse(
-		[property: JsonPropertyName("items")] List<CategoryUplayResponseItems>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("wasCached")] JsonElement? WasCached,
-		[property: JsonPropertyName("cacheTTL")] double? CacheTTL,
-		[property: JsonPropertyName("lastModified")] double? LastModified,
-		[property: JsonPropertyName("serverTime")] double? ServerTime,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<CategoryUplayResponseItems> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("wasCached")] JsonElement WasCached,
+		[property: JsonPropertyName("cacheTTL")] double CacheTTL,
+		[property: JsonPropertyName("lastModified")] double LastModified,
+		[property: JsonPropertyName("serverTime")] double ServerTime,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategoryUplayResponseItemsUplayGamesFfffffffFfffFfffFfffFfffffffffff(
@@ -19151,19 +19151,19 @@ public static class CategoryApiTypes
 	}
 
 	public sealed record CategoryDiscordResponse(
-		[property: JsonPropertyName("items")] List<CategoryDiscordResponseItems>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("wasCached")] JsonElement? WasCached,
-		[property: JsonPropertyName("cacheTTL")] double? CacheTTL,
-		[property: JsonPropertyName("lastModified")] double? LastModified,
-		[property: JsonPropertyName("serverTime")] double? ServerTime,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<CategoryDiscordResponseItems> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("wasCached")] JsonElement WasCached,
+		[property: JsonPropertyName("cacheTTL")] double CacheTTL,
+		[property: JsonPropertyName("lastModified")] double LastModified,
+		[property: JsonPropertyName("serverTime")] double ServerTime,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategoryDiscordResponseItemsBumpSettings(
@@ -19377,19 +19377,19 @@ public static class CategoryApiTypes
 	}
 
 	public sealed record CategoryTikTokResponse(
-		[property: JsonPropertyName("items")] List<CategoryTikTokResponseItems>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("wasCached")] JsonElement? WasCached,
-		[property: JsonPropertyName("cacheTTL")] double? CacheTTL,
-		[property: JsonPropertyName("lastModified")] double? LastModified,
-		[property: JsonPropertyName("serverTime")] double? ServerTime,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<CategoryTikTokResponseItems> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("wasCached")] JsonElement WasCached,
+		[property: JsonPropertyName("cacheTTL")] double CacheTTL,
+		[property: JsonPropertyName("lastModified")] double LastModified,
+		[property: JsonPropertyName("serverTime")] double ServerTime,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategoryTikTokResponseItemsBumpSettings(
@@ -19605,19 +19605,19 @@ public static class CategoryApiTypes
 	}
 
 	public sealed record CategoryInstagramResponse(
-		[property: JsonPropertyName("items")] List<CategoryInstagramResponseItems>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("wasCached")] JsonElement? WasCached,
-		[property: JsonPropertyName("cacheTTL")] double? CacheTTL,
-		[property: JsonPropertyName("lastModified")] double? LastModified,
-		[property: JsonPropertyName("serverTime")] double? ServerTime,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<CategoryInstagramResponseItems> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("wasCached")] JsonElement WasCached,
+		[property: JsonPropertyName("cacheTTL")] double CacheTTL,
+		[property: JsonPropertyName("lastModified")] double LastModified,
+		[property: JsonPropertyName("serverTime")] double ServerTime,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategoryInstagramResponseItemsBumpSettings(
@@ -19830,19 +19830,19 @@ public static class CategoryApiTypes
 	}
 
 	public sealed record CategoryBattleNetResponse(
-		[property: JsonPropertyName("items")] List<CategoryBattleNetResponseItems>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("wasCached")] JsonElement? WasCached,
-		[property: JsonPropertyName("cacheTTL")] double? CacheTTL,
-		[property: JsonPropertyName("lastModified")] double? LastModified,
-		[property: JsonPropertyName("serverTime")] double? ServerTime,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<CategoryBattleNetResponseItems> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("wasCached")] JsonElement WasCached,
+		[property: JsonPropertyName("cacheTTL")] double CacheTTL,
+		[property: JsonPropertyName("lastModified")] double LastModified,
+		[property: JsonPropertyName("serverTime")] double ServerTime,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategoryBattleNetResponseItemsGuarantee(
@@ -20068,19 +20068,19 @@ public static class CategoryApiTypes
 	}
 
 	public sealed record CategoryChatGPTResponse(
-		[property: JsonPropertyName("items")] List<CategoryChatGPTResponseItems>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("wasCached")] JsonElement? WasCached,
-		[property: JsonPropertyName("cacheTTL")] double? CacheTTL,
-		[property: JsonPropertyName("lastModified")] double? LastModified,
-		[property: JsonPropertyName("serverTime")] double? ServerTime,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<CategoryChatGPTResponseItems> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("wasCached")] JsonElement WasCached,
+		[property: JsonPropertyName("cacheTTL")] double CacheTTL,
+		[property: JsonPropertyName("lastModified")] double LastModified,
+		[property: JsonPropertyName("serverTime")] double ServerTime,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategoryChatGPTResponseItemsCopyFormatData(
@@ -20259,19 +20259,19 @@ public static class CategoryApiTypes
 	}
 
 	public sealed record CategoryVpnResponse(
-		[property: JsonPropertyName("items")] List<CategoryVpnResponseItems>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("wasCached")] JsonElement? WasCached,
-		[property: JsonPropertyName("cacheTTL")] double? CacheTTL,
-		[property: JsonPropertyName("lastModified")] double? LastModified,
-		[property: JsonPropertyName("serverTime")] double? ServerTime,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<CategoryVpnResponseItems> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("wasCached")] JsonElement WasCached,
+		[property: JsonPropertyName("cacheTTL")] double CacheTTL,
+		[property: JsonPropertyName("lastModified")] double LastModified,
+		[property: JsonPropertyName("serverTime")] double ServerTime,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategoryVpnResponseItemsBumpSettings(
@@ -20537,19 +20537,19 @@ public static class CategoryApiTypes
 	}
 
 	public sealed record CategoryRobloxResponse(
-		[property: JsonPropertyName("items")] List<CategoryRobloxResponseItems>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("wasCached")] JsonElement? WasCached,
-		[property: JsonPropertyName("cacheTTL")] double? CacheTTL,
-		[property: JsonPropertyName("lastModified")] double? LastModified,
-		[property: JsonPropertyName("serverTime")] double? ServerTime,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<CategoryRobloxResponseItems> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("wasCached")] JsonElement WasCached,
+		[property: JsonPropertyName("cacheTTL")] double CacheTTL,
+		[property: JsonPropertyName("lastModified")] double LastModified,
+		[property: JsonPropertyName("serverTime")] double ServerTime,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategoryRobloxResponseItemsBumpSettings(
@@ -20777,19 +20777,19 @@ public static class CategoryApiTypes
 	}
 
 	public sealed record CategoryWarfaceResponse(
-		[property: JsonPropertyName("items")] List<CategoryWarfaceResponseItems>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("wasCached")] JsonElement? WasCached,
-		[property: JsonPropertyName("cacheTTL")] double? CacheTTL,
-		[property: JsonPropertyName("lastModified")] double? LastModified,
-		[property: JsonPropertyName("serverTime")] double? ServerTime,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<CategoryWarfaceResponseItems> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("wasCached")] JsonElement WasCached,
+		[property: JsonPropertyName("cacheTTL")] double CacheTTL,
+		[property: JsonPropertyName("lastModified")] double LastModified,
+		[property: JsonPropertyName("serverTime")] double ServerTime,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategoryWarfaceResponseItemsBumpSettings(
@@ -21066,19 +21066,19 @@ public static class CategoryApiTypes
 	}
 
 	public sealed record CategoryMinecraftResponse(
-		[property: JsonPropertyName("items")] List<CategoryMinecraftResponseItems>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("wasCached")] JsonElement? WasCached,
-		[property: JsonPropertyName("cacheTTL")] double? CacheTTL,
-		[property: JsonPropertyName("lastModified")] double? LastModified,
-		[property: JsonPropertyName("serverTime")] double? ServerTime,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<CategoryMinecraftResponseItems> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("wasCached")] JsonElement WasCached,
+		[property: JsonPropertyName("cacheTTL")] double CacheTTL,
+		[property: JsonPropertyName("lastModified")] double LastModified,
+		[property: JsonPropertyName("serverTime")] double ServerTime,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategoryMinecraftResponseItemsBumpSettings(
@@ -21270,19 +21270,19 @@ public static class CategoryApiTypes
 	}
 
 	public sealed record CategoryHytaleResponse(
-		[property: JsonPropertyName("items")] List<CategoryHytaleResponseItems>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("wasCached")] JsonElement? WasCached,
-		[property: JsonPropertyName("cacheTTL")] double? CacheTTL,
-		[property: JsonPropertyName("lastModified")] double? LastModified,
-		[property: JsonPropertyName("serverTime")] double? ServerTime,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<CategoryHytaleResponseItems> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("wasCached")] JsonElement WasCached,
+		[property: JsonPropertyName("cacheTTL")] double CacheTTL,
+		[property: JsonPropertyName("lastModified")] double LastModified,
+		[property: JsonPropertyName("serverTime")] double ServerTime,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategoryHytaleResponseItemsCategory(
@@ -21394,8 +21394,8 @@ public static class CategoryApiTypes
 	}
 
 	public sealed record CategoryListResponse(
-		[property: JsonPropertyName("category")] CategoryListResponseCategory? Category,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("category")] CategoryListResponseCategory Category,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategoryListResponseCategoryLinks(
@@ -21485,9 +21485,9 @@ public static class CategoryApiTypes
 public static class CustomDiscountsApiTypes
 {
 	public sealed record CustomDiscountsGetResponse(
-		[property: JsonPropertyName("discounts")] List<JsonElement>? Discounts,
-		[property: JsonPropertyName("total")] double? Total,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("discounts")] List<JsonElement> Discounts,
+		[property: JsonPropertyName("total")] double Total,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CustomDiscountsCreateBody
@@ -21512,9 +21512,9 @@ public static class CustomDiscountsApiTypes
 	}
 
 	public sealed record CustomDiscountsCreateResponse(
-		[property: JsonPropertyName("discount")] JsonElement? Discount,
-		[property: JsonPropertyName("total")] double? Total,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("discount")] JsonElement Discount,
+		[property: JsonPropertyName("total")] double Total,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CustomDiscountsEditBody
@@ -21534,9 +21534,9 @@ public static class CustomDiscountsApiTypes
 	}
 
 	public sealed record CustomDiscountsEditResponse(
-		[property: JsonPropertyName("discounts")] List<JsonElement>? Discounts,
-		[property: JsonPropertyName("total")] double? Total,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("discounts")] List<JsonElement> Discounts,
+		[property: JsonPropertyName("total")] double Total,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CustomDiscountsDeleteBody
@@ -21680,15 +21680,15 @@ public static class ListApiTypes
 	}
 
 	public sealed record ListUserResponse(
-		[property: JsonPropertyName("items")] List<JsonElement>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<JsonElement> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ListOrdersParams
@@ -21741,15 +21741,15 @@ public static class ListApiTypes
 	}
 
 	public sealed record ListOrdersResponse(
-		[property: JsonPropertyName("items")] List<JsonElement>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<JsonElement> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ListStatesParams
@@ -21760,8 +21760,8 @@ public static class ListApiTypes
 	}
 
 	public sealed record ListStatesResponse(
-		[property: JsonPropertyName("userItemStates")] ListStatesResponseUserItemStates? UserItemStates,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("userItemStates")] ListStatesResponseUserItemStates UserItemStates,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ListStatesResponseUserItemStatesStickied(
@@ -21984,15 +21984,15 @@ public static class ListApiTypes
 	}
 
 	public sealed record ListFavoritesResponse(
-		[property: JsonPropertyName("items")] List<JsonElement>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<JsonElement> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ListViewedParams
@@ -22036,15 +22036,15 @@ public static class ListApiTypes
 	}
 
 	public sealed record ListViewedResponse(
-		[property: JsonPropertyName("items")] List<JsonElement>? Items,
-		[property: JsonPropertyName("totalItems")] double? TotalItems,
-		[property: JsonPropertyName("totalItemsPrice")] JsonElement? TotalItemsPrice,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("searchUrl")] string? SearchUrl,
-		[property: JsonPropertyName("stickyItems")] List<JsonElement>? StickyItems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<JsonElement> Items,
+		[property: JsonPropertyName("totalItems")] double TotalItems,
+		[property: JsonPropertyName("totalItemsPrice")] JsonElement TotalItemsPrice,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("searchUrl")] string SearchUrl,
+		[property: JsonPropertyName("stickyItems")] List<JsonElement> StickyItems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 }
 
@@ -22060,27 +22060,27 @@ public static class ManagingApiTypes
 	}
 
 	public sealed record ManagingGetResponse(
-		[property: JsonPropertyName("item")] JsonElement? Item,
-		[property: JsonPropertyName("canStickItem")] JsonElement? CanStickItem,
-		[property: JsonPropertyName("canUnstickItem")] JsonElement? CanUnstickItem,
-		[property: JsonPropertyName("canBuyItem")] JsonElement? CanBuyItem,
-		[property: JsonPropertyName("cannotBuyItemError")] string? CannotBuyItemError,
-		[property: JsonPropertyName("canCloseItem")] JsonElement? CanCloseItem,
-		[property: JsonPropertyName("canOpenItem")] JsonElement? CanOpenItem,
-		[property: JsonPropertyName("canReportItem")] JsonElement? CanReportItem,
-		[property: JsonPropertyName("canEditItem")] JsonElement? CanEditItem,
-		[property: JsonPropertyName("canDeleteItem")] JsonElement? CanDeleteItem,
-		[property: JsonPropertyName("canCancelConfirmedBuy")] JsonElement? CanCancelConfirmedBuy,
-		[property: JsonPropertyName("canViewItemHistory")] JsonElement? CanViewItemHistory,
-		[property: JsonPropertyName("faveCount")] JsonElement? FaveCount,
-		[property: JsonPropertyName("isVisibleItem")] JsonElement? IsVisibleItem,
-		[property: JsonPropertyName("canViewLoginData")] JsonElement? CanViewLoginData,
-		[property: JsonPropertyName("showToFavouritesButton")] JsonElement? ShowToFavouritesButton,
-		[property: JsonPropertyName("itemLink")] string? ItemLink,
-		[property: JsonPropertyName("canChangeOwner")] JsonElement? CanChangeOwner,
-		[property: JsonPropertyName("sameItemsIds")] List<double>? SameItemsIds,
-		[property: JsonPropertyName("sameItemsCount")] double? SameItemsCount,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("item")] JsonElement Item,
+		[property: JsonPropertyName("canStickItem")] JsonElement CanStickItem,
+		[property: JsonPropertyName("canUnstickItem")] JsonElement CanUnstickItem,
+		[property: JsonPropertyName("canBuyItem")] JsonElement CanBuyItem,
+		[property: JsonPropertyName("cannotBuyItemError")] string CannotBuyItemError,
+		[property: JsonPropertyName("canCloseItem")] JsonElement CanCloseItem,
+		[property: JsonPropertyName("canOpenItem")] JsonElement CanOpenItem,
+		[property: JsonPropertyName("canReportItem")] JsonElement CanReportItem,
+		[property: JsonPropertyName("canEditItem")] JsonElement CanEditItem,
+		[property: JsonPropertyName("canDeleteItem")] JsonElement CanDeleteItem,
+		[property: JsonPropertyName("canCancelConfirmedBuy")] JsonElement CanCancelConfirmedBuy,
+		[property: JsonPropertyName("canViewItemHistory")] JsonElement CanViewItemHistory,
+		[property: JsonPropertyName("faveCount")] JsonElement FaveCount,
+		[property: JsonPropertyName("isVisibleItem")] JsonElement IsVisibleItem,
+		[property: JsonPropertyName("canViewLoginData")] JsonElement CanViewLoginData,
+		[property: JsonPropertyName("showToFavouritesButton")] JsonElement ShowToFavouritesButton,
+		[property: JsonPropertyName("itemLink")] string ItemLink,
+		[property: JsonPropertyName("canChangeOwner")] JsonElement CanChangeOwner,
+		[property: JsonPropertyName("sameItemsIds")] List<double> SameItemsIds,
+		[property: JsonPropertyName("sameItemsCount")] double SameItemsCount,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ManagingDeleteBody
@@ -22091,9 +22091,9 @@ public static class ManagingApiTypes
 	}
 
 	public sealed record ManagingDeleteResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ManagingCreateClaimBody
@@ -22107,8 +22107,8 @@ public static class ManagingApiTypes
 	}
 
 	public sealed record ManagingCreateClaimResponse(
-		[property: JsonPropertyName("thread")] ManagingCreateClaimResponseThread? Thread,
-		[property: JsonPropertyName("system_info")] ManagingCreateClaimResponseSystemInfo? SystemInfo
+		[property: JsonPropertyName("thread")] ManagingCreateClaimResponseThread Thread,
+		[property: JsonPropertyName("system_info")] ManagingCreateClaimResponseSystemInfo SystemInfo
 	);
 
 	public sealed record ManagingCreateClaimResponseThreadFirstPostLikeUsers(
@@ -22268,9 +22268,9 @@ public static class ManagingApiTypes
 	}
 
 	public sealed record ManagingBulkGetResponse(
-		[property: JsonPropertyName("items")] List<JsonElement>? Items,
-		[property: JsonPropertyName("left_item_id")] List<double>? LeftItemId,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("items")] List<JsonElement> Items,
+		[property: JsonPropertyName("left_item_id")] List<double> LeftItemId,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ManagingSteamInventoryValueParams
@@ -22396,13 +22396,13 @@ public static class ManagingApiTypes
 	);
 
 	public sealed record ManagingAIPriceResponse(
-		[property: JsonPropertyName("price")] double? Price,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("price")] double Price,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ManagingAutoBuyPriceResponse(
-		[property: JsonPropertyName("price")] double? Price,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("price")] double Price,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ManagingNoteBody
@@ -22413,9 +22413,9 @@ public static class ManagingApiTypes
 	}
 
 	public sealed record ManagingNoteResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ManagingSteamUpdateValueBody
@@ -22432,15 +22432,15 @@ public static class ManagingApiTypes
 	}
 
 	public sealed record ManagingSteamUpdateValueResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("item")] JsonElement? Item,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("item")] JsonElement Item,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ManagingBumpResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ManagingAutoBumpBody
@@ -22451,27 +22451,27 @@ public static class ManagingApiTypes
 	}
 
 	public sealed record ManagingAutoBumpResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ManagingAutoBumpDisableResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ManagingOpenResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ManagingCloseResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ManagingImageParams
@@ -22482,13 +22482,13 @@ public static class ManagingApiTypes
 	}
 
 	public sealed record ManagingImageResponse(
-		[property: JsonPropertyName("base64")] string? Base64,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("base64")] string Base64,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ManagingEmailCodeResponse(
-		[property: JsonPropertyName("item")] JsonElement? Item,
-		[property: JsonPropertyName("codeData")] ManagingEmailCodeResponseCodeData? CodeData
+		[property: JsonPropertyName("item")] JsonElement Item,
+		[property: JsonPropertyName("codeData")] ManagingEmailCodeResponseCodeData CodeData
 	);
 
 	public sealed record ManagingEmailCodeResponseCodeData(
@@ -22514,9 +22514,9 @@ public static class ManagingApiTypes
 	}
 
 	public sealed record ManagingGetLetters2Response(
-		[property: JsonPropertyName("email")] string? Email,
-		[property: JsonPropertyName("letters")] List<ManagingGetLetters2ResponseLetters>? Letters,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("email")] string Email,
+		[property: JsonPropertyName("letters")] List<ManagingGetLetters2ResponseLetters> Letters,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ManagingGetLetters2ResponseLetters(
@@ -22527,8 +22527,8 @@ public static class ManagingApiTypes
 );
 
 	public sealed record ManagingSteamGetMafileResponse(
-		[property: JsonPropertyName("maFile")] ManagingSteamGetMafileResponseMaFile? MaFile,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("maFile")] ManagingSteamGetMafileResponseMaFile MaFile,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ManagingSteamGetMafileResponseMaFileSession(
@@ -22554,22 +22554,22 @@ public static class ManagingApiTypes
 );
 
 	public sealed record ManagingSteamAddMafileResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("item")] JsonElement? Item,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("item")] JsonElement Item,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ManagingSteamRemoveMafileResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("item")] JsonElement? Item,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("item")] JsonElement Item,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ManagingSteamMafileCodeResponse(
-		[property: JsonPropertyName("item")] JsonElement? Item,
-		[property: JsonPropertyName("codeData")] ManagingSteamMafileCodeResponseCodeData? CodeData
+		[property: JsonPropertyName("item")] JsonElement Item,
+		[property: JsonPropertyName("codeData")] ManagingSteamMafileCodeResponseCodeData CodeData
 	);
 
 	public sealed record ManagingSteamMafileCodeResponseCodeData(
@@ -22589,14 +22589,14 @@ public static class ManagingApiTypes
 	}
 
 	public sealed record ManagingSteamSDAResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ManagingTelegramCodeResponse(
-		[property: JsonPropertyName("item")] JsonElement? Item,
-		[property: JsonPropertyName("codes")] ManagingTelegramCodeResponseCodes? Codes
+		[property: JsonPropertyName("item")] JsonElement Item,
+		[property: JsonPropertyName("codes")] ManagingTelegramCodeResponseCodes Codes
 	);
 
 	public sealed record ManagingTelegramCodeResponseCodes(
@@ -22630,8 +22630,8 @@ public static class ManagingApiTypes
 	);
 
 	public sealed record ManagingCheckGuaranteeResponse(
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ManagingChangePasswordBody
@@ -22644,11 +22644,11 @@ public static class ManagingApiTypes
 	public sealed record ManagingChangePasswordResponse(
 		[property: JsonPropertyName("status")] string? Status,
 		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("new_password")] string? NewPassword
+		[property: JsonPropertyName("new_password")] string NewPassword
 	);
 
 	public sealed record ManagingTempEmailPasswordResponse(
-		[property: JsonPropertyName("item")] ManagingTempEmailPasswordResponseItem? Item
+		[property: JsonPropertyName("item")] ManagingTempEmailPasswordResponseItem Item
 	);
 
 	public sealed record ManagingTempEmailPasswordResponseItem(
@@ -22663,11 +22663,11 @@ public static class ManagingApiTypes
 	}
 
 	public sealed record ManagingTagResponse(
-		[property: JsonPropertyName("itemId")] double? ItemId,
-		[property: JsonPropertyName("tag")] ManagingTagResponseTag? Tag,
-		[property: JsonPropertyName("addedTagId")] double? AddedTagId,
-		[property: JsonPropertyName("deleteTags")] List<double>? DeleteTags,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("itemId")] double ItemId,
+		[property: JsonPropertyName("tag")] ManagingTagResponseTag Tag,
+		[property: JsonPropertyName("addedTagId")] double AddedTagId,
+		[property: JsonPropertyName("deleteTags")] List<double> DeleteTags,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ManagingTagResponseTag(
@@ -22686,11 +22686,11 @@ public static class ManagingApiTypes
 	}
 
 	public sealed record ManagingUntagResponse(
-		[property: JsonPropertyName("itemId")] double? ItemId,
-		[property: JsonPropertyName("tag")] ManagingUntagResponseTag? Tag,
-		[property: JsonPropertyName("addedTagId")] double? AddedTagId,
-		[property: JsonPropertyName("deleteTags")] List<double>? DeleteTags,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("itemId")] double ItemId,
+		[property: JsonPropertyName("tag")] ManagingUntagResponseTag Tag,
+		[property: JsonPropertyName("addedTagId")] double AddedTagId,
+		[property: JsonPropertyName("deleteTags")] List<double> DeleteTags,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ManagingUntagResponseTag(
@@ -22709,11 +22709,11 @@ public static class ManagingApiTypes
 	}
 
 	public sealed record ManagingPublicTagResponse(
-		[property: JsonPropertyName("itemId")] double? ItemId,
-		[property: JsonPropertyName("tag")] ManagingPublicTagResponseTag? Tag,
-		[property: JsonPropertyName("addedTagId")] double? AddedTagId,
-		[property: JsonPropertyName("deleteTags")] List<double>? DeleteTags,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("itemId")] double ItemId,
+		[property: JsonPropertyName("tag")] ManagingPublicTagResponseTag Tag,
+		[property: JsonPropertyName("addedTagId")] double AddedTagId,
+		[property: JsonPropertyName("deleteTags")] List<double> DeleteTags,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ManagingPublicTagResponseTag(
@@ -22732,11 +22732,11 @@ public static class ManagingApiTypes
 	}
 
 	public sealed record ManagingPublicUntagResponse(
-		[property: JsonPropertyName("itemId")] double? ItemId,
-		[property: JsonPropertyName("tag")] ManagingPublicUntagResponseTag? Tag,
-		[property: JsonPropertyName("addedTagId")] double? AddedTagId,
-		[property: JsonPropertyName("deleteTags")] List<double>? DeleteTags,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("itemId")] double ItemId,
+		[property: JsonPropertyName("tag")] ManagingPublicUntagResponseTag Tag,
+		[property: JsonPropertyName("addedTagId")] double AddedTagId,
+		[property: JsonPropertyName("deleteTags")] List<double> DeleteTags,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ManagingPublicUntagResponseTag(
@@ -22748,9 +22748,9 @@ public static class ManagingApiTypes
 );
 
 	public sealed record ManagingFavoriteResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ManagingUnfavoriteResponse(
@@ -22803,8 +22803,8 @@ public static class PaymentsApiTypes
 	}
 
 	public sealed record PaymentsInvoiceGetResponse(
-		[property: JsonPropertyName("invoice")] JsonElement? Invoice,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("invoice")] JsonElement Invoice,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PaymentsInvoiceCreateBody
@@ -22847,8 +22847,8 @@ public static class PaymentsApiTypes
 	}
 
 	public sealed record PaymentsInvoiceCreateResponse(
-		[property: JsonPropertyName("invoice")] JsonElement? Invoice,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("invoice")] JsonElement Invoice,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PaymentsInvoiceListParams
@@ -22871,18 +22871,18 @@ public static class PaymentsApiTypes
 	}
 
 	public sealed record PaymentsInvoiceListResponse(
-		[property: JsonPropertyName("invoices")] List<JsonElement>? Invoices,
-		[property: JsonPropertyName("count")] double? Count,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("invoices")] List<JsonElement> Invoices,
+		[property: JsonPropertyName("count")] double Count,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PaymentsCurrencyResponse(
-		[property: JsonPropertyName("currencyList")] PaymentsCurrencyResponseCurrencyList? CurrencyList,
-		[property: JsonPropertyName("lastUpdate")] double? LastUpdate,
-		[property: JsonPropertyName("visitorCurrency")] string? VisitorCurrency,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("currencyList")] PaymentsCurrencyResponseCurrencyList CurrencyList,
+		[property: JsonPropertyName("lastUpdate")] double LastUpdate,
+		[property: JsonPropertyName("visitorCurrency")] string VisitorCurrency,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PaymentsCurrencyResponseCurrencyListBTC(
@@ -23369,9 +23369,9 @@ public static class PaymentsApiTypes
 );
 
 	public sealed record PaymentsBalanceListResponse(
-		[property: JsonPropertyName("from")] PaymentsBalanceListResponseFrom? From,
-		[property: JsonPropertyName("to")] PaymentsBalanceListResponseTo? To,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("from")] PaymentsBalanceListResponseFrom From,
+		[property: JsonPropertyName("to")] PaymentsBalanceListResponseTo To,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PaymentsBalanceListResponseFromBalance(
@@ -23405,9 +23405,9 @@ public static class PaymentsApiTypes
 	}
 
 	public sealed record PaymentsBalanceExchangeResponse(
-		[property: JsonPropertyName("from")] PaymentsBalanceExchangeResponseFrom? From,
-		[property: JsonPropertyName("to")] PaymentsBalanceExchangeResponseTo? To,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("from")] PaymentsBalanceExchangeResponseFrom From,
+		[property: JsonPropertyName("to")] PaymentsBalanceExchangeResponseTo To,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PaymentsBalanceExchangeResponseFromBalance(
@@ -23461,9 +23461,9 @@ public static class PaymentsApiTypes
 	}
 
 	public sealed record PaymentsTransferResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PaymentsFeeParams
@@ -23474,10 +23474,10 @@ public static class PaymentsApiTypes
 	}
 
 	public sealed record PaymentsFeeResponse(
-		[property: JsonPropertyName("commission_percentage")] double? CommissionPercentage,
-		[property: JsonPropertyName("spentCurrentMonth")] double? SpentCurrentMonth,
-		[property: JsonPropertyName("calculator")] PaymentsFeeResponseCalculator? Calculator,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("commission_percentage")] double CommissionPercentage,
+		[property: JsonPropertyName("spentCurrentMonth")] double SpentCurrentMonth,
+		[property: JsonPropertyName("calculator")] PaymentsFeeResponseCalculator Calculator,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PaymentsFeeResponseCalculator(
@@ -23494,9 +23494,9 @@ public static class PaymentsApiTypes
 	}
 
 	public sealed record PaymentsCancelResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PaymentsHistoryParams
@@ -23549,20 +23549,20 @@ public static class PaymentsApiTypes
 	}
 
 	public sealed record PaymentsHistoryResponse(
-		[property: JsonPropertyName("payments")] JsonElement? Payments,
-		[property: JsonPropertyName("perPage")] string? PerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("pageNavLink")] string? PageNavLink,
-		[property: JsonPropertyName("pageNavParams")] PaymentsHistoryResponsePageNavParams? PageNavParams,
-		[property: JsonPropertyName("periodLabel")] string? PeriodLabel,
-		[property: JsonPropertyName("periodLabelPhrase")] string? PeriodLabelPhrase,
-		[property: JsonPropertyName("filterDatesDefault")] JsonElement? FilterDatesDefault,
-		[property: JsonPropertyName("input")] PaymentsHistoryResponseInput? Input,
-		[property: JsonPropertyName("paymentStats")] JsonElement? PaymentStats,
-		[property: JsonPropertyName("hasNextPage")] JsonElement? HasNextPage,
-		[property: JsonPropertyName("lastOperationId")] double? LastOperationId,
-		[property: JsonPropertyName("nextPageHref")] string? NextPageHref,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("payments")] JsonElement Payments,
+		[property: JsonPropertyName("perPage")] string PerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("pageNavLink")] string PageNavLink,
+		[property: JsonPropertyName("pageNavParams")] PaymentsHistoryResponsePageNavParams PageNavParams,
+		[property: JsonPropertyName("periodLabel")] string PeriodLabel,
+		[property: JsonPropertyName("periodLabelPhrase")] string PeriodLabelPhrase,
+		[property: JsonPropertyName("filterDatesDefault")] JsonElement FilterDatesDefault,
+		[property: JsonPropertyName("input")] PaymentsHistoryResponseInput Input,
+		[property: JsonPropertyName("paymentStats")] JsonElement PaymentStats,
+		[property: JsonPropertyName("hasNextPage")] JsonElement HasNextPage,
+		[property: JsonPropertyName("lastOperationId")] double LastOperationId,
+		[property: JsonPropertyName("nextPageHref")] string NextPageHref,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PaymentsHistoryResponsePageNavParams(
@@ -23591,8 +23591,8 @@ public static class PaymentsApiTypes
 );
 
 	public sealed record PaymentsPayoutServicesResponse(
-		[property: JsonPropertyName("systems")] List<PaymentsPayoutServicesResponseSystems>? Systems,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("systems")] List<PaymentsPayoutServicesResponseSystems> Systems,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PaymentsPayoutServicesResponseSystemsProvidersBEP20(
@@ -23733,9 +23733,9 @@ public static class ProfileApiTypes
 	}
 
 	public sealed record ProfileClaimsResponse(
-		[property: JsonPropertyName("claims")] List<ProfileClaimsResponseClaims>? Claims,
-		[property: JsonPropertyName("stats")] ProfileClaimsResponseStats? Stats,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("claims")] List<ProfileClaimsResponseClaims> Claims,
+		[property: JsonPropertyName("stats")] ProfileClaimsResponseStats Stats,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ProfileClaimsResponseClaimsAuthorLinks(
@@ -23826,8 +23826,8 @@ public static class ProfileApiTypes
 	}
 
 	public sealed record ProfileGetResponse(
-		[property: JsonPropertyName("user")] JsonElement? User,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("user")] JsonElement User,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ProfileEditBody
@@ -23880,8 +23880,8 @@ public static class ProfileApiTypes
 public static class ProxyApiTypes
 {
 	public sealed record ProxyGetResponse(
-		[property: JsonPropertyName("proxies")] List<ProxyGetResponseProxies>? Proxies,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("proxies")] List<ProxyGetResponseProxies> Proxies,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ProxyGetResponseProxiesProxy(
@@ -24004,9 +24004,9 @@ public static class PublishingApiTypes
 	}
 
 	public sealed record PublishingFastSellResponse(
-		[property: JsonPropertyName("item")] JsonElement? Item,
-		[property: JsonPropertyName("itemLink")] string? ItemLink,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("item")] JsonElement Item,
+		[property: JsonPropertyName("itemLink")] string ItemLink,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PublishingAddBody
@@ -24064,9 +24064,9 @@ public static class PublishingApiTypes
 	}
 
 	public sealed record PublishingAddResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("item")] JsonElement? Item,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("item")] JsonElement Item,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PublishingCheckBody
@@ -24100,9 +24100,9 @@ public static class PublishingApiTypes
 	}
 
 	public sealed record PublishingCheckResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("item")] PublishingCheckResponseItem? Item,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("item")] PublishingCheckResponseItem Item,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PublishingCheckResponseItemGuarantee(
@@ -24297,9 +24297,9 @@ public static class PurchasingApiTypes
 	}
 
 	public sealed record PurchasingFastBuyResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("item")] PurchasingFastBuyResponseItem? Item,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("item")] PurchasingFastBuyResponseItem Item,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PurchasingFastBuyResponseItemGuarantee(
@@ -24457,10 +24457,10 @@ public static class PurchasingApiTypes
 );
 
 	public sealed record PurchasingCheckResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("item")] PurchasingCheckResponseItem? Item,
-		[property: JsonPropertyName("requireVideoRecording")] JsonElement? RequireVideoRecording,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("item")] PurchasingCheckResponseItem Item,
+		[property: JsonPropertyName("requireVideoRecording")] JsonElement RequireVideoRecording,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PurchasingCheckResponseItemGuarantee(
@@ -24606,8 +24606,8 @@ public static class PurchasingApiTypes
 
 	public sealed record PurchasingConfirmResponse(
 		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("item")] PurchasingConfirmResponseItem? Item,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("item")] PurchasingConfirmResponseItem Item,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PurchasingConfirmResponseItemLoginData(

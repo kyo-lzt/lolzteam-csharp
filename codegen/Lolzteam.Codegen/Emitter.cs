@@ -271,10 +271,9 @@ internal static partial class Emitter
         var seenNames = new HashSet<string>();
         for (var i = 0; i < entries.Count; i++)
         {
-            var (jsonName, csharpType, _) = entries[i];
+            var (jsonName, csharpType, required) = entries[i];
             var propName = DeduplicateName(Naming.SafeCSharpName(jsonName), seenNames);
-            // All fields nullable to tolerate null/missing values from the API
-            var typeStr = MakeNullable(csharpType);
+            var typeStr = required ? csharpType : MakeNullable(csharpType);
 
             sb.Append("\t[property: JsonPropertyName(\"").Append(jsonName).Append("\")] ");
             sb.Append(typeStr).Append(' ').Append(propName);
@@ -721,10 +720,9 @@ internal static partial class Emitter
             var seenNames = new HashSet<string>();
             for (var i = 0; i < entries.Count; i++)
             {
-                var (jsonName, csharpType, _) = entries[i];
+                var (jsonName, csharpType, required) = entries[i];
                 var propName = DeduplicateName(Naming.SafeCSharpName(jsonName), seenNames);
-                // All response fields are nullable to tolerate null/missing values from the API
-                var typeStr = MakeNullable(csharpType);
+                var typeStr = required ? csharpType : MakeNullable(csharpType);
 
                 sb.Append("\t\t[property: JsonPropertyName(\"").Append(jsonName).Append("\")] ");
                 sb.Append(typeStr).Append(' ').Append(propName);
@@ -847,7 +845,7 @@ internal static partial class Emitter
         {
             // Typed response — deserialize directly to the record
             sb.Append(indent).Append("return JsonSerializer.Deserialize<").Append(responseTypeName)
-                .Append(">(__result)!;\n");
+                .Append(">(__result, JsonDefaults.Options)!;\n");
         }
         else
         {
@@ -859,7 +857,7 @@ internal static partial class Emitter
             else
             {
                 sb.Append(indent).Append("return new ").Append(responseTypeName)
-                    .Append("(JsonSerializer.Deserialize<").Append(dataCSharpType).Append(">(__result)!);\n");
+                    .Append("(JsonSerializer.Deserialize<").Append(dataCSharpType).Append(">(__result, JsonDefaults.Options)!);\n");
             }
         }
     }

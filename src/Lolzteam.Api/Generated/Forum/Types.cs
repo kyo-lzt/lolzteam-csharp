@@ -233,7 +233,7 @@ public enum PrizeType
 [JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<ProfilePostsFieldsInclude>))]
 public enum ProfilePostsFieldsInclude
 {
-	[Lolzteam.Api.Runtime.EnumValue("*")] Value622456125,
+	[Lolzteam.Api.Runtime.EnumValue("*")] Value1243483987,
 	[Lolzteam.Api.Runtime.EnumValue("latest_comments")] LatestComments,
 }
 
@@ -267,7 +267,7 @@ public enum State
 [JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<ThreadsFieldsInclude>))]
 public enum ThreadsFieldsInclude
 {
-	[Lolzteam.Api.Runtime.EnumValue("*")] Value622456125,
+	[Lolzteam.Api.Runtime.EnumValue("*")] Value1243483987,
 	[Lolzteam.Api.Runtime.EnumValue("latest_posts")] LatestPosts,
 }
 
@@ -391,7 +391,7 @@ public enum TransferType
 [JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<UsersFieldsInclude>))]
 public enum UsersFieldsInclude
 {
-	[Lolzteam.Api.Runtime.EnumValue("*")] Value622456125,
+	[Lolzteam.Api.Runtime.EnumValue("*")] Value1243483987,
 	[Lolzteam.Api.Runtime.EnumValue("alerts")] Alerts,
 }
 
@@ -413,15 +413,15 @@ public enum UsersType
 // ─── Component Schemas ────────────────────────────────────────
 
 public sealed record Resp_ChatboxMessageModel(
-	[property: JsonPropertyName("can_report")] JsonElement? CanReport,
-	[property: JsonPropertyName("date")] double? Date,
-	[property: JsonPropertyName("is_deleted")] JsonElement? IsDeleted,
-	[property: JsonPropertyName("message")] string? Message,
-	[property: JsonPropertyName("message_id")] double? MessageId,
-	[property: JsonPropertyName("messageJson")] string? MessageJson,
-	[property: JsonPropertyName("messageRaw")] string? MessageRaw,
-	[property: JsonPropertyName("room")] Resp_ChatboxMessageModelRoom? Room,
-	[property: JsonPropertyName("user")] Resp_ChatboxMessageModelUser? User
+	[property: JsonPropertyName("can_report")] JsonElement CanReport,
+	[property: JsonPropertyName("date")] double Date,
+	[property: JsonPropertyName("is_deleted")] JsonElement IsDeleted,
+	[property: JsonPropertyName("message")] string Message,
+	[property: JsonPropertyName("message_id")] double MessageId,
+	[property: JsonPropertyName("messageJson")] string MessageJson,
+	[property: JsonPropertyName("messageRaw")] string MessageRaw,
+	[property: JsonPropertyName("room")] Resp_ChatboxMessageModelRoom Room,
+	[property: JsonPropertyName("user")] Resp_ChatboxMessageModelUser User
 );
 
 public sealed record Resp_ChatboxMessageModelRoom(
@@ -478,22 +478,22 @@ public sealed record Resp_ChatboxMessageModelUser(
 );
 
 public sealed record Resp_ConversationMessageModel(
-	[property: JsonPropertyName("message_id")] double? MessageId,
-	[property: JsonPropertyName("conversation_id")] double? ConversationId,
-	[property: JsonPropertyName("creator_user_id")] double? CreatorUserId,
-	[property: JsonPropertyName("creator_username")] string? CreatorUsername,
-	[property: JsonPropertyName("creator_username_html")] string? CreatorUsernameHtml,
-	[property: JsonPropertyName("message_create_date")] double? MessageCreateDate,
-	[property: JsonPropertyName("message_is_unread")] double? MessageIsUnread,
-	[property: JsonPropertyName("message_need_translate")] JsonElement? MessageNeedTranslate,
-	[property: JsonPropertyName("message_is_system")] JsonElement? MessageIsSystem,
-	[property: JsonPropertyName("message_edit_date")] double? MessageEditDate,
-	[property: JsonPropertyName("message_body")] string? MessageBody,
-	[property: JsonPropertyName("message_body_html")] string? MessageBodyHtml,
-	[property: JsonPropertyName("message_body_plain_text")] string? MessageBodyPlainText,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("links")] Resp_ConversationMessageModelLinks? Links,
-	[property: JsonPropertyName("permissions")] Resp_ConversationMessageModelPermissions? Permissions
+	[property: JsonPropertyName("message_id")] double MessageId,
+	[property: JsonPropertyName("conversation_id")] double ConversationId,
+	[property: JsonPropertyName("creator_user_id")] double CreatorUserId,
+	[property: JsonPropertyName("creator_username")] string CreatorUsername,
+	[property: JsonPropertyName("creator_username_html")] string CreatorUsernameHtml,
+	[property: JsonPropertyName("message_create_date")] double MessageCreateDate,
+	[property: JsonPropertyName("message_is_unread")] double MessageIsUnread,
+	[property: JsonPropertyName("message_need_translate")] JsonElement MessageNeedTranslate,
+	[property: JsonPropertyName("message_is_system")] JsonElement MessageIsSystem,
+	[property: JsonPropertyName("message_edit_date")] double MessageEditDate,
+	[property: JsonPropertyName("message_body")] string MessageBody,
+	[property: JsonPropertyName("message_body_html")] string MessageBodyHtml,
+	[property: JsonPropertyName("message_body_plain_text")] string MessageBodyPlainText,
+	[property: JsonPropertyName("user_is_ignored")] JsonElement UserIsIgnored,
+	[property: JsonPropertyName("links")] Resp_ConversationMessageModelLinks Links,
+	[property: JsonPropertyName("permissions")] Resp_ConversationMessageModelPermissions Permissions
 );
 
 public sealed record Resp_ConversationMessageModelLinks(
@@ -511,28 +511,28 @@ public sealed record Resp_ConversationMessageModelPermissions(
 );
 
 public sealed record Resp_ConversationModel(
-	[property: JsonPropertyName("conversation_id")] double? ConversationId,
-	[property: JsonPropertyName("conversation_title")] string? ConversationTitle,
-	[property: JsonPropertyName("creator_user_id")] double? CreatorUserId,
-	[property: JsonPropertyName("creator_username")] string? CreatorUsername,
-	[property: JsonPropertyName("creator_username_html")] string? CreatorUsernameHtml,
-	[property: JsonPropertyName("conversation_create_date")] double? ConversationCreateDate,
-	[property: JsonPropertyName("conversation_update_date")] double? ConversationUpdateDate,
-	[property: JsonPropertyName("conversation_last_read_date")] double? ConversationLastReadDate,
-	[property: JsonPropertyName("conversation_online_count")] double? ConversationOnlineCount,
-	[property: JsonPropertyName("is_starred")] double? IsStarred,
-	[property: JsonPropertyName("is_group")] double? IsGroup,
-	[property: JsonPropertyName("is_unread")] double? IsUnread,
-	[property: JsonPropertyName("alerts")] double? Alerts,
-	[property: JsonPropertyName("permissions")] Resp_ConversationModelPermissions? Permissions,
-	[property: JsonPropertyName("conversation_message_count")] double? ConversationMessageCount,
-	[property: JsonPropertyName("conversation_is_new")] JsonElement? ConversationIsNew,
-	[property: JsonPropertyName("creator_is_ignored")] JsonElement? CreatorIsIgnored,
-	[property: JsonPropertyName("conversation_is_open")] JsonElement? ConversationIsOpen,
-	[property: JsonPropertyName("conversation_is_deleted")] JsonElement? ConversationIsDeleted,
-	[property: JsonPropertyName("recipient")] Resp_ConversationModelRecipient? Recipient,
-	[property: JsonPropertyName("recipients")] List<Resp_ConversationModelRecipients>? Recipients,
-	[property: JsonPropertyName("links")] Resp_ConversationModelLinks? Links
+	[property: JsonPropertyName("conversation_id")] double ConversationId,
+	[property: JsonPropertyName("conversation_title")] string ConversationTitle,
+	[property: JsonPropertyName("creator_user_id")] double CreatorUserId,
+	[property: JsonPropertyName("creator_username")] string CreatorUsername,
+	[property: JsonPropertyName("creator_username_html")] string CreatorUsernameHtml,
+	[property: JsonPropertyName("conversation_create_date")] double ConversationCreateDate,
+	[property: JsonPropertyName("conversation_update_date")] double ConversationUpdateDate,
+	[property: JsonPropertyName("conversation_last_read_date")] double ConversationLastReadDate,
+	[property: JsonPropertyName("conversation_online_count")] double ConversationOnlineCount,
+	[property: JsonPropertyName("is_starred")] double IsStarred,
+	[property: JsonPropertyName("is_group")] double IsGroup,
+	[property: JsonPropertyName("is_unread")] double IsUnread,
+	[property: JsonPropertyName("alerts")] double Alerts,
+	[property: JsonPropertyName("permissions")] Resp_ConversationModelPermissions Permissions,
+	[property: JsonPropertyName("conversation_message_count")] double ConversationMessageCount,
+	[property: JsonPropertyName("conversation_is_new")] JsonElement ConversationIsNew,
+	[property: JsonPropertyName("creator_is_ignored")] JsonElement CreatorIsIgnored,
+	[property: JsonPropertyName("conversation_is_open")] JsonElement ConversationIsOpen,
+	[property: JsonPropertyName("conversation_is_deleted")] JsonElement ConversationIsDeleted,
+	[property: JsonPropertyName("recipient")] Resp_ConversationModelRecipient Recipient,
+	[property: JsonPropertyName("recipients")] List<Resp_ConversationModelRecipients> Recipients,
+	[property: JsonPropertyName("links")] Resp_ConversationModelLinks Links
 );
 
 public sealed record Resp_ConversationModelPermissions(
@@ -574,11 +574,11 @@ public sealed record Resp_ConversationModelLinks(
 );
 
 public sealed record Resp_LinkModel(
-	[property: JsonPropertyName("link_id")] double? LinkId,
-	[property: JsonPropertyName("link_title")] string? LinkTitle,
-	[property: JsonPropertyName("link_description")] string? LinkDescription,
-	[property: JsonPropertyName("links")] Resp_LinkModelLinks? Links,
-	[property: JsonPropertyName("permissions")] Resp_LinkModelPermissions? Permissions
+	[property: JsonPropertyName("link_id")] double LinkId,
+	[property: JsonPropertyName("link_title")] string LinkTitle,
+	[property: JsonPropertyName("link_description")] string LinkDescription,
+	[property: JsonPropertyName("links")] Resp_LinkModelLinks Links,
+	[property: JsonPropertyName("permissions")] Resp_LinkModelPermissions Permissions
 );
 
 public sealed record Resp_LinkModelLinks(
@@ -591,18 +591,18 @@ public sealed record Resp_LinkModelPermissions(
 );
 
 public sealed record Resp_NotificationModel(
-	[property: JsonPropertyName("notification_id")] double? NotificationId,
-	[property: JsonPropertyName("notification_create_date")] double? NotificationCreateDate,
-	[property: JsonPropertyName("content_type")] string? ContentType,
-	[property: JsonPropertyName("content_id")] double? ContentId,
-	[property: JsonPropertyName("content_action")] string? ContentAction,
-	[property: JsonPropertyName("notification_is_unread")] JsonElement? NotificationIsUnread,
-	[property: JsonPropertyName("creator_user_id")] double? CreatorUserId,
-	[property: JsonPropertyName("creator_username")] string? CreatorUsername,
-	[property: JsonPropertyName("creator_username_html")] string? CreatorUsernameHtml,
-	[property: JsonPropertyName("notification_type")] string? NotificationType,
-	[property: JsonPropertyName("links")] Resp_NotificationModelLinks? Links,
-	[property: JsonPropertyName("notification_html")] string? NotificationHtml
+	[property: JsonPropertyName("notification_id")] double NotificationId,
+	[property: JsonPropertyName("notification_create_date")] double NotificationCreateDate,
+	[property: JsonPropertyName("content_type")] string ContentType,
+	[property: JsonPropertyName("content_id")] double ContentId,
+	[property: JsonPropertyName("content_action")] string ContentAction,
+	[property: JsonPropertyName("notification_is_unread")] JsonElement NotificationIsUnread,
+	[property: JsonPropertyName("creator_user_id")] double CreatorUserId,
+	[property: JsonPropertyName("creator_username")] string CreatorUsername,
+	[property: JsonPropertyName("creator_username_html")] string CreatorUsernameHtml,
+	[property: JsonPropertyName("notification_type")] string NotificationType,
+	[property: JsonPropertyName("links")] Resp_NotificationModelLinks Links,
+	[property: JsonPropertyName("notification_html")] string NotificationHtml
 );
 
 public sealed record Resp_NotificationModelLinks(
@@ -611,23 +611,23 @@ public sealed record Resp_NotificationModelLinks(
 );
 
 public sealed record Resp_PostCommentModel(
-	[property: JsonPropertyName("post_comment_id")] double? PostCommentId,
-	[property: JsonPropertyName("post_id")] double? PostId,
-	[property: JsonPropertyName("thread_id")] double? ThreadId,
-	[property: JsonPropertyName("poster_user_id")] double? PosterUserId,
-	[property: JsonPropertyName("poster_username")] string? PosterUsername,
-	[property: JsonPropertyName("poster_username_html")] string? PosterUsernameHtml,
-	[property: JsonPropertyName("post_comment_create_date")] double? PostCommentCreateDate,
-	[property: JsonPropertyName("post_comment_body")] string? PostCommentBody,
-	[property: JsonPropertyName("post_comment_body_html")] string? PostCommentBodyHtml,
-	[property: JsonPropertyName("post_comment_body_plain_text")] string? PostCommentBodyPlainText,
-	[property: JsonPropertyName("post_comment_like_count")] double? PostCommentLikeCount,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("post_comment_is_published")] JsonElement? PostCommentIsPublished,
-	[property: JsonPropertyName("post_comment_is_deleted")] JsonElement? PostCommentIsDeleted,
-	[property: JsonPropertyName("post_comment_update_date")] double? PostCommentUpdateDate,
-	[property: JsonPropertyName("links")] Resp_PostCommentModelLinks? Links,
-	[property: JsonPropertyName("permissions")] Resp_PostCommentModelPermissions? Permissions
+	[property: JsonPropertyName("post_comment_id")] double PostCommentId,
+	[property: JsonPropertyName("post_id")] double PostId,
+	[property: JsonPropertyName("thread_id")] double ThreadId,
+	[property: JsonPropertyName("poster_user_id")] double PosterUserId,
+	[property: JsonPropertyName("poster_username")] string PosterUsername,
+	[property: JsonPropertyName("poster_username_html")] string PosterUsernameHtml,
+	[property: JsonPropertyName("post_comment_create_date")] double PostCommentCreateDate,
+	[property: JsonPropertyName("post_comment_body")] string PostCommentBody,
+	[property: JsonPropertyName("post_comment_body_html")] string PostCommentBodyHtml,
+	[property: JsonPropertyName("post_comment_body_plain_text")] string PostCommentBodyPlainText,
+	[property: JsonPropertyName("post_comment_like_count")] double PostCommentLikeCount,
+	[property: JsonPropertyName("user_is_ignored")] JsonElement UserIsIgnored,
+	[property: JsonPropertyName("post_comment_is_published")] JsonElement PostCommentIsPublished,
+	[property: JsonPropertyName("post_comment_is_deleted")] JsonElement PostCommentIsDeleted,
+	[property: JsonPropertyName("post_comment_update_date")] double PostCommentUpdateDate,
+	[property: JsonPropertyName("links")] Resp_PostCommentModelLinks Links,
+	[property: JsonPropertyName("permissions")] Resp_PostCommentModelPermissions Permissions
 );
 
 public sealed record Resp_PostCommentModelLinks(
@@ -651,27 +651,27 @@ public sealed record Resp_PostCommentModelPermissions(
 );
 
 public sealed record Resp_PostModel(
-	[property: JsonPropertyName("post_id")] double? PostId,
-	[property: JsonPropertyName("thread_id")] double? ThreadId,
-	[property: JsonPropertyName("poster_user_id")] double? PosterUserId,
-	[property: JsonPropertyName("poster_username")] string? PosterUsername,
-	[property: JsonPropertyName("poster_username_html")] string? PosterUsernameHtml,
-	[property: JsonPropertyName("post_create_date")] double? PostCreateDate,
-	[property: JsonPropertyName("post_body")] string? PostBody,
-	[property: JsonPropertyName("post_body_html")] string? PostBodyHtml,
-	[property: JsonPropertyName("post_body_plain_text")] string? PostBodyPlainText,
-	[property: JsonPropertyName("signature")] string? Signature,
-	[property: JsonPropertyName("signature_html")] string? SignatureHtml,
-	[property: JsonPropertyName("signature_plain_text")] string? SignaturePlainText,
-	[property: JsonPropertyName("post_like_count")] double? PostLikeCount,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("post_is_published")] JsonElement? PostIsPublished,
-	[property: JsonPropertyName("post_is_deleted")] JsonElement? PostIsDeleted,
-	[property: JsonPropertyName("post_update_date")] double? PostUpdateDate,
-	[property: JsonPropertyName("post_is_first_post")] JsonElement? PostIsFirstPost,
-	[property: JsonPropertyName("links")] Resp_PostModelLinks? Links,
-	[property: JsonPropertyName("permissions")] Resp_PostModelPermissions? Permissions,
-	[property: JsonPropertyName("thread_is_deleted")] JsonElement? ThreadIsDeleted
+	[property: JsonPropertyName("post_id")] double PostId,
+	[property: JsonPropertyName("thread_id")] double ThreadId,
+	[property: JsonPropertyName("poster_user_id")] double PosterUserId,
+	[property: JsonPropertyName("poster_username")] string PosterUsername,
+	[property: JsonPropertyName("poster_username_html")] string PosterUsernameHtml,
+	[property: JsonPropertyName("post_create_date")] double PostCreateDate,
+	[property: JsonPropertyName("post_body")] string PostBody,
+	[property: JsonPropertyName("post_body_html")] string PostBodyHtml,
+	[property: JsonPropertyName("post_body_plain_text")] string PostBodyPlainText,
+	[property: JsonPropertyName("signature")] string Signature,
+	[property: JsonPropertyName("signature_html")] string SignatureHtml,
+	[property: JsonPropertyName("signature_plain_text")] string SignaturePlainText,
+	[property: JsonPropertyName("post_like_count")] double PostLikeCount,
+	[property: JsonPropertyName("user_is_ignored")] JsonElement UserIsIgnored,
+	[property: JsonPropertyName("post_is_published")] JsonElement PostIsPublished,
+	[property: JsonPropertyName("post_is_deleted")] JsonElement PostIsDeleted,
+	[property: JsonPropertyName("post_update_date")] double PostUpdateDate,
+	[property: JsonPropertyName("post_is_first_post")] JsonElement PostIsFirstPost,
+	[property: JsonPropertyName("links")] Resp_PostModelLinks Links,
+	[property: JsonPropertyName("permissions")] Resp_PostModelPermissions Permissions,
+	[property: JsonPropertyName("thread_is_deleted")] JsonElement ThreadIsDeleted
 );
 
 public sealed record Resp_PostModelLinks(
@@ -694,19 +694,19 @@ public sealed record Resp_PostModelPermissions(
 );
 
 public sealed record Resp_ProfilePostCommentModel(
-	[property: JsonPropertyName("comment_id")] double? CommentId,
-	[property: JsonPropertyName("profile_post_id")] double? ProfilePostId,
-	[property: JsonPropertyName("comment_user_id")] double? CommentUserId,
-	[property: JsonPropertyName("comment_username")] string? CommentUsername,
-	[property: JsonPropertyName("comment_username_html")] string? CommentUsernameHtml,
-	[property: JsonPropertyName("comment_create_date")] double? CommentCreateDate,
-	[property: JsonPropertyName("comment_body")] string? CommentBody,
-	[property: JsonPropertyName("comment_body_html")] string? CommentBodyHtml,
-	[property: JsonPropertyName("comment_body_plain_text")] string? CommentBodyPlainText,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("timeline_user_id")] double? TimelineUserId,
-	[property: JsonPropertyName("links")] Resp_ProfilePostCommentModelLinks? Links,
-	[property: JsonPropertyName("permissions")] Resp_ProfilePostCommentModelPermissions? Permissions
+	[property: JsonPropertyName("comment_id")] double CommentId,
+	[property: JsonPropertyName("profile_post_id")] double ProfilePostId,
+	[property: JsonPropertyName("comment_user_id")] double CommentUserId,
+	[property: JsonPropertyName("comment_username")] string CommentUsername,
+	[property: JsonPropertyName("comment_username_html")] string CommentUsernameHtml,
+	[property: JsonPropertyName("comment_create_date")] double CommentCreateDate,
+	[property: JsonPropertyName("comment_body")] string CommentBody,
+	[property: JsonPropertyName("comment_body_html")] string CommentBodyHtml,
+	[property: JsonPropertyName("comment_body_plain_text")] string CommentBodyPlainText,
+	[property: JsonPropertyName("user_is_ignored")] JsonElement UserIsIgnored,
+	[property: JsonPropertyName("timeline_user_id")] double TimelineUserId,
+	[property: JsonPropertyName("links")] Resp_ProfilePostCommentModelLinks Links,
+	[property: JsonPropertyName("permissions")] Resp_ProfilePostCommentModelPermissions Permissions
 );
 
 public sealed record Resp_ProfilePostCommentModelLinks(
@@ -724,27 +724,27 @@ public sealed record Resp_ProfilePostCommentModelPermissions(
 );
 
 public sealed record Resp_ProfilePostModel(
-	[property: JsonPropertyName("profile_post_id")] double? ProfilePostId,
-	[property: JsonPropertyName("timeline_user_id")] double? TimelineUserId,
-	[property: JsonPropertyName("poster_user_id")] double? PosterUserId,
-	[property: JsonPropertyName("poster_username")] string? PosterUsername,
-	[property: JsonPropertyName("poster_username_html")] string? PosterUsernameHtml,
-	[property: JsonPropertyName("post_create_date")] double? PostCreateDate,
-	[property: JsonPropertyName("post_body")] string? PostBody,
-	[property: JsonPropertyName("post_body_html")] string? PostBodyHtml,
-	[property: JsonPropertyName("post_body_plain_text")] string? PostBodyPlainText,
-	[property: JsonPropertyName("post_like_count")] double? PostLikeCount,
-	[property: JsonPropertyName("post_comment_count")] double? PostCommentCount,
-	[property: JsonPropertyName("post_comments_is_disabled")] double? PostCommentsIsDisabled,
-	[property: JsonPropertyName("timeline_username")] string? TimelineUsername,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("post_is_published")] JsonElement? PostIsPublished,
-	[property: JsonPropertyName("post_is_deleted")] JsonElement? PostIsDeleted,
-	[property: JsonPropertyName("post_is_liked")] JsonElement? PostIsLiked,
-	[property: JsonPropertyName("post_is_sticked")] JsonElement? PostIsSticked,
-	[property: JsonPropertyName("links")] Resp_ProfilePostModelLinks? Links,
-	[property: JsonPropertyName("permissions")] Resp_ProfilePostModelPermissions? Permissions,
-	[property: JsonPropertyName("timeline_user")] JsonElement? TimelineUser
+	[property: JsonPropertyName("profile_post_id")] double ProfilePostId,
+	[property: JsonPropertyName("timeline_user_id")] double TimelineUserId,
+	[property: JsonPropertyName("poster_user_id")] double PosterUserId,
+	[property: JsonPropertyName("poster_username")] string PosterUsername,
+	[property: JsonPropertyName("poster_username_html")] string PosterUsernameHtml,
+	[property: JsonPropertyName("post_create_date")] double PostCreateDate,
+	[property: JsonPropertyName("post_body")] string PostBody,
+	[property: JsonPropertyName("post_body_html")] string PostBodyHtml,
+	[property: JsonPropertyName("post_body_plain_text")] string PostBodyPlainText,
+	[property: JsonPropertyName("post_like_count")] double PostLikeCount,
+	[property: JsonPropertyName("post_comment_count")] double PostCommentCount,
+	[property: JsonPropertyName("post_comments_is_disabled")] double PostCommentsIsDisabled,
+	[property: JsonPropertyName("timeline_username")] string TimelineUsername,
+	[property: JsonPropertyName("user_is_ignored")] JsonElement UserIsIgnored,
+	[property: JsonPropertyName("post_is_published")] JsonElement PostIsPublished,
+	[property: JsonPropertyName("post_is_deleted")] JsonElement PostIsDeleted,
+	[property: JsonPropertyName("post_is_liked")] JsonElement PostIsLiked,
+	[property: JsonPropertyName("post_is_sticked")] JsonElement PostIsSticked,
+	[property: JsonPropertyName("links")] Resp_ProfilePostModelLinks Links,
+	[property: JsonPropertyName("permissions")] Resp_ProfilePostModelPermissions Permissions,
+	[property: JsonPropertyName("timeline_user")] JsonElement TimelineUser
 );
 
 public sealed record Resp_ProfilePostModelLinks(
@@ -770,37 +770,37 @@ public sealed record Resp_ProfilePostModelPermissions(
 );
 
 public sealed record Resp_SystemInfo(
-	[property: JsonPropertyName("visitor_id")] double? VisitorId,
-	[property: JsonPropertyName("time")] double? Time
+	[property: JsonPropertyName("visitor_id")] double VisitorId,
+	[property: JsonPropertyName("time")] double Time
 );
 
 public sealed record Resp_ThreadModel(
-	[property: JsonPropertyName("thread_id")] double? ThreadId,
-	[property: JsonPropertyName("forum_id")] double? ForumId,
-	[property: JsonPropertyName("thread_title")] string? ThreadTitle,
-	[property: JsonPropertyName("thread_view_count")] double? ThreadViewCount,
-	[property: JsonPropertyName("creator_user_id")] double? CreatorUserId,
-	[property: JsonPropertyName("creator_username")] string? CreatorUsername,
-	[property: JsonPropertyName("creator_username_html")] string? CreatorUsernameHtml,
-	[property: JsonPropertyName("thread_create_date")] double? ThreadCreateDate,
-	[property: JsonPropertyName("thread_update_date")] double? ThreadUpdateDate,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("thread_post_count")] double? ThreadPostCount,
-	[property: JsonPropertyName("thread_is_published")] JsonElement? ThreadIsPublished,
-	[property: JsonPropertyName("thread_is_deleted")] JsonElement? ThreadIsDeleted,
-	[property: JsonPropertyName("thread_is_sticky")] JsonElement? ThreadIsSticky,
-	[property: JsonPropertyName("thread_is_closed")] JsonElement? ThreadIsClosed,
-	[property: JsonPropertyName("thread_is_followed")] JsonElement? ThreadIsFollowed,
-	[property: JsonPropertyName("thread_is_starred")] JsonElement? ThreadIsStarred,
-	[property: JsonPropertyName("first_post")] Resp_ThreadModelFirstPost? FirstPost,
-	[property: JsonPropertyName("thread_prefixes")] List<JsonElement>? ThreadPrefixes,
-	[property: JsonPropertyName("thread_tags")] JsonElement? ThreadTags,
-	[property: JsonPropertyName("links")] Resp_ThreadModelLinks? Links,
-	[property: JsonPropertyName("permissions")] Resp_ThreadModelPermissions? Permissions,
-	[property: JsonPropertyName("node_title")] string? NodeTitle,
-	[property: JsonPropertyName("restrictions")] Resp_ThreadModelRestrictions? Restrictions,
-	[property: JsonPropertyName("last_post")] Resp_ThreadModelLastPost? LastPost,
-	[property: JsonPropertyName("contest")] Resp_ThreadModelContest? Contest
+	[property: JsonPropertyName("thread_id")] double ThreadId,
+	[property: JsonPropertyName("forum_id")] double ForumId,
+	[property: JsonPropertyName("thread_title")] string ThreadTitle,
+	[property: JsonPropertyName("thread_view_count")] double ThreadViewCount,
+	[property: JsonPropertyName("creator_user_id")] double CreatorUserId,
+	[property: JsonPropertyName("creator_username")] string CreatorUsername,
+	[property: JsonPropertyName("creator_username_html")] string CreatorUsernameHtml,
+	[property: JsonPropertyName("thread_create_date")] double ThreadCreateDate,
+	[property: JsonPropertyName("thread_update_date")] double ThreadUpdateDate,
+	[property: JsonPropertyName("user_is_ignored")] JsonElement UserIsIgnored,
+	[property: JsonPropertyName("thread_post_count")] double ThreadPostCount,
+	[property: JsonPropertyName("thread_is_published")] JsonElement ThreadIsPublished,
+	[property: JsonPropertyName("thread_is_deleted")] JsonElement ThreadIsDeleted,
+	[property: JsonPropertyName("thread_is_sticky")] JsonElement ThreadIsSticky,
+	[property: JsonPropertyName("thread_is_closed")] JsonElement ThreadIsClosed,
+	[property: JsonPropertyName("thread_is_followed")] JsonElement ThreadIsFollowed,
+	[property: JsonPropertyName("thread_is_starred")] JsonElement ThreadIsStarred,
+	[property: JsonPropertyName("first_post")] Resp_ThreadModelFirstPost FirstPost,
+	[property: JsonPropertyName("thread_prefixes")] List<JsonElement> ThreadPrefixes,
+	[property: JsonPropertyName("thread_tags")] JsonElement ThreadTags,
+	[property: JsonPropertyName("links")] Resp_ThreadModelLinks Links,
+	[property: JsonPropertyName("permissions")] Resp_ThreadModelPermissions Permissions,
+	[property: JsonPropertyName("node_title")] string NodeTitle,
+	[property: JsonPropertyName("restrictions")] Resp_ThreadModelRestrictions Restrictions,
+	[property: JsonPropertyName("last_post")] Resp_ThreadModelLastPost LastPost,
+	[property: JsonPropertyName("contest")] Resp_ThreadModelContest Contest
 );
 
 public sealed record Resp_ThreadModelFirstPostLinks(
@@ -953,51 +953,51 @@ public sealed record Resp_ThreadModelContest(
 );
 
 public sealed record Resp_UserModel(
-	[property: JsonPropertyName("user_id")] double? UserId,
-	[property: JsonPropertyName("username")] string? Username,
-	[property: JsonPropertyName("username_html")] string? UsernameHtml,
-	[property: JsonPropertyName("user_message_count")] double? UserMessageCount,
-	[property: JsonPropertyName("user_register_date")] double? UserRegisterDate,
-	[property: JsonPropertyName("user_like_count")] double? UserLikeCount,
-	[property: JsonPropertyName("user_like2_count")] double? UserLike2Count,
-	[property: JsonPropertyName("contest_count")] double? ContestCount,
-	[property: JsonPropertyName("trophy_count")] double? TrophyCount,
-	[property: JsonPropertyName("short_link")] string? ShortLink,
-	[property: JsonPropertyName("custom_title")] string? CustomTitle,
-	[property: JsonPropertyName("is_banned")] double? IsBanned,
-	[property: JsonPropertyName("display_banner_id")] double? DisplayBannerId,
-	[property: JsonPropertyName("display_icon_group_id")] double? DisplayIconGroupId,
-	[property: JsonPropertyName("balance")] string? Balance,
-	[property: JsonPropertyName("hold")] string? Hold,
-	[property: JsonPropertyName("currency")] string? Currency,
-	[property: JsonPropertyName("user_email")] string? UserEmail,
-	[property: JsonPropertyName("user_unread_notification_count")] double? UserUnreadNotificationCount,
-	[property: JsonPropertyName("user_unread_conversation_count")] double? UserUnreadConversationCount,
-	[property: JsonPropertyName("conv_welcome_message")] string? ConvWelcomeMessage,
-	[property: JsonPropertyName("user_title")] string? UserTitle,
-	[property: JsonPropertyName("user_deposit")] double? UserDeposit,
-	[property: JsonPropertyName("user_is_valid")] JsonElement? UserIsValid,
-	[property: JsonPropertyName("user_is_verified")] JsonElement? UserIsVerified,
-	[property: JsonPropertyName("user_is_followed")] JsonElement? UserIsFollowed,
-	[property: JsonPropertyName("user_last_seen_date")] double? UserLastSeenDate,
-	[property: JsonPropertyName("links")] Resp_UserModelLinks? Links,
-	[property: JsonPropertyName("permissions")] Resp_UserModelPermissions? Permissions,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("user_is_visitor")] JsonElement? UserIsVisitor,
-	[property: JsonPropertyName("user_group_id")] double? UserGroupId,
-	[property: JsonPropertyName("curator_titles")] List<string>? CuratorTitles,
-	[property: JsonPropertyName("user_groups")] List<Resp_UserModelUserGroups>? UserGroups,
-	[property: JsonPropertyName("fields")] List<Resp_UserModelFields>? Fields,
-	[property: JsonPropertyName("user_timezone_offset")] double? UserTimezoneOffset,
-	[property: JsonPropertyName("user_external_authentications")] List<Resp_UserModelUserExternalAuthentications>? UserExternalAuthentications,
-	[property: JsonPropertyName("self_permissions")] Resp_UserModelSelfPermissions? SelfPermissions,
-	[property: JsonPropertyName("edit_permissions")] Resp_UserModelEditPermissions? EditPermissions,
-	[property: JsonPropertyName("birthday")] Resp_UserModelBirthday? Birthday,
-	[property: JsonPropertyName("secret_answer_rendered")] string? SecretAnswerRendered,
-	[property: JsonPropertyName("secret_answer_first_letter")] string? SecretAnswerFirstLetter,
-	[property: JsonPropertyName("user_following")] Resp_UserModelUserFollowing? UserFollowing,
-	[property: JsonPropertyName("user_followers")] Resp_UserModelUserFollowers? UserFollowers,
-	[property: JsonPropertyName("banner")] string? Banner
+	[property: JsonPropertyName("user_id")] double UserId,
+	[property: JsonPropertyName("username")] string Username,
+	[property: JsonPropertyName("username_html")] string UsernameHtml,
+	[property: JsonPropertyName("user_message_count")] double UserMessageCount,
+	[property: JsonPropertyName("user_register_date")] double UserRegisterDate,
+	[property: JsonPropertyName("user_like_count")] double UserLikeCount,
+	[property: JsonPropertyName("user_like2_count")] double UserLike2Count,
+	[property: JsonPropertyName("contest_count")] double ContestCount,
+	[property: JsonPropertyName("trophy_count")] double TrophyCount,
+	[property: JsonPropertyName("short_link")] string ShortLink,
+	[property: JsonPropertyName("custom_title")] string CustomTitle,
+	[property: JsonPropertyName("is_banned")] double IsBanned,
+	[property: JsonPropertyName("display_banner_id")] double DisplayBannerId,
+	[property: JsonPropertyName("display_icon_group_id")] double DisplayIconGroupId,
+	[property: JsonPropertyName("balance")] string Balance,
+	[property: JsonPropertyName("hold")] string Hold,
+	[property: JsonPropertyName("currency")] string Currency,
+	[property: JsonPropertyName("user_email")] string UserEmail,
+	[property: JsonPropertyName("user_unread_notification_count")] double UserUnreadNotificationCount,
+	[property: JsonPropertyName("user_unread_conversation_count")] double UserUnreadConversationCount,
+	[property: JsonPropertyName("conv_welcome_message")] string ConvWelcomeMessage,
+	[property: JsonPropertyName("user_title")] string UserTitle,
+	[property: JsonPropertyName("user_deposit")] double UserDeposit,
+	[property: JsonPropertyName("user_is_valid")] JsonElement UserIsValid,
+	[property: JsonPropertyName("user_is_verified")] JsonElement UserIsVerified,
+	[property: JsonPropertyName("user_is_followed")] JsonElement UserIsFollowed,
+	[property: JsonPropertyName("user_last_seen_date")] double UserLastSeenDate,
+	[property: JsonPropertyName("links")] Resp_UserModelLinks Links,
+	[property: JsonPropertyName("permissions")] Resp_UserModelPermissions Permissions,
+	[property: JsonPropertyName("user_is_ignored")] JsonElement UserIsIgnored,
+	[property: JsonPropertyName("user_is_visitor")] JsonElement UserIsVisitor,
+	[property: JsonPropertyName("user_group_id")] double UserGroupId,
+	[property: JsonPropertyName("curator_titles")] List<string> CuratorTitles,
+	[property: JsonPropertyName("user_groups")] List<Resp_UserModelUserGroups> UserGroups,
+	[property: JsonPropertyName("fields")] List<Resp_UserModelFields> Fields,
+	[property: JsonPropertyName("user_timezone_offset")] double UserTimezoneOffset,
+	[property: JsonPropertyName("user_external_authentications")] List<Resp_UserModelUserExternalAuthentications> UserExternalAuthentications,
+	[property: JsonPropertyName("self_permissions")] Resp_UserModelSelfPermissions SelfPermissions,
+	[property: JsonPropertyName("edit_permissions")] Resp_UserModelEditPermissions EditPermissions,
+	[property: JsonPropertyName("birthday")] Resp_UserModelBirthday Birthday,
+	[property: JsonPropertyName("secret_answer_rendered")] string SecretAnswerRendered,
+	[property: JsonPropertyName("secret_answer_first_letter")] string SecretAnswerFirstLetter,
+	[property: JsonPropertyName("user_following")] Resp_UserModelUserFollowing UserFollowing,
+	[property: JsonPropertyName("user_followers")] Resp_UserModelUserFollowers UserFollowers,
+	[property: JsonPropertyName("banner")] string Banner
 );
 
 public sealed record Resp_UserModelLinks(
@@ -1125,8 +1125,8 @@ public static class AssetsApiTypes
 	}
 
 	public sealed record AssetsCssResponse(
-		[property: JsonPropertyName("contents")] string? Contents,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("contents")] string Contents,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 }
 
@@ -1135,7 +1135,7 @@ public static class AssetsApiTypes
 public static class BatchApiTypes
 {
 	public sealed record BatchExecuteResponse(
-		[property: JsonPropertyName("jobs")] BatchExecuteResponseJobs? Jobs
+		[property: JsonPropertyName("jobs")] BatchExecuteResponseJobs Jobs
 	);
 
 	public sealed record BatchExecuteResponseJobs(
@@ -1161,9 +1161,9 @@ public static class CategoriesApiTypes
 	}
 
 	public sealed record CategoriesListResponse(
-		[property: JsonPropertyName("categories")] List<CategoriesListResponseCategories>? Categories,
-		[property: JsonPropertyName("categories_total")] double? CategoriesTotal,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("categories")] List<CategoriesListResponseCategories> Categories,
+		[property: JsonPropertyName("categories_total")] double CategoriesTotal,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategoriesListResponseCategoriesLinks(
@@ -1188,8 +1188,8 @@ public static class CategoriesApiTypes
 );
 
 	public sealed record CategoriesGetResponse(
-		[property: JsonPropertyName("category")] CategoriesGetResponseCategory? Category,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("category")] CategoriesGetResponseCategory Category,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record CategoriesGetResponseCategoryLinks(
@@ -1226,13 +1226,13 @@ public static class ChatboxApiTypes
 	}
 
 	public sealed record ChatboxIndexResponse(
-		[property: JsonPropertyName("rooms")] List<ChatboxIndexResponseRooms>? Rooms,
-		[property: JsonPropertyName("ban")] JsonElement? Ban,
-		[property: JsonPropertyName("ignore")] List<ChatboxIndexResponseIgnore>? Ignore,
-		[property: JsonPropertyName("permissions")] ChatboxIndexResponsePermissions? Permissions,
-		[property: JsonPropertyName("commands")] List<string>? Commands,
-		[property: JsonPropertyName("roomsOnline")] ChatboxIndexResponseRoomsOnline? RoomsOnline,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("rooms")] List<ChatboxIndexResponseRooms> Rooms,
+		[property: JsonPropertyName("ban")] JsonElement Ban,
+		[property: JsonPropertyName("ignore")] List<ChatboxIndexResponseIgnore> Ignore,
+		[property: JsonPropertyName("permissions")] ChatboxIndexResponsePermissions Permissions,
+		[property: JsonPropertyName("commands")] List<string> Commands,
+		[property: JsonPropertyName("roomsOnline")] ChatboxIndexResponseRoomsOnline RoomsOnline,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ChatboxIndexResponseRooms(
@@ -1305,8 +1305,8 @@ public static class ChatboxApiTypes
 	}
 
 	public sealed record ChatboxGetMessagesResponse(
-		[property: JsonPropertyName("messages")] List<JsonElement>? Messages,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("messages")] List<JsonElement> Messages,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ChatboxPostMessageBody
@@ -1323,8 +1323,8 @@ public static class ChatboxApiTypes
 	}
 
 	public sealed record ChatboxPostMessageResponse(
-		[property: JsonPropertyName("message")] JsonElement? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("message")] JsonElement Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ChatboxEditMessageBody
@@ -1338,8 +1338,8 @@ public static class ChatboxApiTypes
 	}
 
 	public sealed record ChatboxEditMessageResponse(
-		[property: JsonPropertyName("message")] JsonElement? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("message")] JsonElement Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ChatboxDeleteMessageBody
@@ -1363,8 +1363,8 @@ public static class ChatboxApiTypes
 	}
 
 	public sealed record ChatboxOnlineResponse(
-		[property: JsonPropertyName("users")] List<ChatboxOnlineResponseUsers>? Users,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("users")] List<ChatboxOnlineResponseUsers> Users,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ChatboxOnlineResponseUsersRenderedAvatars(
@@ -1420,8 +1420,8 @@ public static class ChatboxApiTypes
 	}
 
 	public sealed record ChatboxReportReasonsResponse(
-		[property: JsonPropertyName("reasons")] List<string>? Reasons,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("reasons")] List<string> Reasons,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ChatboxReportBody
@@ -1448,8 +1448,8 @@ public static class ChatboxApiTypes
 	}
 
 	public sealed record ChatboxGetLeaderboardResponse(
-		[property: JsonPropertyName("leaderboard")] List<ChatboxGetLeaderboardResponseLeaderboard>? Leaderboard,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("leaderboard")] List<ChatboxGetLeaderboardResponseLeaderboard> Leaderboard,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ChatboxGetLeaderboardResponseLeaderboardRenderedAvatars(
@@ -1495,8 +1495,8 @@ public static class ChatboxApiTypes
 );
 
 	public sealed record ChatboxGetIgnoreResponse(
-		[property: JsonPropertyName("ignored")] List<ChatboxGetIgnoreResponseIgnored>? Ignored,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("ignored")] List<ChatboxGetIgnoreResponseIgnored> Ignored,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ChatboxGetIgnoreResponseIgnoredRenderedAvatars(
@@ -1577,11 +1577,11 @@ public static class ConversationsApiTypes
 	}
 
 	public sealed record ConversationsListResponse(
-		[property: JsonPropertyName("conversations")] List<JsonElement>? Conversations,
-		[property: JsonPropertyName("can_start")] JsonElement? CanStart,
-		[property: JsonPropertyName("folders")] List<ConversationsListResponseFolders>? Folders,
-		[property: JsonPropertyName("links")] ConversationsListResponseLinks? Links,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("conversations")] List<JsonElement> Conversations,
+		[property: JsonPropertyName("can_start")] JsonElement CanStart,
+		[property: JsonPropertyName("folders")] List<ConversationsListResponseFolders> Folders,
+		[property: JsonPropertyName("links")] ConversationsListResponseLinks Links,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ConversationsListResponseFolders(
@@ -1628,8 +1628,8 @@ public static class ConversationsApiTypes
 	}
 
 	public sealed record ConversationsCreateResponse(
-		[property: JsonPropertyName("conversation")] JsonElement? Conversation,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("conversation")] JsonElement Conversation,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ConversationsUpdateBody
@@ -1658,8 +1658,8 @@ public static class ConversationsApiTypes
 	}
 
 	public sealed record ConversationsUpdateResponse(
-		[property: JsonPropertyName("conversation")] JsonElement? Conversation,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("conversation")] JsonElement Conversation,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ConversationsDeleteBody
@@ -1685,8 +1685,8 @@ public static class ConversationsApiTypes
 	}
 
 	public sealed record ConversationsStartResponse(
-		[property: JsonPropertyName("conversation")] JsonElement? Conversation,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("conversation")] JsonElement Conversation,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ConversationsSaveBody
@@ -1703,8 +1703,8 @@ public static class ConversationsApiTypes
 	);
 
 	public sealed record ConversationsGetResponse(
-		[property: JsonPropertyName("conversation")] JsonElement? Conversation,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("conversation")] JsonElement Conversation,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ConversationsMessagesListParams
@@ -1727,10 +1727,10 @@ public static class ConversationsApiTypes
 	}
 
 	public sealed record ConversationsMessagesListResponse(
-		[property: JsonPropertyName("messages")] List<JsonElement>? Messages,
-		[property: JsonPropertyName("messages_total")] double? MessagesTotal,
-		[property: JsonPropertyName("links")] ConversationsMessagesListResponseLinks? Links,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("messages")] List<JsonElement> Messages,
+		[property: JsonPropertyName("messages_total")] double MessagesTotal,
+		[property: JsonPropertyName("links")] ConversationsMessagesListResponseLinks Links,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ConversationsMessagesListResponseLinks(
@@ -1750,8 +1750,8 @@ public static class ConversationsApiTypes
 	}
 
 	public sealed record ConversationsMessagesCreateResponse(
-		[property: JsonPropertyName("message")] JsonElement? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("message")] JsonElement Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ConversationsSearchBody
@@ -1768,14 +1768,14 @@ public static class ConversationsApiTypes
 	}
 
 	public sealed record ConversationsSearchResponse(
-		[property: JsonPropertyName("conversations")] List<JsonElement>? Conversations,
-		[property: JsonPropertyName("recipients")] JsonElement? Recipients,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("conversations")] List<JsonElement> Conversations,
+		[property: JsonPropertyName("recipients")] JsonElement Recipients,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ConversationsMessagesGetResponse(
-		[property: JsonPropertyName("message")] JsonElement? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("message")] JsonElement Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ConversationsMessagesEditBody
@@ -1786,8 +1786,8 @@ public static class ConversationsApiTypes
 	}
 
 	public sealed record ConversationsMessagesEditResponse(
-		[property: JsonPropertyName("message")] JsonElement? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("message")] JsonElement Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ConversationsMessagesDeleteResponse(
@@ -1829,9 +1829,9 @@ public static class ConversationsApiTypes
 	);
 
 	public sealed record ConversationsReadAllResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ConversationsMessagesStickResponse(
@@ -1847,27 +1847,27 @@ public static class ConversationsApiTypes
 	);
 
 	public sealed record ConversationsStarResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ConversationsUnstarResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ConversationsAlertsEnableResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ConversationsAlertsDisableResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 }
 
@@ -1883,11 +1883,11 @@ public static class FormsApiTypes
 	}
 
 	public sealed record FormsListResponse(
-		[property: JsonPropertyName("forms")] List<FormsListResponseForms>? Forms,
-		[property: JsonPropertyName("formsPerPage")] double? FormsPerPage,
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("totalForms")] double? TotalForms,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("forms")] List<FormsListResponseForms> Forms,
+		[property: JsonPropertyName("formsPerPage")] double FormsPerPage,
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("totalForms")] double TotalForms,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record FormsListResponseFormsFieldsFieldChoices(
@@ -1920,20 +1920,20 @@ public static class FormsApiTypes
 		[JsonPropertyName("form_id")]
 		public long FormId => 1;
 		[JsonPropertyName("fields")]
-		public required JsonElement Fields { get; init; }
+		public required Dictionary<string, string> Fields { get; init; }
 	}
 	public sealed record FormsCreateBodyComplaint : FormsCreateBody
 	{
 		[JsonPropertyName("form_id")]
 		public long FormId => 3;
 		[JsonPropertyName("fields")]
-		public required JsonElement Fields { get; init; }
+		public required Dictionary<string, string> Fields { get; init; }
 	}
 
 	public sealed record FormsCreateResponse(
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("content")] FormsCreateResponseContent? Content,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("content")] FormsCreateResponseContent Content,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record FormsCreateResponseContentLinks(
@@ -1997,10 +1997,10 @@ public static class ForumsApiTypes
 	}
 
 	public sealed record ForumsListResponse(
-		[property: JsonPropertyName("forums")] List<ForumsListResponseForums>? Forums,
-		[property: JsonPropertyName("forums_total")] double? ForumsTotal,
-		[property: JsonPropertyName("tabs")] List<ForumsListResponseTabs>? Tabs,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("forums")] List<ForumsListResponseForums> Forums,
+		[property: JsonPropertyName("forums_total")] double ForumsTotal,
+		[property: JsonPropertyName("tabs")] List<ForumsListResponseTabs> Tabs,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ForumsListResponseForumsForumPrefixesGroupPrefixes(
@@ -2053,9 +2053,9 @@ public static class ForumsApiTypes
 );
 
 	public sealed record ForumsGroupedResponse(
-		[property: JsonPropertyName("data")] JsonElement? Data,
-		[property: JsonPropertyName("tabs")] List<ForumsGroupedResponseTabs>? Tabs,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("data")] JsonElement Data,
+		[property: JsonPropertyName("tabs")] List<ForumsGroupedResponseTabs> Tabs,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ForumsGroupedResponseTabs(
@@ -2066,8 +2066,8 @@ public static class ForumsApiTypes
 );
 
 	public sealed record ForumsGetResponse(
-		[property: JsonPropertyName("forum")] ForumsGetResponseForum? Forum,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("forum")] ForumsGetResponseForum Forum,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ForumsGetResponseForumForumPrefixesGroupPrefixes(
@@ -2114,8 +2114,8 @@ public static class ForumsApiTypes
 );
 
 	public sealed record ForumsFollowersResponse(
-		[property: JsonPropertyName("users")] List<ForumsFollowersResponseUsers>? Users,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("users")] List<ForumsFollowersResponseUsers> Users,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ForumsFollowersResponseUsersFollow(
@@ -2169,8 +2169,8 @@ public static class ForumsApiTypes
 	}
 
 	public sealed record ForumsFollowedResponse(
-		[property: JsonPropertyName("forums")] List<ForumsFollowedResponseForums>? Forums,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("forums")] List<ForumsFollowedResponseForums> Forums,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ForumsFollowedResponseForumsForumPrefixesGroupPrefixes(
@@ -2224,11 +2224,11 @@ public static class ForumsApiTypes
 );
 
 	public sealed record ForumsGetFeedOptionsResponse(
-		[property: JsonPropertyName("forums")] List<ForumsGetFeedOptionsResponseForums>? Forums,
-		[property: JsonPropertyName("excluded_forums_ids")] List<double>? ExcludedForumsIds,
-		[property: JsonPropertyName("default_excluded_forums_ids")] List<double>? DefaultExcludedForumsIds,
-		[property: JsonPropertyName("keywords")] string? Keywords,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("forums")] List<ForumsGetFeedOptionsResponseForums> Forums,
+		[property: JsonPropertyName("excluded_forums_ids")] List<double> ExcludedForumsIds,
+		[property: JsonPropertyName("default_excluded_forums_ids")] List<double> DefaultExcludedForumsIds,
+		[property: JsonPropertyName("keywords")] string Keywords,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ForumsGetFeedOptionsResponseForumsLinks(
@@ -2282,14 +2282,14 @@ public static class ForumsApiTypes
 public static class LinksApiTypes
 {
 	public sealed record LinksListResponse(
-		[property: JsonPropertyName("link-forums")] List<JsonElement>? LinkForums,
-		[property: JsonPropertyName("link-forums_total")] double? LinkForumsTotal,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("link-forums")] List<JsonElement> LinkForums,
+		[property: JsonPropertyName("link-forums_total")] double LinkForumsTotal,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record LinksGetResponse(
-		[property: JsonPropertyName("link-forum")] JsonElement? LinkForum,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("link-forum")] JsonElement LinkForum,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 }
 
@@ -2305,9 +2305,9 @@ public static class NavigationApiTypes
 	}
 
 	public sealed record NavigationListResponse(
-		[property: JsonPropertyName("elements")] List<NavigationListResponseElements>? Elements,
-		[property: JsonPropertyName("elements_count")] double? ElementsCount,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("elements")] List<NavigationListResponseElements> Elements,
+		[property: JsonPropertyName("elements_count")] double ElementsCount,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record NavigationListResponseElementsLinks(
@@ -2355,10 +2355,10 @@ public static class NotificationsApiTypes
 	}
 
 	public sealed record NotificationsListResponse(
-		[property: JsonPropertyName("notifications")] List<JsonElement>? Notifications,
-		[property: JsonPropertyName("notifications_total")] double? NotificationsTotal,
-		[property: JsonPropertyName("links")] NotificationsListResponseLinks? Links,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("notifications")] List<JsonElement> Notifications,
+		[property: JsonPropertyName("notifications_total")] double NotificationsTotal,
+		[property: JsonPropertyName("links")] NotificationsListResponseLinks Links,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record NotificationsListResponseLinks(
@@ -2369,9 +2369,9 @@ public static class NotificationsApiTypes
 );
 
 	public sealed record NotificationsGetResponse(
-		[property: JsonPropertyName("notification_id")] double? NotificationId,
-		[property: JsonPropertyName("notification")] JsonElement? Notification,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("notification_id")] double NotificationId,
+		[property: JsonPropertyName("notification")] JsonElement Notification,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record NotificationsReadBody
@@ -2468,9 +2468,9 @@ public static class OAuthApiTypes
 	}
 
 	public sealed record OAuthTokenResponse(
-		[property: JsonPropertyName("access_token")] string? AccessToken,
-		[property: JsonPropertyName("token_type")] string? TokenType,
-		[property: JsonPropertyName("expires_in")] double? ExpiresIn,
+		[property: JsonPropertyName("access_token")] string AccessToken,
+		[property: JsonPropertyName("token_type")] string TokenType,
+		[property: JsonPropertyName("expires_in")] double ExpiresIn,
 		[property: JsonPropertyName("refresh_token")] string? RefreshToken,
 		[property: JsonPropertyName("scope")] string? Scope
 	);
@@ -2491,9 +2491,9 @@ public static class PagesApiTypes
 	}
 
 	public sealed record PagesListResponse(
-		[property: JsonPropertyName("pages")] List<PagesListResponsePages>? Pages,
-		[property: JsonPropertyName("pages_total")] double? PagesTotal,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("pages")] List<PagesListResponsePages> Pages,
+		[property: JsonPropertyName("pages_total")] double PagesTotal,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PagesListResponsePagesLinks(
@@ -2517,8 +2517,8 @@ public static class PagesApiTypes
 );
 
 	public sealed record PagesGetResponse(
-		[property: JsonPropertyName("page")] PagesGetResponsePage? Page,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("page")] PagesGetResponsePage Page,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PagesGetResponsePageLinks(
@@ -2568,10 +2568,10 @@ public static class PostsApiTypes
 	}
 
 	public sealed record PostsListResponse(
-		[property: JsonPropertyName("posts")] List<JsonElement>? Posts,
-		[property: JsonPropertyName("thread")] JsonElement? Thread,
-		[property: JsonPropertyName("posts_total")] double? PostsTotal,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("posts")] List<JsonElement> Posts,
+		[property: JsonPropertyName("thread")] JsonElement Thread,
+		[property: JsonPropertyName("posts_total")] double PostsTotal,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PostsCreateBody
@@ -2588,13 +2588,13 @@ public static class PostsApiTypes
 	}
 
 	public sealed record PostsCreateResponse(
-		[property: JsonPropertyName("post")] JsonElement? Post,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("post")] JsonElement Post,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PostsGetResponse(
-		[property: JsonPropertyName("post")] JsonElement? Post,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("post")] JsonElement Post,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PostsEditBody
@@ -2605,8 +2605,8 @@ public static class PostsApiTypes
 	}
 
 	public sealed record PostsEditResponse(
-		[property: JsonPropertyName("post")] JsonElement? Post,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("post")] JsonElement Post,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PostsDeleteBody
@@ -2633,8 +2633,8 @@ public static class PostsApiTypes
 	}
 
 	public sealed record PostsLikesResponse(
-		[property: JsonPropertyName("users")] List<PostsLikesResponseUsers>? Users,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("users")] List<PostsLikesResponseUsers> Users,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PostsLikesResponseUsers(
@@ -2655,8 +2655,8 @@ public static class PostsApiTypes
 	);
 
 	public sealed record PostsReportReasonsResponse(
-		[property: JsonPropertyName("reasons")] List<string>? Reasons,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("reasons")] List<string> Reasons,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PostsReportBody
@@ -2686,8 +2686,8 @@ public static class PostsApiTypes
 	}
 
 	public sealed record PostsCommentsGetResponse(
-		[property: JsonPropertyName("comments")] List<JsonElement>? Comments,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("comments")] List<JsonElement> Comments,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PostsCommentsCreateBody
@@ -2701,8 +2701,8 @@ public static class PostsApiTypes
 	}
 
 	public sealed record PostsCommentsCreateResponse(
-		[property: JsonPropertyName("comment")] PostsCommentsCreateResponseComment? Comment,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("comment")] PostsCommentsCreateResponseComment Comment,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PostsCommentsCreateResponseCommentLinks(
@@ -2755,8 +2755,8 @@ public static class PostsApiTypes
 	}
 
 	public sealed record PostsCommentsEditResponse(
-		[property: JsonPropertyName("comment")] PostsCommentsEditResponseComment? Comment,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("comment")] PostsCommentsEditResponseComment Comment,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record PostsCommentsEditResponseCommentLinks(
@@ -2852,11 +2852,11 @@ public static class ProfilePostsApiTypes
 	}
 
 	public sealed record ProfilePostsListResponse(
-		[property: JsonPropertyName("profile_posts")] List<JsonElement>? ProfilePosts,
-		[property: JsonPropertyName("totalProfilePosts")] double? TotalProfilePosts,
-		[property: JsonPropertyName("canPostOnProfile")] JsonElement? CanPostOnProfile,
-		[property: JsonPropertyName("links")] ProfilePostsListResponseLinks? Links,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("profile_posts")] List<JsonElement> ProfilePosts,
+		[property: JsonPropertyName("totalProfilePosts")] double TotalProfilePosts,
+		[property: JsonPropertyName("canPostOnProfile")] JsonElement CanPostOnProfile,
+		[property: JsonPropertyName("links")] ProfilePostsListResponseLinks Links,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ProfilePostsListResponseLinks(
@@ -2866,8 +2866,8 @@ public static class ProfilePostsApiTypes
 );
 
 	public sealed record ProfilePostsGetResponse(
-		[property: JsonPropertyName("profile_post")] JsonElement? ProfilePost,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("profile_post")] JsonElement ProfilePost,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ProfilePostsEditBody
@@ -2881,8 +2881,8 @@ public static class ProfilePostsApiTypes
 	}
 
 	public sealed record ProfilePostsEditResponse(
-		[property: JsonPropertyName("profile_post")] ProfilePostsEditResponseProfilePost? ProfilePost,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("profile_post")] ProfilePostsEditResponseProfilePost ProfilePost,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ProfilePostsEditResponseProfilePostLinks(
@@ -2938,8 +2938,8 @@ public static class ProfilePostsApiTypes
 	);
 
 	public sealed record ProfilePostsReportReasonsResponse(
-		[property: JsonPropertyName("reasons")] List<string>? Reasons,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("reasons")] List<string> Reasons,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ProfilePostsReportBody
@@ -2965,8 +2965,8 @@ public static class ProfilePostsApiTypes
 	}
 
 	public sealed record ProfilePostsCreateResponse(
-		[property: JsonPropertyName("profile_post")] ProfilePostsCreateResponseProfilePost? ProfilePost,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("profile_post")] ProfilePostsCreateResponseProfilePost ProfilePost,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ProfilePostsCreateResponseProfilePostLinks(
@@ -3021,8 +3021,8 @@ public static class ProfilePostsApiTypes
 	);
 
 	public sealed record ProfilePostsLikesResponse(
-		[property: JsonPropertyName("users")] List<ProfilePostsLikesResponseUsers>? Users,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("users")] List<ProfilePostsLikesResponseUsers> Users,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ProfilePostsLikesResponseUsers(
@@ -3056,11 +3056,11 @@ public static class ProfilePostsApiTypes
 	}
 
 	public sealed record ProfilePostsCommentsListResponse(
-		[property: JsonPropertyName("comments")] List<JsonElement>? Comments,
-		[property: JsonPropertyName("comments_total")] double? CommentsTotal,
-		[property: JsonPropertyName("profile_post")] ProfilePostsCommentsListResponseProfilePost? ProfilePost,
-		[property: JsonPropertyName("timeline_user")] JsonElement? TimelineUser,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("comments")] List<JsonElement> Comments,
+		[property: JsonPropertyName("comments_total")] double CommentsTotal,
+		[property: JsonPropertyName("profile_post")] ProfilePostsCommentsListResponseProfilePost ProfilePost,
+		[property: JsonPropertyName("timeline_user")] JsonElement TimelineUser,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ProfilePostsCommentsListResponseProfilePostLinks(
@@ -3113,8 +3113,8 @@ public static class ProfilePostsApiTypes
 	}
 
 	public sealed record ProfilePostsCommentsCreateResponse(
-		[property: JsonPropertyName("comment")] ProfilePostsCommentsCreateResponseComment? Comment,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("comment")] ProfilePostsCommentsCreateResponseComment Comment,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ProfilePostsCommentsCreateResponseCommentLinks(
@@ -3156,8 +3156,8 @@ public static class ProfilePostsApiTypes
 	}
 
 	public sealed record ProfilePostsCommentsEditResponse(
-		[property: JsonPropertyName("comment")] ProfilePostsCommentsEditResponseComment? Comment,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("comment")] ProfilePostsCommentsEditResponseComment Comment,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ProfilePostsCommentsEditResponseCommentLinks(
@@ -3202,8 +3202,8 @@ public static class ProfilePostsApiTypes
 	);
 
 	public sealed record ProfilePostsCommentsGetResponse(
-		[property: JsonPropertyName("comment")] JsonElement? Comment,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("comment")] JsonElement Comment,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ProfilePostsCommentsReportBody
@@ -3243,14 +3243,17 @@ public static class SearchApiTypes
 		/// <summary>Number of results in a page.</summary>
 		[JsonPropertyName("limit")]
 		public long? Limit { get; init; }
+		/// <summary>The time in milliseconds (e.g. 1767214800) before last content date.</summary>
+		[JsonPropertyName("before")]
+		public long? Before { get; init; }
 	}
 
 	public sealed record SearchAllResponse(
-		[property: JsonPropertyName("data")] List<SearchAllResponseData>? Data,
-		[property: JsonPropertyName("data_total")] double? DataTotal,
-		[property: JsonPropertyName("users")] List<JsonElement>? Users,
-		[property: JsonPropertyName("links")] SearchAllResponseLinks? Links,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("data")] List<SearchAllResponseData> Data,
+		[property: JsonPropertyName("data_total")] double DataTotal,
+		[property: JsonPropertyName("users")] List<JsonElement> Users,
+		[property: JsonPropertyName("links")] SearchAllResponseLinks Links,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record SearchAllResponseDataFirstPostLinks(
@@ -3461,13 +3464,16 @@ public static class SearchApiTypes
 		/// <summary>Number of thread data to be returned.</summary>
 		[JsonPropertyName("data_limit")]
 		public long? DataLimit { get; init; }
+		/// <summary>The time in milliseconds (e.g. 1767214800) before last content date.</summary>
+		[JsonPropertyName("before")]
+		public long? Before { get; init; }
 	}
 
 	public sealed record SearchThreadsResponse(
-		[property: JsonPropertyName("data")] List<SearchThreadsResponseData>? Data,
-		[property: JsonPropertyName("data_total")] double? DataTotal,
-		[property: JsonPropertyName("links")] SearchThreadsResponseLinks? Links,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("data")] List<SearchThreadsResponseData> Data,
+		[property: JsonPropertyName("data_total")] double DataTotal,
+		[property: JsonPropertyName("links")] SearchThreadsResponseLinks Links,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record SearchThreadsResponseDataFirstPostLinks(
@@ -3623,13 +3629,16 @@ public static class SearchApiTypes
 		/// <summary>Number of post data to be returned.</summary>
 		[JsonPropertyName("data_limit")]
 		public long? DataLimit { get; init; }
+		/// <summary>The time in milliseconds (e.g. 1767214800) before last content date.</summary>
+		[JsonPropertyName("before")]
+		public long? Before { get; init; }
 	}
 
 	public sealed record SearchPostsResponse(
-		[property: JsonPropertyName("data")] List<SearchPostsResponseData>? Data,
-		[property: JsonPropertyName("data_total")] double? DataTotal,
-		[property: JsonPropertyName("links")] SearchPostsResponseLinks? Links,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("data")] List<SearchPostsResponseData> Data,
+		[property: JsonPropertyName("data_total")] double DataTotal,
+		[property: JsonPropertyName("links")] SearchPostsResponseLinks Links,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record SearchPostsResponseDataFirstPostLinks(
@@ -3771,8 +3780,8 @@ public static class SearchApiTypes
 	}
 
 	public sealed record SearchUsersResponse(
-		[property: JsonPropertyName("users")] List<JsonElement>? Users,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("users")] List<JsonElement> Users,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record SearchProfilePostsBody
@@ -3789,13 +3798,16 @@ public static class SearchApiTypes
 		/// <summary>Number of results in a page.</summary>
 		[JsonPropertyName("limit")]
 		public long? Limit { get; init; }
+		/// <summary>The time in milliseconds (e.g. 1767214800) before last content date.</summary>
+		[JsonPropertyName("before")]
+		public long? Before { get; init; }
 	}
 
 	public sealed record SearchProfilePostsResponse(
-		[property: JsonPropertyName("data")] List<SearchProfilePostsResponseData>? Data,
-		[property: JsonPropertyName("data_total")] double? DataTotal,
-		[property: JsonPropertyName("links")] SearchProfilePostsResponseLinks? Links,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("data")] List<SearchProfilePostsResponseData> Data,
+		[property: JsonPropertyName("data_total")] double DataTotal,
+		[property: JsonPropertyName("links")] SearchProfilePostsResponseLinks Links,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record SearchProfilePostsResponseDataLinks(
@@ -3863,10 +3875,10 @@ public static class SearchApiTypes
 	}
 
 	public sealed record SearchTaggedResponse(
-		[property: JsonPropertyName("data")] List<SearchTaggedResponseData>? Data,
-		[property: JsonPropertyName("data_total")] double? DataTotal,
-		[property: JsonPropertyName("search_tags")] JsonElement? SearchTags,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("data")] List<SearchTaggedResponseData> Data,
+		[property: JsonPropertyName("data_total")] double DataTotal,
+		[property: JsonPropertyName("search_tags")] JsonElement SearchTags,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record SearchTaggedResponseDataFirstPostLinks(
@@ -4017,10 +4029,10 @@ public static class SearchApiTypes
 	}
 
 	public sealed record SearchResultsResponse(
-		[property: JsonPropertyName("data")] List<SearchResultsResponseData>? Data,
-		[property: JsonPropertyName("data_total")] double? DataTotal,
-		[property: JsonPropertyName("search_tags")] JsonElement? SearchTags,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("data")] List<SearchResultsResponseData> Data,
+		[property: JsonPropertyName("data_total")] double DataTotal,
+		[property: JsonPropertyName("search_tags")] JsonElement SearchTags,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record SearchResultsResponseDataFirstPostLinks(
@@ -4166,8 +4178,8 @@ public static class SearchApiTypes
 public static class TagsApiTypes
 {
 	public sealed record TagsPopularResponse(
-		[property: JsonPropertyName("tags")] JsonElement? Tags,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("tags")] JsonElement Tags,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record TagsListParams
@@ -4181,10 +4193,10 @@ public static class TagsApiTypes
 	}
 
 	public sealed record TagsListResponse(
-		[property: JsonPropertyName("tags")] JsonElement? Tags,
-		[property: JsonPropertyName("tags_total")] double? TagsTotal,
-		[property: JsonPropertyName("links")] TagsListResponseLinks? Links,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("tags")] JsonElement Tags,
+		[property: JsonPropertyName("tags_total")] double TagsTotal,
+		[property: JsonPropertyName("links")] TagsListResponseLinks Links,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record TagsListResponseLinks(
@@ -4204,11 +4216,11 @@ public static class TagsApiTypes
 	}
 
 	public sealed record TagsGetResponse(
-		[property: JsonPropertyName("tag")] TagsGetResponseTag? Tag,
-		[property: JsonPropertyName("tagged")] List<TagsGetResponseTagged>? Tagged,
-		[property: JsonPropertyName("tagged_total")] double? TaggedTotal,
-		[property: JsonPropertyName("links")] TagsGetResponseLinks? Links,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("tag")] TagsGetResponseTag Tag,
+		[property: JsonPropertyName("tagged")] List<TagsGetResponseTagged> Tagged,
+		[property: JsonPropertyName("tagged_total")] double TaggedTotal,
+		[property: JsonPropertyName("links")] TagsGetResponseLinks Links,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record TagsGetResponseTagLinks(
@@ -4378,9 +4390,9 @@ public static class TagsApiTypes
 	}
 
 	public sealed record TagsFindResponse(
-		[property: JsonPropertyName("tags")] List<string>? Tags,
-		[property: JsonPropertyName("ids")] List<double>? Ids,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("tags")] List<string> Tags,
+		[property: JsonPropertyName("ids")] List<double> Ids,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 }
 
@@ -4447,11 +4459,11 @@ public static class ThreadsApiTypes
 	}
 
 	public sealed record ThreadsListResponse(
-		[property: JsonPropertyName("threads")] List<JsonElement>? Threads,
-		[property: JsonPropertyName("forum")] ThreadsListResponseForum? Forum,
-		[property: JsonPropertyName("threads_total")] double? ThreadsTotal,
-		[property: JsonPropertyName("links")] ThreadsListResponseLinks? Links,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("threads")] List<JsonElement> Threads,
+		[property: JsonPropertyName("forum")] ThreadsListResponseForum Forum,
+		[property: JsonPropertyName("threads_total")] double ThreadsTotal,
+		[property: JsonPropertyName("links")] ThreadsListResponseLinks Links,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ThreadsListResponseForumLinks(
@@ -4546,8 +4558,8 @@ public static class ThreadsApiTypes
 	}
 
 	public sealed record ThreadsCreateResponse(
-		[property: JsonPropertyName("thread")] JsonElement? Thread,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("thread")] JsonElement Thread,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ThreadsCreateContestBody
@@ -4633,8 +4645,8 @@ public static class ThreadsApiTypes
 	}
 
 	public sealed record ThreadsCreateContestResponse(
-		[property: JsonPropertyName("thread")] JsonElement? Thread,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("thread")] JsonElement Thread,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ThreadsClaimBody
@@ -4708,8 +4720,8 @@ public static class ThreadsApiTypes
 	}
 
 	public sealed record ThreadsClaimResponse(
-		[property: JsonPropertyName("thread")] JsonElement? Thread,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("thread")] JsonElement Thread,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ThreadsGetParams
@@ -4720,8 +4732,8 @@ public static class ThreadsApiTypes
 	}
 
 	public sealed record ThreadsGetResponse(
-		[property: JsonPropertyName("thread")] JsonElement? Thread,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("thread")] JsonElement Thread,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ThreadsEditBody
@@ -4756,8 +4768,8 @@ public static class ThreadsApiTypes
 	}
 
 	public sealed record ThreadsEditResponse(
-		[property: JsonPropertyName("thread")] JsonElement? Thread,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("thread")] JsonElement Thread,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ThreadsDeleteBody
@@ -4802,15 +4814,15 @@ public static class ThreadsApiTypes
 	);
 
 	public sealed record ThreadsBumpResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ThreadsHideResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ThreadsStarResponse(
@@ -4826,8 +4838,8 @@ public static class ThreadsApiTypes
 	);
 
 	public sealed record ThreadsFollowersResponse(
-		[property: JsonPropertyName("users")] List<ThreadsFollowersResponseUsers>? Users,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("users")] List<ThreadsFollowersResponseUsers> Users,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ThreadsFollowersResponseUsersFollow(
@@ -4871,9 +4883,9 @@ public static class ThreadsApiTypes
 	}
 
 	public sealed record ThreadsFollowedResponse(
-		[property: JsonPropertyName("threads")] List<ThreadsFollowedResponseThreads>? Threads,
-		[property: JsonPropertyName("threads_total")] double? ThreadsTotal,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("threads")] List<ThreadsFollowedResponseThreads> Threads,
+		[property: JsonPropertyName("threads_total")] double ThreadsTotal,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ThreadsFollowedResponseThreadsFirstPostLikeUsers(
@@ -5017,9 +5029,9 @@ public static class ThreadsApiTypes
 );
 
 	public sealed record ThreadsNavigationResponse(
-		[property: JsonPropertyName("elements")] List<ThreadsNavigationResponseElements>? Elements,
-		[property: JsonPropertyName("elements_count")] double? ElementsCount,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("elements")] List<ThreadsNavigationResponseElements> Elements,
+		[property: JsonPropertyName("elements_count")] double ElementsCount,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ThreadsNavigationResponseElementsLinks(
@@ -5050,8 +5062,8 @@ public static class ThreadsApiTypes
 );
 
 	public sealed record ThreadsPollGetResponse(
-		[property: JsonPropertyName("poll")] ThreadsPollGetResponsePoll? Poll,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("poll")] ThreadsPollGetResponsePoll Poll,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ThreadsPollGetResponsePollResponses(
@@ -5111,9 +5123,9 @@ public static class ThreadsApiTypes
 	}
 
 	public sealed record ThreadsUnreadResponse(
-		[property: JsonPropertyName("threads")] List<JsonElement>? Threads,
-		[property: JsonPropertyName("data")] List<ThreadsUnreadResponseData>? Data,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("threads")] List<JsonElement> Threads,
+		[property: JsonPropertyName("data")] List<ThreadsUnreadResponseData> Data,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ThreadsUnreadResponseDataFirstPostLikeUsers(
@@ -5268,9 +5280,9 @@ public static class ThreadsApiTypes
 	}
 
 	public sealed record ThreadsRecentResponse(
-		[property: JsonPropertyName("threads")] List<JsonElement>? Threads,
-		[property: JsonPropertyName("data")] List<ThreadsRecentResponseData>? Data,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("threads")] List<JsonElement> Threads,
+		[property: JsonPropertyName("data")] List<ThreadsRecentResponseData> Data,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ThreadsRecentResponseDataFirstPostLinks(
@@ -5424,10 +5436,10 @@ public static class UsersApiTypes
 	}
 
 	public sealed record UsersListResponse(
-		[property: JsonPropertyName("users")] List<JsonElement>? Users,
-		[property: JsonPropertyName("users_total")] double? UsersTotal,
-		[property: JsonPropertyName("links")] UsersListResponseLinks? Links,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("users")] List<JsonElement> Users,
+		[property: JsonPropertyName("users_total")] double UsersTotal,
+		[property: JsonPropertyName("links")] UsersListResponseLinks Links,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record UsersListResponseLinks(
@@ -5437,8 +5449,8 @@ public static class UsersApiTypes
 );
 
 	public sealed record UsersFieldsResponse(
-		[property: JsonPropertyName("fields")] List<UsersFieldsResponseFields>? Fields,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("fields")] List<UsersFieldsResponseFields> Fields,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record UsersFieldsResponseFields(
@@ -5456,15 +5468,15 @@ public static class UsersApiTypes
 		public string? Username { get; init; }
 		/// <summary>Custom fields to filter. Example: custom_fields[telegram]=telegramLogin.</summary>
 		[JsonPropertyName("custom_fields")]
-		public JsonElement? CustomFields { get; init; }
+		public Dictionary<string, string>? CustomFields { get; init; }
 		/// <summary>List of fields to include.</summary>
 		[JsonPropertyName("fields_include")]
 		public List<UsersFieldsInclude>? FieldsInclude { get; init; }
 	}
 
 	public sealed record UsersFindResponse(
-		[property: JsonPropertyName("users")] List<JsonElement>? Users,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("users")] List<JsonElement> Users,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record UsersGetParams
@@ -5475,8 +5487,8 @@ public static class UsersApiTypes
 	}
 
 	public sealed record UsersGetResponse(
-		[property: JsonPropertyName("user")] JsonElement? User,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("user")] JsonElement User,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record UsersEditBody
@@ -5558,7 +5570,7 @@ public static class UsersApiTypes
 		public AllowReceiveNewsFeed? AllowReceiveNewsFeed { get; init; }
 		/// <summary>Alert settings.</summary>
 		[JsonPropertyName("alert")]
-		public JsonElement? Alert { get; init; }
+		public Dictionary<string, bool?>? Alert { get; init; }
 		/// <summary>Custom user profile fields.</summary>
 		[JsonPropertyName("fields")]
 		public JsonElement? Fields { get; init; }
@@ -5581,9 +5593,9 @@ public static class UsersApiTypes
 	}
 
 	public sealed record UsersClaimsResponse(
-		[property: JsonPropertyName("claims")] List<UsersClaimsResponseClaims>? Claims,
-		[property: JsonPropertyName("stats")] UsersClaimsResponseStats? Stats,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("claims")] List<UsersClaimsResponseClaims> Claims,
+		[property: JsonPropertyName("stats")] UsersClaimsResponseStats Stats,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record UsersClaimsResponseClaims(
@@ -5634,9 +5646,9 @@ public static class UsersApiTypes
 	}
 
 	public sealed record UsersAvatarUploadResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record UsersAvatarDeleteResponse(
@@ -5659,9 +5671,9 @@ public static class UsersApiTypes
 	}
 
 	public sealed record UsersAvatarCropResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record UsersBackgroundUploadBody
@@ -5681,9 +5693,9 @@ public static class UsersApiTypes
 	}
 
 	public sealed record UsersBackgroundUploadResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record UsersBackgroundDeleteResponse(
@@ -5706,9 +5718,9 @@ public static class UsersApiTypes
 	}
 
 	public sealed record UsersBackgroundCropResponse(
-		[property: JsonPropertyName("status")] string? Status,
-		[property: JsonPropertyName("message")] string? Message,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("status")] string Status,
+		[property: JsonPropertyName("message")] string Message,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record UsersFollowersParams
@@ -5725,10 +5737,10 @@ public static class UsersApiTypes
 	}
 
 	public sealed record UsersFollowersResponse(
-		[property: JsonPropertyName("users")] List<UsersFollowersResponseUsers>? Users,
-		[property: JsonPropertyName("users_total")] double? UsersTotal,
-		[property: JsonPropertyName("links")] UsersFollowersResponseLinks? Links,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("users")] List<UsersFollowersResponseUsers> Users,
+		[property: JsonPropertyName("users_total")] double UsersTotal,
+		[property: JsonPropertyName("links")] UsersFollowersResponseLinks Links,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record UsersFollowersResponseUsersLinks(
@@ -5819,9 +5831,9 @@ public static class UsersApiTypes
 	}
 
 	public sealed record UsersFollowingsResponse(
-		[property: JsonPropertyName("users")] List<UsersFollowingsResponseUsers>? Users,
-		[property: JsonPropertyName("users_total")] double? UsersTotal,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("users")] List<UsersFollowingsResponseUsers> Users,
+		[property: JsonPropertyName("users_total")] double UsersTotal,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record UsersFollowingsResponseUsersLinks(
@@ -5924,12 +5936,12 @@ public static class UsersApiTypes
 	}
 
 	public sealed record UsersLikesResponse(
-		[property: JsonPropertyName("page")] double? Page,
-		[property: JsonPropertyName("perPage")] double? PerPage,
-		[property: JsonPropertyName("contentType")] string? ContentType,
-		[property: JsonPropertyName("totalLikes")] double? TotalLikes,
-		[property: JsonPropertyName("likes")] JsonElement? Likes,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("page")] double Page,
+		[property: JsonPropertyName("perPage")] double PerPage,
+		[property: JsonPropertyName("contentType")] string ContentType,
+		[property: JsonPropertyName("totalLikes")] double TotalLikes,
+		[property: JsonPropertyName("likes")] JsonElement Likes,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record UsersIgnoredParams
@@ -5940,8 +5952,8 @@ public static class UsersApiTypes
 	}
 
 	public sealed record UsersIgnoredResponse(
-		[property: JsonPropertyName("users")] List<UsersIgnoredResponseUsers>? Users,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("users")] List<UsersIgnoredResponseUsers> Users,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record UsersIgnoredResponseUsersCustomFields(
@@ -6058,11 +6070,11 @@ public static class UsersApiTypes
 	}
 
 	public sealed record UsersContentsResponse(
-		[property: JsonPropertyName("data")] List<UsersContentsResponseData>? Data,
-		[property: JsonPropertyName("data_total")] double? DataTotal,
-		[property: JsonPropertyName("user")] JsonElement? User,
-		[property: JsonPropertyName("links")] UsersContentsResponseLinks? Links,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("data")] List<UsersContentsResponseData> Data,
+		[property: JsonPropertyName("data_total")] double DataTotal,
+		[property: JsonPropertyName("user")] JsonElement User,
+		[property: JsonPropertyName("links")] UsersContentsResponseLinks Links,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record UsersContentsResponseDataLikeUsers(
@@ -6172,8 +6184,8 @@ public static class UsersApiTypes
 );
 
 	public sealed record UsersTrophiesResponse(
-		[property: JsonPropertyName("trophies")] List<UsersTrophiesResponseTrophies>? Trophies,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("trophies")] List<UsersTrophiesResponseTrophies> Trophies,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record UsersTrophiesResponseTrophies(
@@ -6184,8 +6196,8 @@ public static class UsersApiTypes
 );
 
 	public sealed record UsersSecretAnswerTypesResponse(
-		[property: JsonPropertyName("data")] List<UsersSecretAnswerTypesResponseData>? Data,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("data")] List<UsersSecretAnswerTypesResponseData> Data,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record UsersSecretAnswerTypesResponseData(
@@ -6194,9 +6206,9 @@ public static class UsersApiTypes
 );
 
 	public sealed record UsersSaResetResponse(
-		[property: JsonPropertyName("success")] JsonElement? Success,
-		[property: JsonPropertyName("waiting_time")] string? WaitingTime,
-		[property: JsonPropertyName("system_info")] JsonElement? SystemInfo
+		[property: JsonPropertyName("success")] JsonElement Success,
+		[property: JsonPropertyName("waiting_time")] string WaitingTime,
+		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record UsersSaCancelResetResponse(

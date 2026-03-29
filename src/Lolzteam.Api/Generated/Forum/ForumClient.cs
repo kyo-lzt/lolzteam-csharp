@@ -26,7 +26,7 @@ public sealed class AssetsApi
 			Path = "/css",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<AssetsApiTypes.AssetsCssResponse>(__result)!;
+		return JsonSerializer.Deserialize<AssetsApiTypes.AssetsCssResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -55,7 +55,7 @@ public sealed class BatchApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<BatchApiTypes.BatchExecuteResponse>(__result)!;
+		return JsonSerializer.Deserialize<BatchApiTypes.BatchExecuteResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -83,7 +83,7 @@ public sealed class CategoriesApi
 			Path = "/categories",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoriesApiTypes.CategoriesListResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoriesApiTypes.CategoriesListResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Category</summary>
@@ -101,7 +101,7 @@ public sealed class CategoriesApi
 			Method = "GET",
 			Path = $"/categories/{CategoryId}",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<CategoriesApiTypes.CategoriesGetResponse>(__result)!;
+		return JsonSerializer.Deserialize<CategoriesApiTypes.CategoriesGetResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -129,7 +129,7 @@ public sealed class ChatboxApi
 			Path = "/chatbox",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxIndexResponse>(__result)!;
+		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxIndexResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Chat Messages</summary>
@@ -147,7 +147,7 @@ public sealed class ChatboxApi
 			Path = "/chatbox/messages",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxGetMessagesResponse>(__result)!;
+		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxGetMessagesResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Create Chat Message</summary>
@@ -166,7 +166,7 @@ public sealed class ChatboxApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxPostMessageResponse>(__result)!;
+		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxPostMessageResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Edit Chat Message</summary>
@@ -185,7 +185,7 @@ public sealed class ChatboxApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxEditMessageResponse>(__result)!;
+		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxEditMessageResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Delete Chat Message</summary>
@@ -204,7 +204,7 @@ public sealed class ChatboxApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxDeleteMessageResponse>(__result)!;
+		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxDeleteMessageResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Chat Online</summary>
@@ -222,7 +222,7 @@ public sealed class ChatboxApi
 			Path = "/chatbox/messages/online",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxOnlineResponse>(__result)!;
+		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxOnlineResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Chat Message Report Reasons</summary>
@@ -240,7 +240,7 @@ public sealed class ChatboxApi
 			Path = "/chatbox/messages/report",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxReportReasonsResponse>(__result)!;
+		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxReportReasonsResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Report Chat Message</summary>
@@ -259,7 +259,7 @@ public sealed class ChatboxApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxReportResponse>(__result)!;
+		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxReportResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Chat Leaderboard</summary>
@@ -277,7 +277,7 @@ public sealed class ChatboxApi
 			Path = "/chatbox/messages/leaderboard",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxGetLeaderboardResponse>(__result)!;
+		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxGetLeaderboardResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Ignored Chat Users</summary>
@@ -294,7 +294,7 @@ public sealed class ChatboxApi
 			Method = "GET",
 			Path = "/chatbox/ignore",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxGetIgnoreResponse>(__result)!;
+		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxGetIgnoreResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Ignore Chat User</summary>
@@ -313,7 +313,7 @@ public sealed class ChatboxApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxPostIgnoreResponse>(__result)!;
+		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxPostIgnoreResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Unignore Chat User</summary>
@@ -332,7 +332,7 @@ public sealed class ChatboxApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxDeleteIgnoreResponse>(__result)!;
+		return JsonSerializer.Deserialize<ChatboxApiTypes.ChatboxDeleteIgnoreResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -361,7 +361,7 @@ public sealed class ConversationsApi
 			Path = "/conversations",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsListResponse>(__result)!;
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsListResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Create Conversation</summary>
@@ -381,7 +381,7 @@ public sealed class ConversationsApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsCreateResponse>(__result)!;
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsCreateResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Edit Conversation</summary>
@@ -400,7 +400,7 @@ public sealed class ConversationsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsUpdateResponse>(__result)!;
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsUpdateResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Leave Conversation</summary>
@@ -420,7 +420,7 @@ public sealed class ConversationsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsDeleteResponse>(__result)!;
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsDeleteResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Start Conversation</summary>
@@ -439,7 +439,7 @@ public sealed class ConversationsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsStartResponse>(__result)!;
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsStartResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Send Content To Saved Messages</summary>
@@ -458,7 +458,7 @@ public sealed class ConversationsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsSaveResponse>(__result)!;
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsSaveResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Conversation</summary>
@@ -477,7 +477,7 @@ public sealed class ConversationsApi
 			Method = "GET",
 			Path = $"/conversations/{ConversationId}",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsGetResponse>(__result)!;
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsGetResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Conversation Messages</summary>
@@ -497,7 +497,7 @@ public sealed class ConversationsApi
 			Path = $"/conversations/{ConversationId}/messages",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesListResponse>(__result)!;
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesListResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Create Conversation Message</summary>
@@ -518,7 +518,7 @@ public sealed class ConversationsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesCreateResponse>(__result)!;
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesCreateResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Search Conversations Messages</summary>
@@ -538,7 +538,7 @@ public sealed class ConversationsApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsSearchResponse>(__result)!;
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsSearchResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Conversation Message</summary>
@@ -557,7 +557,7 @@ public sealed class ConversationsApi
 			Method = "GET",
 			Path = $"/conversations/messages/{MessageId}",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesGetResponse>(__result)!;
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesGetResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Edit Conversation Message</summary>
@@ -579,7 +579,7 @@ public sealed class ConversationsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesEditResponse>(__result)!;
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesEditResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Delete Conversation Message</summary>
@@ -598,7 +598,7 @@ public sealed class ConversationsApi
 			Method = "DELETE",
 			Path = $"/conversations/{ConversationId}/messages/{MessageId}",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesDeleteResponse>(__result)!;
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesDeleteResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Invite Users to Conversation</summary>
@@ -619,7 +619,7 @@ public sealed class ConversationsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsInviteResponse>(__result)!;
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsInviteResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Kick User from Conversation</summary>
@@ -639,7 +639,7 @@ public sealed class ConversationsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsKickResponse>(__result)!;
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsKickResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Read a Conversation</summary>
@@ -657,7 +657,7 @@ public sealed class ConversationsApi
 			Method = "POST",
 			Path = $"/conversations/{ConversationId}/read",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsReadResponse>(__result)!;
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsReadResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Read All Conversations</summary>
@@ -675,7 +675,7 @@ public sealed class ConversationsApi
 			Method = "POST",
 			Path = "/conversations/read-all",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsReadAllResponse>(__result)!;
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsReadAllResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Stick Conversation Message</summary>
@@ -695,7 +695,7 @@ public sealed class ConversationsApi
 			Method = "POST",
 			Path = $"/conversations/{ConversationId}/messages/{MessageId}/stick",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesStickResponse>(__result)!;
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesStickResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Unstick Conversation Message</summary>
@@ -715,7 +715,7 @@ public sealed class ConversationsApi
 			Method = "DELETE",
 			Path = $"/conversations/{ConversationId}/messages/{MessageId}/stick",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesUnstickResponse>(__result)!;
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsMessagesUnstickResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Star Conversation</summary>
@@ -734,7 +734,7 @@ public sealed class ConversationsApi
 			Method = "POST",
 			Path = $"/conversations/{ConversationId}/star",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsStarResponse>(__result)!;
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsStarResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Unstar Conversation</summary>
@@ -753,7 +753,7 @@ public sealed class ConversationsApi
 			Method = "DELETE",
 			Path = $"/conversations/{ConversationId}/star",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsUnstarResponse>(__result)!;
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsUnstarResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Enable Conversation Alerts</summary>
@@ -772,7 +772,7 @@ public sealed class ConversationsApi
 			Method = "POST",
 			Path = $"/conversations/{ConversationId}/alerts",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsAlertsEnableResponse>(__result)!;
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsAlertsEnableResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Disable Conversation Alerts</summary>
@@ -791,7 +791,7 @@ public sealed class ConversationsApi
 			Method = "DELETE",
 			Path = $"/conversations/{ConversationId}/alerts",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsAlertsDisableResponse>(__result)!;
+		return JsonSerializer.Deserialize<ConversationsApiTypes.ConversationsAlertsDisableResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -816,7 +816,7 @@ public sealed class FormsApi
 			Path = "/forms",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<FormsApiTypes.FormsListResponse>(__result)!;
+		return JsonSerializer.Deserialize<FormsApiTypes.FormsListResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Create Form</summary>
@@ -832,7 +832,7 @@ public sealed class FormsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<FormsApiTypes.FormsCreateResponse>(__result)!;
+		return JsonSerializer.Deserialize<FormsApiTypes.FormsCreateResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -860,7 +860,7 @@ public sealed class ForumsApi
 			Path = "/forums",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ForumsApiTypes.ForumsListResponse>(__result)!;
+		return JsonSerializer.Deserialize<ForumsApiTypes.ForumsListResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Forums Tree</summary>
@@ -877,7 +877,7 @@ public sealed class ForumsApi
 			Method = "GET",
 			Path = "/forums/grouped",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ForumsApiTypes.ForumsGroupedResponse>(__result)!;
+		return JsonSerializer.Deserialize<ForumsApiTypes.ForumsGroupedResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Forum</summary>
@@ -895,7 +895,7 @@ public sealed class ForumsApi
 			Method = "GET",
 			Path = $"/forums/{ForumId}",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ForumsApiTypes.ForumsGetResponse>(__result)!;
+		return JsonSerializer.Deserialize<ForumsApiTypes.ForumsGetResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Followers</summary>
@@ -913,7 +913,7 @@ public sealed class ForumsApi
 			Method = "GET",
 			Path = $"/forums/{ForumId}/followers",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ForumsApiTypes.ForumsFollowersResponse>(__result)!;
+		return JsonSerializer.Deserialize<ForumsApiTypes.ForumsFollowersResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Follow Forum</summary>
@@ -933,7 +933,7 @@ public sealed class ForumsApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ForumsApiTypes.ForumsFollowResponse>(__result)!;
+		return JsonSerializer.Deserialize<ForumsApiTypes.ForumsFollowResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Unfollow Forum</summary>
@@ -951,7 +951,7 @@ public sealed class ForumsApi
 			Method = "DELETE",
 			Path = $"/forums/{ForumId}/followers",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ForumsApiTypes.ForumsUnfollowResponse>(__result)!;
+		return JsonSerializer.Deserialize<ForumsApiTypes.ForumsUnfollowResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Followed Forums</summary>
@@ -969,7 +969,7 @@ public sealed class ForumsApi
 			Path = "/forums/followed",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ForumsApiTypes.ForumsFollowedResponse>(__result)!;
+		return JsonSerializer.Deserialize<ForumsApiTypes.ForumsFollowedResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Feed Options</summary>
@@ -986,7 +986,7 @@ public sealed class ForumsApi
 			Method = "GET",
 			Path = "/forums/feed/options",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ForumsApiTypes.ForumsGetFeedOptionsResponse>(__result)!;
+		return JsonSerializer.Deserialize<ForumsApiTypes.ForumsGetFeedOptionsResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Edit Feed Options</summary>
@@ -1005,7 +1005,7 @@ public sealed class ForumsApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ForumsApiTypes.ForumsEditFeedOptionsResponse>(__result)!;
+		return JsonSerializer.Deserialize<ForumsApiTypes.ForumsEditFeedOptionsResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -1032,7 +1032,7 @@ public sealed class LinksApi
 			Method = "GET",
 			Path = "/link-forums",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<LinksApiTypes.LinksListResponse>(__result)!;
+		return JsonSerializer.Deserialize<LinksApiTypes.LinksListResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Link Forum</summary>
@@ -1050,7 +1050,7 @@ public sealed class LinksApi
 			Method = "GET",
 			Path = $"/link-forums/{LinkId}",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<LinksApiTypes.LinksGetResponse>(__result)!;
+		return JsonSerializer.Deserialize<LinksApiTypes.LinksGetResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -1078,7 +1078,7 @@ public sealed class NavigationApi
 			Path = "/navigation",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<NavigationApiTypes.NavigationListResponse>(__result)!;
+		return JsonSerializer.Deserialize<NavigationApiTypes.NavigationListResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -1106,7 +1106,7 @@ public sealed class NotificationsApi
 			Path = "/notifications",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<NotificationsApiTypes.NotificationsListResponse>(__result)!;
+		return JsonSerializer.Deserialize<NotificationsApiTypes.NotificationsListResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Notification</summary>
@@ -1124,7 +1124,7 @@ public sealed class NotificationsApi
 			Method = "GET",
 			Path = $"/notifications/{NotificationId}/content",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<NotificationsApiTypes.NotificationsGetResponse>(__result)!;
+		return JsonSerializer.Deserialize<NotificationsApiTypes.NotificationsGetResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Mark Notification Read</summary>
@@ -1143,7 +1143,7 @@ public sealed class NotificationsApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<NotificationsApiTypes.NotificationsReadResponse>(__result)!;
+		return JsonSerializer.Deserialize<NotificationsApiTypes.NotificationsReadResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -1175,7 +1175,7 @@ public sealed class OAuthApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Multipart,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<OAuthApiTypes.OAuthTokenResponse>(__result)!;
+		return JsonSerializer.Deserialize<OAuthApiTypes.OAuthTokenResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -1203,7 +1203,7 @@ public sealed class PagesApi
 			Path = "/pages",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PagesApiTypes.PagesListResponse>(__result)!;
+		return JsonSerializer.Deserialize<PagesApiTypes.PagesListResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Page</summary>
@@ -1221,7 +1221,7 @@ public sealed class PagesApi
 			Method = "GET",
 			Path = $"/pages/{PageId}",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PagesApiTypes.PagesGetResponse>(__result)!;
+		return JsonSerializer.Deserialize<PagesApiTypes.PagesGetResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -1249,7 +1249,7 @@ public sealed class PostsApi
 			Path = "/posts",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsListResponse>(__result)!;
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsListResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Create Post</summary>
@@ -1268,7 +1268,7 @@ public sealed class PostsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsCreateResponse>(__result)!;
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsCreateResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Post</summary>
@@ -1286,7 +1286,7 @@ public sealed class PostsApi
 			Method = "GET",
 			Path = $"/posts/{PostId}",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsGetResponse>(__result)!;
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsGetResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Edit Post</summary>
@@ -1306,7 +1306,7 @@ public sealed class PostsApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsEditResponse>(__result)!;
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsEditResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Delete Post</summary>
@@ -1326,7 +1326,7 @@ public sealed class PostsApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsDeleteResponse>(__result)!;
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsDeleteResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Post Likes</summary>
@@ -1345,7 +1345,7 @@ public sealed class PostsApi
 			Path = $"/posts/{PostId}/likes",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsLikesResponse>(__result)!;
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsLikesResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Like Post</summary>
@@ -1363,7 +1363,7 @@ public sealed class PostsApi
 			Method = "POST",
 			Path = $"/posts/{PostId}/likes",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsLikeResponse>(__result)!;
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsLikeResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Unlike Post</summary>
@@ -1381,7 +1381,7 @@ public sealed class PostsApi
 			Method = "DELETE",
 			Path = $"/posts/{PostId}/likes",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsUnlikeResponse>(__result)!;
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsUnlikeResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Post Report Reasons</summary>
@@ -1399,7 +1399,7 @@ public sealed class PostsApi
 			Method = "GET",
 			Path = $"/posts/{PostId}/report",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsReportReasonsResponse>(__result)!;
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsReportReasonsResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Report Post</summary>
@@ -1419,7 +1419,7 @@ public sealed class PostsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsReportResponse>(__result)!;
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsReportResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Post Comments</summary>
@@ -1437,7 +1437,7 @@ public sealed class PostsApi
 			Path = "/posts/comments",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsCommentsGetResponse>(__result)!;
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsCommentsGetResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Create Post Comment</summary>
@@ -1456,7 +1456,7 @@ public sealed class PostsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsCommentsCreateResponse>(__result)!;
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsCommentsCreateResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Edit Post Comment</summary>
@@ -1475,7 +1475,7 @@ public sealed class PostsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsCommentsEditResponse>(__result)!;
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsCommentsEditResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Delete Post Comment</summary>
@@ -1494,7 +1494,7 @@ public sealed class PostsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsCommentsDeleteResponse>(__result)!;
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsCommentsDeleteResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Report Post Comment</summary>
@@ -1513,7 +1513,7 @@ public sealed class PostsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<PostsApiTypes.PostsCommentsReportResponse>(__result)!;
+		return JsonSerializer.Deserialize<PostsApiTypes.PostsCommentsReportResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -1542,7 +1542,7 @@ public sealed class ProfilePostsApi
 			Path = $"/users/{UserId}/profile-posts",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsListResponse>(__result)!;
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsListResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Profile Post</summary>
@@ -1560,7 +1560,7 @@ public sealed class ProfilePostsApi
 			Method = "GET",
 			Path = $"/profile-posts/{ProfilePostId}",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsGetResponse>(__result)!;
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsGetResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Edit Profile Post</summary>
@@ -1580,7 +1580,7 @@ public sealed class ProfilePostsApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsEditResponse>(__result)!;
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsEditResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Delete Profile Post</summary>
@@ -1599,7 +1599,7 @@ public sealed class ProfilePostsApi
 			Path = $"/profile-posts/{ProfilePostId}",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsDeleteResponse>(__result)!;
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsDeleteResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Profile Post Report Reasons</summary>
@@ -1617,7 +1617,7 @@ public sealed class ProfilePostsApi
 			Method = "GET",
 			Path = $"/profile-posts/{ProfilePostId}/report",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsReportReasonsResponse>(__result)!;
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsReportReasonsResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Report a Profile Post</summary>
@@ -1637,7 +1637,7 @@ public sealed class ProfilePostsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsReportResponse>(__result)!;
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsReportResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Create Profile Post</summary>
@@ -1656,7 +1656,7 @@ public sealed class ProfilePostsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCreateResponse>(__result)!;
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCreateResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Stick Profile Post</summary>
@@ -1674,7 +1674,7 @@ public sealed class ProfilePostsApi
 			Method = "POST",
 			Path = $"/profile-posts/{ProfilePostId}/stick",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsStickResponse>(__result)!;
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsStickResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Unstick Profile Post</summary>
@@ -1692,7 +1692,7 @@ public sealed class ProfilePostsApi
 			Method = "DELETE",
 			Path = $"/profile-posts/{ProfilePostId}/stick",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsUnstickResponse>(__result)!;
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsUnstickResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Profile Post Likes</summary>
@@ -1710,7 +1710,7 @@ public sealed class ProfilePostsApi
 			Method = "GET",
 			Path = $"/profile-posts/{ProfilePostId}/likes",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsLikesResponse>(__result)!;
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsLikesResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Like Profile Post</summary>
@@ -1728,7 +1728,7 @@ public sealed class ProfilePostsApi
 			Method = "POST",
 			Path = $"/profile-posts/{ProfilePostId}/likes",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsLikeResponse>(__result)!;
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsLikeResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Unlike Profile Post</summary>
@@ -1746,7 +1746,7 @@ public sealed class ProfilePostsApi
 			Method = "DELETE",
 			Path = $"/profile-posts/{ProfilePostId}/likes",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsUnlikeResponse>(__result)!;
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsUnlikeResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Profile Post Comments</summary>
@@ -1764,7 +1764,7 @@ public sealed class ProfilePostsApi
 			Path = "/profile-posts/comments",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCommentsListResponse>(__result)!;
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCommentsListResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Create Profile Post Comment</summary>
@@ -1783,7 +1783,7 @@ public sealed class ProfilePostsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCommentsCreateResponse>(__result)!;
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCommentsCreateResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Edit Profile Post Comment</summary>
@@ -1802,7 +1802,7 @@ public sealed class ProfilePostsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCommentsEditResponse>(__result)!;
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCommentsEditResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Delete Profile Post Comment</summary>
@@ -1821,7 +1821,7 @@ public sealed class ProfilePostsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCommentsDeleteResponse>(__result)!;
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCommentsDeleteResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Profile Post Comment</summary>
@@ -1840,7 +1840,7 @@ public sealed class ProfilePostsApi
 			Method = "GET",
 			Path = $"/profile-posts/{ProfilePostId}/comments/{CommentId}",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCommentsGetResponse>(__result)!;
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCommentsGetResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Report a Profile Post Comment</summary>
@@ -1860,7 +1860,7 @@ public sealed class ProfilePostsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCommentsReportResponse>(__result)!;
+		return JsonSerializer.Deserialize<ProfilePostsApiTypes.ProfilePostsCommentsReportResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -1889,7 +1889,7 @@ public sealed class SearchApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<SearchApiTypes.SearchAllResponse>(__result)!;
+		return JsonSerializer.Deserialize<SearchApiTypes.SearchAllResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Search Thread</summary>
@@ -1908,7 +1908,7 @@ public sealed class SearchApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<SearchApiTypes.SearchThreadsResponse>(__result)!;
+		return JsonSerializer.Deserialize<SearchApiTypes.SearchThreadsResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Search Post</summary>
@@ -1927,7 +1927,7 @@ public sealed class SearchApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<SearchApiTypes.SearchPostsResponse>(__result)!;
+		return JsonSerializer.Deserialize<SearchApiTypes.SearchPostsResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Search Users</summary>
@@ -1946,7 +1946,7 @@ public sealed class SearchApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<SearchApiTypes.SearchUsersResponse>(__result)!;
+		return JsonSerializer.Deserialize<SearchApiTypes.SearchUsersResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Search Profile Posts</summary>
@@ -1965,7 +1965,7 @@ public sealed class SearchApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<SearchApiTypes.SearchProfilePostsResponse>(__result)!;
+		return JsonSerializer.Deserialize<SearchApiTypes.SearchProfilePostsResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Search Tagged</summary>
@@ -1984,7 +1984,7 @@ public sealed class SearchApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<SearchApiTypes.SearchTaggedResponse>(__result)!;
+		return JsonSerializer.Deserialize<SearchApiTypes.SearchTaggedResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Search Results</summary>
@@ -2003,7 +2003,7 @@ public sealed class SearchApi
 			Path = $"/search/{SearchId}/results",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<SearchApiTypes.SearchResultsResponse>(__result)!;
+		return JsonSerializer.Deserialize<SearchApiTypes.SearchResultsResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -2030,7 +2030,7 @@ public sealed class TagsApi
 			Method = "GET",
 			Path = "/tags",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<TagsApiTypes.TagsPopularResponse>(__result)!;
+		return JsonSerializer.Deserialize<TagsApiTypes.TagsPopularResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Tags</summary>
@@ -2048,7 +2048,7 @@ public sealed class TagsApi
 			Path = "/tags/list",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<TagsApiTypes.TagsListResponse>(__result)!;
+		return JsonSerializer.Deserialize<TagsApiTypes.TagsListResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Tagged Content</summary>
@@ -2067,7 +2067,7 @@ public sealed class TagsApi
 			Path = $"/tags/{TagId}",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<TagsApiTypes.TagsGetResponse>(__result)!;
+		return JsonSerializer.Deserialize<TagsApiTypes.TagsGetResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Filtered Content</summary>
@@ -2085,7 +2085,7 @@ public sealed class TagsApi
 			Path = "/tags/find",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<TagsApiTypes.TagsFindResponse>(__result)!;
+		return JsonSerializer.Deserialize<TagsApiTypes.TagsFindResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -2113,7 +2113,7 @@ public sealed class ThreadsApi
 			Path = "/threads",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsListResponse>(__result)!;
+		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsListResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Create Thread</summary>
@@ -2132,7 +2132,7 @@ public sealed class ThreadsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsCreateResponse>(__result)!;
+		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsCreateResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Create Contest</summary>
@@ -2151,7 +2151,7 @@ public sealed class ThreadsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsCreateContestResponse>(__result)!;
+		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsCreateContestResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Create Claim</summary>
@@ -2170,7 +2170,7 @@ public sealed class ThreadsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsClaimResponse>(__result)!;
+		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsClaimResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Thread</summary>
@@ -2189,7 +2189,7 @@ public sealed class ThreadsApi
 			Path = $"/threads/{ThreadId}",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsGetResponse>(__result)!;
+		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsGetResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Edit thread</summary>
@@ -2209,7 +2209,7 @@ public sealed class ThreadsApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsEditResponse>(__result)!;
+		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsEditResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Delete Thread</summary>
@@ -2229,7 +2229,7 @@ public sealed class ThreadsApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsDeleteResponse>(__result)!;
+		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsDeleteResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Move Thread</summary>
@@ -2249,7 +2249,7 @@ public sealed class ThreadsApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsMoveResponse>(__result)!;
+		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsMoveResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Bump Thread</summary>
@@ -2267,7 +2267,7 @@ public sealed class ThreadsApi
 			Method = "POST",
 			Path = $"/threads/{ThreadId}/bump",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsBumpResponse>(__result)!;
+		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsBumpResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Hide Thread</summary>
@@ -2285,7 +2285,7 @@ public sealed class ThreadsApi
 			Method = "POST",
 			Path = $"/threads/{ThreadId}/hide",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsHideResponse>(__result)!;
+		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsHideResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Bookmark Thread</summary>
@@ -2303,7 +2303,7 @@ public sealed class ThreadsApi
 			Method = "POST",
 			Path = $"/threads/{ThreadId}/star",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsStarResponse>(__result)!;
+		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsStarResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Unbookmark Thread</summary>
@@ -2321,7 +2321,7 @@ public sealed class ThreadsApi
 			Method = "DELETE",
 			Path = $"/threads/{ThreadId}/star",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsUnstarResponse>(__result)!;
+		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsUnstarResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Thread Followers</summary>
@@ -2339,7 +2339,7 @@ public sealed class ThreadsApi
 			Method = "GET",
 			Path = $"/threads/{ThreadId}/followers",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsFollowersResponse>(__result)!;
+		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsFollowersResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Follow Thread</summary>
@@ -2359,7 +2359,7 @@ public sealed class ThreadsApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsFollowResponse>(__result)!;
+		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsFollowResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Unfollow Thread</summary>
@@ -2377,7 +2377,7 @@ public sealed class ThreadsApi
 			Method = "DELETE",
 			Path = $"/threads/{ThreadId}/followers",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsUnfollowResponse>(__result)!;
+		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsUnfollowResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Followed Threads</summary>
@@ -2395,7 +2395,7 @@ public sealed class ThreadsApi
 			Path = "/threads/followed",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsFollowedResponse>(__result)!;
+		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsFollowedResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Navigation Elements</summary>
@@ -2413,7 +2413,7 @@ public sealed class ThreadsApi
 			Method = "GET",
 			Path = $"/threads/{ThreadId}/navigation",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsNavigationResponse>(__result)!;
+		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsNavigationResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Poll</summary>
@@ -2431,7 +2431,7 @@ public sealed class ThreadsApi
 			Method = "GET",
 			Path = $"/threads/{ThreadId}/poll",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsPollGetResponse>(__result)!;
+		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsPollGetResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Vote Poll</summary>
@@ -2451,7 +2451,7 @@ public sealed class ThreadsApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsPollVoteResponse>(__result)!;
+		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsPollVoteResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Unread Threads</summary>
@@ -2469,7 +2469,7 @@ public sealed class ThreadsApi
 			Path = "/threads/new",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsUnreadResponse>(__result)!;
+		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsUnreadResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Recent Threads</summary>
@@ -2487,7 +2487,7 @@ public sealed class ThreadsApi
 			Path = "/threads/recent",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsRecentResponse>(__result)!;
+		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsRecentResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Finish Contest</summary>
@@ -2505,7 +2505,7 @@ public sealed class ThreadsApi
 			Method = "POST",
 			Path = $"/contests/{ThreadId}/finish",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsFinishResponse>(__result)!;
+		return JsonSerializer.Deserialize<ThreadsApiTypes.ThreadsFinishResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
@@ -2533,7 +2533,7 @@ public sealed class UsersApi
 			Path = "/users",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<UsersApiTypes.UsersListResponse>(__result)!;
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersListResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get User Fields</summary>
@@ -2550,7 +2550,7 @@ public sealed class UsersApi
 			Method = "GET",
 			Path = "/users/fields",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<UsersApiTypes.UsersFieldsResponse>(__result)!;
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersFieldsResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Find Users</summary>
@@ -2568,7 +2568,7 @@ public sealed class UsersApi
 			Path = "/users/find",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<UsersApiTypes.UsersFindResponse>(__result)!;
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersFindResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get User</summary>
@@ -2588,7 +2588,7 @@ public sealed class UsersApi
 			Path = $"/users/{UserId}",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<UsersApiTypes.UsersGetResponse>(__result)!;
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersGetResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Edit User</summary>
@@ -2608,7 +2608,7 @@ public sealed class UsersApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<UsersApiTypes.UsersEditResponse>(__result)!;
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersEditResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get User Claims</summary>
@@ -2627,7 +2627,7 @@ public sealed class UsersApi
 			Path = $"/users/{UserId}/claims",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<UsersApiTypes.UsersClaimsResponse>(__result)!;
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersClaimsResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Upload Avatar</summary>
@@ -2654,7 +2654,7 @@ public sealed class UsersApi
 			BodyEncoding = BodyEncoding.Multipart,
 			ByteArrayFields = byteFields,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<UsersApiTypes.UsersAvatarUploadResponse>(__result)!;
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersAvatarUploadResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Delete Avatar</summary>
@@ -2672,7 +2672,7 @@ public sealed class UsersApi
 			Method = "DELETE",
 			Path = $"/users/{UserId}/avatar",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<UsersApiTypes.UsersAvatarDeleteResponse>(__result)!;
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersAvatarDeleteResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Crop Avatar</summary>
@@ -2692,7 +2692,7 @@ public sealed class UsersApi
 			Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<UsersApiTypes.UsersAvatarCropResponse>(__result)!;
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersAvatarCropResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Upload Background</summary>
@@ -2719,7 +2719,7 @@ public sealed class UsersApi
 			BodyEncoding = BodyEncoding.Multipart,
 			ByteArrayFields = byteFields,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<UsersApiTypes.UsersBackgroundUploadResponse>(__result)!;
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersBackgroundUploadResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Delete Background</summary>
@@ -2737,7 +2737,7 @@ public sealed class UsersApi
 			Method = "DELETE",
 			Path = $"/users/{UserId}/background",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<UsersApiTypes.UsersBackgroundDeleteResponse>(__result)!;
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersBackgroundDeleteResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Crop Background</summary>
@@ -2757,7 +2757,7 @@ public sealed class UsersApi
 			Body = JsonSerializer.SerializeToElement(body),
 			BodyEncoding = BodyEncoding.Json,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<UsersApiTypes.UsersBackgroundCropResponse>(__result)!;
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersBackgroundCropResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get User Followers</summary>
@@ -2776,7 +2776,7 @@ public sealed class UsersApi
 			Path = $"/users/{UserId}/followers",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<UsersApiTypes.UsersFollowersResponse>(__result)!;
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersFollowersResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Follow User</summary>
@@ -2794,7 +2794,7 @@ public sealed class UsersApi
 			Method = "POST",
 			Path = $"/users/{UserId}/followers",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<UsersApiTypes.UsersFollowResponse>(__result)!;
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersFollowResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Unfollow User</summary>
@@ -2812,7 +2812,7 @@ public sealed class UsersApi
 			Method = "DELETE",
 			Path = $"/users/{UserId}/followers",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<UsersApiTypes.UsersUnfollowResponse>(__result)!;
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersUnfollowResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Followed Users By User</summary>
@@ -2831,7 +2831,7 @@ public sealed class UsersApi
 			Path = $"/users/{UserId}/followings",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<UsersApiTypes.UsersFollowingsResponse>(__result)!;
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersFollowingsResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get User Likes</summary>
@@ -2850,7 +2850,7 @@ public sealed class UsersApi
 			Path = $"/users/{UserId}/likes",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<UsersApiTypes.UsersLikesResponse>(__result)!;
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersLikesResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Ignored Users</summary>
@@ -2868,7 +2868,7 @@ public sealed class UsersApi
 			Path = "/users/ignored",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<UsersApiTypes.UsersIgnoredResponse>(__result)!;
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersIgnoredResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Ignore User</summary>
@@ -2886,7 +2886,7 @@ public sealed class UsersApi
 			Method = "POST",
 			Path = $"/users/{UserId}/ignore",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<UsersApiTypes.UsersIgnoreResponse>(__result)!;
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersIgnoreResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Edit Ignoring Options</summary>
@@ -2905,7 +2905,7 @@ public sealed class UsersApi
 			Path = $"/users/{UserId}/ignore",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<UsersApiTypes.UsersIgnoreEditResponse>(__result)!;
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersIgnoreEditResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Unignore User</summary>
@@ -2923,7 +2923,7 @@ public sealed class UsersApi
 			Method = "DELETE",
 			Path = $"/users/{UserId}/ignore",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<UsersApiTypes.UsersUnignoreResponse>(__result)!;
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersUnignoreResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Contents</summary>
@@ -2942,7 +2942,7 @@ public sealed class UsersApi
 			Path = $"/users/{UserId}/timeline",
 			Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<UsersApiTypes.UsersContentsResponse>(__result)!;
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersContentsResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Trophies</summary>
@@ -2960,7 +2960,7 @@ public sealed class UsersApi
 			Method = "GET",
 			Path = $"/users/{UserId}/trophies",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<UsersApiTypes.UsersTrophiesResponse>(__result)!;
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersTrophiesResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Get Secret Answer Types</summary>
@@ -2977,7 +2977,7 @@ public sealed class UsersApi
 			Method = "GET",
 			Path = "/users/secret-answer/types",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<UsersApiTypes.UsersSecretAnswerTypesResponse>(__result)!;
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersSecretAnswerTypesResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Reset Secret Answer</summary>
@@ -2994,7 +2994,7 @@ public sealed class UsersApi
 			Method = "POST",
 			Path = "/account/secret-answer/reset",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<UsersApiTypes.UsersSaResetResponse>(__result)!;
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersSaResetResponse>(__result, JsonDefaults.Options)!;
 	}
 
 	/// <summary>Cancel Secret Answer Reset</summary>
@@ -3011,7 +3011,7 @@ public sealed class UsersApi
 			Method = "DELETE",
 			Path = "/account/secret-answer/reset",
 		}, cancellationToken).ConfigureAwait(false);
-		return JsonSerializer.Deserialize<UsersApiTypes.UsersSaCancelResetResponse>(__result)!;
+		return JsonSerializer.Deserialize<UsersApiTypes.UsersSaCancelResetResponse>(__result, JsonDefaults.Options)!;
 	}
 }
 
