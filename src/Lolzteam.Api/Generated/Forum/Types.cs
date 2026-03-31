@@ -233,7 +233,7 @@ public enum PrizeType
 [JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<ProfilePostsFieldsInclude>))]
 public enum ProfilePostsFieldsInclude
 {
-	[Lolzteam.Api.Runtime.EnumValue("*")] Value1243483987,
+	[Lolzteam.Api.Runtime.EnumValue("*")] Value882129986,
 	[Lolzteam.Api.Runtime.EnumValue("latest_comments")] LatestComments,
 }
 
@@ -267,7 +267,7 @@ public enum State
 [JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<ThreadsFieldsInclude>))]
 public enum ThreadsFieldsInclude
 {
-	[Lolzteam.Api.Runtime.EnumValue("*")] Value1243483987,
+	[Lolzteam.Api.Runtime.EnumValue("*")] Value882129986,
 	[Lolzteam.Api.Runtime.EnumValue("latest_posts")] LatestPosts,
 }
 
@@ -391,7 +391,7 @@ public enum TransferType
 [JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<UsersFieldsInclude>))]
 public enum UsersFieldsInclude
 {
-	[Lolzteam.Api.Runtime.EnumValue("*")] Value1243483987,
+	[Lolzteam.Api.Runtime.EnumValue("*")] Value882129986,
 	[Lolzteam.Api.Runtime.EnumValue("alerts")] Alerts,
 }
 
@@ -571,6 +571,54 @@ public sealed record Resp_ConversationModelLinks(
 	[property: JsonPropertyName("detail")] string? Detail,
 	[property: JsonPropertyName("messages")] string? Messages,
 	[property: JsonPropertyName("avatar")] string? Avatar
+);
+
+public sealed record Resp_ForumModel(
+	[property: JsonPropertyName("forum_id")] double ForumId,
+	[property: JsonPropertyName("forum_title")] string ForumTitle,
+	[property: JsonPropertyName("forum_description")] string ForumDescription,
+	[property: JsonPropertyName("forum_thread_count")] double ForumThreadCount,
+	[property: JsonPropertyName("forum_post_count")] double ForumPostCount,
+	[property: JsonPropertyName("parent_node_id")] double ParentNodeId,
+	[property: JsonPropertyName("node_type_id")] string NodeTypeId,
+	[property: JsonPropertyName("icon_content")] string IconContent,
+	[property: JsonPropertyName("active_icon_content")] string ActiveIconContent,
+	[property: JsonPropertyName("forum_rules_thread_id")] double ForumRulesThreadId,
+	[property: JsonPropertyName("forum_prefixes")] List<Resp_ForumModelForumPrefixes> ForumPrefixes,
+	[property: JsonPropertyName("thread_default_prefix_id")] double ThreadDefaultPrefixId,
+	[property: JsonPropertyName("thread_prefix_is_required")] JsonElement ThreadPrefixIsRequired,
+	[property: JsonPropertyName("links")] Resp_ForumModelLinks Links,
+	[property: JsonPropertyName("permissions")] Resp_ForumModelPermissions Permissions,
+	[property: JsonPropertyName("forum_is_followed")] JsonElement ForumIsFollowed
+);
+
+public sealed record Resp_ForumModelForumPrefixesGroupPrefixes(
+	[property: JsonPropertyName("prefix_id")] double? PrefixId,
+	[property: JsonPropertyName("css_class")] string? CssClass,
+	[property: JsonPropertyName("prefix_title")] string? PrefixTitle
+);
+
+public sealed record Resp_ForumModelForumPrefixes(
+	[property: JsonPropertyName("group_title")] string? GroupTitle,
+	[property: JsonPropertyName("group_prefixes")] List<Resp_ForumModelForumPrefixesGroupPrefixes>? GroupPrefixes
+);
+
+public sealed record Resp_ForumModelLinks(
+	[property: JsonPropertyName("permalink")] string? Permalink,
+	[property: JsonPropertyName("detail")] string? Detail,
+	[property: JsonPropertyName("sub-categories")] string? SubCategories,
+	[property: JsonPropertyName("sub-forums")] string? SubForums,
+	[property: JsonPropertyName("threads")] string? Threads,
+	[property: JsonPropertyName("followers")] string? Followers
+);
+
+public sealed record Resp_ForumModelPermissions(
+	[property: JsonPropertyName("view")] JsonElement? View,
+	[property: JsonPropertyName("edit")] JsonElement? Edit,
+	[property: JsonPropertyName("delete")] JsonElement? Delete,
+	[property: JsonPropertyName("create_thread")] JsonElement? CreateThread,
+	[property: JsonPropertyName("tag_thread")] JsonElement? TagThread,
+	[property: JsonPropertyName("follow")] JsonElement? Follow
 );
 
 public sealed record Resp_LinkModel(
@@ -793,14 +841,14 @@ public sealed record Resp_ThreadModel(
 	[property: JsonPropertyName("thread_is_followed")] JsonElement ThreadIsFollowed,
 	[property: JsonPropertyName("thread_is_starred")] JsonElement ThreadIsStarred,
 	[property: JsonPropertyName("first_post")] Resp_ThreadModelFirstPost FirstPost,
-	[property: JsonPropertyName("thread_prefixes")] List<JsonElement> ThreadPrefixes,
+	[property: JsonPropertyName("thread_prefixes")] List<Resp_ThreadModelThreadPrefixes> ThreadPrefixes,
 	[property: JsonPropertyName("thread_tags")] JsonElement ThreadTags,
 	[property: JsonPropertyName("links")] Resp_ThreadModelLinks Links,
 	[property: JsonPropertyName("permissions")] Resp_ThreadModelPermissions Permissions,
 	[property: JsonPropertyName("node_title")] string NodeTitle,
-	[property: JsonPropertyName("restrictions")] Resp_ThreadModelRestrictions Restrictions,
-	[property: JsonPropertyName("last_post")] Resp_ThreadModelLastPost LastPost,
-	[property: JsonPropertyName("contest")] Resp_ThreadModelContest Contest
+	[property: JsonPropertyName("forum")] JsonElement? Forum,
+	[property: JsonPropertyName("restrictions")] Resp_ThreadModelRestrictions? Restrictions,
+	[property: JsonPropertyName("contest")] Resp_ThreadModelContest? Contest
 );
 
 public sealed record Resp_ThreadModelFirstPostLinks(
@@ -847,6 +895,11 @@ public sealed record Resp_ThreadModelFirstPost(
 	[property: JsonPropertyName("thread_is_deleted")] JsonElement? ThreadIsDeleted
 );
 
+public sealed record Resp_ThreadModelThreadPrefixes(
+	[property: JsonPropertyName("prefix_id")] double? PrefixId,
+	[property: JsonPropertyName("prefix_title")] string? PrefixTitle
+);
+
 public sealed record Resp_ThreadModelLinks(
 	[property: JsonPropertyName("permalink")] string? Permalink,
 	[property: JsonPropertyName("detail")] string? Detail,
@@ -862,8 +915,8 @@ public sealed record Resp_ThreadModelLinks(
 public sealed record Resp_ThreadModelPermissionsBump(
 	[property: JsonPropertyName("can")] JsonElement? Can,
 	[property: JsonPropertyName("available_count")] double? AvailableCount,
-	[property: JsonPropertyName("error")] JsonElement? Error,
-	[property: JsonPropertyName("next_available_time")] JsonElement? NextAvailableTime
+	[property: JsonPropertyName("error")] string? Error,
+	[property: JsonPropertyName("next_available_time")] double? NextAvailableTime
 );
 
 public sealed record Resp_ThreadModelPermissions(
@@ -880,50 +933,6 @@ public sealed record Resp_ThreadModelPermissions(
 public sealed record Resp_ThreadModelRestrictions(
 	[property: JsonPropertyName("reply_delay")] double? ReplyDelay,
 	[property: JsonPropertyName("max_reply_count")] double? MaxReplyCount
-);
-
-public sealed record Resp_ThreadModelLastPostLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("thread")] string? Thread,
-	[property: JsonPropertyName("poster")] string? Poster,
-	[property: JsonPropertyName("likes")] string? Likes,
-	[property: JsonPropertyName("report")] string? Report,
-	[property: JsonPropertyName("poster_avatar")] string? PosterAvatar
-);
-
-public sealed record Resp_ThreadModelLastPostPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("reply")] JsonElement? Reply,
-	[property: JsonPropertyName("like")] JsonElement? Like,
-	[property: JsonPropertyName("report")] JsonElement? Report
-);
-
-public sealed record Resp_ThreadModelLastPost(
-	[property: JsonPropertyName("post_id")] double? PostId,
-	[property: JsonPropertyName("thread_id")] double? ThreadId,
-	[property: JsonPropertyName("poster_user_id")] double? PosterUserId,
-	[property: JsonPropertyName("poster_username")] string? PosterUsername,
-	[property: JsonPropertyName("poster_username_html")] string? PosterUsernameHtml,
-	[property: JsonPropertyName("post_create_date")] double? PostCreateDate,
-	[property: JsonPropertyName("post_body")] string? PostBody,
-	[property: JsonPropertyName("post_body_html")] string? PostBodyHtml,
-	[property: JsonPropertyName("post_body_plain_text")] string? PostBodyPlainText,
-	[property: JsonPropertyName("signature")] string? Signature,
-	[property: JsonPropertyName("signature_html")] string? SignatureHtml,
-	[property: JsonPropertyName("signature_plain_text")] string? SignaturePlainText,
-	[property: JsonPropertyName("post_like_count")] double? PostLikeCount,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("post_is_published")] JsonElement? PostIsPublished,
-	[property: JsonPropertyName("post_is_deleted")] JsonElement? PostIsDeleted,
-	[property: JsonPropertyName("post_update_date")] double? PostUpdateDate,
-	[property: JsonPropertyName("post_is_first_post")] JsonElement? PostIsFirstPost,
-	[property: JsonPropertyName("post_is_liked")] JsonElement? PostIsLiked,
-	[property: JsonPropertyName("links")] Resp_ThreadModelLastPostLinks? Links,
-	[property: JsonPropertyName("permissions")] Resp_ThreadModelLastPostPermissions? Permissions,
-	[property: JsonPropertyName("thread_is_deleted")] JsonElement? ThreadIsDeleted
 );
 
 public sealed record Resp_ThreadModelContestPermissions(
@@ -1932,51 +1941,9 @@ public static class FormsApiTypes
 
 	public sealed record FormsCreateResponse(
 		[property: JsonPropertyName("message")] string Message,
-		[property: JsonPropertyName("content")] FormsCreateResponseContent Content,
+		[property: JsonPropertyName("content")] JsonElement Content,
 		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
-
-	public sealed record FormsCreateResponseContentLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("followers")] string? Followers,
-	[property: JsonPropertyName("forum")] string? Forum,
-	[property: JsonPropertyName("posts")] string? Posts,
-	[property: JsonPropertyName("first_poster")] string? FirstPoster,
-	[property: JsonPropertyName("first_poster_avatar")] string? FirstPosterAvatar,
-	[property: JsonPropertyName("first_post")] string? FirstPost
-);
-
-	public sealed record FormsCreateResponseContentPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("follow")] JsonElement? Follow,
-	[property: JsonPropertyName("post")] JsonElement? Post
-);
-
-	public sealed record FormsCreateResponseContent(
-	[property: JsonPropertyName("thread_id")] double? ThreadId,
-	[property: JsonPropertyName("forum_id")] double? ForumId,
-	[property: JsonPropertyName("thread_title")] string? ThreadTitle,
-	[property: JsonPropertyName("thread_view_count")] double? ThreadViewCount,
-	[property: JsonPropertyName("creator_user_id")] double? CreatorUserId,
-	[property: JsonPropertyName("creator_username")] string? CreatorUsername,
-	[property: JsonPropertyName("creator_username_html")] string? CreatorUsernameHtml,
-	[property: JsonPropertyName("thread_create_date")] double? ThreadCreateDate,
-	[property: JsonPropertyName("thread_update_date")] double? ThreadUpdateDate,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("thread_post_count")] double? ThreadPostCount,
-	[property: JsonPropertyName("thread_is_published")] JsonElement? ThreadIsPublished,
-	[property: JsonPropertyName("thread_is_deleted")] JsonElement? ThreadIsDeleted,
-	[property: JsonPropertyName("thread_is_sticky")] JsonElement? ThreadIsSticky,
-	[property: JsonPropertyName("thread_is_closed")] JsonElement? ThreadIsClosed,
-	[property: JsonPropertyName("thread_is_followed")] JsonElement? ThreadIsFollowed,
-	[property: JsonPropertyName("thread_prefixes")] List<JsonElement>? ThreadPrefixes,
-	[property: JsonPropertyName("thread_tags")] List<JsonElement>? ThreadTags,
-	[property: JsonPropertyName("links")] FormsCreateResponseContentLinks? Links,
-	[property: JsonPropertyName("permissions")] FormsCreateResponseContentPermissions? Permissions,
-	[property: JsonPropertyName("node_title")] string? NodeTitle
-);
 }
 
 // ─── ForumsApi Types ────────────────────────────────────────
@@ -1997,53 +1964,11 @@ public static class ForumsApiTypes
 	}
 
 	public sealed record ForumsListResponse(
-		[property: JsonPropertyName("forums")] List<ForumsListResponseForums> Forums,
+		[property: JsonPropertyName("forums")] List<JsonElement> Forums,
 		[property: JsonPropertyName("forums_total")] double ForumsTotal,
 		[property: JsonPropertyName("tabs")] List<ForumsListResponseTabs> Tabs,
 		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
-
-	public sealed record ForumsListResponseForumsForumPrefixesGroupPrefixes(
-	[property: JsonPropertyName("prefix_id")] double? PrefixId,
-	[property: JsonPropertyName("prefix_title")] string? PrefixTitle
-);
-
-	public sealed record ForumsListResponseForumsForumPrefixes(
-	[property: JsonPropertyName("group_title")] string? GroupTitle,
-	[property: JsonPropertyName("group_prefixes")] List<ForumsListResponseForumsForumPrefixesGroupPrefixes>? GroupPrefixes
-);
-
-	public sealed record ForumsListResponseForumsLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("sub-categories")] string? SubCategories,
-	[property: JsonPropertyName("sub-forums")] string? SubForums,
-	[property: JsonPropertyName("threads")] string? Threads,
-	[property: JsonPropertyName("followers")] string? Followers
-);
-
-	public sealed record ForumsListResponseForumsPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("create_thread")] JsonElement? CreateThread,
-	[property: JsonPropertyName("tag_thread")] JsonElement? TagThread,
-	[property: JsonPropertyName("follow")] JsonElement? Follow
-);
-
-	public sealed record ForumsListResponseForums(
-	[property: JsonPropertyName("forum_id")] double? ForumId,
-	[property: JsonPropertyName("forum_title")] string? ForumTitle,
-	[property: JsonPropertyName("forum_description")] string? ForumDescription,
-	[property: JsonPropertyName("forum_thread_count")] double? ForumThreadCount,
-	[property: JsonPropertyName("forum_post_count")] double? ForumPostCount,
-	[property: JsonPropertyName("forum_prefixes")] List<ForumsListResponseForumsForumPrefixes>? ForumPrefixes,
-	[property: JsonPropertyName("thread_default_prefix_id")] double? ThreadDefaultPrefixId,
-	[property: JsonPropertyName("thread_prefix_is_required")] JsonElement? ThreadPrefixIsRequired,
-	[property: JsonPropertyName("links")] ForumsListResponseForumsLinks? Links,
-	[property: JsonPropertyName("permissions")] ForumsListResponseForumsPermissions? Permissions,
-	[property: JsonPropertyName("forum_is_followed")] JsonElement? ForumIsFollowed
-);
 
 	public sealed record ForumsListResponseTabs(
 	[property: JsonPropertyName("link_title")] string? LinkTitle,
@@ -2053,65 +1978,30 @@ public static class ForumsApiTypes
 );
 
 	public sealed record ForumsGroupedResponse(
-		[property: JsonPropertyName("data")] JsonElement Data,
+		[property: JsonPropertyName("data")] List<List<JsonElement>> Data,
 		[property: JsonPropertyName("tabs")] List<ForumsGroupedResponseTabs> Tabs,
 		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
 	public sealed record ForumsGroupedResponseTabs(
-	[property: JsonPropertyName("link_title")] string? LinkTitle,
-	[property: JsonPropertyName("isDefault")] JsonElement? IsDefault,
+	[property: JsonPropertyName("node_ids")] string? NodeIds,
 	[property: JsonPropertyName("title")] string? Title,
-	[property: JsonPropertyName("isHidden")] JsonElement? IsHidden
+	[property: JsonPropertyName("link_title")] string? LinkTitle,
+	[property: JsonPropertyName("isExtendedTab")] JsonElement? IsExtendedTab,
+	[property: JsonPropertyName("prefixes")] List<JsonElement>? Prefixes,
+	[property: JsonPropertyName("prefixes_not")] List<JsonElement>? PrefixesNot,
+	[property: JsonPropertyName("order")] string? Order,
+	[property: JsonPropertyName("direction")] string? Direction,
+	[property: JsonPropertyName("period")] string? Period,
+	[property: JsonPropertyName("state")] string? State,
+	[property: JsonPropertyName("q")] string? Q,
+	[property: JsonPropertyName("tabLink")] string? TabLink
 );
 
 	public sealed record ForumsGetResponse(
-		[property: JsonPropertyName("forum")] ForumsGetResponseForum Forum,
+		[property: JsonPropertyName("forum")] JsonElement Forum,
 		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
-
-	public sealed record ForumsGetResponseForumForumPrefixesGroupPrefixes(
-	[property: JsonPropertyName("prefix_id")] double? PrefixId,
-	[property: JsonPropertyName("prefix_title")] string? PrefixTitle
-);
-
-	public sealed record ForumsGetResponseForumForumPrefixes(
-	[property: JsonPropertyName("group_title")] string? GroupTitle,
-	[property: JsonPropertyName("group_prefixes")] List<ForumsGetResponseForumForumPrefixesGroupPrefixes>? GroupPrefixes
-);
-
-	public sealed record ForumsGetResponseForumLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("sub-categories")] string? SubCategories,
-	[property: JsonPropertyName("sub-forums")] string? SubForums,
-	[property: JsonPropertyName("threads")] string? Threads,
-	[property: JsonPropertyName("followers")] string? Followers
-);
-
-	public sealed record ForumsGetResponseForumPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("create_thread")] JsonElement? CreateThread,
-	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment,
-	[property: JsonPropertyName("tag_thread")] JsonElement? TagThread,
-	[property: JsonPropertyName("follow")] JsonElement? Follow
-);
-
-	public sealed record ForumsGetResponseForum(
-	[property: JsonPropertyName("forum_id")] double? ForumId,
-	[property: JsonPropertyName("forum_title")] string? ForumTitle,
-	[property: JsonPropertyName("forum_description")] string? ForumDescription,
-	[property: JsonPropertyName("forum_thread_count")] double? ForumThreadCount,
-	[property: JsonPropertyName("forum_post_count")] double? ForumPostCount,
-	[property: JsonPropertyName("forum_prefixes")] List<ForumsGetResponseForumForumPrefixes>? ForumPrefixes,
-	[property: JsonPropertyName("thread_default_prefix_id")] double? ThreadDefaultPrefixId,
-	[property: JsonPropertyName("thread_prefix_is_required")] JsonElement? ThreadPrefixIsRequired,
-	[property: JsonPropertyName("links")] ForumsGetResponseForumLinks? Links,
-	[property: JsonPropertyName("permissions")] ForumsGetResponseForumPermissions? Permissions,
-	[property: JsonPropertyName("forum_is_followed")] JsonElement? ForumIsFollowed
-);
 
 	public sealed record ForumsFollowersResponse(
 		[property: JsonPropertyName("users")] List<ForumsFollowersResponseUsers> Users,
@@ -2169,96 +2059,17 @@ public static class ForumsApiTypes
 	}
 
 	public sealed record ForumsFollowedResponse(
-		[property: JsonPropertyName("forums")] List<ForumsFollowedResponseForums> Forums,
+		[property: JsonPropertyName("forums")] List<JsonElement> Forums,
 		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
-	public sealed record ForumsFollowedResponseForumsForumPrefixesGroupPrefixes(
-	[property: JsonPropertyName("prefix_id")] double? PrefixId,
-	[property: JsonPropertyName("prefix_title")] string? PrefixTitle
-);
-
-	public sealed record ForumsFollowedResponseForumsForumPrefixes(
-	[property: JsonPropertyName("group_title")] string? GroupTitle,
-	[property: JsonPropertyName("group_prefixes")] List<ForumsFollowedResponseForumsForumPrefixesGroupPrefixes>? GroupPrefixes
-);
-
-	public sealed record ForumsFollowedResponseForumsLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("sub-categories")] string? SubCategories,
-	[property: JsonPropertyName("sub-forums")] string? SubForums,
-	[property: JsonPropertyName("threads")] string? Threads,
-	[property: JsonPropertyName("followers")] string? Followers
-);
-
-	public sealed record ForumsFollowedResponseForumsPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("create_thread")] JsonElement? CreateThread,
-	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment,
-	[property: JsonPropertyName("tag_thread")] JsonElement? TagThread,
-	[property: JsonPropertyName("follow")] JsonElement? Follow
-);
-
-	public sealed record ForumsFollowedResponseForumsFollow(
-	[property: JsonPropertyName("post")] JsonElement? Post,
-	[property: JsonPropertyName("alert")] JsonElement? Alert,
-	[property: JsonPropertyName("email")] JsonElement? Email
-);
-
-	public sealed record ForumsFollowedResponseForums(
-	[property: JsonPropertyName("forum_id")] double? ForumId,
-	[property: JsonPropertyName("forum_title")] string? ForumTitle,
-	[property: JsonPropertyName("forum_description")] string? ForumDescription,
-	[property: JsonPropertyName("forum_thread_count")] double? ForumThreadCount,
-	[property: JsonPropertyName("forum_post_count")] double? ForumPostCount,
-	[property: JsonPropertyName("forum_prefixes")] List<ForumsFollowedResponseForumsForumPrefixes>? ForumPrefixes,
-	[property: JsonPropertyName("thread_default_prefix_id")] double? ThreadDefaultPrefixId,
-	[property: JsonPropertyName("thread_prefix_is_required")] JsonElement? ThreadPrefixIsRequired,
-	[property: JsonPropertyName("links")] ForumsFollowedResponseForumsLinks? Links,
-	[property: JsonPropertyName("permissions")] ForumsFollowedResponseForumsPermissions? Permissions,
-	[property: JsonPropertyName("forum_is_followed")] JsonElement? ForumIsFollowed,
-	[property: JsonPropertyName("follow")] ForumsFollowedResponseForumsFollow? Follow
-);
-
 	public sealed record ForumsGetFeedOptionsResponse(
-		[property: JsonPropertyName("forums")] List<ForumsGetFeedOptionsResponseForums> Forums,
+		[property: JsonPropertyName("forums")] List<JsonElement> Forums,
 		[property: JsonPropertyName("excluded_forums_ids")] List<double> ExcludedForumsIds,
 		[property: JsonPropertyName("default_excluded_forums_ids")] List<double> DefaultExcludedForumsIds,
 		[property: JsonPropertyName("keywords")] string Keywords,
 		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
-
-	public sealed record ForumsGetFeedOptionsResponseForumsLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("sub-categories")] string? SubCategories,
-	[property: JsonPropertyName("sub-forums")] string? SubForums,
-	[property: JsonPropertyName("threads")] string? Threads,
-	[property: JsonPropertyName("followers")] string? Followers
-);
-
-	public sealed record ForumsGetFeedOptionsResponseForumsPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("create_thread")] JsonElement? CreateThread,
-	[property: JsonPropertyName("tag_thread")] JsonElement? TagThread,
-	[property: JsonPropertyName("follow")] JsonElement? Follow
-);
-
-	public sealed record ForumsGetFeedOptionsResponseForums(
-	[property: JsonPropertyName("forum_id")] double? ForumId,
-	[property: JsonPropertyName("forum_title")] string? ForumTitle,
-	[property: JsonPropertyName("forum_description")] string? ForumDescription,
-	[property: JsonPropertyName("parent_node_id")] double? ParentNodeId,
-	[property: JsonPropertyName("links")] ForumsGetFeedOptionsResponseForumsLinks? Links,
-	[property: JsonPropertyName("permissions")] ForumsGetFeedOptionsResponseForumsPermissions? Permissions,
-	[property: JsonPropertyName("forum_is_followed")] JsonElement? ForumIsFollowed,
-	[property: JsonPropertyName("has_children")] JsonElement? HasChildren
-);
 
 	public sealed record ForumsEditFeedOptionsBody
 	{
@@ -3249,192 +3060,12 @@ public static class SearchApiTypes
 	}
 
 	public sealed record SearchAllResponse(
-		[property: JsonPropertyName("data")] List<SearchAllResponseData> Data,
+		[property: JsonPropertyName("data")] List<JsonElement> Data,
 		[property: JsonPropertyName("data_total")] double DataTotal,
 		[property: JsonPropertyName("users")] List<JsonElement> Users,
 		[property: JsonPropertyName("links")] SearchAllResponseLinks Links,
 		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
-
-	public sealed record SearchAllResponseDataFirstPostLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("thread")] string? Thread,
-	[property: JsonPropertyName("poster")] string? Poster,
-	[property: JsonPropertyName("likes")] string? Likes,
-	[property: JsonPropertyName("report")] string? Report,
-	[property: JsonPropertyName("poster_avatar")] string? PosterAvatar
-);
-
-	public sealed record SearchAllResponseDataFirstPostPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("reply")] JsonElement? Reply,
-	[property: JsonPropertyName("like")] JsonElement? Like,
-	[property: JsonPropertyName("report")] JsonElement? Report
-);
-
-	public sealed record SearchAllResponseDataFirstPost(
-	[property: JsonPropertyName("post_id")] double? PostId,
-	[property: JsonPropertyName("thread_id")] double? ThreadId,
-	[property: JsonPropertyName("poster_user_id")] double? PosterUserId,
-	[property: JsonPropertyName("poster_username")] string? PosterUsername,
-	[property: JsonPropertyName("poster_username_html")] string? PosterUsernameHtml,
-	[property: JsonPropertyName("post_create_date")] double? PostCreateDate,
-	[property: JsonPropertyName("post_body")] string? PostBody,
-	[property: JsonPropertyName("post_body_html")] string? PostBodyHtml,
-	[property: JsonPropertyName("post_body_plain_text")] string? PostBodyPlainText,
-	[property: JsonPropertyName("signature")] string? Signature,
-	[property: JsonPropertyName("signature_html")] string? SignatureHtml,
-	[property: JsonPropertyName("signature_plain_text")] string? SignaturePlainText,
-	[property: JsonPropertyName("post_like_count")] double? PostLikeCount,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("post_is_published")] JsonElement? PostIsPublished,
-	[property: JsonPropertyName("post_is_deleted")] JsonElement? PostIsDeleted,
-	[property: JsonPropertyName("post_update_date")] double? PostUpdateDate,
-	[property: JsonPropertyName("post_is_first_post")] JsonElement? PostIsFirstPost,
-	[property: JsonPropertyName("post_is_liked")] JsonElement? PostIsLiked,
-	[property: JsonPropertyName("links")] SearchAllResponseDataFirstPostLinks? Links,
-	[property: JsonPropertyName("permissions")] SearchAllResponseDataFirstPostPermissions? Permissions,
-	[property: JsonPropertyName("thread_is_deleted")] JsonElement? ThreadIsDeleted
-);
-
-	public sealed record SearchAllResponseDataLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("followers")] string? Followers,
-	[property: JsonPropertyName("forum")] string? Forum,
-	[property: JsonPropertyName("posts")] string? Posts,
-	[property: JsonPropertyName("first_poster")] string? FirstPoster,
-	[property: JsonPropertyName("first_poster_avatar")] string? FirstPosterAvatar,
-	[property: JsonPropertyName("first_post")] string? FirstPost,
-	[property: JsonPropertyName("last_poster")] string? LastPoster,
-	[property: JsonPropertyName("last_post")] string? LastPost
-);
-
-	public sealed record SearchAllResponseDataPermissionsBump(
-	[property: JsonPropertyName("can")] JsonElement? Can,
-	[property: JsonPropertyName("available_count")] double? AvailableCount,
-	[property: JsonPropertyName("error")] JsonElement? Error,
-	[property: JsonPropertyName("next_available_time")] JsonElement? NextAvailableTime
-);
-
-	public sealed record SearchAllResponseDataPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("follow")] JsonElement? Follow,
-	[property: JsonPropertyName("post")] JsonElement? Post,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("bump")] SearchAllResponseDataPermissionsBump? Bump
-);
-
-	public sealed record SearchAllResponseDataForumLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("sub-categories")] string? SubCategories,
-	[property: JsonPropertyName("sub-forums")] string? SubForums,
-	[property: JsonPropertyName("threads")] string? Threads,
-	[property: JsonPropertyName("followers")] string? Followers
-);
-
-	public sealed record SearchAllResponseDataForumPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("create_thread")] JsonElement? CreateThread,
-	[property: JsonPropertyName("tag_thread")] JsonElement? TagThread,
-	[property: JsonPropertyName("follow")] JsonElement? Follow
-);
-
-	public sealed record SearchAllResponseDataForum(
-	[property: JsonPropertyName("forum_id")] double? ForumId,
-	[property: JsonPropertyName("forum_title")] string? ForumTitle,
-	[property: JsonPropertyName("forum_description")] string? ForumDescription,
-	[property: JsonPropertyName("forum_thread_count")] double? ForumThreadCount,
-	[property: JsonPropertyName("forum_post_count")] double? ForumPostCount,
-	[property: JsonPropertyName("parent_node_id")] double? ParentNodeId,
-	[property: JsonPropertyName("forum_prefixes")] List<JsonElement>? ForumPrefixes,
-	[property: JsonPropertyName("thread_default_prefix_id")] double? ThreadDefaultPrefixId,
-	[property: JsonPropertyName("thread_prefix_is_required")] JsonElement? ThreadPrefixIsRequired,
-	[property: JsonPropertyName("links")] SearchAllResponseDataForumLinks? Links,
-	[property: JsonPropertyName("permissions")] SearchAllResponseDataForumPermissions? Permissions,
-	[property: JsonPropertyName("forum_is_followed")] JsonElement? ForumIsFollowed
-);
-
-	public sealed record SearchAllResponseDataLastPostLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("thread")] string? Thread,
-	[property: JsonPropertyName("poster")] string? Poster,
-	[property: JsonPropertyName("likes")] string? Likes,
-	[property: JsonPropertyName("report")] string? Report,
-	[property: JsonPropertyName("poster_avatar")] string? PosterAvatar
-);
-
-	public sealed record SearchAllResponseDataLastPostPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("reply")] JsonElement? Reply,
-	[property: JsonPropertyName("like")] JsonElement? Like,
-	[property: JsonPropertyName("report")] JsonElement? Report
-);
-
-	public sealed record SearchAllResponseDataLastPost(
-	[property: JsonPropertyName("post_id")] double? PostId,
-	[property: JsonPropertyName("thread_id")] double? ThreadId,
-	[property: JsonPropertyName("poster_user_id")] double? PosterUserId,
-	[property: JsonPropertyName("poster_username")] string? PosterUsername,
-	[property: JsonPropertyName("poster_username_html")] string? PosterUsernameHtml,
-	[property: JsonPropertyName("post_create_date")] double? PostCreateDate,
-	[property: JsonPropertyName("post_body")] string? PostBody,
-	[property: JsonPropertyName("post_body_html")] string? PostBodyHtml,
-	[property: JsonPropertyName("post_body_plain_text")] string? PostBodyPlainText,
-	[property: JsonPropertyName("signature")] string? Signature,
-	[property: JsonPropertyName("signature_html")] string? SignatureHtml,
-	[property: JsonPropertyName("signature_plain_text")] string? SignaturePlainText,
-	[property: JsonPropertyName("post_like_count")] double? PostLikeCount,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("post_is_published")] JsonElement? PostIsPublished,
-	[property: JsonPropertyName("post_is_deleted")] JsonElement? PostIsDeleted,
-	[property: JsonPropertyName("post_update_date")] double? PostUpdateDate,
-	[property: JsonPropertyName("post_is_first_post")] JsonElement? PostIsFirstPost,
-	[property: JsonPropertyName("post_is_liked")] JsonElement? PostIsLiked,
-	[property: JsonPropertyName("links")] SearchAllResponseDataLastPostLinks? Links,
-	[property: JsonPropertyName("permissions")] SearchAllResponseDataLastPostPermissions? Permissions,
-	[property: JsonPropertyName("thread_is_deleted")] JsonElement? ThreadIsDeleted
-);
-
-	public sealed record SearchAllResponseData(
-	[property: JsonPropertyName("content_type")] string? ContentType,
-	[property: JsonPropertyName("content_id")] string? ContentId,
-	[property: JsonPropertyName("thread_id")] double? ThreadId,
-	[property: JsonPropertyName("forum_id")] double? ForumId,
-	[property: JsonPropertyName("thread_title")] string? ThreadTitle,
-	[property: JsonPropertyName("thread_view_count")] double? ThreadViewCount,
-	[property: JsonPropertyName("creator_user_id")] double? CreatorUserId,
-	[property: JsonPropertyName("creator_username")] string? CreatorUsername,
-	[property: JsonPropertyName("creator_username_html")] string? CreatorUsernameHtml,
-	[property: JsonPropertyName("thread_create_date")] double? ThreadCreateDate,
-	[property: JsonPropertyName("thread_update_date")] double? ThreadUpdateDate,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("thread_post_count")] double? ThreadPostCount,
-	[property: JsonPropertyName("thread_is_published")] JsonElement? ThreadIsPublished,
-	[property: JsonPropertyName("thread_is_deleted")] JsonElement? ThreadIsDeleted,
-	[property: JsonPropertyName("thread_is_sticky")] JsonElement? ThreadIsSticky,
-	[property: JsonPropertyName("thread_is_closed")] JsonElement? ThreadIsClosed,
-	[property: JsonPropertyName("thread_is_followed")] JsonElement? ThreadIsFollowed,
-	[property: JsonPropertyName("thread_is_starred")] JsonElement? ThreadIsStarred,
-	[property: JsonPropertyName("first_post")] SearchAllResponseDataFirstPost? FirstPost,
-	[property: JsonPropertyName("thread_prefixes")] List<JsonElement>? ThreadPrefixes,
-	[property: JsonPropertyName("thread_tags")] List<JsonElement>? ThreadTags,
-	[property: JsonPropertyName("links")] SearchAllResponseDataLinks? Links,
-	[property: JsonPropertyName("permissions")] SearchAllResponseDataPermissions? Permissions,
-	[property: JsonPropertyName("node_title")] string? NodeTitle,
-	[property: JsonPropertyName("forum")] SearchAllResponseDataForum? Forum,
-	[property: JsonPropertyName("last_post")] SearchAllResponseDataLastPost? LastPost
-);
 
 	public sealed record SearchAllResponseLinks(
 	[property: JsonPropertyName("pages")] double? Pages,
@@ -3470,136 +3101,11 @@ public static class SearchApiTypes
 	}
 
 	public sealed record SearchThreadsResponse(
-		[property: JsonPropertyName("data")] List<SearchThreadsResponseData> Data,
+		[property: JsonPropertyName("data")] List<JsonElement> Data,
 		[property: JsonPropertyName("data_total")] double DataTotal,
 		[property: JsonPropertyName("links")] SearchThreadsResponseLinks Links,
 		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
-
-	public sealed record SearchThreadsResponseDataFirstPostLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("thread")] string? Thread,
-	[property: JsonPropertyName("poster")] string? Poster,
-	[property: JsonPropertyName("likes")] string? Likes,
-	[property: JsonPropertyName("report")] string? Report,
-	[property: JsonPropertyName("attachments")] string? Attachments,
-	[property: JsonPropertyName("poster_avatar")] string? PosterAvatar
-);
-
-	public sealed record SearchThreadsResponseDataFirstPostPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("reply")] JsonElement? Reply,
-	[property: JsonPropertyName("like")] JsonElement? Like,
-	[property: JsonPropertyName("report")] JsonElement? Report,
-	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment
-);
-
-	public sealed record SearchThreadsResponseDataFirstPost(
-	[property: JsonPropertyName("post_id")] double? PostId,
-	[property: JsonPropertyName("thread_id")] double? ThreadId,
-	[property: JsonPropertyName("poster_user_id")] double? PosterUserId,
-	[property: JsonPropertyName("poster_username")] string? PosterUsername,
-	[property: JsonPropertyName("poster_username_html")] string? PosterUsernameHtml,
-	[property: JsonPropertyName("post_create_date")] double? PostCreateDate,
-	[property: JsonPropertyName("post_body")] string? PostBody,
-	[property: JsonPropertyName("post_body_html")] string? PostBodyHtml,
-	[property: JsonPropertyName("post_body_plain_text")] string? PostBodyPlainText,
-	[property: JsonPropertyName("signature")] string? Signature,
-	[property: JsonPropertyName("signature_html")] string? SignatureHtml,
-	[property: JsonPropertyName("signature_plain_text")] string? SignaturePlainText,
-	[property: JsonPropertyName("post_like_count")] double? PostLikeCount,
-	[property: JsonPropertyName("post_attachment_count")] double? PostAttachmentCount,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("post_is_published")] JsonElement? PostIsPublished,
-	[property: JsonPropertyName("post_is_deleted")] JsonElement? PostIsDeleted,
-	[property: JsonPropertyName("post_update_date")] double? PostUpdateDate,
-	[property: JsonPropertyName("post_is_first_post")] JsonElement? PostIsFirstPost,
-	[property: JsonPropertyName("links")] SearchThreadsResponseDataFirstPostLinks? Links,
-	[property: JsonPropertyName("permissions")] SearchThreadsResponseDataFirstPostPermissions? Permissions
-);
-
-	public sealed record SearchThreadsResponseDataLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("followers")] string? Followers,
-	[property: JsonPropertyName("forum")] string? Forum,
-	[property: JsonPropertyName("posts")] string? Posts,
-	[property: JsonPropertyName("first_poster")] string? FirstPoster,
-	[property: JsonPropertyName("first_poster_avatar")] string? FirstPosterAvatar,
-	[property: JsonPropertyName("first_post")] string? FirstPost,
-	[property: JsonPropertyName("last_post")] string? LastPost
-);
-
-	public sealed record SearchThreadsResponseDataPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("follow")] JsonElement? Follow,
-	[property: JsonPropertyName("post")] JsonElement? Post,
-	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment,
-	[property: JsonPropertyName("edit")] JsonElement? Edit
-);
-
-	public sealed record SearchThreadsResponseDataForumLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("sub-categories")] string? SubCategories,
-	[property: JsonPropertyName("sub-forums")] string? SubForums,
-	[property: JsonPropertyName("threads")] string? Threads,
-	[property: JsonPropertyName("followers")] string? Followers
-);
-
-	public sealed record SearchThreadsResponseDataForumPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("create_thread")] JsonElement? CreateThread,
-	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment,
-	[property: JsonPropertyName("tag_thread")] JsonElement? TagThread,
-	[property: JsonPropertyName("follow")] JsonElement? Follow
-);
-
-	public sealed record SearchThreadsResponseDataForum(
-	[property: JsonPropertyName("forum_id")] double? ForumId,
-	[property: JsonPropertyName("forum_title")] string? ForumTitle,
-	[property: JsonPropertyName("forum_description")] string? ForumDescription,
-	[property: JsonPropertyName("forum_thread_count")] double? ForumThreadCount,
-	[property: JsonPropertyName("forum_post_count")] double? ForumPostCount,
-	[property: JsonPropertyName("forum_prefixes")] List<JsonElement>? ForumPrefixes,
-	[property: JsonPropertyName("thread_default_prefix_id")] double? ThreadDefaultPrefixId,
-	[property: JsonPropertyName("thread_prefix_is_required")] JsonElement? ThreadPrefixIsRequired,
-	[property: JsonPropertyName("links")] SearchThreadsResponseDataForumLinks? Links,
-	[property: JsonPropertyName("permissions")] SearchThreadsResponseDataForumPermissions? Permissions,
-	[property: JsonPropertyName("forum_is_followed")] JsonElement? ForumIsFollowed
-);
-
-	public sealed record SearchThreadsResponseData(
-	[property: JsonPropertyName("content_type")] string? ContentType,
-	[property: JsonPropertyName("content_id")] double? ContentId,
-	[property: JsonPropertyName("thread_id")] double? ThreadId,
-	[property: JsonPropertyName("forum_id")] double? ForumId,
-	[property: JsonPropertyName("thread_title")] string? ThreadTitle,
-	[property: JsonPropertyName("thread_view_count")] double? ThreadViewCount,
-	[property: JsonPropertyName("creator_user_id")] double? CreatorUserId,
-	[property: JsonPropertyName("creator_username")] string? CreatorUsername,
-	[property: JsonPropertyName("creator_username_html")] string? CreatorUsernameHtml,
-	[property: JsonPropertyName("thread_create_date")] double? ThreadCreateDate,
-	[property: JsonPropertyName("thread_update_date")] double? ThreadUpdateDate,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("thread_post_count")] double? ThreadPostCount,
-	[property: JsonPropertyName("thread_is_published")] JsonElement? ThreadIsPublished,
-	[property: JsonPropertyName("thread_is_deleted")] JsonElement? ThreadIsDeleted,
-	[property: JsonPropertyName("thread_is_sticky")] JsonElement? ThreadIsSticky,
-	[property: JsonPropertyName("thread_is_followed")] JsonElement? ThreadIsFollowed,
-	[property: JsonPropertyName("first_post")] SearchThreadsResponseDataFirstPost? FirstPost,
-	[property: JsonPropertyName("thread_prefixes")] List<JsonElement>? ThreadPrefixes,
-	[property: JsonPropertyName("thread_tags")] List<JsonElement>? ThreadTags,
-	[property: JsonPropertyName("links")] SearchThreadsResponseDataLinks? Links,
-	[property: JsonPropertyName("permissions")] SearchThreadsResponseDataPermissions? Permissions,
-	[property: JsonPropertyName("forum")] SearchThreadsResponseDataForum? Forum
-);
 
 	public sealed record SearchThreadsResponseLinks(
 	[property: JsonPropertyName("pages")] double? Pages,
@@ -3635,136 +3141,11 @@ public static class SearchApiTypes
 	}
 
 	public sealed record SearchPostsResponse(
-		[property: JsonPropertyName("data")] List<SearchPostsResponseData> Data,
+		[property: JsonPropertyName("data")] List<JsonElement> Data,
 		[property: JsonPropertyName("data_total")] double DataTotal,
 		[property: JsonPropertyName("links")] SearchPostsResponseLinks Links,
 		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
-
-	public sealed record SearchPostsResponseDataFirstPostLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("thread")] string? Thread,
-	[property: JsonPropertyName("poster")] string? Poster,
-	[property: JsonPropertyName("likes")] string? Likes,
-	[property: JsonPropertyName("report")] string? Report,
-	[property: JsonPropertyName("attachments")] string? Attachments,
-	[property: JsonPropertyName("poster_avatar")] string? PosterAvatar
-);
-
-	public sealed record SearchPostsResponseDataFirstPostPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("reply")] JsonElement? Reply,
-	[property: JsonPropertyName("like")] JsonElement? Like,
-	[property: JsonPropertyName("report")] JsonElement? Report,
-	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment
-);
-
-	public sealed record SearchPostsResponseDataFirstPost(
-	[property: JsonPropertyName("post_id")] double? PostId,
-	[property: JsonPropertyName("thread_id")] double? ThreadId,
-	[property: JsonPropertyName("poster_user_id")] double? PosterUserId,
-	[property: JsonPropertyName("poster_username")] string? PosterUsername,
-	[property: JsonPropertyName("poster_username_html")] string? PosterUsernameHtml,
-	[property: JsonPropertyName("post_create_date")] double? PostCreateDate,
-	[property: JsonPropertyName("post_body")] string? PostBody,
-	[property: JsonPropertyName("post_body_html")] string? PostBodyHtml,
-	[property: JsonPropertyName("post_body_plain_text")] string? PostBodyPlainText,
-	[property: JsonPropertyName("signature")] string? Signature,
-	[property: JsonPropertyName("signature_html")] string? SignatureHtml,
-	[property: JsonPropertyName("signature_plain_text")] string? SignaturePlainText,
-	[property: JsonPropertyName("post_like_count")] double? PostLikeCount,
-	[property: JsonPropertyName("post_attachment_count")] double? PostAttachmentCount,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("post_is_published")] JsonElement? PostIsPublished,
-	[property: JsonPropertyName("post_is_deleted")] JsonElement? PostIsDeleted,
-	[property: JsonPropertyName("post_update_date")] double? PostUpdateDate,
-	[property: JsonPropertyName("post_is_first_post")] JsonElement? PostIsFirstPost,
-	[property: JsonPropertyName("links")] SearchPostsResponseDataFirstPostLinks? Links,
-	[property: JsonPropertyName("permissions")] SearchPostsResponseDataFirstPostPermissions? Permissions
-);
-
-	public sealed record SearchPostsResponseDataLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("followers")] string? Followers,
-	[property: JsonPropertyName("forum")] string? Forum,
-	[property: JsonPropertyName("posts")] string? Posts,
-	[property: JsonPropertyName("first_poster")] string? FirstPoster,
-	[property: JsonPropertyName("first_poster_avatar")] string? FirstPosterAvatar,
-	[property: JsonPropertyName("first_post")] string? FirstPost,
-	[property: JsonPropertyName("last_post")] string? LastPost
-);
-
-	public sealed record SearchPostsResponseDataPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("follow")] JsonElement? Follow,
-	[property: JsonPropertyName("post")] JsonElement? Post,
-	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment,
-	[property: JsonPropertyName("edit")] JsonElement? Edit
-);
-
-	public sealed record SearchPostsResponseDataForumLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("sub-categories")] string? SubCategories,
-	[property: JsonPropertyName("sub-forums")] string? SubForums,
-	[property: JsonPropertyName("threads")] string? Threads,
-	[property: JsonPropertyName("followers")] string? Followers
-);
-
-	public sealed record SearchPostsResponseDataForumPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("create_thread")] JsonElement? CreateThread,
-	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment,
-	[property: JsonPropertyName("tag_thread")] JsonElement? TagThread,
-	[property: JsonPropertyName("follow")] JsonElement? Follow
-);
-
-	public sealed record SearchPostsResponseDataForum(
-	[property: JsonPropertyName("forum_id")] double? ForumId,
-	[property: JsonPropertyName("forum_title")] string? ForumTitle,
-	[property: JsonPropertyName("forum_description")] string? ForumDescription,
-	[property: JsonPropertyName("forum_thread_count")] double? ForumThreadCount,
-	[property: JsonPropertyName("forum_post_count")] double? ForumPostCount,
-	[property: JsonPropertyName("forum_prefixes")] List<JsonElement>? ForumPrefixes,
-	[property: JsonPropertyName("thread_default_prefix_id")] double? ThreadDefaultPrefixId,
-	[property: JsonPropertyName("thread_prefix_is_required")] JsonElement? ThreadPrefixIsRequired,
-	[property: JsonPropertyName("links")] SearchPostsResponseDataForumLinks? Links,
-	[property: JsonPropertyName("permissions")] SearchPostsResponseDataForumPermissions? Permissions,
-	[property: JsonPropertyName("forum_is_followed")] JsonElement? ForumIsFollowed
-);
-
-	public sealed record SearchPostsResponseData(
-	[property: JsonPropertyName("content_type")] string? ContentType,
-	[property: JsonPropertyName("content_id")] double? ContentId,
-	[property: JsonPropertyName("thread_id")] double? ThreadId,
-	[property: JsonPropertyName("forum_id")] double? ForumId,
-	[property: JsonPropertyName("thread_title")] string? ThreadTitle,
-	[property: JsonPropertyName("thread_view_count")] double? ThreadViewCount,
-	[property: JsonPropertyName("creator_user_id")] double? CreatorUserId,
-	[property: JsonPropertyName("creator_username")] string? CreatorUsername,
-	[property: JsonPropertyName("creator_username_html")] string? CreatorUsernameHtml,
-	[property: JsonPropertyName("thread_create_date")] double? ThreadCreateDate,
-	[property: JsonPropertyName("thread_update_date")] double? ThreadUpdateDate,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("thread_post_count")] double? ThreadPostCount,
-	[property: JsonPropertyName("thread_is_published")] JsonElement? ThreadIsPublished,
-	[property: JsonPropertyName("thread_is_deleted")] JsonElement? ThreadIsDeleted,
-	[property: JsonPropertyName("thread_is_sticky")] JsonElement? ThreadIsSticky,
-	[property: JsonPropertyName("thread_is_followed")] JsonElement? ThreadIsFollowed,
-	[property: JsonPropertyName("first_post")] SearchPostsResponseDataFirstPost? FirstPost,
-	[property: JsonPropertyName("thread_prefixes")] List<JsonElement>? ThreadPrefixes,
-	[property: JsonPropertyName("thread_tags")] List<JsonElement>? ThreadTags,
-	[property: JsonPropertyName("links")] SearchPostsResponseDataLinks? Links,
-	[property: JsonPropertyName("permissions")] SearchPostsResponseDataPermissions? Permissions,
-	[property: JsonPropertyName("forum")] SearchPostsResponseDataForum? Forum
-);
 
 	public sealed record SearchPostsResponseLinks(
 	[property: JsonPropertyName("pages")] double? Pages,
@@ -3875,148 +3256,11 @@ public static class SearchApiTypes
 	}
 
 	public sealed record SearchTaggedResponse(
-		[property: JsonPropertyName("data")] List<SearchTaggedResponseData> Data,
+		[property: JsonPropertyName("data")] List<JsonElement> Data,
 		[property: JsonPropertyName("data_total")] double DataTotal,
 		[property: JsonPropertyName("search_tags")] JsonElement SearchTags,
 		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
-
-	public sealed record SearchTaggedResponseDataFirstPostLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("thread")] string? Thread,
-	[property: JsonPropertyName("poster")] string? Poster,
-	[property: JsonPropertyName("likes")] string? Likes,
-	[property: JsonPropertyName("report")] string? Report,
-	[property: JsonPropertyName("attachments")] string? Attachments,
-	[property: JsonPropertyName("poster_avatar")] string? PosterAvatar
-);
-
-	public sealed record SearchTaggedResponseDataFirstPostPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("reply")] JsonElement? Reply,
-	[property: JsonPropertyName("like")] JsonElement? Like,
-	[property: JsonPropertyName("report")] JsonElement? Report,
-	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment
-);
-
-	public sealed record SearchTaggedResponseDataFirstPost(
-	[property: JsonPropertyName("post_id")] double? PostId,
-	[property: JsonPropertyName("thread_id")] double? ThreadId,
-	[property: JsonPropertyName("poster_user_id")] double? PosterUserId,
-	[property: JsonPropertyName("poster_username")] string? PosterUsername,
-	[property: JsonPropertyName("poster_username_html")] string? PosterUsernameHtml,
-	[property: JsonPropertyName("post_create_date")] double? PostCreateDate,
-	[property: JsonPropertyName("post_body")] string? PostBody,
-	[property: JsonPropertyName("post_body_html")] string? PostBodyHtml,
-	[property: JsonPropertyName("post_body_plain_text")] string? PostBodyPlainText,
-	[property: JsonPropertyName("signature")] string? Signature,
-	[property: JsonPropertyName("signature_html")] string? SignatureHtml,
-	[property: JsonPropertyName("signature_plain_text")] string? SignaturePlainText,
-	[property: JsonPropertyName("post_like_count")] double? PostLikeCount,
-	[property: JsonPropertyName("post_attachment_count")] double? PostAttachmentCount,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("post_is_published")] JsonElement? PostIsPublished,
-	[property: JsonPropertyName("post_is_deleted")] JsonElement? PostIsDeleted,
-	[property: JsonPropertyName("post_update_date")] double? PostUpdateDate,
-	[property: JsonPropertyName("post_is_first_post")] JsonElement? PostIsFirstPost,
-	[property: JsonPropertyName("links")] SearchTaggedResponseDataFirstPostLinks? Links,
-	[property: JsonPropertyName("permissions")] SearchTaggedResponseDataFirstPostPermissions? Permissions
-);
-
-	public sealed record SearchTaggedResponseDataLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("followers")] string? Followers,
-	[property: JsonPropertyName("forum")] string? Forum,
-	[property: JsonPropertyName("posts")] string? Posts,
-	[property: JsonPropertyName("first_poster")] string? FirstPoster,
-	[property: JsonPropertyName("first_poster_avatar")] string? FirstPosterAvatar,
-	[property: JsonPropertyName("first_post")] string? FirstPost,
-	[property: JsonPropertyName("last_post")] string? LastPost
-);
-
-	public sealed record SearchTaggedResponseDataPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("follow")] JsonElement? Follow,
-	[property: JsonPropertyName("post")] JsonElement? Post,
-	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("edit_title")] JsonElement? EditTitle,
-	[property: JsonPropertyName("edit_tags")] JsonElement? EditTags
-);
-
-	public sealed record SearchTaggedResponseDataForumForumPrefixesGroupPrefixes(
-	[property: JsonPropertyName("prefix_id")] double? PrefixId,
-	[property: JsonPropertyName("prefix_title")] string? PrefixTitle
-);
-
-	public sealed record SearchTaggedResponseDataForumForumPrefixes(
-	[property: JsonPropertyName("group_title")] string? GroupTitle,
-	[property: JsonPropertyName("group_prefixes")] List<SearchTaggedResponseDataForumForumPrefixesGroupPrefixes>? GroupPrefixes
-);
-
-	public sealed record SearchTaggedResponseDataForumLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("sub-categories")] string? SubCategories,
-	[property: JsonPropertyName("sub-forums")] string? SubForums,
-	[property: JsonPropertyName("threads")] string? Threads,
-	[property: JsonPropertyName("followers")] string? Followers
-);
-
-	public sealed record SearchTaggedResponseDataForumPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("create_thread")] JsonElement? CreateThread,
-	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment,
-	[property: JsonPropertyName("tag_thread")] JsonElement? TagThread,
-	[property: JsonPropertyName("follow")] JsonElement? Follow
-);
-
-	public sealed record SearchTaggedResponseDataForum(
-	[property: JsonPropertyName("forum_id")] double? ForumId,
-	[property: JsonPropertyName("forum_title")] string? ForumTitle,
-	[property: JsonPropertyName("forum_description")] string? ForumDescription,
-	[property: JsonPropertyName("forum_thread_count")] double? ForumThreadCount,
-	[property: JsonPropertyName("forum_post_count")] double? ForumPostCount,
-	[property: JsonPropertyName("forum_prefixes")] List<SearchTaggedResponseDataForumForumPrefixes>? ForumPrefixes,
-	[property: JsonPropertyName("thread_default_prefix_id")] double? ThreadDefaultPrefixId,
-	[property: JsonPropertyName("thread_prefix_is_required")] JsonElement? ThreadPrefixIsRequired,
-	[property: JsonPropertyName("links")] SearchTaggedResponseDataForumLinks? Links,
-	[property: JsonPropertyName("permissions")] SearchTaggedResponseDataForumPermissions? Permissions,
-	[property: JsonPropertyName("forum_is_followed")] JsonElement? ForumIsFollowed
-);
-
-	public sealed record SearchTaggedResponseData(
-	[property: JsonPropertyName("content_type")] string? ContentType,
-	[property: JsonPropertyName("content_id")] double? ContentId,
-	[property: JsonPropertyName("thread_id")] double? ThreadId,
-	[property: JsonPropertyName("forum_id")] double? ForumId,
-	[property: JsonPropertyName("thread_title")] string? ThreadTitle,
-	[property: JsonPropertyName("thread_view_count")] double? ThreadViewCount,
-	[property: JsonPropertyName("creator_user_id")] double? CreatorUserId,
-	[property: JsonPropertyName("creator_username")] string? CreatorUsername,
-	[property: JsonPropertyName("creator_username_html")] string? CreatorUsernameHtml,
-	[property: JsonPropertyName("thread_create_date")] double? ThreadCreateDate,
-	[property: JsonPropertyName("thread_update_date")] double? ThreadUpdateDate,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("thread_post_count")] double? ThreadPostCount,
-	[property: JsonPropertyName("thread_is_published")] JsonElement? ThreadIsPublished,
-	[property: JsonPropertyName("thread_is_deleted")] JsonElement? ThreadIsDeleted,
-	[property: JsonPropertyName("thread_is_sticky")] JsonElement? ThreadIsSticky,
-	[property: JsonPropertyName("thread_is_followed")] JsonElement? ThreadIsFollowed,
-	[property: JsonPropertyName("first_post")] SearchTaggedResponseDataFirstPost? FirstPost,
-	[property: JsonPropertyName("thread_prefixes")] List<JsonElement>? ThreadPrefixes,
-	[property: JsonPropertyName("thread_tags")] JsonElement? ThreadTags,
-	[property: JsonPropertyName("links")] SearchTaggedResponseDataLinks? Links,
-	[property: JsonPropertyName("permissions")] SearchTaggedResponseDataPermissions? Permissions,
-	[property: JsonPropertyName("forum")] SearchTaggedResponseDataForum? Forum
-);
 
 	public sealed record SearchResultsParams
 	{
@@ -4029,148 +3273,11 @@ public static class SearchApiTypes
 	}
 
 	public sealed record SearchResultsResponse(
-		[property: JsonPropertyName("data")] List<SearchResultsResponseData> Data,
+		[property: JsonPropertyName("data")] List<JsonElement> Data,
 		[property: JsonPropertyName("data_total")] double DataTotal,
 		[property: JsonPropertyName("search_tags")] JsonElement SearchTags,
 		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
-
-	public sealed record SearchResultsResponseDataFirstPostLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("thread")] string? Thread,
-	[property: JsonPropertyName("poster")] string? Poster,
-	[property: JsonPropertyName("likes")] string? Likes,
-	[property: JsonPropertyName("report")] string? Report,
-	[property: JsonPropertyName("attachments")] string? Attachments,
-	[property: JsonPropertyName("poster_avatar")] string? PosterAvatar
-);
-
-	public sealed record SearchResultsResponseDataFirstPostPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("reply")] JsonElement? Reply,
-	[property: JsonPropertyName("like")] JsonElement? Like,
-	[property: JsonPropertyName("report")] JsonElement? Report,
-	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment
-);
-
-	public sealed record SearchResultsResponseDataFirstPost(
-	[property: JsonPropertyName("post_id")] double? PostId,
-	[property: JsonPropertyName("thread_id")] double? ThreadId,
-	[property: JsonPropertyName("poster_user_id")] double? PosterUserId,
-	[property: JsonPropertyName("poster_username")] string? PosterUsername,
-	[property: JsonPropertyName("poster_username_html")] string? PosterUsernameHtml,
-	[property: JsonPropertyName("post_create_date")] double? PostCreateDate,
-	[property: JsonPropertyName("post_body")] string? PostBody,
-	[property: JsonPropertyName("post_body_html")] string? PostBodyHtml,
-	[property: JsonPropertyName("post_body_plain_text")] string? PostBodyPlainText,
-	[property: JsonPropertyName("signature")] string? Signature,
-	[property: JsonPropertyName("signature_html")] string? SignatureHtml,
-	[property: JsonPropertyName("signature_plain_text")] string? SignaturePlainText,
-	[property: JsonPropertyName("post_like_count")] double? PostLikeCount,
-	[property: JsonPropertyName("post_attachment_count")] double? PostAttachmentCount,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("post_is_published")] JsonElement? PostIsPublished,
-	[property: JsonPropertyName("post_is_deleted")] JsonElement? PostIsDeleted,
-	[property: JsonPropertyName("post_update_date")] double? PostUpdateDate,
-	[property: JsonPropertyName("post_is_first_post")] JsonElement? PostIsFirstPost,
-	[property: JsonPropertyName("links")] SearchResultsResponseDataFirstPostLinks? Links,
-	[property: JsonPropertyName("permissions")] SearchResultsResponseDataFirstPostPermissions? Permissions
-);
-
-	public sealed record SearchResultsResponseDataLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("followers")] string? Followers,
-	[property: JsonPropertyName("forum")] string? Forum,
-	[property: JsonPropertyName("posts")] string? Posts,
-	[property: JsonPropertyName("first_poster")] string? FirstPoster,
-	[property: JsonPropertyName("first_poster_avatar")] string? FirstPosterAvatar,
-	[property: JsonPropertyName("first_post")] string? FirstPost,
-	[property: JsonPropertyName("last_post")] string? LastPost
-);
-
-	public sealed record SearchResultsResponseDataPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("follow")] JsonElement? Follow,
-	[property: JsonPropertyName("post")] JsonElement? Post,
-	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("edit_title")] JsonElement? EditTitle,
-	[property: JsonPropertyName("edit_tags")] JsonElement? EditTags
-);
-
-	public sealed record SearchResultsResponseDataForumForumPrefixesGroupPrefixes(
-	[property: JsonPropertyName("prefix_id")] double? PrefixId,
-	[property: JsonPropertyName("prefix_title")] string? PrefixTitle
-);
-
-	public sealed record SearchResultsResponseDataForumForumPrefixes(
-	[property: JsonPropertyName("group_title")] string? GroupTitle,
-	[property: JsonPropertyName("group_prefixes")] List<SearchResultsResponseDataForumForumPrefixesGroupPrefixes>? GroupPrefixes
-);
-
-	public sealed record SearchResultsResponseDataForumLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("sub-categories")] string? SubCategories,
-	[property: JsonPropertyName("sub-forums")] string? SubForums,
-	[property: JsonPropertyName("threads")] string? Threads,
-	[property: JsonPropertyName("followers")] string? Followers
-);
-
-	public sealed record SearchResultsResponseDataForumPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("create_thread")] JsonElement? CreateThread,
-	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment,
-	[property: JsonPropertyName("tag_thread")] JsonElement? TagThread,
-	[property: JsonPropertyName("follow")] JsonElement? Follow
-);
-
-	public sealed record SearchResultsResponseDataForum(
-	[property: JsonPropertyName("forum_id")] double? ForumId,
-	[property: JsonPropertyName("forum_title")] string? ForumTitle,
-	[property: JsonPropertyName("forum_description")] string? ForumDescription,
-	[property: JsonPropertyName("forum_thread_count")] double? ForumThreadCount,
-	[property: JsonPropertyName("forum_post_count")] double? ForumPostCount,
-	[property: JsonPropertyName("forum_prefixes")] List<SearchResultsResponseDataForumForumPrefixes>? ForumPrefixes,
-	[property: JsonPropertyName("thread_default_prefix_id")] double? ThreadDefaultPrefixId,
-	[property: JsonPropertyName("thread_prefix_is_required")] JsonElement? ThreadPrefixIsRequired,
-	[property: JsonPropertyName("links")] SearchResultsResponseDataForumLinks? Links,
-	[property: JsonPropertyName("permissions")] SearchResultsResponseDataForumPermissions? Permissions,
-	[property: JsonPropertyName("forum_is_followed")] JsonElement? ForumIsFollowed
-);
-
-	public sealed record SearchResultsResponseData(
-	[property: JsonPropertyName("content_type")] string? ContentType,
-	[property: JsonPropertyName("content_id")] double? ContentId,
-	[property: JsonPropertyName("thread_id")] double? ThreadId,
-	[property: JsonPropertyName("forum_id")] double? ForumId,
-	[property: JsonPropertyName("thread_title")] string? ThreadTitle,
-	[property: JsonPropertyName("thread_view_count")] double? ThreadViewCount,
-	[property: JsonPropertyName("creator_user_id")] double? CreatorUserId,
-	[property: JsonPropertyName("creator_username")] string? CreatorUsername,
-	[property: JsonPropertyName("creator_username_html")] string? CreatorUsernameHtml,
-	[property: JsonPropertyName("thread_create_date")] double? ThreadCreateDate,
-	[property: JsonPropertyName("thread_update_date")] double? ThreadUpdateDate,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("thread_post_count")] double? ThreadPostCount,
-	[property: JsonPropertyName("thread_is_published")] JsonElement? ThreadIsPublished,
-	[property: JsonPropertyName("thread_is_deleted")] JsonElement? ThreadIsDeleted,
-	[property: JsonPropertyName("thread_is_sticky")] JsonElement? ThreadIsSticky,
-	[property: JsonPropertyName("thread_is_followed")] JsonElement? ThreadIsFollowed,
-	[property: JsonPropertyName("first_post")] SearchResultsResponseDataFirstPost? FirstPost,
-	[property: JsonPropertyName("thread_prefixes")] List<JsonElement>? ThreadPrefixes,
-	[property: JsonPropertyName("thread_tags")] JsonElement? ThreadTags,
-	[property: JsonPropertyName("links")] SearchResultsResponseDataLinks? Links,
-	[property: JsonPropertyName("permissions")] SearchResultsResponseDataPermissions? Permissions,
-	[property: JsonPropertyName("forum")] SearchResultsResponseDataForum? Forum
-);
 }
 
 // ─── TagsApi Types ────────────────────────────────────────
@@ -4217,7 +3324,7 @@ public static class TagsApiTypes
 
 	public sealed record TagsGetResponse(
 		[property: JsonPropertyName("tag")] TagsGetResponseTag Tag,
-		[property: JsonPropertyName("tagged")] List<TagsGetResponseTagged> Tagged,
+		[property: JsonPropertyName("tagged")] List<JsonElement> Tagged,
 		[property: JsonPropertyName("tagged_total")] double TaggedTotal,
 		[property: JsonPropertyName("links")] TagsGetResponseLinks Links,
 		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
@@ -4233,147 +3340,6 @@ public static class TagsApiTypes
 	[property: JsonPropertyName("tag_text")] string? TagText,
 	[property: JsonPropertyName("tag_use_count")] double? TagUseCount,
 	[property: JsonPropertyName("links")] TagsGetResponseTagLinks? Links
-);
-
-	public sealed record TagsGetResponseTaggedFirstPostLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("thread")] string? Thread,
-	[property: JsonPropertyName("poster")] string? Poster,
-	[property: JsonPropertyName("likes")] string? Likes,
-	[property: JsonPropertyName("report")] string? Report,
-	[property: JsonPropertyName("attachments")] string? Attachments,
-	[property: JsonPropertyName("poster_avatar")] string? PosterAvatar
-);
-
-	public sealed record TagsGetResponseTaggedFirstPostPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("reply")] JsonElement? Reply,
-	[property: JsonPropertyName("like")] JsonElement? Like,
-	[property: JsonPropertyName("report")] JsonElement? Report,
-	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment
-);
-
-	public sealed record TagsGetResponseTaggedFirstPost(
-	[property: JsonPropertyName("post_id")] double? PostId,
-	[property: JsonPropertyName("thread_id")] double? ThreadId,
-	[property: JsonPropertyName("poster_user_id")] double? PosterUserId,
-	[property: JsonPropertyName("poster_username")] string? PosterUsername,
-	[property: JsonPropertyName("poster_username_html")] string? PosterUsernameHtml,
-	[property: JsonPropertyName("post_create_date")] double? PostCreateDate,
-	[property: JsonPropertyName("post_body")] string? PostBody,
-	[property: JsonPropertyName("post_body_html")] string? PostBodyHtml,
-	[property: JsonPropertyName("post_body_plain_text")] string? PostBodyPlainText,
-	[property: JsonPropertyName("signature")] string? Signature,
-	[property: JsonPropertyName("signature_html")] string? SignatureHtml,
-	[property: JsonPropertyName("signature_plain_text")] string? SignaturePlainText,
-	[property: JsonPropertyName("post_like_count")] double? PostLikeCount,
-	[property: JsonPropertyName("post_attachment_count")] double? PostAttachmentCount,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("post_is_published")] JsonElement? PostIsPublished,
-	[property: JsonPropertyName("post_is_deleted")] JsonElement? PostIsDeleted,
-	[property: JsonPropertyName("post_update_date")] double? PostUpdateDate,
-	[property: JsonPropertyName("post_is_first_post")] JsonElement? PostIsFirstPost,
-	[property: JsonPropertyName("links")] TagsGetResponseTaggedFirstPostLinks? Links,
-	[property: JsonPropertyName("permissions")] TagsGetResponseTaggedFirstPostPermissions? Permissions
-);
-
-	public sealed record TagsGetResponseTaggedThreadPrefixes(
-	[property: JsonPropertyName("prefix_id")] double? PrefixId,
-	[property: JsonPropertyName("prefix_title")] string? PrefixTitle
-);
-
-	public sealed record TagsGetResponseTaggedLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("followers")] string? Followers,
-	[property: JsonPropertyName("forum")] string? Forum,
-	[property: JsonPropertyName("posts")] string? Posts,
-	[property: JsonPropertyName("first_poster")] string? FirstPoster,
-	[property: JsonPropertyName("first_poster_avatar")] string? FirstPosterAvatar,
-	[property: JsonPropertyName("first_post")] string? FirstPost,
-	[property: JsonPropertyName("last_poster")] string? LastPoster,
-	[property: JsonPropertyName("last_post")] string? LastPost
-);
-
-	public sealed record TagsGetResponseTaggedPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("follow")] JsonElement? Follow,
-	[property: JsonPropertyName("post")] JsonElement? Post,
-	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment,
-	[property: JsonPropertyName("edit")] JsonElement? Edit
-);
-
-	public sealed record TagsGetResponseTaggedForumForumPrefixesGroupPrefixes(
-	[property: JsonPropertyName("prefix_id")] double? PrefixId,
-	[property: JsonPropertyName("prefix_title")] string? PrefixTitle
-);
-
-	public sealed record TagsGetResponseTaggedForumForumPrefixes(
-	[property: JsonPropertyName("group_title")] string? GroupTitle,
-	[property: JsonPropertyName("group_prefixes")] List<TagsGetResponseTaggedForumForumPrefixesGroupPrefixes>? GroupPrefixes
-);
-
-	public sealed record TagsGetResponseTaggedForumLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("sub-categories")] string? SubCategories,
-	[property: JsonPropertyName("sub-forums")] string? SubForums,
-	[property: JsonPropertyName("threads")] string? Threads,
-	[property: JsonPropertyName("followers")] string? Followers
-);
-
-	public sealed record TagsGetResponseTaggedForumPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("create_thread")] JsonElement? CreateThread,
-	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment,
-	[property: JsonPropertyName("tag_thread")] JsonElement? TagThread,
-	[property: JsonPropertyName("follow")] JsonElement? Follow
-);
-
-	public sealed record TagsGetResponseTaggedForum(
-	[property: JsonPropertyName("forum_id")] double? ForumId,
-	[property: JsonPropertyName("forum_title")] string? ForumTitle,
-	[property: JsonPropertyName("forum_description")] string? ForumDescription,
-	[property: JsonPropertyName("forum_thread_count")] double? ForumThreadCount,
-	[property: JsonPropertyName("forum_post_count")] double? ForumPostCount,
-	[property: JsonPropertyName("forum_prefixes")] List<TagsGetResponseTaggedForumForumPrefixes>? ForumPrefixes,
-	[property: JsonPropertyName("thread_default_prefix_id")] double? ThreadDefaultPrefixId,
-	[property: JsonPropertyName("thread_prefix_is_required")] JsonElement? ThreadPrefixIsRequired,
-	[property: JsonPropertyName("links")] TagsGetResponseTaggedForumLinks? Links,
-	[property: JsonPropertyName("permissions")] TagsGetResponseTaggedForumPermissions? Permissions,
-	[property: JsonPropertyName("forum_is_followed")] JsonElement? ForumIsFollowed
-);
-
-	public sealed record TagsGetResponseTagged(
-	[property: JsonPropertyName("content_type")] string? ContentType,
-	[property: JsonPropertyName("content_id")] double? ContentId,
-	[property: JsonPropertyName("thread_id")] double? ThreadId,
-	[property: JsonPropertyName("forum_id")] double? ForumId,
-	[property: JsonPropertyName("thread_title")] string? ThreadTitle,
-	[property: JsonPropertyName("thread_view_count")] double? ThreadViewCount,
-	[property: JsonPropertyName("creator_user_id")] double? CreatorUserId,
-	[property: JsonPropertyName("creator_username")] string? CreatorUsername,
-	[property: JsonPropertyName("creator_username_html")] string? CreatorUsernameHtml,
-	[property: JsonPropertyName("thread_create_date")] double? ThreadCreateDate,
-	[property: JsonPropertyName("thread_update_date")] double? ThreadUpdateDate,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("thread_post_count")] double? ThreadPostCount,
-	[property: JsonPropertyName("thread_is_published")] JsonElement? ThreadIsPublished,
-	[property: JsonPropertyName("thread_is_deleted")] JsonElement? ThreadIsDeleted,
-	[property: JsonPropertyName("thread_is_sticky")] JsonElement? ThreadIsSticky,
-	[property: JsonPropertyName("thread_is_followed")] JsonElement? ThreadIsFollowed,
-	[property: JsonPropertyName("first_post")] TagsGetResponseTaggedFirstPost? FirstPost,
-	[property: JsonPropertyName("thread_prefixes")] List<TagsGetResponseTaggedThreadPrefixes>? ThreadPrefixes,
-	[property: JsonPropertyName("thread_tags")] JsonElement? ThreadTags,
-	[property: JsonPropertyName("links")] TagsGetResponseTaggedLinks? Links,
-	[property: JsonPropertyName("permissions")] TagsGetResponseTaggedPermissions? Permissions,
-	[property: JsonPropertyName("forum")] TagsGetResponseTaggedForum? Forum
 );
 
 	public sealed record TagsGetResponseLinks(
@@ -4883,150 +3849,10 @@ public static class ThreadsApiTypes
 	}
 
 	public sealed record ThreadsFollowedResponse(
-		[property: JsonPropertyName("threads")] List<ThreadsFollowedResponseThreads> Threads,
+		[property: JsonPropertyName("threads")] List<JsonElement> Threads,
 		[property: JsonPropertyName("threads_total")] double ThreadsTotal,
 		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
-
-	public sealed record ThreadsFollowedResponseThreadsFirstPostLikeUsers(
-	[property: JsonPropertyName("user_id")] double? UserId,
-	[property: JsonPropertyName("username")] string? Username,
-	[property: JsonPropertyName("display_style_group_id")] double? DisplayStyleGroupId,
-	[property: JsonPropertyName("is_banned")] double? IsBanned,
-	[property: JsonPropertyName("uniq_username_css")] string? UniqUsernameCss
-);
-
-	public sealed record ThreadsFollowedResponseThreadsFirstPostLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("thread")] string? Thread,
-	[property: JsonPropertyName("poster")] string? Poster,
-	[property: JsonPropertyName("likes")] string? Likes,
-	[property: JsonPropertyName("report")] string? Report,
-	[property: JsonPropertyName("attachments")] string? Attachments,
-	[property: JsonPropertyName("poster_avatar")] string? PosterAvatar
-);
-
-	public sealed record ThreadsFollowedResponseThreadsFirstPostPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("reply")] JsonElement? Reply,
-	[property: JsonPropertyName("like")] JsonElement? Like,
-	[property: JsonPropertyName("report")] JsonElement? Report,
-	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment
-);
-
-	public sealed record ThreadsFollowedResponseThreadsFirstPost(
-	[property: JsonPropertyName("post_id")] double? PostId,
-	[property: JsonPropertyName("thread_id")] double? ThreadId,
-	[property: JsonPropertyName("poster_user_id")] double? PosterUserId,
-	[property: JsonPropertyName("poster_username")] string? PosterUsername,
-	[property: JsonPropertyName("poster_username_html")] string? PosterUsernameHtml,
-	[property: JsonPropertyName("post_create_date")] double? PostCreateDate,
-	[property: JsonPropertyName("post_body")] string? PostBody,
-	[property: JsonPropertyName("post_body_html")] string? PostBodyHtml,
-	[property: JsonPropertyName("post_body_plain_text")] string? PostBodyPlainText,
-	[property: JsonPropertyName("signature")] string? Signature,
-	[property: JsonPropertyName("signature_html")] string? SignatureHtml,
-	[property: JsonPropertyName("signature_plain_text")] string? SignaturePlainText,
-	[property: JsonPropertyName("post_like_count")] double? PostLikeCount,
-	[property: JsonPropertyName("post_attachment_count")] double? PostAttachmentCount,
-	[property: JsonPropertyName("like_users")] List<ThreadsFollowedResponseThreadsFirstPostLikeUsers>? LikeUsers,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("post_is_published")] JsonElement? PostIsPublished,
-	[property: JsonPropertyName("post_is_deleted")] JsonElement? PostIsDeleted,
-	[property: JsonPropertyName("post_update_date")] double? PostUpdateDate,
-	[property: JsonPropertyName("post_is_first_post")] JsonElement? PostIsFirstPost,
-	[property: JsonPropertyName("links")] ThreadsFollowedResponseThreadsFirstPostLinks? Links,
-	[property: JsonPropertyName("permissions")] ThreadsFollowedResponseThreadsFirstPostPermissions? Permissions
-);
-
-	public sealed record ThreadsFollowedResponseThreadsLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("followers")] string? Followers,
-	[property: JsonPropertyName("forum")] string? Forum,
-	[property: JsonPropertyName("posts")] string? Posts,
-	[property: JsonPropertyName("first_poster")] string? FirstPoster,
-	[property: JsonPropertyName("first_poster_avatar")] string? FirstPosterAvatar,
-	[property: JsonPropertyName("first_post")] string? FirstPost,
-	[property: JsonPropertyName("last_post")] string? LastPost
-);
-
-	public sealed record ThreadsFollowedResponseThreadsPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("follow")] JsonElement? Follow,
-	[property: JsonPropertyName("post")] JsonElement? Post,
-	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("edit_title")] JsonElement? EditTitle,
-	[property: JsonPropertyName("edit_tags")] JsonElement? EditTags
-);
-
-	public sealed record ThreadsFollowedResponseThreadsForumLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("sub-categories")] string? SubCategories,
-	[property: JsonPropertyName("sub-forums")] string? SubForums,
-	[property: JsonPropertyName("threads")] string? Threads,
-	[property: JsonPropertyName("followers")] string? Followers
-);
-
-	public sealed record ThreadsFollowedResponseThreadsForumPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("create_thread")] JsonElement? CreateThread,
-	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment,
-	[property: JsonPropertyName("tag_thread")] JsonElement? TagThread,
-	[property: JsonPropertyName("follow")] JsonElement? Follow
-);
-
-	public sealed record ThreadsFollowedResponseThreadsForum(
-	[property: JsonPropertyName("forum_id")] double? ForumId,
-	[property: JsonPropertyName("forum_title")] string? ForumTitle,
-	[property: JsonPropertyName("forum_description")] string? ForumDescription,
-	[property: JsonPropertyName("forum_thread_count")] double? ForumThreadCount,
-	[property: JsonPropertyName("forum_post_count")] double? ForumPostCount,
-	[property: JsonPropertyName("forum_prefixes")] List<JsonElement>? ForumPrefixes,
-	[property: JsonPropertyName("thread_default_prefix_id")] double? ThreadDefaultPrefixId,
-	[property: JsonPropertyName("thread_prefix_is_required")] JsonElement? ThreadPrefixIsRequired,
-	[property: JsonPropertyName("links")] ThreadsFollowedResponseThreadsForumLinks? Links,
-	[property: JsonPropertyName("permissions")] ThreadsFollowedResponseThreadsForumPermissions? Permissions,
-	[property: JsonPropertyName("forum_is_followed")] JsonElement? ForumIsFollowed
-);
-
-	public sealed record ThreadsFollowedResponseThreadsFollow(
-	[property: JsonPropertyName("alert")] JsonElement? Alert,
-	[property: JsonPropertyName("email")] JsonElement? Email
-);
-
-	public sealed record ThreadsFollowedResponseThreads(
-	[property: JsonPropertyName("thread_id")] double? ThreadId,
-	[property: JsonPropertyName("forum_id")] double? ForumId,
-	[property: JsonPropertyName("thread_title")] string? ThreadTitle,
-	[property: JsonPropertyName("thread_view_count")] double? ThreadViewCount,
-	[property: JsonPropertyName("creator_user_id")] double? CreatorUserId,
-	[property: JsonPropertyName("creator_username")] string? CreatorUsername,
-	[property: JsonPropertyName("creator_username_html")] string? CreatorUsernameHtml,
-	[property: JsonPropertyName("thread_create_date")] double? ThreadCreateDate,
-	[property: JsonPropertyName("thread_update_date")] double? ThreadUpdateDate,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("thread_post_count")] double? ThreadPostCount,
-	[property: JsonPropertyName("thread_is_published")] JsonElement? ThreadIsPublished,
-	[property: JsonPropertyName("thread_is_deleted")] JsonElement? ThreadIsDeleted,
-	[property: JsonPropertyName("thread_is_sticky")] JsonElement? ThreadIsSticky,
-	[property: JsonPropertyName("thread_is_followed")] JsonElement? ThreadIsFollowed,
-	[property: JsonPropertyName("first_post")] ThreadsFollowedResponseThreadsFirstPost? FirstPost,
-	[property: JsonPropertyName("thread_prefixes")] List<JsonElement>? ThreadPrefixes,
-	[property: JsonPropertyName("thread_tags")] JsonElement? ThreadTags,
-	[property: JsonPropertyName("links")] ThreadsFollowedResponseThreadsLinks? Links,
-	[property: JsonPropertyName("permissions")] ThreadsFollowedResponseThreadsPermissions? Permissions,
-	[property: JsonPropertyName("forum")] ThreadsFollowedResponseThreadsForum? Forum,
-	[property: JsonPropertyName("follow")] ThreadsFollowedResponseThreadsFollow? Follow
-);
 
 	public sealed record ThreadsNavigationResponse(
 		[property: JsonPropertyName("elements")] List<ThreadsNavigationResponseElements> Elements,
@@ -5123,144 +3949,13 @@ public static class ThreadsApiTypes
 	}
 
 	public sealed record ThreadsUnreadResponse(
-		[property: JsonPropertyName("threads")] List<JsonElement> Threads,
-		[property: JsonPropertyName("data")] List<ThreadsUnreadResponseData> Data,
+		[property: JsonPropertyName("threads")] List<ThreadsUnreadResponseThreads> Threads,
+		[property: JsonPropertyName("data")] List<JsonElement> Data,
 		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
-	public sealed record ThreadsUnreadResponseDataFirstPostLikeUsers(
-	[property: JsonPropertyName("user_id")] double? UserId,
-	[property: JsonPropertyName("username")] string? Username,
-	[property: JsonPropertyName("display_style_group_id")] double? DisplayStyleGroupId,
-	[property: JsonPropertyName("is_banned")] double? IsBanned,
-	[property: JsonPropertyName("uniq_username_css")] string? UniqUsernameCss
-);
-
-	public sealed record ThreadsUnreadResponseDataFirstPostLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("thread")] string? Thread,
-	[property: JsonPropertyName("poster")] string? Poster,
-	[property: JsonPropertyName("likes")] string? Likes,
-	[property: JsonPropertyName("report")] string? Report,
-	[property: JsonPropertyName("attachments")] string? Attachments,
-	[property: JsonPropertyName("poster_avatar")] string? PosterAvatar
-);
-
-	public sealed record ThreadsUnreadResponseDataFirstPostPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("reply")] JsonElement? Reply,
-	[property: JsonPropertyName("like")] JsonElement? Like,
-	[property: JsonPropertyName("report")] JsonElement? Report,
-	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment
-);
-
-	public sealed record ThreadsUnreadResponseDataFirstPost(
-	[property: JsonPropertyName("post_id")] double? PostId,
-	[property: JsonPropertyName("thread_id")] double? ThreadId,
-	[property: JsonPropertyName("poster_user_id")] double? PosterUserId,
-	[property: JsonPropertyName("poster_username")] string? PosterUsername,
-	[property: JsonPropertyName("poster_username_html")] string? PosterUsernameHtml,
-	[property: JsonPropertyName("post_create_date")] double? PostCreateDate,
-	[property: JsonPropertyName("post_body")] string? PostBody,
-	[property: JsonPropertyName("post_body_html")] string? PostBodyHtml,
-	[property: JsonPropertyName("post_body_plain_text")] string? PostBodyPlainText,
-	[property: JsonPropertyName("signature")] string? Signature,
-	[property: JsonPropertyName("signature_html")] string? SignatureHtml,
-	[property: JsonPropertyName("signature_plain_text")] string? SignaturePlainText,
-	[property: JsonPropertyName("post_like_count")] double? PostLikeCount,
-	[property: JsonPropertyName("post_attachment_count")] double? PostAttachmentCount,
-	[property: JsonPropertyName("like_users")] List<ThreadsUnreadResponseDataFirstPostLikeUsers>? LikeUsers,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("post_is_published")] JsonElement? PostIsPublished,
-	[property: JsonPropertyName("post_is_deleted")] JsonElement? PostIsDeleted,
-	[property: JsonPropertyName("post_update_date")] double? PostUpdateDate,
-	[property: JsonPropertyName("post_is_first_post")] JsonElement? PostIsFirstPost,
-	[property: JsonPropertyName("links")] ThreadsUnreadResponseDataFirstPostLinks? Links,
-	[property: JsonPropertyName("permissions")] ThreadsUnreadResponseDataFirstPostPermissions? Permissions
-);
-
-	public sealed record ThreadsUnreadResponseDataLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("followers")] string? Followers,
-	[property: JsonPropertyName("forum")] string? Forum,
-	[property: JsonPropertyName("posts")] string? Posts,
-	[property: JsonPropertyName("first_poster")] string? FirstPoster,
-	[property: JsonPropertyName("first_poster_avatar")] string? FirstPosterAvatar,
-	[property: JsonPropertyName("first_post")] string? FirstPost,
-	[property: JsonPropertyName("last_poster")] string? LastPoster,
-	[property: JsonPropertyName("last_post")] string? LastPost
-);
-
-	public sealed record ThreadsUnreadResponseDataPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("follow")] JsonElement? Follow,
-	[property: JsonPropertyName("post")] JsonElement? Post,
-	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment,
-	[property: JsonPropertyName("edit")] JsonElement? Edit
-);
-
-	public sealed record ThreadsUnreadResponseDataForumLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("sub-categories")] string? SubCategories,
-	[property: JsonPropertyName("sub-forums")] string? SubForums,
-	[property: JsonPropertyName("threads")] string? Threads,
-	[property: JsonPropertyName("followers")] string? Followers
-);
-
-	public sealed record ThreadsUnreadResponseDataForumPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("create_thread")] JsonElement? CreateThread,
-	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment,
-	[property: JsonPropertyName("tag_thread")] JsonElement? TagThread,
-	[property: JsonPropertyName("follow")] JsonElement? Follow
-);
-
-	public sealed record ThreadsUnreadResponseDataForum(
-	[property: JsonPropertyName("forum_id")] double? ForumId,
-	[property: JsonPropertyName("forum_title")] string? ForumTitle,
-	[property: JsonPropertyName("forum_description")] string? ForumDescription,
-	[property: JsonPropertyName("forum_thread_count")] double? ForumThreadCount,
-	[property: JsonPropertyName("forum_post_count")] double? ForumPostCount,
-	[property: JsonPropertyName("forum_prefixes")] List<JsonElement>? ForumPrefixes,
-	[property: JsonPropertyName("thread_default_prefix_id")] double? ThreadDefaultPrefixId,
-	[property: JsonPropertyName("thread_prefix_is_required")] JsonElement? ThreadPrefixIsRequired,
-	[property: JsonPropertyName("links")] ThreadsUnreadResponseDataForumLinks? Links,
-	[property: JsonPropertyName("permissions")] ThreadsUnreadResponseDataForumPermissions? Permissions,
-	[property: JsonPropertyName("forum_is_followed")] JsonElement? ForumIsFollowed
-);
-
-	public sealed record ThreadsUnreadResponseData(
-	[property: JsonPropertyName("content_type")] string? ContentType,
-	[property: JsonPropertyName("content_id")] double? ContentId,
-	[property: JsonPropertyName("thread_id")] double? ThreadId,
-	[property: JsonPropertyName("forum_id")] double? ForumId,
-	[property: JsonPropertyName("thread_title")] string? ThreadTitle,
-	[property: JsonPropertyName("thread_view_count")] double? ThreadViewCount,
-	[property: JsonPropertyName("creator_user_id")] double? CreatorUserId,
-	[property: JsonPropertyName("creator_username")] string? CreatorUsername,
-	[property: JsonPropertyName("creator_username_html")] string? CreatorUsernameHtml,
-	[property: JsonPropertyName("thread_create_date")] double? ThreadCreateDate,
-	[property: JsonPropertyName("thread_update_date")] double? ThreadUpdateDate,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("thread_post_count")] double? ThreadPostCount,
-	[property: JsonPropertyName("thread_is_published")] JsonElement? ThreadIsPublished,
-	[property: JsonPropertyName("thread_is_deleted")] JsonElement? ThreadIsDeleted,
-	[property: JsonPropertyName("thread_is_sticky")] JsonElement? ThreadIsSticky,
-	[property: JsonPropertyName("thread_is_followed")] JsonElement? ThreadIsFollowed,
-	[property: JsonPropertyName("first_post")] ThreadsUnreadResponseDataFirstPost? FirstPost,
-	[property: JsonPropertyName("thread_prefixes")] List<JsonElement>? ThreadPrefixes,
-	[property: JsonPropertyName("thread_tags")] List<JsonElement>? ThreadTags,
-	[property: JsonPropertyName("links")] ThreadsUnreadResponseDataLinks? Links,
-	[property: JsonPropertyName("permissions")] ThreadsUnreadResponseDataPermissions? Permissions,
-	[property: JsonPropertyName("forum")] ThreadsUnreadResponseDataForum? Forum
+	public sealed record ThreadsUnreadResponseThreads(
+	[property: JsonPropertyName("thread_id")] double? ThreadId
 );
 
 	public sealed record ThreadsRecentParams
@@ -5280,135 +3975,13 @@ public static class ThreadsApiTypes
 	}
 
 	public sealed record ThreadsRecentResponse(
-		[property: JsonPropertyName("threads")] List<JsonElement> Threads,
-		[property: JsonPropertyName("data")] List<ThreadsRecentResponseData> Data,
+		[property: JsonPropertyName("threads")] List<ThreadsRecentResponseThreads> Threads,
+		[property: JsonPropertyName("data")] List<JsonElement> Data,
 		[property: JsonPropertyName("system_info")] JsonElement SystemInfo
 	);
 
-	public sealed record ThreadsRecentResponseDataFirstPostLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("thread")] string? Thread,
-	[property: JsonPropertyName("poster")] string? Poster,
-	[property: JsonPropertyName("likes")] string? Likes,
-	[property: JsonPropertyName("report")] string? Report,
-	[property: JsonPropertyName("attachments")] string? Attachments,
-	[property: JsonPropertyName("poster_avatar")] string? PosterAvatar
-);
-
-	public sealed record ThreadsRecentResponseDataFirstPostPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("reply")] JsonElement? Reply,
-	[property: JsonPropertyName("like")] JsonElement? Like,
-	[property: JsonPropertyName("report")] JsonElement? Report,
-	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment
-);
-
-	public sealed record ThreadsRecentResponseDataFirstPost(
-	[property: JsonPropertyName("post_id")] double? PostId,
-	[property: JsonPropertyName("thread_id")] double? ThreadId,
-	[property: JsonPropertyName("poster_user_id")] double? PosterUserId,
-	[property: JsonPropertyName("poster_username")] string? PosterUsername,
-	[property: JsonPropertyName("poster_username_html")] string? PosterUsernameHtml,
-	[property: JsonPropertyName("post_create_date")] double? PostCreateDate,
-	[property: JsonPropertyName("post_body")] string? PostBody,
-	[property: JsonPropertyName("post_body_html")] string? PostBodyHtml,
-	[property: JsonPropertyName("post_body_plain_text")] string? PostBodyPlainText,
-	[property: JsonPropertyName("signature")] string? Signature,
-	[property: JsonPropertyName("signature_html")] string? SignatureHtml,
-	[property: JsonPropertyName("signature_plain_text")] string? SignaturePlainText,
-	[property: JsonPropertyName("post_like_count")] double? PostLikeCount,
-	[property: JsonPropertyName("post_attachment_count")] double? PostAttachmentCount,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("post_is_published")] JsonElement? PostIsPublished,
-	[property: JsonPropertyName("post_is_deleted")] JsonElement? PostIsDeleted,
-	[property: JsonPropertyName("post_update_date")] double? PostUpdateDate,
-	[property: JsonPropertyName("post_is_first_post")] JsonElement? PostIsFirstPost,
-	[property: JsonPropertyName("links")] ThreadsRecentResponseDataFirstPostLinks? Links,
-	[property: JsonPropertyName("permissions")] ThreadsRecentResponseDataFirstPostPermissions? Permissions
-);
-
-	public sealed record ThreadsRecentResponseDataLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("followers")] string? Followers,
-	[property: JsonPropertyName("forum")] string? Forum,
-	[property: JsonPropertyName("posts")] string? Posts,
-	[property: JsonPropertyName("first_poster")] string? FirstPoster,
-	[property: JsonPropertyName("first_poster_avatar")] string? FirstPosterAvatar,
-	[property: JsonPropertyName("first_post")] string? FirstPost,
-	[property: JsonPropertyName("last_poster")] string? LastPoster,
-	[property: JsonPropertyName("last_post")] string? LastPost
-);
-
-	public sealed record ThreadsRecentResponseDataPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("follow")] JsonElement? Follow,
-	[property: JsonPropertyName("post")] JsonElement? Post,
-	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment,
-	[property: JsonPropertyName("edit")] JsonElement? Edit
-);
-
-	public sealed record ThreadsRecentResponseDataForumLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("sub-categories")] string? SubCategories,
-	[property: JsonPropertyName("sub-forums")] string? SubForums,
-	[property: JsonPropertyName("threads")] string? Threads,
-	[property: JsonPropertyName("followers")] string? Followers
-);
-
-	public sealed record ThreadsRecentResponseDataForumPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("edit")] JsonElement? Edit,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("create_thread")] JsonElement? CreateThread,
-	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment,
-	[property: JsonPropertyName("tag_thread")] JsonElement? TagThread,
-	[property: JsonPropertyName("follow")] JsonElement? Follow
-);
-
-	public sealed record ThreadsRecentResponseDataForum(
-	[property: JsonPropertyName("forum_id")] double? ForumId,
-	[property: JsonPropertyName("forum_title")] string? ForumTitle,
-	[property: JsonPropertyName("forum_description")] string? ForumDescription,
-	[property: JsonPropertyName("forum_thread_count")] double? ForumThreadCount,
-	[property: JsonPropertyName("forum_post_count")] double? ForumPostCount,
-	[property: JsonPropertyName("forum_prefixes")] List<JsonElement>? ForumPrefixes,
-	[property: JsonPropertyName("thread_default_prefix_id")] double? ThreadDefaultPrefixId,
-	[property: JsonPropertyName("thread_prefix_is_required")] JsonElement? ThreadPrefixIsRequired,
-	[property: JsonPropertyName("links")] ThreadsRecentResponseDataForumLinks? Links,
-	[property: JsonPropertyName("permissions")] ThreadsRecentResponseDataForumPermissions? Permissions,
-	[property: JsonPropertyName("forum_is_followed")] JsonElement? ForumIsFollowed
-);
-
-	public sealed record ThreadsRecentResponseData(
-	[property: JsonPropertyName("content_type")] string? ContentType,
-	[property: JsonPropertyName("content_id")] double? ContentId,
-	[property: JsonPropertyName("thread_id")] double? ThreadId,
-	[property: JsonPropertyName("forum_id")] double? ForumId,
-	[property: JsonPropertyName("thread_title")] string? ThreadTitle,
-	[property: JsonPropertyName("thread_view_count")] double? ThreadViewCount,
-	[property: JsonPropertyName("creator_user_id")] double? CreatorUserId,
-	[property: JsonPropertyName("creator_username")] string? CreatorUsername,
-	[property: JsonPropertyName("creator_username_html")] string? CreatorUsernameHtml,
-	[property: JsonPropertyName("thread_create_date")] double? ThreadCreateDate,
-	[property: JsonPropertyName("thread_update_date")] double? ThreadUpdateDate,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("thread_post_count")] double? ThreadPostCount,
-	[property: JsonPropertyName("thread_is_published")] JsonElement? ThreadIsPublished,
-	[property: JsonPropertyName("thread_is_deleted")] JsonElement? ThreadIsDeleted,
-	[property: JsonPropertyName("thread_is_sticky")] JsonElement? ThreadIsSticky,
-	[property: JsonPropertyName("thread_is_followed")] JsonElement? ThreadIsFollowed,
-	[property: JsonPropertyName("first_post")] ThreadsRecentResponseDataFirstPost? FirstPost,
-	[property: JsonPropertyName("thread_prefixes")] List<JsonElement>? ThreadPrefixes,
-	[property: JsonPropertyName("thread_tags")] List<JsonElement>? ThreadTags,
-	[property: JsonPropertyName("links")] ThreadsRecentResponseDataLinks? Links,
-	[property: JsonPropertyName("permissions")] ThreadsRecentResponseDataPermissions? Permissions,
-	[property: JsonPropertyName("forum")] ThreadsRecentResponseDataForum? Forum
+	public sealed record ThreadsRecentResponseThreads(
+	[property: JsonPropertyName("thread_id")] double? ThreadId
 );
 
 	public sealed record ThreadsFinishResponse(
@@ -6106,49 +4679,6 @@ public static class UsersApiTypes
 	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment
 );
 
-	public sealed record UsersContentsResponseDataThreadLinks(
-	[property: JsonPropertyName("permalink")] string? Permalink,
-	[property: JsonPropertyName("detail")] string? Detail,
-	[property: JsonPropertyName("followers")] string? Followers,
-	[property: JsonPropertyName("forum")] string? Forum,
-	[property: JsonPropertyName("posts")] string? Posts,
-	[property: JsonPropertyName("first_poster")] string? FirstPoster,
-	[property: JsonPropertyName("first_poster_avatar")] string? FirstPosterAvatar,
-	[property: JsonPropertyName("first_post")] string? FirstPost,
-	[property: JsonPropertyName("last_poster")] string? LastPoster,
-	[property: JsonPropertyName("last_post")] string? LastPost
-);
-
-	public sealed record UsersContentsResponseDataThreadPermissions(
-	[property: JsonPropertyName("view")] JsonElement? View,
-	[property: JsonPropertyName("delete")] JsonElement? Delete,
-	[property: JsonPropertyName("follow")] JsonElement? Follow,
-	[property: JsonPropertyName("post")] JsonElement? Post,
-	[property: JsonPropertyName("upload_attachment")] JsonElement? UploadAttachment
-);
-
-	public sealed record UsersContentsResponseDataThread(
-	[property: JsonPropertyName("thread_id")] double? ThreadId,
-	[property: JsonPropertyName("forum_id")] double? ForumId,
-	[property: JsonPropertyName("thread_title")] string? ThreadTitle,
-	[property: JsonPropertyName("thread_view_count")] double? ThreadViewCount,
-	[property: JsonPropertyName("creator_user_id")] double? CreatorUserId,
-	[property: JsonPropertyName("creator_username")] string? CreatorUsername,
-	[property: JsonPropertyName("creator_username_html")] string? CreatorUsernameHtml,
-	[property: JsonPropertyName("thread_create_date")] double? ThreadCreateDate,
-	[property: JsonPropertyName("thread_update_date")] double? ThreadUpdateDate,
-	[property: JsonPropertyName("user_is_ignored")] JsonElement? UserIsIgnored,
-	[property: JsonPropertyName("thread_post_count")] double? ThreadPostCount,
-	[property: JsonPropertyName("thread_is_published")] JsonElement? ThreadIsPublished,
-	[property: JsonPropertyName("thread_is_deleted")] JsonElement? ThreadIsDeleted,
-	[property: JsonPropertyName("thread_is_sticky")] JsonElement? ThreadIsSticky,
-	[property: JsonPropertyName("thread_is_followed")] JsonElement? ThreadIsFollowed,
-	[property: JsonPropertyName("thread_prefixes")] List<JsonElement>? ThreadPrefixes,
-	[property: JsonPropertyName("thread_tags")] List<JsonElement>? ThreadTags,
-	[property: JsonPropertyName("links")] UsersContentsResponseDataThreadLinks? Links,
-	[property: JsonPropertyName("permissions")] UsersContentsResponseDataThreadPermissions? Permissions
-);
-
 	public sealed record UsersContentsResponseData(
 	[property: JsonPropertyName("content_type")] string? ContentType,
 	[property: JsonPropertyName("content_id")] double? ContentId,
@@ -6174,7 +4704,7 @@ public static class UsersApiTypes
 	[property: JsonPropertyName("post_is_first_post")] JsonElement? PostIsFirstPost,
 	[property: JsonPropertyName("links")] UsersContentsResponseDataLinks? Links,
 	[property: JsonPropertyName("permissions")] UsersContentsResponseDataPermissions? Permissions,
-	[property: JsonPropertyName("thread")] UsersContentsResponseDataThread? Thread
+	[property: JsonPropertyName("thread")] JsonElement? Thread
 );
 
 	public sealed record UsersContentsResponseLinks(

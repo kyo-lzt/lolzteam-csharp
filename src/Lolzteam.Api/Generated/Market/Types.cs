@@ -215,36 +215,6 @@ public enum CanChangeDetails
 	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
 }
 
-[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<CartNotOrigin>))]
-public enum CartNotOrigin
-{
-	[Lolzteam.Api.Runtime.EnumValue("brute")] Brute,
-	[Lolzteam.Api.Runtime.EnumValue("phishing")] Phishing,
-	[Lolzteam.Api.Runtime.EnumValue("stealer")] Stealer,
-	[Lolzteam.Api.Runtime.EnumValue("personal")] Personal,
-	[Lolzteam.Api.Runtime.EnumValue("resale")] Resale,
-	[Lolzteam.Api.Runtime.EnumValue("autoreg")] Autoreg,
-	[Lolzteam.Api.Runtime.EnumValue("self_registration")] SelfRegistration,
-	[Lolzteam.Api.Runtime.EnumValue("retrieve")] Retrieve,
-	[Lolzteam.Api.Runtime.EnumValue("retrieve_via_support")] RetrieveViaSupport,
-	[Lolzteam.Api.Runtime.EnumValue("dummy")] Dummy,
-}
-
-[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<CartOrigin>))]
-public enum CartOrigin
-{
-	[Lolzteam.Api.Runtime.EnumValue("brute")] Brute,
-	[Lolzteam.Api.Runtime.EnumValue("phishing")] Phishing,
-	[Lolzteam.Api.Runtime.EnumValue("stealer")] Stealer,
-	[Lolzteam.Api.Runtime.EnumValue("personal")] Personal,
-	[Lolzteam.Api.Runtime.EnumValue("resale")] Resale,
-	[Lolzteam.Api.Runtime.EnumValue("autoreg")] Autoreg,
-	[Lolzteam.Api.Runtime.EnumValue("self_registration")] SelfRegistration,
-	[Lolzteam.Api.Runtime.EnumValue("retrieve")] Retrieve,
-	[Lolzteam.Api.Runtime.EnumValue("retrieve_via_support")] RetrieveViaSupport,
-	[Lolzteam.Api.Runtime.EnumValue("dummy")] Dummy,
-}
-
 public enum CategoryEg : long
 {
 	Neg1 = -1,
@@ -325,32 +295,6 @@ public enum CategoryId : long
 	V28 = 28,
 	V30 = 30,
 	V31 = 31,
-}
-
-[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<CategoryNotOrigin>))]
-public enum CategoryNotOrigin
-{
-	[Lolzteam.Api.Runtime.EnumValue("brute")] Brute,
-	[Lolzteam.Api.Runtime.EnumValue("phishing")] Phishing,
-	[Lolzteam.Api.Runtime.EnumValue("stealer")] Stealer,
-	[Lolzteam.Api.Runtime.EnumValue("personal")] Personal,
-	[Lolzteam.Api.Runtime.EnumValue("resale")] Resale,
-	[Lolzteam.Api.Runtime.EnumValue("autoreg")] Autoreg,
-	[Lolzteam.Api.Runtime.EnumValue("dummy")] Dummy,
-	[Lolzteam.Api.Runtime.EnumValue("self_registration")] SelfRegistration,
-}
-
-[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<CategoryOrigin>))]
-public enum CategoryOrigin
-{
-	[Lolzteam.Api.Runtime.EnumValue("brute")] Brute,
-	[Lolzteam.Api.Runtime.EnumValue("phishing")] Phishing,
-	[Lolzteam.Api.Runtime.EnumValue("stealer")] Stealer,
-	[Lolzteam.Api.Runtime.EnumValue("personal")] Personal,
-	[Lolzteam.Api.Runtime.EnumValue("resale")] Resale,
-	[Lolzteam.Api.Runtime.EnumValue("autoreg")] Autoreg,
-	[Lolzteam.Api.Runtime.EnumValue("dummy")] Dummy,
-	[Lolzteam.Api.Runtime.EnumValue("self_registration")] SelfRegistration,
 }
 
 [JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<CategoryRegion>))]
@@ -2651,7 +2595,7 @@ public enum ExtendedGuarantee : long
 [JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<FieldsInclude>))]
 public enum FieldsInclude
 {
-	[Lolzteam.Api.Runtime.EnumValue("*")] Value1243483987,
+	[Lolzteam.Api.Runtime.EnumValue("*")] Value882129986,
 	[Lolzteam.Api.Runtime.EnumValue("searchHistory")] SearchHistory,
 	[Lolzteam.Api.Runtime.EnumValue("savedSearch")] SavedSearch,
 }
@@ -7671,6 +7615,20 @@ public enum HypixelSkyblockApiEnabled
 	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
 }
 
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<ItemOrigin>))]
+public enum ItemOrigin
+{
+	[Lolzteam.Api.Runtime.EnumValue("brute")] Brute,
+	[Lolzteam.Api.Runtime.EnumValue("phishing")] Phishing,
+	[Lolzteam.Api.Runtime.EnumValue("stealer")] Stealer,
+	[Lolzteam.Api.Runtime.EnumValue("autoreg")] Autoreg,
+	[Lolzteam.Api.Runtime.EnumValue("personal")] Personal,
+	[Lolzteam.Api.Runtime.EnumValue("resale")] Resale,
+	[Lolzteam.Api.Runtime.EnumValue("dummy")] Dummy,
+	[Lolzteam.Api.Runtime.EnumValue("self_registration")] SelfRegistration,
+	[Lolzteam.Api.Runtime.EnumValue("retrieve_via_support")] RetrieveViaSupport,
+}
+
 [JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Java>))]
 public enum Java
 {
@@ -7770,18 +7728,6 @@ public enum Mafile
 	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
 	[Lolzteam.Api.Runtime.EnumValue("no")] No,
 	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
-}
-
-[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<ManagingItemOrigin>))]
-public enum ManagingItemOrigin
-{
-	[Lolzteam.Api.Runtime.EnumValue("brute")] Brute,
-	[Lolzteam.Api.Runtime.EnumValue("phishing")] Phishing,
-	[Lolzteam.Api.Runtime.EnumValue("stealer")] Stealer,
-	[Lolzteam.Api.Runtime.EnumValue("personal")] Personal,
-	[Lolzteam.Api.Runtime.EnumValue("resale")] Resale,
-	[Lolzteam.Api.Runtime.EnumValue("autoreg")] Autoreg,
-	[Lolzteam.Api.Runtime.EnumValue("dummy")] Dummy,
 }
 
 [JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<ManagingType>))]
@@ -8059,6 +8005,20 @@ public enum NotEmailProvider
 	[Lolzteam.Api.Runtime.EnumValue("mail_ru")] MailRu,
 }
 
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<NotOrigin>))]
+public enum NotOrigin
+{
+	[Lolzteam.Api.Runtime.EnumValue("brute")] Brute,
+	[Lolzteam.Api.Runtime.EnumValue("phishing")] Phishing,
+	[Lolzteam.Api.Runtime.EnumValue("stealer")] Stealer,
+	[Lolzteam.Api.Runtime.EnumValue("autoreg")] Autoreg,
+	[Lolzteam.Api.Runtime.EnumValue("personal")] Personal,
+	[Lolzteam.Api.Runtime.EnumValue("resale")] Resale,
+	[Lolzteam.Api.Runtime.EnumValue("dummy")] Dummy,
+	[Lolzteam.Api.Runtime.EnumValue("self_registration")] SelfRegistration,
+	[Lolzteam.Api.Runtime.EnumValue("retrieve_via_support")] RetrieveViaSupport,
+}
+
 [JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<NotRegion>))]
 public enum NotRegion
 {
@@ -8100,6 +8060,20 @@ public enum OrderBy
 	[Lolzteam.Api.Runtime.EnumValue("edate_to_down")] EdateToDown,
 	[Lolzteam.Api.Runtime.EnumValue("ddate_to_up")] DdateToUp,
 	[Lolzteam.Api.Runtime.EnumValue("ddate_to_down")] DdateToDown,
+}
+
+[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<Origin>))]
+public enum Origin
+{
+	[Lolzteam.Api.Runtime.EnumValue("brute")] Brute,
+	[Lolzteam.Api.Runtime.EnumValue("phishing")] Phishing,
+	[Lolzteam.Api.Runtime.EnumValue("stealer")] Stealer,
+	[Lolzteam.Api.Runtime.EnumValue("autoreg")] Autoreg,
+	[Lolzteam.Api.Runtime.EnumValue("personal")] Personal,
+	[Lolzteam.Api.Runtime.EnumValue("resale")] Resale,
+	[Lolzteam.Api.Runtime.EnumValue("dummy")] Dummy,
+	[Lolzteam.Api.Runtime.EnumValue("self_registration")] SelfRegistration,
+	[Lolzteam.Api.Runtime.EnumValue("retrieve_via_support")] RetrieveViaSupport,
 }
 
 [JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<ParentControl>))]
@@ -10249,19 +10223,6 @@ public enum PsnLinkable
 	[Lolzteam.Api.Runtime.EnumValue("yes")] Yes,
 	[Lolzteam.Api.Runtime.EnumValue("no")] No,
 	[Lolzteam.Api.Runtime.EnumValue("nomatter")] Nomatter,
-}
-
-[JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<PublishingItemOrigin>))]
-public enum PublishingItemOrigin
-{
-	[Lolzteam.Api.Runtime.EnumValue("brute")] Brute,
-	[Lolzteam.Api.Runtime.EnumValue("phishing")] Phishing,
-	[Lolzteam.Api.Runtime.EnumValue("stealer")] Stealer,
-	[Lolzteam.Api.Runtime.EnumValue("personal")] Personal,
-	[Lolzteam.Api.Runtime.EnumValue("resale")] Resale,
-	[Lolzteam.Api.Runtime.EnumValue("autoreg")] Autoreg,
-	[Lolzteam.Api.Runtime.EnumValue("dummy")] Dummy,
-	[Lolzteam.Api.Runtime.EnumValue("self_registration")] SelfRegistration,
 }
 
 [JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<PublishingType>))]
@@ -14185,10 +14146,10 @@ public static class CartApiTypes
 		public List<long?>? NotPublicTagId { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Search accounts of user.</summary>
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
@@ -14293,10 +14254,10 @@ public static class CategoryApiTypes
 		public List<long?>? NotPublicTagId { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Search accounts of user.</summary>
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
@@ -14372,10 +14333,10 @@ public static class CategoryApiTypes
 		public List<long?>? NotPublicTagId { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Search accounts of user.</summary>
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
@@ -14945,10 +14906,10 @@ public static class CategoryApiTypes
 		public List<long?>? NotPublicTagId { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Search accounts of user.</summary>
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
@@ -15365,10 +15326,10 @@ public static class CategoryApiTypes
 		public List<long?>? NotPublicTagId { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Search accounts of user.</summary>
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
@@ -15923,10 +15884,10 @@ public static class CategoryApiTypes
 		public List<long?>? NotPublicTagId { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Search accounts of user.</summary>
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
@@ -16318,10 +16279,10 @@ public static class CategoryApiTypes
 		public List<long?>? NotPublicTagId { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CategoryOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CategoryNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Search accounts of user.</summary>
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
@@ -16641,10 +16602,10 @@ public static class CategoryApiTypes
 		public List<long?>? NotPublicTagId { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Search accounts of user.</summary>
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
@@ -16994,10 +16955,10 @@ public static class CategoryApiTypes
 		public List<long?>? NotPublicTagId { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Search accounts of user.</summary>
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
@@ -17256,10 +17217,10 @@ public static class CategoryApiTypes
 		public List<long?>? NotPublicTagId { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Search accounts of user.</summary>
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
@@ -17552,10 +17513,10 @@ public static class CategoryApiTypes
 		public List<long?>? NotPublicTagId { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Search accounts of user.</summary>
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
@@ -17848,10 +17809,10 @@ public static class CategoryApiTypes
 		public List<long?>? NotPublicTagId { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Search accounts of user.</summary>
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
@@ -18023,10 +17984,10 @@ public static class CategoryApiTypes
 		public List<long?>? NotPublicTagId { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Search accounts of user.</summary>
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
@@ -18264,10 +18225,10 @@ public static class CategoryApiTypes
 		public List<long?>? NotPublicTagId { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Search accounts of user.</summary>
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
@@ -18482,10 +18443,10 @@ public static class CategoryApiTypes
 		public List<long?>? NotPublicTagId { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Search accounts of user.</summary>
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
@@ -18694,10 +18655,10 @@ public static class CategoryApiTypes
 		public List<long?>? NotPublicTagId { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Search accounts of user.</summary>
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
@@ -18994,10 +18955,10 @@ public static class CategoryApiTypes
 		public List<long?>? NotPublicTagId { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Search accounts of user.</summary>
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
@@ -19292,10 +19253,10 @@ public static class CategoryApiTypes
 		public List<long?>? NotPublicTagId { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Search accounts of user.</summary>
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
@@ -19529,10 +19490,10 @@ public static class CategoryApiTypes
 		public List<long?>? NotPublicTagId { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Search accounts of user.</summary>
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
@@ -19748,10 +19709,10 @@ public static class CategoryApiTypes
 		public List<long?>? NotPublicTagId { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Search accounts of user.</summary>
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
@@ -19992,10 +19953,10 @@ public static class CategoryApiTypes
 		public List<long?>? NotPublicTagId { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Search accounts of user.</summary>
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
@@ -20210,10 +20171,10 @@ public static class CategoryApiTypes
 		public List<long?>? NotPublicTagId { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Search accounts of user.</summary>
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
@@ -20389,10 +20350,10 @@ public static class CategoryApiTypes
 		public List<long?>? NotPublicTagId { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Search accounts of user.</summary>
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
@@ -20710,10 +20671,10 @@ public static class CategoryApiTypes
 		public List<long?>? NotPublicTagId { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Search accounts of user.</summary>
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
@@ -20924,10 +20885,10 @@ public static class CategoryApiTypes
 		public List<long?>? NotPublicTagId { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Search accounts of user.</summary>
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
@@ -21224,10 +21185,10 @@ public static class CategoryApiTypes
 		public List<long?>? NotPublicTagId { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Search accounts of user.</summary>
 		[JsonPropertyName("user_id")]
 		public long? UserId { get; init; }
@@ -21628,10 +21589,10 @@ public static class ListApiTypes
 		public string? Login { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Order by.</summary>
 		[JsonPropertyName("order_by")]
 		public OrderBy? OrderBy { get; init; }
@@ -21719,10 +21680,10 @@ public static class ListApiTypes
 		public string? Login { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Order by.</summary>
 		[JsonPropertyName("order_by")]
 		public OrderBy? OrderBy { get; init; }
@@ -21890,10 +21851,10 @@ public static class ListApiTypes
 		public long? Pmax { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Order by.</summary>
 		[JsonPropertyName("order_by")]
 		public OrderBy? OrderBy { get; init; }
@@ -21962,10 +21923,10 @@ public static class ListApiTypes
 		public long? Pmax { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Order by.</summary>
 		[JsonPropertyName("order_by")]
 		public OrderBy? OrderBy { get; init; }
@@ -22014,10 +21975,10 @@ public static class ListApiTypes
 		public long? Pmax { get; init; }
 		/// <summary>List of account origins.</summary>
 		[JsonPropertyName("origin[]")]
-		public List<CartOrigin>? Origin { get; init; }
+		public Origin? Origin { get; init; }
 		/// <summary>List of account origins that won't be included.</summary>
 		[JsonPropertyName("not_origin[]")]
-		public List<CartNotOrigin>? NotOrigin { get; init; }
+		public List<NotOrigin>? NotOrigin { get; init; }
 		/// <summary>Order by.</summary>
 		[JsonPropertyName("order_by")]
 		public OrderBy? OrderBy { get; init; }
@@ -22366,9 +22327,9 @@ public static class ManagingApiTypes
 		public long? Price { get; init; }
 		[JsonPropertyName("currency")]
 		public Currency? Currency { get; init; }
-		/// <summary>Account origin. Where did you get it from.</summary>
+		/// <summary>Account origin.</summary>
 		[JsonPropertyName("item_origin")]
-		public ManagingItemOrigin? ItemOrigin { get; init; }
+		public ItemOrigin? ItemOrigin { get; init; }
 		/// <summary>Email login data (email:password format).</summary>
 		[JsonPropertyName("email_login_data")]
 		public string? EmailLoginData { get; init; }
@@ -23960,9 +23921,9 @@ public static class PublishingApiTypes
 		public required CategoryId CategoryId { get; init; }
 		[JsonPropertyName("currency")]
 		public required Currency Currency { get; init; }
-		/// <summary>Account origin. Where did you get it from.</summary>
+		/// <summary>Account origin.</summary>
 		[JsonPropertyName("item_origin")]
-		public required PublishingItemOrigin ItemOrigin { get; init; }
+		public required ItemOrigin ItemOrigin { get; init; }
 		/// <summary>Guarantee type.</summary>
 		[JsonPropertyName("extended_guarantee")]
 		public ExtendedGuarantee? ExtendedGuarantee { get; init; }
@@ -24025,9 +23986,9 @@ public static class PublishingApiTypes
 		public required CategoryId CategoryId { get; init; }
 		[JsonPropertyName("currency")]
 		public required Currency Currency { get; init; }
-		/// <summary>Account origin. Where did you get it from.</summary>
+		/// <summary>Account origin.</summary>
 		[JsonPropertyName("item_origin")]
-		public required PublishingItemOrigin ItemOrigin { get; init; }
+		public required ItemOrigin ItemOrigin { get; init; }
 		/// <summary>Guarantee type.</summary>
 		[JsonPropertyName("extended_guarantee")]
 		public ExtendedGuarantee? ExtendedGuarantee { get; init; }
