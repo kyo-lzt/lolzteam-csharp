@@ -146,7 +146,7 @@ internal static partial class Emitter
                 if (variant is EnumVariant.IntVariant iv)
                 {
                     var memberName = DeduplicateName(IntEnumMemberName(iv.Value), seenMembers);
-                    sb.Append('\t').Append(memberName).Append(" = ").Append(iv.Value).Append(",\n");
+                    sb.Append("    ").Append(memberName).Append(" = ").Append(iv.Value).Append(",\n");
                 }
             }
         }
@@ -160,7 +160,7 @@ internal static partial class Emitter
                 if (variant is EnumVariant.StringVariant sv)
                 {
                     var memberName = DeduplicateName(StringEnumMemberName(sv.Value), seenMembers);
-                    sb.Append("\t[Lolzteam.Api.Runtime.EnumValue(\"")
+                    sb.Append("    [Lolzteam.Api.Runtime.EnumValue(\"")
                         .Append(sv.Value.Replace("\\", "\\\\").Replace("\"", "\\\""))
                         .Append("\")] ")
                         .Append(memberName).Append(",\n");
@@ -275,7 +275,7 @@ internal static partial class Emitter
             var propName = DeduplicateName(Naming.SafeCSharpName(jsonName), seenNames);
             var typeStr = required ? csharpType : MakeNullable(csharpType);
 
-            sb.Append("\t[property: JsonPropertyName(\"").Append(jsonName).Append("\")] ");
+            sb.Append("    [property: JsonPropertyName(\"").Append(jsonName).Append("\")] ");
             sb.Append(typeStr).Append(' ').Append(propName);
 
             if (i < entries.Count - 1)
@@ -404,7 +404,7 @@ internal static partial class Emitter
                         var (jn, ct, _) = entries[i];
                         var pn = DeduplicateName(Naming.SafeCSharpName(jn), nestedSeen);
                         var ts = MakeNullable(ct);
-                        nestedSb.Append("\t[property: JsonPropertyName(\"").Append(jn).Append("\")] ");
+                        nestedSb.Append("    [property: JsonPropertyName(\"").Append(jn).Append("\")] ");
                         nestedSb.Append(ts).Append(' ').Append(pn);
                         nestedSb.Append(i < entries.Count - 1 ? ",\n" : "\n");
                     }
@@ -446,8 +446,8 @@ internal static partial class Emitter
 
         var typeName = Naming.BuildTypeName(group, method.MethodName) + "Params";
         var sb = new StringBuilder();
-        sb.Append("\tpublic sealed record ").Append(typeName).Append('\n');
-        sb.Append("\t{\n");
+        sb.Append("    public sealed record ").Append(typeName).Append('\n');
+        sb.Append("    {\n");
 
         foreach (var param in method.Params.QueryParams)
         {
@@ -461,11 +461,11 @@ internal static partial class Emitter
                 var parts = new List<string>();
                 if (param.Description is not null) parts.Add(EscapeXml(param.Description.ReplaceLineEndings(" ")));
                 if (param.DefaultValue is not null) parts.Add("Default: " + FormatDefaultValue(param.DefaultValue) + ".");
-                sb.Append("\t\t/// <summary>").Append(string.Join(" ", parts)).Append("</summary>\n");
+                sb.Append("        /// <summary>").Append(string.Join(" ", parts)).Append("</summary>\n");
             }
             if (Naming.NeedsJsonPropertyName(param.Name))
             {
-                sb.Append("\t\t[JsonPropertyName(\"").Append(param.Name).Append("\")]\n");
+                sb.Append("        [JsonPropertyName(\"").Append(param.Name).Append("\")]\n");
             }
             var defaultLiteral = param.DefaultValue is not null
                 ? FormatDefaultLiteral(param.DefaultValue, csharpType, enumDefs, propName)
@@ -473,20 +473,20 @@ internal static partial class Emitter
             if (param.Required && defaultLiteral is null)
             {
                 // Required param without default: non-nullable with required keyword
-                sb.Append("\t\tpublic required ").Append(csharpType).Append(' ').Append(propName).Append(" { get; init; }\n");
+                sb.Append("        public required ").Append(csharpType).Append(' ').Append(propName).Append(" { get; init; }\n");
             }
             else if (defaultLiteral is not null)
             {
-                sb.Append("\t\tpublic ").Append(MakeNullable(csharpType)).Append(' ').Append(propName)
+                sb.Append("        public ").Append(MakeNullable(csharpType)).Append(' ').Append(propName)
                     .Append(" { get; init; } = ").Append(defaultLiteral).Append(";\n");
             }
             else
             {
-                sb.Append("\t\tpublic ").Append(MakeNullable(csharpType)).Append(' ').Append(propName).Append(" { get; init; }\n");
+                sb.Append("        public ").Append(MakeNullable(csharpType)).Append(' ').Append(propName).Append(" { get; init; }\n");
             }
         }
 
-        sb.Append("\t}");
+        sb.Append("    }");
         return sb.ToString();
     }
 
@@ -510,8 +510,8 @@ internal static partial class Emitter
         var typeName = Naming.BuildTypeName(group, method.MethodName) + "Body";
 
         var sb = new StringBuilder();
-        sb.Append("\tpublic sealed record ").Append(typeName).Append('\n');
-        sb.Append("\t{\n");
+        sb.Append("    public sealed record ").Append(typeName).Append('\n');
+        sb.Append("    {\n");
 
         foreach (var prop in method.BodyProperties)
         {
@@ -528,11 +528,11 @@ internal static partial class Emitter
                 var parts = new List<string>();
                 if (prop.Description is not null) parts.Add(EscapeXml(prop.Description.ReplaceLineEndings(" ")));
                 if (prop.DefaultValue is not null) parts.Add("Default: " + FormatDefaultValue(prop.DefaultValue) + ".");
-                sb.Append("\t\t/// <summary>").Append(string.Join(" ", parts)).Append("</summary>\n");
+                sb.Append("        /// <summary>").Append(string.Join(" ", parts)).Append("</summary>\n");
             }
             if (Naming.NeedsJsonPropertyName(prop.Name))
             {
-                sb.Append("\t\t[JsonPropertyName(\"").Append(prop.Name).Append("\")]\n");
+                sb.Append("        [JsonPropertyName(\"").Append(prop.Name).Append("\")]\n");
             }
 
             var defaultLiteral = prop.DefaultValue is not null
@@ -544,29 +544,29 @@ internal static partial class Emitter
                 if (defaultLiteral is not null)
                 {
                     // Has default → not truly "required" from user perspective, emit with initializer
-                    sb.Append("\t\tpublic ").Append(csharpType).Append(' ').Append(propName)
+                    sb.Append("        public ").Append(csharpType).Append(' ').Append(propName)
                         .Append(" { get; init; } = ").Append(defaultLiteral).Append(";\n");
                 }
                 else
                 {
-                    sb.Append("\t\tpublic required ").Append(csharpType).Append(' ').Append(propName).Append(" { get; init; }\n");
+                    sb.Append("        public required ").Append(csharpType).Append(' ').Append(propName).Append(" { get; init; }\n");
                 }
             }
             else
             {
                 if (defaultLiteral is not null)
                 {
-                    sb.Append("\t\tpublic ").Append(MakeNullable(csharpType)).Append(' ').Append(propName)
+                    sb.Append("        public ").Append(MakeNullable(csharpType)).Append(' ').Append(propName)
                         .Append(" { get; init; } = ").Append(defaultLiteral).Append(";\n");
                 }
                 else
                 {
-                    sb.Append("\t\tpublic ").Append(MakeNullable(csharpType)).Append(' ').Append(propName).Append(" { get; init; }\n");
+                    sb.Append("        public ").Append(MakeNullable(csharpType)).Append(' ').Append(propName).Append(" { get; init; }\n");
                 }
             }
         }
 
-        sb.Append("\t}");
+        sb.Append("    }");
         return sb.ToString();
     }
 
@@ -581,31 +581,31 @@ internal static partial class Emitter
         foreach (var variant in variants)
         {
             var variantName = VariantClassName(baseName, variant.Title);
-            sb.Append("\t[JsonDerivedType(typeof(").Append(variantName).Append("), \"")
+            sb.Append("    [JsonDerivedType(typeof(").Append(variantName).Append("), \"")
                 .Append(variant.DiscriminatorValue).Append("\")]\n");
         }
-        sb.Append("\tpublic abstract record ").Append(baseName).Append(";\n");
+        sb.Append("    public abstract record ").Append(baseName).Append(";\n");
 
         // Variant records
         foreach (var variant in variants)
         {
             var variantName = VariantClassName(baseName, variant.Title);
             sb.Append('\n');
-            sb.Append("\tpublic sealed record ").Append(variantName).Append(" : ").Append(baseName).Append('\n');
-            sb.Append("\t{\n");
+            sb.Append("    public sealed record ").Append(variantName).Append(" : ").Append(baseName).Append('\n');
+            sb.Append("    {\n");
 
             // Discriminator field as a constant
             var discPropName = Naming.SafeCSharpName(variant.DiscriminatorField);
-            sb.Append("\t\t[JsonPropertyName(\"").Append(variant.DiscriminatorField).Append("\")]\n");
+            sb.Append("        [JsonPropertyName(\"").Append(variant.DiscriminatorField).Append("\")]\n");
 
             // Determine if discriminator is int or string
             if (long.TryParse(variant.DiscriminatorValue, out var intDisc))
             {
-                sb.Append("\t\tpublic long ").Append(discPropName).Append(" => ").Append(intDisc).Append(";\n");
+                sb.Append("        public long ").Append(discPropName).Append(" => ").Append(intDisc).Append(";\n");
             }
             else
             {
-                sb.Append("\t\tpublic string ").Append(discPropName).Append(" => \"")
+                sb.Append("        public string ").Append(discPropName).Append(" => \"")
                     .Append(variant.DiscriminatorValue).Append("\";\n");
             }
 
@@ -624,11 +624,11 @@ internal static partial class Emitter
                     var parts = new List<string>();
                     if (prop.Description is not null) parts.Add(EscapeXml(prop.Description.ReplaceLineEndings(" ")));
                     if (prop.DefaultValue is not null) parts.Add("Default: " + FormatDefaultValue(prop.DefaultValue) + ".");
-                    sb.Append("\t\t/// <summary>").Append(string.Join(" ", parts)).Append("</summary>\n");
+                    sb.Append("        /// <summary>").Append(string.Join(" ", parts)).Append("</summary>\n");
                 }
                 if (Naming.NeedsJsonPropertyName(prop.Name))
                 {
-                    sb.Append("\t\t[JsonPropertyName(\"").Append(prop.Name).Append("\")]\n");
+                    sb.Append("        [JsonPropertyName(\"").Append(prop.Name).Append("\")]\n");
                 }
 
                 var variantDefaultLiteral = prop.DefaultValue is not null
@@ -639,29 +639,29 @@ internal static partial class Emitter
                 {
                     if (variantDefaultLiteral is not null)
                     {
-                        sb.Append("\t\tpublic ").Append(csharpType).Append(' ').Append(propName)
+                        sb.Append("        public ").Append(csharpType).Append(' ').Append(propName)
                             .Append(" { get; init; } = ").Append(variantDefaultLiteral).Append(";\n");
                     }
                     else
                     {
-                        sb.Append("\t\tpublic required ").Append(csharpType).Append(' ').Append(propName).Append(" { get; init; }\n");
+                        sb.Append("        public required ").Append(csharpType).Append(' ').Append(propName).Append(" { get; init; }\n");
                     }
                 }
                 else
                 {
                     if (variantDefaultLiteral is not null)
                     {
-                        sb.Append("\t\tpublic ").Append(MakeNullable(csharpType)).Append(' ').Append(propName)
+                        sb.Append("        public ").Append(MakeNullable(csharpType)).Append(' ').Append(propName)
                             .Append(" { get; init; } = ").Append(variantDefaultLiteral).Append(";\n");
                     }
                     else
                     {
-                        sb.Append("\t\tpublic ").Append(MakeNullable(csharpType)).Append(' ').Append(propName).Append(" { get; init; }\n");
+                        sb.Append("        public ").Append(MakeNullable(csharpType)).Append(' ').Append(propName).Append(" { get; init; }\n");
                     }
                 }
             }
 
-            sb.Append("\t}");
+            sb.Append("    }");
         }
 
         return sb.ToString();
@@ -683,7 +683,7 @@ internal static partial class Emitter
         // text/html endpoints return raw string
         if (method.ReturnsHtml)
         {
-            return $"\tpublic sealed record {typeName}(string Data);";
+            return $"    public sealed record {typeName}(string Data);";
         }
 
         // If we have a raw response schema with properties, resolve types with nested record generation
@@ -692,7 +692,7 @@ internal static partial class Emitter
         {
             var nestedRecords = new List<string>();
             var sb = new StringBuilder();
-            sb.Append("\tpublic sealed record ").Append(typeName).Append("(\n");
+            sb.Append("    public sealed record ").Append(typeName).Append("(\n");
 
             var requiredSet = new HashSet<string>();
             var requiredArr = rawSchema["required"];
@@ -724,7 +724,7 @@ internal static partial class Emitter
                 var propName = DeduplicateName(Naming.SafeCSharpName(jsonName), seenNames);
                 var typeStr = required ? csharpType : MakeNullable(csharpType);
 
-                sb.Append("\t\t[property: JsonPropertyName(\"").Append(jsonName).Append("\")] ");
+                sb.Append("        [property: JsonPropertyName(\"").Append(jsonName).Append("\")] ");
                 sb.Append(typeStr).Append(' ').Append(propName);
 
                 if (i < entries.Count - 1)
@@ -733,12 +733,12 @@ internal static partial class Emitter
                     sb.Append('\n');
             }
 
-            sb.Append("\t);");
+            sb.Append("    );");
 
             // Append nested records after the response record
             foreach (var nested in nestedRecords)
             {
-                sb.Append("\n\n\t").Append(nested.TrimEnd());
+                sb.Append("\n\n    ").Append(nested.TrimEnd());
             }
 
             return sb.ToString();
@@ -746,7 +746,7 @@ internal static partial class Emitter
 
         // Fallback: opaque JsonElement
         var fallbackType = Transforms.ToCSharpType(method.ResponseType);
-        return $"\tpublic sealed record {typeName}({fallbackType} Data);";
+        return $"    public sealed record {typeName}({fallbackType} Data);";
     }
 
     internal static string EmitCSharpTypesFile(
@@ -955,48 +955,48 @@ internal static partial class Emitter
         // XML doc comments
         if (method.Summary is not null)
         {
-            sb.Append("\t/// <summary>").Append(EscapeXml(method.Summary)).Append("</summary>\n");
+            sb.Append("    /// <summary>").Append(EscapeXml(method.Summary)).Append("</summary>\n");
         }
         if (method.Description is not null)
         {
-            sb.Append("\t/// <remarks>\n");
+            sb.Append("    /// <remarks>\n");
             foreach (var line in method.Description.Split('\n'))
             {
                 var trimmed = line.TrimEnd('\r');
-                sb.Append("\t/// ").Append(EscapeXml(trimmed)).Append('\n');
+                sb.Append("    /// ").Append(EscapeXml(trimmed)).Append('\n');
             }
-            sb.Append("\t/// </remarks>\n");
+            sb.Append("    /// </remarks>\n");
         }
         foreach (var param in method.Params.PathParams)
         {
             if (param.Description is not null)
             {
                 var paramName = Naming.SnakeToPascal(Naming.SanitizeName(param.Name));
-                sb.Append("\t/// <param name=\"").Append(paramName).Append("\">").Append(EscapeXml(param.Description.ReplaceLineEndings(" "))).Append("</param>\n");
+                sb.Append("    /// <param name=\"").Append(paramName).Append("\">").Append(EscapeXml(param.Description.ReplaceLineEndings(" "))).Append("</param>\n");
             }
         }
 
-        sb.Append("\tpublic async Task<").Append(responseTypeName).Append("> ").Append(method.MethodName)
-            .Append("Async(").Append(argStr).Append(")\n\t{\n");
+        sb.Append("    public async Task<").Append(responseTypeName).Append("> ").Append(method.MethodName)
+            .Append("Async(").Append(argStr).Append(")\n    {\n");
 
         // text/html endpoints use RequestRawAsync
         if (method.ReturnsHtml)
         {
-            sb.Append("\t\tvar __result = await _http.RequestRawAsync(new RequestOptions\n");
-            sb.Append("\t\t{\n");
-            sb.Append("\t\t\tMethod = \"").Append(method.HttpMethod).Append("\",\n");
-            sb.Append("\t\t\tPath = ").Append(pathExpr).Append(",\n");
+            sb.Append("        var __result = await _http.RequestRawAsync(new RequestOptions\n");
+            sb.Append("        {\n");
+            sb.Append("            Method = \"").Append(method.HttpMethod).Append("\",\n");
+            sb.Append("            Path = ").Append(pathExpr).Append(",\n");
             if (hasQueryType)
             {
-                sb.Append("\t\t\tQuery = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,\n");
+                sb.Append("            Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,\n");
             }
             if (isSearch)
             {
-                sb.Append("\t\t\tIsSearch = true,\n");
+                sb.Append("            IsSearch = true,\n");
             }
-            sb.Append("\t\t}, cancellationToken).ConfigureAwait(false);\n");
-            sb.Append("\t\treturn new ").Append(responseTypeName).Append("(__result);\n");
-            sb.Append("\t}");
+            sb.Append("        }, cancellationToken).ConfigureAwait(false);\n");
+            sb.Append("        return new ").Append(responseTypeName).Append("(__result);\n");
+            sb.Append("    }");
             return sb.ToString();
         }
 
@@ -1007,43 +1007,43 @@ internal static partial class Emitter
         else
         {
             var encodingLiteral = BodyEncodingLiteral(method.BodyEncoding);
-            sb.Append("\t\tvar __result = await _http.RequestAsync(new RequestOptions\n");
-            sb.Append("\t\t{\n");
-            sb.Append("\t\t\tMethod = \"").Append(method.HttpMethod).Append("\",\n");
-            sb.Append("\t\t\tPath = ").Append(pathExpr).Append(",\n");
+            sb.Append("        var __result = await _http.RequestAsync(new RequestOptions\n");
+            sb.Append("        {\n");
+            sb.Append("            Method = \"").Append(method.HttpMethod).Append("\",\n");
+            sb.Append("            Path = ").Append(pathExpr).Append(",\n");
 
             if (hasQueryType)
             {
-                sb.Append("\t\t\tQuery = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,\n");
+                sb.Append("            Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,\n");
             }
 
             if (hasBodyType)
             {
                 if (method.BodyRequired)
                 {
-                    sb.Append("\t\t\tBody = JsonSerializer.SerializeToElement(body),\n");
+                    sb.Append("            Body = JsonSerializer.SerializeToElement(body),\n");
                 }
                 else
                 {
-                    sb.Append("\t\t\tBody = body is not null ? JsonSerializer.SerializeToElement(body) : null,\n");
+                    sb.Append("            Body = body is not null ? JsonSerializer.SerializeToElement(body) : null,\n");
                 }
-                sb.Append("\t\t\tBodyEncoding = ").Append(encodingLiteral).Append(",\n");
+                sb.Append("            BodyEncoding = ").Append(encodingLiteral).Append(",\n");
             }
             else if (method.BodyEncoding != "form")
             {
-                sb.Append("\t\t\tBodyEncoding = ").Append(encodingLiteral).Append(",\n");
+                sb.Append("            BodyEncoding = ").Append(encodingLiteral).Append(",\n");
             }
 
             if (isSearch)
             {
-                sb.Append("\t\t\tIsSearch = true,\n");
+                sb.Append("            IsSearch = true,\n");
             }
 
-            sb.Append("\t\t}, cancellationToken).ConfigureAwait(false);\n");
-            EmitReturnStatement(sb, responseTypeName, method, "\t\t");
+            sb.Append("        }, cancellationToken).ConfigureAwait(false);\n");
+            EmitReturnStatement(sb, responseTypeName, method, "        ");
         }
 
-        sb.Append("\t}");
+        sb.Append("    }");
         return sb.ToString();
     }
 
@@ -1055,7 +1055,7 @@ internal static partial class Emitter
         var byteArrayFieldNames = method.BodyProperties.FindAll(p => p.Type == "Blob")
             .ConvertAll(p => p.Name);
 
-        var indent = method.BodyRequired ? "\t\t" : "\t\t\t";
+        var indent = method.BodyRequired ? "        " : "            ";
 
         void EmitBody()
         {
@@ -1095,23 +1095,23 @@ internal static partial class Emitter
 
             sb.Append(indent).Append("var __result = await _http.RequestAsync(new RequestOptions\n");
             sb.Append(indent).Append("{\n");
-            sb.Append(indent).Append("\tMethod = \"").Append(method.HttpMethod).Append("\",\n");
-            sb.Append(indent).Append("\tPath = ").Append(pathExpr).Append(",\n");
+            sb.Append(indent).Append("    Method = \"").Append(method.HttpMethod).Append("\",\n");
+            sb.Append(indent).Append("    Path = ").Append(pathExpr).Append(",\n");
 
             if (hasQueryType)
             {
-                sb.Append(indent).Append("\tQuery = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,\n");
+                sb.Append(indent).Append("    Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,\n");
             }
 
             if (serializableProps.Count > 0)
             {
-                sb.Append(indent).Append("\tBody = JsonSerializer.SerializeToElement(jsonObj),\n");
+                sb.Append(indent).Append("    Body = JsonSerializer.SerializeToElement(jsonObj),\n");
             }
-            sb.Append(indent).Append("\tBodyEncoding = BodyEncoding.Multipart,\n");
-            sb.Append(indent).Append("\tByteArrayFields = byteFields,\n");
+            sb.Append(indent).Append("    BodyEncoding = BodyEncoding.Multipart,\n");
+            sb.Append(indent).Append("    ByteArrayFields = byteFields,\n");
             if (isSearch)
             {
-                sb.Append(indent).Append("\tIsSearch = true,\n");
+                sb.Append(indent).Append("    IsSearch = true,\n");
             }
             sb.Append(indent).Append("}, cancellationToken).ConfigureAwait(false);\n");
             EmitReturnStatement(sb, responseTypeName, method, indent);
@@ -1123,25 +1123,25 @@ internal static partial class Emitter
         }
         else
         {
-            sb.Append("\t\tif (body is not null)\n\t\t{\n");
+            sb.Append("        if (body is not null)\n        {\n");
             EmitBody();
-            sb.Append("\t\t}\n\t\telse\n\t\t{\n");
-            sb.Append("\t\t\tvar __result = await _http.RequestAsync(new RequestOptions\n");
-            sb.Append("\t\t\t{\n");
-            sb.Append("\t\t\t\tMethod = \"").Append(method.HttpMethod).Append("\",\n");
-            sb.Append("\t\t\t\tPath = ").Append(pathExpr).Append(",\n");
+            sb.Append("        }\n        else\n        {\n");
+            sb.Append("            var __result = await _http.RequestAsync(new RequestOptions\n");
+            sb.Append("            {\n");
+            sb.Append("                Method = \"").Append(method.HttpMethod).Append("\",\n");
+            sb.Append("                Path = ").Append(pathExpr).Append(",\n");
             if (hasQueryType)
             {
-                sb.Append("\t\t\t\tQuery = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,\n");
+                sb.Append("                Query = @params is not null ? JsonSerializer.SerializeToElement(@params) : null,\n");
             }
-            sb.Append("\t\t\t\tBodyEncoding = BodyEncoding.Multipart,\n");
+            sb.Append("                BodyEncoding = BodyEncoding.Multipart,\n");
             if (isSearch)
             {
-                sb.Append("\t\t\t\tIsSearch = true,\n");
+                sb.Append("                IsSearch = true,\n");
             }
-            sb.Append("\t\t\t}, cancellationToken).ConfigureAwait(false);\n");
-            EmitReturnStatement(sb, responseTypeName, method, "\t\t\t");
-            sb.Append("\t\t}\n");
+            sb.Append("            }, cancellationToken).ConfigureAwait(false);\n");
+            EmitReturnStatement(sb, responseTypeName, method, "            ");
+            sb.Append("        }\n");
         }
     }
 
@@ -1152,11 +1152,11 @@ internal static partial class Emitter
 
         sb.Append("public sealed class ").Append(className).Append('\n');
         sb.Append("{\n");
-        sb.Append("\tprivate readonly LolzteamHttpClient _http;\n\n");
-        sb.Append("\tpublic ").Append(className).Append("(LolzteamHttpClient http)\n");
-        sb.Append("\t{\n");
-        sb.Append("\t\t_http = http;\n");
-        sb.Append("\t}\n");
+        sb.Append("    private readonly LolzteamHttpClient _http;\n\n");
+        sb.Append("    public ").Append(className).Append("(LolzteamHttpClient http)\n");
+        sb.Append("    {\n");
+        sb.Append("        _http = http;\n");
+        sb.Append("    }\n");
 
         foreach (var method in group.Methods)
         {
@@ -1200,40 +1200,40 @@ internal static partial class Emitter
         {
             var propClassName = Naming.GroupToClassName(group.GroupName);
             var propName = Naming.GroupToPropertyName(group.GroupName);
-            sb.Append("\tpublic ").Append(propClassName).Append(' ').Append(propName).Append(" { get; }\n");
+            sb.Append("    public ").Append(propClassName).Append(' ').Append(propName).Append(" { get; }\n");
         }
 
-        sb.Append("\n\tprivate readonly LolzteamHttpClient _http;\n\n");
+        sb.Append("\n    private readonly LolzteamHttpClient _http;\n\n");
 
         // Constructor
-        sb.Append("\tpublic ").Append(clientName).Append("(ClientConfig config)\n\t{\n");
-        sb.Append("\t\tvar resolvedConfig = config with\n\t\t{\n");
-        sb.Append("\t\t\tBaseUrl = config.BaseUrl ?? \"").Append(defaultBaseUrl).Append("\",\n");
-        sb.Append("\t\t\tRateLimit = config.RateLimit ?? new RateLimitConfig(").Append(defaultRateLimit).Append("),\n");
+        sb.Append("    public ").Append(clientName).Append("(ClientConfig config)\n    {\n");
+        sb.Append("        var resolvedConfig = config with\n        {\n");
+        sb.Append("            BaseUrl = config.BaseUrl ?? \"").Append(defaultBaseUrl).Append("\",\n");
+        sb.Append("            RateLimit = config.RateLimit ?? new RateLimitConfig(").Append(defaultRateLimit).Append("),\n");
         if (defaultSearchRateLimit > 0)
         {
-            sb.Append("\t\t\tSearchRateLimit = config.SearchRateLimit ?? new RateLimitConfig(").Append(defaultSearchRateLimit).Append("),\n");
+            sb.Append("            SearchRateLimit = config.SearchRateLimit ?? new RateLimitConfig(").Append(defaultSearchRateLimit).Append("),\n");
         }
-        sb.Append("\t\t};\n");
-        sb.Append("\t\t_http = new LolzteamHttpClient(resolvedConfig);\n\n");
+        sb.Append("        };\n");
+        sb.Append("        _http = new LolzteamHttpClient(resolvedConfig);\n\n");
 
         foreach (var group in groups)
         {
             var propClassName = Naming.GroupToClassName(group.GroupName);
             var propName = Naming.GroupToPropertyName(group.GroupName);
-            sb.Append("\t\t").Append(propName).Append(" = new ").Append(propClassName).Append("(_http);\n");
+            sb.Append("        ").Append(propName).Append(" = new ").Append(propClassName).Append("(_http);\n");
         }
 
-        sb.Append("\t}\n\n");
+        sb.Append("    }\n\n");
 
-        sb.Append("\tpublic static ").Append(clientName).Append(" Create(string token)\n\t{\n");
-        sb.Append("\t\treturn new ").Append(clientName).Append("(new ClientConfig { Token = token });\n");
-        sb.Append("\t}\n\n");
+        sb.Append("    public static ").Append(clientName).Append(" Create(string token)\n    {\n");
+        sb.Append("        return new ").Append(clientName).Append("(new ClientConfig { Token = token });\n");
+        sb.Append("    }\n\n");
 
         // Dispose
-        sb.Append("\tpublic void Dispose()\n\t{\n");
-        sb.Append("\t\t_http.Dispose();\n");
-        sb.Append("\t}\n");
+        sb.Append("    public void Dispose()\n    {\n");
+        sb.Append("        _http.Dispose();\n");
+        sb.Append("    }\n");
 
         sb.Append("}\n");
 
