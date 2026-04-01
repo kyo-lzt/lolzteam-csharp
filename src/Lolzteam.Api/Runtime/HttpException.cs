@@ -21,7 +21,8 @@ public class HttpException : LolzteamException
         return statusCode switch
         {
             429 => new RateLimitException(responseBody, headers),
-            401 or 403 => new AuthException(statusCode, responseBody, headers),
+            401 => new AuthException(statusCode, responseBody, headers),
+            403 => new ForbiddenException(statusCode, responseBody, headers),
             404 => new NotFoundException(responseBody, headers),
             >= 500 and <= 503 or 504 => new ServerException(statusCode, responseBody, headers),
             _ => new HttpException(statusCode, responseBody, headers),
