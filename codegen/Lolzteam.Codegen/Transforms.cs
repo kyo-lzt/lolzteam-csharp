@@ -282,7 +282,8 @@ internal static partial class Transforms
         if (tsType.StartsWith("Record<string, ", StringComparison.Ordinal) && tsType.EndsWith('>'))
         {
             var inner = tsType["Record<string, ".Length..^1];
-            return "Dictionary<string, " + ToCSharpType(inner) + ">";
+            // Dictionary value types should not be nullable — nullability is for the dict itself
+            return "Dictionary<string, " + ToCSharpType(inner).TrimEnd('?') + ">";
         }
 
         // Inline objects
@@ -1022,10 +1023,9 @@ internal static partial class Transforms
             var csharp = type switch
             {
                 "string" => "string",
-                "integer" => "double",
+                "integer" => "long",
                 "number" => "double",
-                // boolean with default:null → API may return object instead of bool (e.g. guarantee)
-                "boolean" => "JsonElement",
+                "boolean" => "bool",
                 _ => "JsonElement",
             };
             return (csharp, null);

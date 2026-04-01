@@ -46,7 +46,7 @@ internal static partial class Emitter
 
     private static string? FormatDefaultLiteral(
         string defaultValue, string csharpType, List<EnumDefinition>? enumDefs,
-        string? propName = null)
+        string? propName = null, string? ns = null)
     {
         // Strip nullable suffix for matching
         var baseType = csharpType.TrimEnd('?');
@@ -55,6 +55,8 @@ internal static partial class Emitter
         {
             case "string":
                 return "\"" + defaultValue.Replace("\\", "\\\\").Replace("\"", "\\\"") + "\"";
+            case "long":
+                return long.TryParse(defaultValue, out var l) ? l.ToString() : null;
             case "double":
                 return double.TryParse(defaultValue, System.Globalization.NumberStyles.Float,
                     System.Globalization.CultureInfo.InvariantCulture, out var d)
@@ -81,7 +83,7 @@ internal static partial class Emitter
                     var enumDef = enumDefs.Find(e => e.TypeName == baseType);
                     if (enumDef is not null)
                     {
-                        return FindEnumDefaultLiteral(enumDef, defaultValue, propName);
+                        return FindEnumDefaultLiteral(enumDef, defaultValue, propName, ns);
                     }
                 }
                 return null;
@@ -90,7 +92,8 @@ internal static partial class Emitter
 
     /// <summary>Find the enum member name that corresponds to a default value.</summary>
     private static string? FindEnumDefaultLiteral(
-        EnumDefinition enumDef, string defaultValue, string? propName = null)
+        EnumDefinition enumDef, string defaultValue, string? propName = null,
+        string? ns = null)
     {
         string? memberName = null;
         if (enumDef.IsIntEnum)
@@ -121,11 +124,11 @@ internal static partial class Emitter
 
         if (memberName is null) return null;
 
-        // If property name matches enum type name, C# will resolve the name to the property
-        // rather than the type. Skip the default in this case (XML doc comment still shows it).
-        if (propName is not null && propName == enumDef.TypeName)
+        // If property name matches enum type name, C# resolves the name to the property.
+        // Use fully-qualified type name to disambiguate.
+        if (propName is not null && propName == enumDef.TypeName && ns is not null)
         {
-            return null;
+            return "global::" + ns + "." + enumDef.TypeName + "." + memberName;
         }
         return enumDef.TypeName + "." + memberName;
     }
@@ -422,10 +425,9 @@ internal static partial class Emitter
             return type switch
             {
                 "string" => "string",
-                "integer" => "double",
+                "integer" => "long",
                 "number" => "double",
-                // boolean → JsonElement (API may return object where boolean expected, e.g. guarantee)
-                "boolean" => "JsonElement",
+                "boolean" => "bool",
                 _ => "JsonElement",
             };
         }
@@ -440,7 +442,7 @@ internal static partial class Emitter
 
     private static string? EmitQueryParamsRecord(
         string group, MethodDefinition method, Dictionary<string, string> paramToEnumType,
-        List<EnumDefinition>? enumDefs = null)
+        List<EnumDefinition>? enumDefs = null, string? ns = null)
     {
         if (method.Params.QueryParams.Count == 0) return null;
 
@@ -468,7 +470,7 @@ internal static partial class Emitter
                 sb.Append("        [JsonPropertyName(\"").Append(param.Name).Append("\")]\n");
             }
             var defaultLiteral = param.DefaultValue is not null
-                ? FormatDefaultLiteral(param.DefaultValue, csharpType, enumDefs, propName)
+                ? FormatDefaultLiteral(param.DefaultValue, csharpType, enumDefs, propName, ns)
                 : null;
             if (param.Required && defaultLiteral is null)
             {
@@ -492,7 +494,7 @@ internal static partial class Emitter
 
     private static string? EmitBodyRecord(
         string group, MethodDefinition method, Dictionary<string, string> paramToEnumType,
-        List<EnumDefinition>? enumDefs = null)
+        List<EnumDefinition>? enumDefs = null, string? ns = null)
     {
         if (!method.HasBody) return null;
 
@@ -502,7 +504,7 @@ internal static partial class Emitter
         // Discriminated oneOf → abstract base + sealed variant records
         if (method.BodyOneOfVariants is { Count: > 0 } variants)
         {
-            return EmitSealedBodyRecords(group, method, variants, paramToEnumType, enumDefs);
+            return EmitSealedBodyRecords(group, method, variants, paramToEnumType, enumDefs, ns);
         }
 
         if (method.BodyProperties.Count == 0) return null;
@@ -536,7 +538,7 @@ internal static partial class Emitter
             }
 
             var defaultLiteral = prop.DefaultValue is not null
-                ? FormatDefaultLiteral(prop.DefaultValue, csharpType, enumDefs, propName)
+                ? FormatDefaultLiteral(prop.DefaultValue, csharpType, enumDefs, propName, ns)
                 : null;
 
             if (prop.Required)
@@ -572,7 +574,8 @@ internal static partial class Emitter
 
     private static string EmitSealedBodyRecords(
         string group, MethodDefinition method, List<OneOfVariant> variants,
-        Dictionary<string, string> paramToEnumType, List<EnumDefinition>? enumDefs = null)
+        Dictionary<string, string> paramToEnumType, List<EnumDefinition>? enumDefs = null,
+        string? ns = null)
     {
         var baseName = Naming.BuildTypeName(group, method.MethodName) + "Body";
         var sb = new StringBuilder();
@@ -632,7 +635,7 @@ internal static partial class Emitter
                 }
 
                 var variantDefaultLiteral = prop.DefaultValue is not null
-                    ? FormatDefaultLiteral(prop.DefaultValue, csharpType, enumDefs, propName)
+                    ? FormatDefaultLiteral(prop.DefaultValue, csharpType, enumDefs, propName, ns)
                     : null;
 
                 if (prop.Required)
@@ -792,10 +795,10 @@ internal static partial class Emitter
 
             foreach (var method in group.Methods)
             {
-                var queryType = EmitQueryParamsRecord(group.GroupName, method, paramToEnumType, enumDefs);
+                var queryType = EmitQueryParamsRecord(group.GroupName, method, paramToEnumType, enumDefs, ns);
                 if (queryType is not null) groupTypes.Add(queryType);
 
-                var bodyType = EmitBodyRecord(group.GroupName, method, paramToEnumType, enumDefs);
+                var bodyType = EmitBodyRecord(group.GroupName, method, paramToEnumType, enumDefs, ns);
                 if (bodyType is not null) groupTypes.Add(bodyType);
 
                 groupTypes.Add(EmitResponseRecord(group.GroupName, method, rawSpec, componentSchemaNames));
