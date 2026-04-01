@@ -2595,7 +2595,7 @@ public enum ExtendedGuarantee : long
 [JsonConverter(typeof(Lolzteam.Api.Runtime.StringEnumConverter<FieldsInclude>))]
 public enum FieldsInclude
 {
-    [Lolzteam.Api.Runtime.EnumValue("*")] Value1101874402,
+    [Lolzteam.Api.Runtime.EnumValue("*")] Value317412203,
     [Lolzteam.Api.Runtime.EnumValue("searchHistory")] SearchHistory,
     [Lolzteam.Api.Runtime.EnumValue("savedSearch")] SavedSearch,
 }
