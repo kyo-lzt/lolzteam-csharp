@@ -386,7 +386,16 @@ public sealed class LolzteamHttpClient : IDisposable
         }
         else
         {
-            handler.Proxy = new WebProxy(proxyUri);
+            var webProxy = new WebProxy(proxyUri.Host, proxyUri.Port);
+            if (!string.IsNullOrEmpty(proxyUri.UserInfo))
+            {
+                var parts = proxyUri.UserInfo.Split(':', 2);
+                var user = Uri.UnescapeDataString(parts[0]);
+                var pass = parts.Length > 1 ? Uri.UnescapeDataString(parts[1]) : "";
+                webProxy.Credentials = new NetworkCredential(user, pass);
+            }
+
+            handler.Proxy = webProxy;
             handler.UseProxy = true;
         }
 
@@ -573,7 +582,16 @@ public sealed class LolzteamHttpClient : IDisposable
 			throw new ConfigException($"Unsupported proxy scheme: {scheme}. Supported: http, https.");
 		}
 
-		handler.Proxy = new WebProxy(proxyUri);
+		var webProxy = new WebProxy(proxyUri.Host, proxyUri.Port);
+		if (!string.IsNullOrEmpty(proxyUri.UserInfo))
+		{
+			var parts = proxyUri.UserInfo.Split(new[] { ':' }, 2);
+			var user = Uri.UnescapeDataString(parts[0]);
+			var pass = parts.Length > 1 ? Uri.UnescapeDataString(parts[1]) : "";
+			webProxy.Credentials = new System.Net.NetworkCredential(user, pass);
+		}
+
+		handler.Proxy = webProxy;
 		handler.UseProxy = true;
 
 		return handler;
