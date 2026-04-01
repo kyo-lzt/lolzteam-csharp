@@ -1023,7 +1023,7 @@ internal static partial class Transforms
             var csharp = type switch
             {
                 "string" => "string",
-                "integer" => "long",
+                "integer" => "double",
                 "number" => "double",
                 "boolean" => "bool",
                 _ => "JsonElement",

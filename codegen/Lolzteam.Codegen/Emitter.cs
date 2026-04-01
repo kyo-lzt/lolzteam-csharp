@@ -425,7 +425,7 @@ internal static partial class Emitter
             return type switch
             {
                 "string" => "string",
-                "integer" => "long",
+                "integer" => "double",
                 "number" => "double",
                 "boolean" => "bool",
                 _ => "JsonElement",
